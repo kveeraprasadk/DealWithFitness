@@ -1,0 +1,35 @@
+<div class="modal fade" id="recurrence-confirmation-dialog" tabindex="-1"
+	role="dialog" aria-labelledby="calendar-new-schedule-dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Confirm Delete</h4>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" class="flex-column">
+				<span id = "recurrence-dialog-message"></span>
+				<div class="mt">
+					<div class="form-check">
+						<input class="form-check-input" type="radio"
+							name="recurrence-occurrence" id="recurrence-dialog-delete-ocurrence"> <label
+							class="form-check-label" for="recurrence-dialog-delete-ocurrence"> Delete
+							this occurrence</label>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" type="radio"
+							name="recurrence-occurrence" id="recurrence-dialog-delete-recurrence" checked> <label
+							class="form-check-label" for="recurrence-dialog-delete-recurrence"> Delete
+							the series </label>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary" onclick="trainerCalendar.deleteSeriesDialogEvent()">Save</button>
+			</div>
+		</div>
+	</div>
+</div>

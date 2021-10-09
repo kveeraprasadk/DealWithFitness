@@ -1,0 +1,44 @@
+<div class="modal fade" id="register-trainee-dialog" role="dialog">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title text-center">Trainee Registration</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body text-center" id="register-trainee-dialog-parent">
+				<p>
+					<i class="fa fa-user user-container"></i>
+				</p>
+				<p>
+					<input type="text" id="register-traineeFullname"
+						class="form-control" placeholder="Full name" maxlength="50">
+				</p>
+				<p>
+					<input type="email" id="register-traineeemailid"
+						class="form-control" placeholder="Email" maxlength="50">
+				</p>
+				<p>
+					<input type="number" id="register-traineephone" class="form-control"
+						placeholder="Mobile number" maxlength="16">
+				</p>
+				<p>
+					<input type="password" id="register-traineepassword"
+						class="form-control" placeholder="Password" maxlength="26">
+				</p>
+				<p>
+					<input type="password" id="register-traineeconfirmpassword"
+						class="form-control" placeholder="Confirm Password" maxlength="26">
+				</p>
+				<div id="reg-validation-error" class="error-message-container hide">
+				</div> 
+			</div>
+			<div class="modal-footer">
+				<p>
+					<button class="btn bookbutton btn-primary" onclick="trainers.storeNewTraineeEvent()"
+						id="register-labelregbutton">Register</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				</p>
+			</div>
+		</div>
+	</div>
+</div>

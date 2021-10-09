@@ -1,0 +1,284 @@
+input {
+	font-size: 14px !important;
+	font-family: "Open Sans";
+}
+
+input[type=date] {
+	border: 1px solid #d0d0d0;
+	height: 36px;
+	padding: 5px;
+	border-radius: 5px;
+	width: 100%;
+	font-family: "Open Sans";
+}
+
+input[type=time] {
+	border: 1px solid #d0d0d0;
+	height: 36px;
+	padding: 5px;
+	border-radius: 5px;
+	width: 100%;
+	font-family: "Open Sans";
+}
+
+#progress-bar {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	z-index: 1051;
+	background-color: rgb(0, 0, 0, 0.1);
+	display: none;
+}
+
+.progress-bar-center {
+	position: fixed;
+	border: 1px solid rgb(200, 200, 200);
+	border-radius: 5px;
+	box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+	left: 45%;
+	top: 50%;
+	background: white;
+	width: 280px;
+	height: 120px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 10px;
+	font-size: 24px;
+	padding: 10px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.progress-bar-center span {
+	margin-bottom: 10px;
+}
+
+.alert-message-container {
+	padding: 5px;
+	margin: 0px 10px;
+	background: #ffeeee;
+	border-radius: 5px;
+	margin-bottom: 10px;
+	color: #f20505;
+	font-size: 14px;
+	display: none;
+}
+
+.form-control {
+	background-color: white !important;
+	margin-bottom: 5px;
+}
+
+.no-wrap {
+	white-space: nowrap;
+}
+
+.mt {
+	margin-top: 10px;
+}
+
+.ml {
+	margin-left: 10px;
+}
+
+.mr {
+	margin-right: 10px;
+}
+
+.mr-sm {
+	margin-right: 5px;
+}
+
+.mb {
+	margin-bottom: 10px;
+}
+
+.pt {
+	padding-top: 10px;
+}
+
+.pt-sm {
+	padding-top: 5px;
+}
+
+.pl {
+	padding-left: 10px;
+}
+
+.pr {
+	padding-right: 10px;
+}
+
+.pb {
+	padding-bottom: 10px
+}
+
+.pb-sm {
+	padding-bottom: 5px
+}
+
+.pr-sm {
+	padding-right: 5px;
+}
+
+.pl-sm {
+	padding-left: 5px;
+}
+
+.flex, .flex-column {
+	display: flex;
+}
+
+.flex-column {
+	flex-direction: column;
+}
+
+.flex-grow {
+	flex-grow: 1;
+}
+
+.flex-halign-end {
+	justify-content: flex-end;
+}
+
+.flex-halign-center {
+	justify-content: center;
+}
+
+.flex-valign-start {
+	align-items: flex-start;
+}
+
+.flex-valign-end {
+	align-items: flex-end;
+}
+
+.flex-valign-center {
+	align-items: center;
+}
+
+.flex-wrap {
+	flex-wrap: wrap;
+}
+
+.input-currency-symbol {
+	min-width: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: #e8e8e8;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	font-size: 22px;
+	color: gray;
+}
+
+.user-container-sm, .user-container {
+	color: #0868f6;
+	border-radius: 50%;
+	border: 1px solid #c3cbf8;
+	background-color: #ecf1ff;
+}
+
+.user-container {
+	font-size: 60px;
+	padding: 20px;
+	width: 100px;
+	height: 100px;
+}
+
+.user-container-sm {
+	font-size: 18px;
+	width: 32px;
+	height: 32px;
+}
+
+.hide {
+	display: none;
+}
+
+.error-message-container {
+	font-size: 14px;
+	padding: 5px;
+	color: red;
+	border: 1px solid #ffa9a9;
+	background: #fff5f0;
+	border-radius: 5px;
+}
+
+.logo-text {
+	font-size: 14px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	color: black;
+}
+
+.home-trainer-list-a {
+	font-size: 16px !important;
+	width: 32px !important;
+	height: 32px !important;
+	color: #6f747a !important;
+	margin-right: 5px !important;
+	padding: 5px 0px 5px 5px !important;
+	cursor: pointer;
+}
+
+.attendee-count-parent {
+	background: #cce0fc;
+	align-items: center;
+	border-radius: 50%;
+	justify-content: center;
+	padding: 3px 5px;
+	height: 32px;
+	width: 32px;
+	position: relative;
+	margin-right: 15px;
+	color: #5d6c7e;
+}
+
+.trainer-name {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: calc(100% - 95px);
+	font-size: 15px;
+	font-weight: 600;
+	margin: 0 10px 0 10px;
+}
+
+.attendee-count {
+	position: absolute;
+	font-size: 12px;
+	top: 0px;
+	background: #0659f0;
+	color: white;
+	padding: 3px;
+	border-radius: 8px;
+	font-family: 'Open Sans';
+}
+
+.trainee-selected {
+	margin-left: 5px;
+	height: 32px;
+	width: 32px;
+	font-size: 28px;
+	color: #26b626;
+}
+
+.trainer-details-card-ineer-container {
+	width: 100%;
+	padding: 10px 10px 10px 0px;
+	box-sizing: border-box;
+	background: rgb(248, 248, 248);
+	border-radius: 10px;
+}
+
+.trainer-schedules .trainer-details-card-ineer-container {
+	background: #f3f8ff;
+}

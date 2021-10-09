@@ -1,0 +1,322 @@
+@import url(https://fonts.googleapis.com/css?family=Noto+Sans);
+
+body {
+	font-family: 'Noto Sans', sans-serif;
+}
+
+@media only screen and (min-width: 600px) {
+	.calendar-dates-range {
+		min-width: 300px;
+	}
+}
+
+@media ( max-width : 900px) {
+	#calendar-container {
+		margin: 5px;
+	}
+}
+
+@media ( min-width : 900px) {
+	#calendar-container {
+		margin: 20px;
+	}
+}
+
+.calendar-dates-range {
+	font-size: 18px;
+	padding: 5px 10px 5px 0px;
+}
+
+/**  custom bootstrap - start */
+.open>.dropdown-toggle.btn-default {
+	background-color: #fff;
+}
+
+.dropdown-menu {
+	top: 25px;
+	padding: 3px 0;
+	border-radius: 2px;
+	border: 1px solid #bbb;
+}
+
+.dropdown-menu>li>a {
+	padding: 9px 12px;
+	cursor: pointer;
+}
+
+.dropdown-menu>li>a:hover {
+	background-color: rgba(81, 92, 230, 0.05);
+	color: #333;
+}
+
+.bi15 {
+	width: 15px;
+	height: 15px;
+}
+/** custom fontawesome - end */
+.calendar-icon {
+	width: 14px;
+	height: 14px;
+}
+
+#top {
+	height: 49px;
+	border-bottom: 1px solid #bbb;
+	padding: 16px;
+	font-size: 10px;
+}
+
+#lnb {
+	position: absolute;
+	width: 200px;
+	top: 49px;
+	bottom: 0;
+	border-right: 1px solid #d5d5d5;
+	padding: 12px 10px;
+	background: #fafafa;
+}
+
+#right {
+	position: absolute;
+	left: 200px;
+	top: 49px;
+	right: 0;
+	bottom: 0;
+}
+
+#lnb label {
+	margin-bottom: 0;
+	cursor: pointer;
+}
+
+.lnb-new-schedule {
+	padding-bottom: 12px;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+.lnb-new-schedule-btn {
+	height: 100%;
+	font-size: 14px;
+	background-color: #ff6618;
+	color: #ffffff;
+	border: 0;
+	border-radius: 25px;
+	padding: 10px 20px;
+	font-weight: bold;
+}
+
+.lnb-new-schedule-btn:hover {
+	height: 100%;
+	font-size: 14px;
+	background-color: #e55b15;
+	color: #ffffff;
+	border: 0;
+	border-radius: 25px;
+	padding: 10px 20px;
+	font-weight: bold;
+}
+
+.lnb-new-schedule-btn:active {
+	height: 100%;
+	font-size: 14px;
+	background-color: #d95614;
+	color: #ffffff;
+	border: 0;
+	border-radius: 25px;
+	padding: 10px 20px;
+	font-weight: bold;
+}
+
+.lnb-calendars>div {
+	padding: 12px 16px;
+	border-bottom: 1px solid #e5e5e5;
+	font-weight: normal;
+}
+
+.lnb-calendars-d1 {
+	padding-left: 8px;
+}
+
+.lnb-calendars-d1 label {
+	font-weight: normal;
+}
+
+.lnb-calendars-item {
+	min-height: 14px;
+	line-height: 14px;
+	padding: 8px 0;
+}
+
+.lnb-footer {
+	color: #999;
+	font-size: 11px;
+	position: absolute;
+	bottom: 12px;
+	padding-left: 16px;
+}
+
+#menu {
+	padding: 16px;
+}
+
+#dropdownMenu-calendarType {
+	padding: 0 8px 0 11px;
+}
+
+#calendarTypeName {
+	min-width: 62px;
+	display: inline-block;
+	text-align: left;
+	line-height: 30px;
+}
+
+#renderRange {
+	padding-left: 12px;
+	font-size: 19px;
+	vertical-align: middle;
+}
+
+.dropdown-menu-title .calendar-icon {
+	margin-right: 8px;
+}
+
+.calendar-bar {
+	width: 16px;
+	height: 16px;
+	margin-right: 5px;
+	display: inline-block;
+	border: 1px solid #eee;
+	vertical-align: middle;
+}
+
+.calendar-name {
+	font-size: 14px;
+	font-weight: bold;
+	vertical-align: middle;
+}
+
+.schedule-time {
+	color: #005aff;
+}
+
+#calendar {
+	position: relative;
+}
+
+/** custom fontawesome */
+.fa {
+	width: 12px;
+	height: 12px;
+	margin-right: 2px;
+}
+
+.weekday-grid-more-schedules {
+	float: right;
+	margin-top: 4px;
+	margin-right: 6px;
+	height: 18px;
+	line-height: 17px;
+	padding: 0 5px;
+	border-radius: 3px;
+	border: 1px solid #ddd;
+	font-size: 12px;
+	text-align: center;
+	color: #000;
+}
+
+.tui-full-calendar-dayname-layout .tui-full-calendar-today {
+	background: #cee8ff !important;
+	padding-left: 5px !important;
+}
+
+.ic-arrow-line-left {
+	background:
+		url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAAXNSR0IArs4c6QAAAK1JREFUKBVjYKAFaGhoYMJlLjMuibS0NNZHjx6t1tHR0bx69eoBdHVYTQRpev/+/Uqg4sD////rYbOZEd0kZE1AufWCgoLhs2bN+o2uDkUjsZpAhsA1kqIJpBGrH0EShAA8VM+ePfvPxsZm3Y8fP3SAmgJBNIgPEsdmCFwjSJIUzRhOBYUgKCSB5qwH4kBQtBAVHSCbQQAWWIyMjJdWrVrVABYklsBmE7F6caoDAB4rYZDo034sAAAAAElFTkSuQmCC)
+		no-repeat !important;
+}
+
+.ic-arrow-line-right {
+	background:
+		url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAAXNSR0IArs4c6QAAAKNJREFUKBVjYKA2aGhoYMJnJiM2ybCwsIb////rCQoKhs+aNes3NjUYpoJsAmkCKg58//79yrS0NFZsGrHaCFIM0gTSDMTrsdnMjM20s2fP/rOxsVn348cPHZBmEA3ig8Rh6rFqBEkS0ozhR5iJhGisfgRpIuRPrBoJaQIZjOFUUHQQClGQRozAOXDgwH8dHR1NoNx7bNEA0oQXEEpyeDXjkwQAiyNhSndGN/YAAAAASUVORK5CYII=)
+		no-repeat !important;
+}
+
+.schedule-title {
+	font-size: 14px;
+	color: black;
+}
+
+.schedule-location {
+	font-size: 13px;
+	color: #0563d7;
+	font-weight: normal
+}
+
+.label-plain-sm {
+	font-size: 12px;
+	font-weight: normal;
+}
+
+.label-plain {
+	color: black;
+}
+
+.label-plain, .label-with-cb {
+	font-size: 14px;
+	font-weight: normal;
+}
+
+.label-with-cb {
+	margin-bottom: -1px;
+	margin-left: 5px;
+}
+
+.day-label {
+	min-width: 80px;
+	padding: 5px;
+}
+
+.round-button {
+	border-radius: 17px;
+	box-shadow: none;
+	border: 1px solid rgb(220, 220, 220);
+	min-width: 34px;
+	min-height: 34px;
+	max-height: 34px;
+	max-width: 34px;
+}
+
+.round-button:active, .round-button:focus {
+	background-color: #f9f9f9;
+	border: solid 1px gray;
+	outline: none;
+	outline-width: 0px !important;
+}
+
+.readonly-box {
+	padding: 6px 10px 5px 10px;
+	color: gray;
+	border-radius: 3px;
+	width: 100%;
+	border: 1px solid #d0d0d0;
+	background: rgb(248, 248, 248);
+}
+
+#calendar {
+	height: 750px;
+}
+
+#calendar-container {
+	background: white;
+	display: none;
+	border-bottom: 1px solid #dadada;
+	border-radius: 5px;
+	background: white;
+	overflow: hidden;
+}
+
+.recurrence-dialog-body {
+	background-color: #fffbec;
+	padding: 0px 10px;
+	border: 1px solid #dcdcdc;
+}
