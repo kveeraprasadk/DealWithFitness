@@ -95,7 +95,8 @@ label {
 	<%
 	int i = 0;
 	%>
-	<script type="text/html" id="Trainer-details-template" targetId="trainers-list-container">
+	<script type="text/html" id="Trainer-details-template"
+		targetId="trainers-list-container">
 	    <div class="col-lg-4 col-md-6 col-sm-12 class-item filter-1 wow fadeInUp" data-wow-delay="0.0s">
 		    <div class="class-wrap">
 		        <div class="class-text flex-column flex-valign-center trainer-schedules">
@@ -141,7 +142,8 @@ label {
 		</div>
 	</script>
 	<!--If trainer is not providing any trainings then this template will be rendered -->
-	<script  type="text/html" id="Trainer-details-template-empty" targetId="trainers-list-container">
+	<script type="text/html" id="Trainer-details-template-empty"
+		targetId="trainers-list-container">
 	    <div class="col-lg-4 col-md-6 col-sm-12 class-item filter-1 wow fadeInUp" data-wow-delay="0.0s">
 		    <div class="class-wrap class-text flex-column">
 	            <div class="class-teacher">
@@ -226,11 +228,19 @@ label {
 					onchange='trainers.filterTrainers(event)'
 					style="box-shadow: 0px 0px 10px #00afff4f;">
 					<option value="all">All Experts</option>
-					<option value="Yoga for health">Yoga for health</option>
-					<option value="Weight Loss">Weight Loss</option>
-					<option value="Kids Yoga">Kids Yoga</option>
-					<option value="Pregnancy Yoga">Pregnancy Yoga</option>
-					<option value="Meditation">Meditation</option>
+					<optgroup label="Yoga">
+						<option value="Yoga for health">Yoga for health</option>
+						<option value="Weight Loss">Weight Loss</option>
+						<option value="Kids Yoga">Kids Yoga</option>
+						<option value="Pregnancy Yoga">Pregnancy Yoga</option>
+						<option value="Meditation">Meditation</option>
+					</optgroup>
+					<optgroup label="Dance">
+						<option value="Dance">Dance</option>
+						<option value="Zumba">Zumba</option>
+					</optgroup>
+					<option value="Weight / Body weight Workout">Weight / Body weight Workout</option>
+					<option value="Nutrition">Nutrition</option>
 				</select>
 				<div class="hero-btn"></div>
 			</div>
