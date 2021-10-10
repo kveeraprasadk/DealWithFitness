@@ -71,43 +71,52 @@ function Trainers() {
 		$('#login-trainee-action').click(self.loginEvent);
 	}
 
-	self.loginEvent = function() {
-		var emailId = $('#login-traineeemailid').val();
-		var pass = $('#login-traineepassword').val();
+	self.validateLogin = function(emailId, pass) {
 		if (emailId == null || emailId.trim().length == 0) {
-			self.validationError(LOGIN_ERROR_MSG_ID, "Email is mandatory");
-			return;
+			self.validationError(LOGIN_ERROR_MSG_ID, "Email id is mandatory");
+			return false;
+		} else if (!Utils.validateEmail(emailId)) {
+			self.validationError(LOGIN_ERROR_MSG_ID, "Email id is invalid");
+			return false;
 		}
 		if (pass == null || pass.trim().length == 0) {
 			self.validationError(LOGIN_ERROR_MSG_ID, "Password is mandatory");
-			return;
+			return false;
 		}
-		// Validations are done push the payload to backend
-		$.ajax({
-			url: "TraineeClassLoginPayment",
-			type: "GET",
-			data: {
-				email: emailId,
-				password: pass
-			},
-			cache: false,
-			success: function(data) {
-				if (data == "Login Success") {
-					if (self.selectedTrainerSeriesId) {
-						whoami.bindUser(emailId);
-						// as the login is successful hence redirect to trainee booking page
-						self.submitTraineeBooking();
+		return true;
+	}
+
+	self.loginEvent = function() {
+		var emailId = $('#login-traineeemailid').val();
+		var pass = $('#login-traineepassword').val();
+		if (self.validateLogin(emailId, pass)) {
+			// Validations are done push the payload to backend
+			$.ajax({
+				url: "TraineeClassLoginPayment",
+				type: "GET",
+				data: {
+					email: emailId,
+					password: pass
+				},
+				cache: false,
+				success: function(data) {
+					if (data == "Login Success") {
+						if (self.selectedTrainerSeriesId) {
+							whoami.bindUser(emailId);
+							// as the login is successful hence redirect to trainee booking page
+							self.submitTraineeBooking();
+						} else {
+							self.showMyBookingsEvent();
+						}
 					} else {
-						self.showMyBookingsEvent();
+						alertDialog.show("Authentication Failed", data);
 					}
-				} else {
-					alertDialog.show("Authentication Failed", data);
+				},
+				error: function(data) {
+					alertDialog.show("Service Failure", data.statusText);
 				}
-			},
-			error: function(data) {
-				alertDialog.show("Service Failure", data.statusText);
-			}
-		});
+			});
+		}
 	}
 
 	// Triggerd by book button in the trainers list
@@ -126,13 +135,15 @@ function Trainers() {
 					trainerId: trainerId,
 					seriesId: seriesId
 				}
-				if (whoami.isUserLoggedIn() && whoami.isTrainee()) {
-					// User already logged in
-					self.submitTraineeBooking();
-				} else {
-					self.showLoginDialogEvent();
-				}
+				setTimeout(() => {
+					if (whoami.isUserLoggedIn() && whoami.isTrainee()) {
+						// User already logged in
+						self.submitTraineeBooking();
+					} else {
+						self.showLoginDialogEvent();
+					}
 
+				}, 500);
 			})
 		}
 	}
@@ -163,7 +174,7 @@ function Trainers() {
 					series.zeroAttendeesClass = "hide";
 					if (series.attendees) {
 						series.attendeeCount = series.attendees.length;
-						series.zeroAttendeesClass = series.attendees.length > 0 ? "": "hide";
+						series.zeroAttendeesClass = series.attendees.length > 0 ? "" : "hide";
 						// If currently logged in user is part of scheduled training then show checkbox otherwise hide it
 						if (series.attendees.includes(whoami.getUser())) {
 							series.attendee = "show";
@@ -298,7 +309,11 @@ function Trainers() {
 			return false;
 		}
 		if (email == null || email.trim().length == 0) {
-			self.validationError(REG_ERROR_MSG_ID, "Trainee Email is mandatory");
+			self.validationError(REG_ERROR_MSG_ID, "Trainee Email id is mandatory");
+			$("#register-traineeemailid").focus();
+			return false;
+		} else if (!Utils.validateEmail(email)) {
+			self.validationError(REG_ERROR_MSG_ID, "Trainee Email id is invalid");
 			$("#register-traineeemailid").focus();
 			return false;
 		}

@@ -17,18 +17,6 @@
 		<servlet-class>main.ContactServlet</servlet-class>
 	</servlet>
 	<servlet>
-		<servlet-name>TrainersProfileViewServlet</servlet-name>
-		<display-name>TrainersProfileViewServlet</display-name>
-		<description></description>
-		<servlet-class>main.TrainersProfileViewServlet</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>TrainerDetailsView</servlet-name>
-		<display-name>TrainerDetailsView</display-name>
-		<description></description>
-		<servlet-class>main.TrainerDetailsView</servlet-class>
-	</servlet>
-	<servlet>
 		<servlet-name>TrainerRequestServlet</servlet-name>
 		<display-name>TrainerRequestServlet</display-name>
 		<description></description>
@@ -208,14 +196,6 @@
 	<servlet-mapping>
 		<servlet-name>TrainersListServlet</servlet-name>
 		<url-pattern>/TrainersListServlet</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>TrainersProfileViewServlet</servlet-name>
-		<url-pattern>/TrainersProfileViewServlet</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>TrainerDetailsView</servlet-name>
-		<url-pattern>/TrainerDetailsView</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>TrainerRequestServlet</servlet-name>

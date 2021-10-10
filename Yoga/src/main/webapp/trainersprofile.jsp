@@ -1,75 +1,93 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-        <%@page import="java.util.*" %>
-<%@page import="main.model.TrainerDetailsVO" %>
-<%@ page isELIgnored="false" %>
+	pageEncoding="ISO-8859-1"%>
+<%@page import="java.util.*"%>
+<%@page import="main.model.TrainerDetailsVO"%>
+<%@ page isELIgnored="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>DealWithFitness</title>
-        <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <meta content="Free Website Template" name="keywords">
-        <meta content="Free Website Template" name="description">
+<head>
+<meta charset="utf-8">
+<title>DealWithFitness</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="Free Website Template" name="keywords">
+<meta content="Free Website Template" name="description">
 
-        <!-- Favicon -->
-        <link href="img/favicon.ico" rel="icon">
+<!-- Favicon -->
+<link href="img/favicon.ico" rel="icon">
 
-        <!-- Google Font -->
-        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<!-- Google Font -->
+<link
+	href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap"
+	rel="stylesheet">
 
-        <!-- CSS Libraries -->
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
-        <link href="lib/animate/animate.min.css" rel="stylesheet">
-        <link href="lib/flaticon/font/flaticon.css" rel="stylesheet"> 
-        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-        <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
-		
-		 <link rel="shortcut icon" href="profile/images/fav.jpg">
-    <link rel="stylesheet" href="profile/css/bootstrap.min.css">
-    <link rel="stylesheet" href="profile/css/fontawsom-all.min.css">
-    <link rel="stylesheet" type="text/css" href="profile/css/style.css" />   
-    
-          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" defer></script>
-	<link href="css/style.css" rel="stylesheet">
-	
-	<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-    <style>
-  .toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px; }
-  .toggle.ios .toggle-handle { border-radius: 20px; }
+<!-- CSS Libraries -->
+<link
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	rel="stylesheet">
+<link href="lib/animate/animate.min.css" rel="stylesheet">
+<link href="lib/flaticon/font/flaticon.css" rel="stylesheet">
+<link href="lib/owlcarousel/assets/owl.carousel.min.css"
+	rel="stylesheet">
+<link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+<link rel="shortcut icon" href="profile/images/fav.jpg">
+<link rel="stylesheet" href="profile/css/bootstrap.min.css">
+<link rel="stylesheet" href="profile/css/fontawsom-all.min.css">
+<link rel="stylesheet" type="text/css" href="profile/css/style.css" />
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"
+	defer></script>
+<link href="css/style.css" rel="stylesheet">
+
+<link
+	href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css"
+	rel="stylesheet">
+<script
+	src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+<style>
+.toggle.ios, .toggle-on.ios, .toggle-off.ios {
+	border-radius: 20px;
+}
+
+.toggle.ios .toggle-handle {
+	border-radius: 20px;
+}
 </style>
 
 
-        <script src="./dist/external/tui-code-snippet.min.js"></script>
-		<script src="./dist/external/tui-time-picker.min.js"></script>
-		<script src="./dist/external/tui-date-picker.min.js"></script>
-		<script src="./dist/external/moment.min.js"></script>
-        <script src="./dist/external/tui-calendar.min.js"></script>
-		<script src="./dist/utils.js"></script>
-		<script src="./dist/dialogs.js"></script>
-		<script src="./dist/trainer-booking.js"></script>
-		        
-        <link rel="stylesheet" type="text/css" href="./css/external/tui-date-picker.css">
-		<link rel="stylesheet" type="text/css" href="./css/external/tui-time-picker.css">
-		<link rel="stylesheet" type="text/css" href="./css/external/tui-calendar.min.css">
-		
-		<link rel="stylesheet" type="text/css" href="./css/common.css">
-		<link rel="stylesheet" type="text/css" href="./css/bookings.css">
-		<link rel="stylesheet" type="text/css" href="./css/icons.css">
+<script src="./dist/external/tui-code-snippet.min.js"></script>
+<script src="./dist/external/tui-time-picker.min.js"></script>
+<script src="./dist/external/tui-date-picker.min.js"></script>
+<script src="./dist/external/moment.min.js"></script>
+<script src="./dist/external/tui-calendar.min.js"></script>
+<script src="./dist/utils.js"></script>
+<script src="./dist/dialogs.js"></script>
+<script src="./dist/trainer-booking.js"></script>
 
-    </head>
+<link rel="stylesheet" type="text/css"
+	href="./css/external/tui-date-picker.css">
+<link rel="stylesheet" type="text/css"
+	href="./css/external/tui-time-picker.css">
+<link rel="stylesheet" type="text/css"
+	href="./css/external/tui-calendar.min.css">
 
-    <body onLoad="LoadingTrainersProfileData()">
-    <script type="text/javascript">
-    var calendarInitialized = false;
-    
-	 function switchView(viewName) {
-		$("#profile-container").css("display", viewName === "profile" ? "block" : "none");
+<link rel="stylesheet" type="text/css" href="./css/common.css">
+<link rel="stylesheet" type="text/css" href="./css/bookings.css">
+<link rel="stylesheet" type="text/css" href="./css/icons.css">
+<script type="text/javascript">
+	var calendarInitialized = false;
+
+	function switchView(viewName) {
+		$("#profile-container").css("display",
+				viewName === "profile" ? "block" : "none");
 		if (viewName === "calendar") {
 			$("#calendar-container").css("display", "block");
 			// Very first time do a lazy init
@@ -82,466 +100,585 @@
 		}
 	}
 
-     function LoadingTrainersProfileData(){
-    	 $.ajax({
-    		 type: 'GET',
-    		 url: "${pageContext.request.contextPath}/TrainersProfileViewServlet",
-    	 });
-     }
-    
-    
+	function renderTrainerProfile() {
+		const image = $("#trainer-profile-base64-encoded-element").val();
+		if (image) {
+			console.log("Profile picture present")
+			$("#profile-image-element").attr("src",
+					"data:image/*;base64," + image);
+		} else {
+			console.log("No profile picture");
+		}
+	}
 </script>
-        <!-- Top Bar Start -->
-        <div class="top-bar d-none d-md-block">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-8">
-       <!--                  <div class="top-bar-left">
-                            <div class="text">
-                                <i class="far fa-clock"></i>
-                                <h2>8:00 - 9:00</h2>
-                                <p>Mon - Fri</p>
-                            </div>
-                            <div class="text">
-                                <i class="fa fa-phone-alt"></i>
-                                <h2>+123 456 7890</h2>
-                                <p>For Appointment</p>
-                            </div>
-                        </div>        -->
-                    </div>
-                    <div class="col-md-4">
-                        <div class="top-bar-right">
-                            <div class="social">
-                                <a href=""><i class="fab fa-twitter"></i></a>
-                                <a href=""><i class="fab fa-facebook-f"></i></a>
-                                <a href=""><i class="fab fa-linkedin-in"></i></a>
-                                <a href=""><i class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Top Bar End -->
+</head>
 
-        <!-- Nav Bar Start -->
-        <div class="navbar navbar-expand-lg bg-dark navbar-dark">
-            <div class="container-fluid">
-                <span class="logo-text">DEALWITHFITNESS</span>
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                    <span class="fa fa-bars" style="color: gray; margin: 5px 0px 5px 5px"></span>
-                </button>
+<body onLoad="renderTrainerProfile()">
 
-                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                    <div class="navbar-nav ml-auto">
-                       
-                       <a href="index.jsp" class="nav-item nav-link ">Home</a>
-                        <a href="About.jsp" class="nav-item nav-link" >About</a>       
-                       <a href="./TrainerLogoutServlet" class="nav-item nav-link">Logout</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Nav Bar End -->
+	<!-- Top Bar Start -->
+	<div class="top-bar d-none d-md-block">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-8">
+				</div>
+				<div class="col-md-4">
+					<div class="top-bar-right">
+						<div class="social">
+							<a href=""><i class="fab fa-twitter"></i></a> <a href=""><i
+								class="fab fa-facebook-f"></i></a> <a href=""><i
+								class="fab fa-linkedin-in"></i></a> <a href=""><i
+								class="fab fa-instagram"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Top Bar End -->
 
-        <!-- Page Header Start -->
-        <div class="page-header">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <h2>Trainer's Zone</h2>
-                    </div>
-                    <div class="col-12">
-                        <a href="javascript: switchView('calendar')">My Training Calendar</a>
-                        <a href="">My Profile</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Page Header End -->
-        <!-- Trainers calendar html inclusion -->
-        <%@include  file="./html/dialogs.html" %>
-        <%@include  file="./html/trainer-calender-booking.html" %>
-        <%@include  file="./html/recurrence-confirmation-dialog.html" %>
+	<!-- Nav Bar Start -->
+	<div class="navbar navbar-expand-lg bg-dark navbar-dark">
+		<div class="container-fluid">
+			<span class="logo-text">DEALWITHFITNESS</span>
+			<button type="button" class="navbar-toggler" data-toggle="collapse"
+				data-target="#navbarCollapse">
+				<span class="fa fa-bars"
+					style="color: gray; margin: 5px 0px 5px 5px"></span>
+			</button>
 
-        <!-- About Start -->
-        <div class="container-fluid overcover" id="profile-container">
-        <div class="container profile-box">
-           <div class="cover-image row">
-      <!--           <img src="profile/images/bloogs-6.jpg" alt="">  --> 
-           </div>
-            <%
-            ArrayList<TrainerDetailsVO> trainers = (ArrayList<TrainerDetailsVO>) request.getAttribute("TrainerProfileData");
-            %>
+			<div class="collapse navbar-collapse justify-content-between"
+				id="navbarCollapse">
+				<div class="navbar-nav ml-auto">
 
+					<a href="index.jsp" class="nav-item nav-link ">Home</a> <a
+						href="About.jsp" class="nav-item nav-link">About</a> <a
+						href="./TrainerLogoutServlet" class="nav-item nav-link">Logout</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Nav Bar End -->
 
-<%
-// Iterating through subjectList
-if(trainers != null && trainers.size() >0)  // Null check for the object
-{
-	Iterator<TrainerDetailsVO> iterator = trainers.iterator();  // Iterator interface
-	int inv=0;
-	for (TrainerDetailsVO trainerdetails: trainers)  // iterate through all the data until the last record
-	{
-		//InvestorExpertNamemodel myinvestordetails = iterator.next(); //assign individual employee record to the employee class object
-	inv++;
-//	System.out.println("My Investor: "+ trainerdetails.getName());
-%>
-            <div class="row">
-                <div class="col-lg-8 col-md-7 detail-px no-padding">
-                   
-                   
-                    <h3 class="mth3">Profile</h3>
-                    <div class="fx-ro">
-                        <div class="dat">
-                            Name	 :	 <b><%=trainerdetails.getName() %></b>
-                        </div>
-                        
-                    </div>
-                    <div class="fx-ro">
-                        <div class="dat">
-                            Email	 :	 <b id="trainer-id"><%=trainerdetails.getEmail() %></b>
-                        </div>
-                        
-                    </div>
-                    
-                   
-                    <div class="fx-ro">
-                        <div class="dat">
-                            Experience	 :	 <b><%=trainerdetails.getExperience() %></b>
-                        </div>
-                        
-                    </div>
-                    <div class="fx-ro">
-                        <div class="dat">
-                            Qualification	 :	 <b><%=trainerdetails.getQualification() %></b>
-                        </div>                        
-                    </div>
-                    <div class="fx-ro">
-                        <div class="dat">
-                            Expertise	 :	 <b><%=trainerdetails.getExpertise() %></b>
-                        </div>                        
-                    </div>
-                   
-                   
-                    
-                    
-                     <h3>About Trainer</h3>
-                    <p><%=trainerdetails.getAboutyourself() %></p>
-                    
-                    <h3 class="mth3">Certificates</h3>
-                    
-                    <ul class="exrts">
-                        <li><%=trainerdetails.getCertificate1filename() %></li>
-                        <li><%if(trainerdetails.getCertificate1filename().length() > 3 ){ %>
-                        <button class="btn" >Download</button>
-                        <%} %></li>
-                        <li><%=trainerdetails.getCertificate2filename() %></li>
-                        <li><%if(trainerdetails.getCertificate2filename().length() > 3){ %>
-                        <button class="btn" >Download</button>
-                        <% System.out.println("tt::"+trainerdetails.getCertificate2filename().length());} %></li>
-                        <li><%=trainerdetails.getCertificate3filename() %></li>
-                        <li><%if(trainerdetails.getCertificate3filename().length() > 3){ %>
-                        <button class="btn" >Download
-                        </button><%} %></li>
-                    </ul>
-                    
-                </div>
-                <div class="col-lg-4 col-md-5 leftgh">
-                    <div class="img-box">
-                         <img src="profile/images/gallery/gallery_12.jpg" alt="">   
-                    </div>
-                    <div class="name-det">
-                        
-                   
-                     <h2><%=trainerdetails.getName() %></h2>
-                     
-                     <h3>Contact</h3>
-                     
-                     <p><%=trainerdetails.getName() %> <br>
-                     </p>
-                     
-                     <p><%=trainerdetails.getEmail() %> <br>
-                     </p>
-                     
-                     
-                     
-                     <h3><a class="trainereditprofile">Edit Profile</a></h3>
-                     <div id="editprofilehide">
-                     
-                     <p><input type="text" name="form-name"  class="form-name form-control" id="form-name" value="<%=trainerdetails.getName() %>" required></p>                    
-                     <p><input type="text" name="form-qualification"  class="form-qualification form-control" id="form-qualification" value="<%=trainerdetails.getQualification() %>" required></p>   
-                     <p><select name="form-experience" id="form-experience" class="form-control required" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();' required>
-    									<option value="<%=trainerdetails.getExperience() %>"><%=trainerdetails.getExperience() %></option>
-    									<option value="upto 2Yr">upto 2Yr</option>
-    									<option value="2 to 5Yrs">2 to 5Yrs</option>
-    									<option value="5 to 10Yrs">5 to 10Yrs</option>
-    									<option value="10 to 20Yrs">10 to 20Yrs</option>
-    									<option value="Above 20Yrs">Above 20Yrs</option>   									
-    					</select></p>
-    					
-                     <p><select name="form-expertise" id="form-expertise" class="form-control required" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();' required>
-    									<option value="<%=trainerdetails.getExpertise() %>"><%=trainerdetails.getExpertise() %></option>
-    									<option value="Yoga for health">Yoga for health</option>
-    									<option value="Weight Loss">Weight Loss</option>
-    									<option value="Kids Yoga">Kids Yoga</option>
-    									<option value="Pregnancy Yoga">Pregnancy Yoga</option>
-    									<option value="Meditation">Meditation</option>
-    					</select></p>
-    					
-                     
-                                     
-                   
-                   <p><textarea class="form-control" id="form-aboutself" name="form-aboutself" placeholder="About Yourself.." required ><%=trainerdetails.getAboutyourself() %></textarea></p>
-                   <button type="button" class="btn" name="updatebutton" id="updatebutton">UPDATE</button>
-                     </div>
-                     <div id="updatesuccess"></div>
-                      <%
-							}
+	<!-- Page Header Start -->
+	<div class="page-header">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<h2>Trainer's Zone</h2>
+				</div>
+				<div class="col-12">
+					<a href="javascript: switchView('calendar')">My Training
+						Calendar</a> <a href="">My Profile</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Page Header End -->
+	<!-- Trainers calendar html inclusion -->
+	<%@include file="./html/dialogs.html"%>
+	<%@include file="./html/trainer-calender-booking.html"%>
+	<%@include file="./html/recurrence-confirmation-dialog.html"%>
+
+	<!-- About Start -->
+	<div class="container-fluid overcover" id="profile-container">
+		<div class="container profile-box">
+			<div class="cover-image row">
+			</div>
+			<%
+			ArrayList<TrainerDetailsVO> trainers = (ArrayList<TrainerDetailsVO>) request.getAttribute("TrainerProfileData");
+			%>
+
+			<%
+			// Iterating through subjectList
+			if (trainers != null && trainers.size() > 0) // Null check for the object
+			{
+				Iterator<TrainerDetailsVO> iterator = trainers.iterator(); // Iterator interface
+				int inv = 0;
+				for (TrainerDetailsVO trainerdetails : trainers) // iterate through all the data until the last record
+				{
+					//InvestorExpertNamemodel myinvestordetails = iterator.next(); //assign individual employee record to the employee class object
+					inv++;
+					//	System.out.println("My Investor: "+ trainerdetails.getName());
+			%>
+			<div class="row">
+				<div class="col-lg-8 col-md-7 detail-px no-padding">
+					<h3 class="mth3">Profile</h3>
+					<input type="hidden" id="trainer-profile-base64-encoded-element"
+						value="<%=trainerdetails.getBase64Image()%>" />
+					<div class="fx-ro">
+						<div class="dat">
+							Name : <b><%=trainerdetails.getName()%></b>
+						</div>
+
+					</div>
+					<div class="fx-ro">
+						<div class="dat">
+							Email : <b id="trainer-id"><%=trainerdetails.getEmail()%></b>
+						</div>
+					</div>
+					<div class="fx-ro">
+						<div class="dat">
+							Experience : <b><%=trainerdetails.getExperience()%></b>
+						</div>
+					</div>
+					<div class="fx-ro">
+						<div class="dat">
+							Qualification : <b><%=trainerdetails.getQualification()%></b>
+						</div>
+					</div>
+					<div class="fx-ro">
+						<div class="dat">
+							Expertise : <b><%=trainerdetails.getExpertise()%></b>
+						</div>
+					</div>
+					<h3>About Trainer</h3>
+					<p><%=trainerdetails.getAboutyourself()%></p>
+
+					<h3 class="mth3">Certificates</h3>
+
+					<ul class="exrts">
+						<li><%=trainerdetails.getCertificate1filename()%></li>
+						<li>
+							<%
+							if (trainerdetails.getCertificate1filename().length() > 3) {
+							%>
+							<button class="btn">Download</button> <%
+ }
+ %>
+						</li>
+						<li><%=trainerdetails.getCertificate2filename()%></li>
+						<li>
+							<%
+							if (trainerdetails.getCertificate2filename().length() > 3) {
+							%>
+							<button class="btn">Download</button> <%
+ System.out.println("tt::" + trainerdetails.getCertificate2filename().length());
+ }
+ %>
+						</li>
+						<li><%=trainerdetails.getCertificate3filename()%></li>
+						<li>
+							<%
+							if (trainerdetails.getCertificate3filename().length() > 3) {
+							%>
+							<button class="btn">Download</button> <%
+ }
+ %>
+						</li>
+					</ul>
+
+				</div>
+				<div class="col-lg-4 col-md-5 leftgh flex-column flex-halign-center flex-valign-center">
+					<div class="bh-img">
+						<img id="profile-image-element" alt="">
+					</div>
+					<div class="name-det">
+						<h2><%=trainerdetails.getName()%></h2>
+						<h3>Contact</h3>
+						<p><%=trainerdetails.getName()%>
+							<br>
+						</p>
+						<p><%=trainerdetails.getEmail()%>
+							<br>
+						</p>
+						<h3>
+							<a class="trainereditprofile">Edit Profile</a>
+						</h3>
+						<div id="editprofilehide">
+
+							<p>
+								<input type="text" name="form-name"
+									class="form-name form-control" id="form-name"
+									value="<%=trainerdetails.getName()%>" required>
+							</p>
+							<p>
+								<input type="text" name="form-qualification"
+									class="form-qualification form-control" id="form-qualification"
+									value="<%=trainerdetails.getQualification()%>" required>
+							</p>
+							<p>
+								<select name="form-experience" id="form-experience"
+									class="form-control required" onfocus='this.size=5;'
+									onblur='this.size=1;' onchange='this.size=1; this.blur();'
+									required>
+									<option value="<%=trainerdetails.getExperience()%>"><%=trainerdetails.getExperience()%></option>
+									<option value="upto 2Yr">upto 2Yr</option>
+									<option value="2 to 5Yrs">2 to 5Yrs</option>
+									<option value="5 to 10Yrs">5 to 10Yrs</option>
+									<option value="10 to 20Yrs">10 to 20Yrs</option>
+									<option value="Above 20Yrs">Above 20Yrs</option>
+								</select>
+							</p>
+							<p>
+								<select name="form-expertise" id="form-expertise"
+									class="form-control required" onfocus='this.size=5;'
+									onblur='this.size=1;' onchange='this.size=1; this.blur();'
+									required>
+									<option value="<%=trainerdetails.getExpertise()%>"><%=trainerdetails.getExpertise()%></option>
+									<option value="Yoga for health">Yoga for health</option>
+									<option value="Weight Loss">Weight Loss</option>
+									<option value="Kids Yoga">Kids Yoga</option>
+									<option value="Pregnancy Yoga">Pregnancy Yoga</option>
+									<option value="Meditation">Meditation</option>
+								</select>
+							</p>
+							<p>
+								<textarea class="form-control" id="form-aboutself"
+									name="form-aboutself" placeholder="About Yourself.." required><%=trainerdetails.getAboutyourself()%></textarea>
+							</p>
+							<button type="button" class="btn" name="updatebutton"
+								id="updatebutton">UPDATE</button>
+						</div>
+						<div id="updatesuccess"></div>
+						<%
 						}
-					%>  
-                     <form id="trainerppchangepassword" name="trainerppchangepassword">
-                      <h3><a  class="trainerchangepassword">Change Password</a></h3>
-                      <div id="changepasswordhide">
-                      <p><input type="text" name="formcurrentpassword" placeholder="Current Password.."  class="form-currentpassword form-control" id="formcurrentpassword"  required></p>
-                     
-                     <p><input type="text" name="formnewpassword" placeholder="New Password.." class="form-newpassword form-control" id="formnewpassword"  required></p>
-                     
-                     <p><input type="text" name="formconfirmpassword" placeholder="Confirm Password.." class="form-confirmpassword form-control" id="formconfirmpassword"  required></p>
-                     <input type="submit" class="btn" name="changepasswordbutton" id="changepasswordbutton" value="Change">
-                   
-                    </div>
-                    <div id="success"></div>
-                     </form>
-                        <h3><a href="./TrainerLogoutServlet">Logout</a></h3>
-                    </div>
-                                       
-                     
-                </div>
-            </div>
-            
-                 
-                    
-        </div>
-    </div>
-    <script type="text/javascript">
-$(document).ready(function(){
-$("#trainerppchangepassword").validate({
- rules: {
-	 formcurrentpassword: {
-	        required: true, 
-	        minlength: 6
-	      },
-	
-	      formnewpassword: {
-        required: true, 
-        minlength: 6
-      },
-      formconfirmpassword:{
-	  required: true,
-	  equalTo:"#formnewpassword"
-	  }
-    },
-    messages : {
-    	formcurrentpassword: {
-            required: "please enter password",
-            minlength: "Password min 6 characters"
-          },
-          formnewpassword: {
-        required: "please enter password",
-        minlength: "Password min 6 characters"
-      },
-      formconfirmpassword: {
-		required: "please enter confirm password",
-		equalTo: "password doesn match"
-	  }
-    }
-  });
- 
-  
-});
-</script>    
-    <script type="text/javascript">
-          $(document).ready(function(){
-        	  $('#editprofilehide').hide();
-        	  $('#changepasswordhide').hide();
-        	  $('#addmoreclass2').hide();
-        	  $('#addmoreclass3').hide();
-        	  
-        	  $(".trainereditprofile").click(function(){
-        		  $('#editprofilehide').show();
-        	  });
-        	  $(".trainerchangepassword").click(function(){
-        		  $('#changepasswordhide').show();
-        	  });
-        	  $("#addclass2").click(function(){
-        		  $('#addmoreclass2').show();
-        		  $('#addclass2').hide();
-        		  $('#addclass3').show();
-        	  });
-        	  $("#addclass3").click(function(){
-        		  $('#addmoreclass3').show();
-        		  $('#addclass3').hide();
-        	  });
-          });
-          </script>
-           <script type="text/javascript">
-          $(document).ready(function(){
-        	  $("#updatebutton").click(function(){
-        			
-        		  event.preventDefault();
-        	      var name = $("#form-name").val();                
-                  var exper = $("#form-experience").val();
-                  var qua = $("#form-qualification").val();
-                  
-                  var exp = $("#form-expertise").val();                 
-                  
-                  var message = $("#form-aboutself").val();
-        		 
-                 
-                $.ajax({
-                      url: "TrainerProfileDetailsUpdateServlet",
-                      type: "POST",
-                      data: {
-                    	  name: name,                             
-                          experience: exper,
-                          qualification:qua,
-                          expertise: exp,                         
-                          aboutyourself: message
-                      },
-                      cache: false,
-                     
-                    	  success: function (data) {
-                            	
-                              $('#updatesuccess').html("<div class='alert alert-success'>");
-                              $('#updatesuccess > .alert-success').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-                                      .append("</button>");
-                              $('#updatesuccess > .alert-success')
-                                      .append("<strong>"+data+". </strong>");
-                              $('#updatesuccess > .alert-success')
-                                      .append('</div>');
-                              $('#editprofilehide').hide();
-                              document.location.href='./TrainerProfile';
-                          },
-                          error: function () {
-                              $('#updatesuccess').html("<div class='alert alert-danger'>");
-                              $('#updatesuccess > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-                                      .append("</button>");
-                              $('#updatesuccess > .alert-danger').append($("<strong>").text("Sorry " + name + ", update failed. Please try again later!"));
-                              $('#updatesuccess > .alert-danger').append('</div>');
-                             
-                          }
-                      
-                  });
-        			
-        		});
-          });
-	 </script>
-	  <script type="text/javascript">
-          $(document).ready(function(){
-        	  $("#changepasswordbutton").click(function(){
-        			
-        		  event.preventDefault();
-        		  var currentpass=$('#formcurrentpassword').val();
-                  var newpass=$('#formnewpassword').val();
-                  var confirmpass=$('#formconfirmpassword').val();
-                 
-                $.ajax({
-                      url: "TrainersChangePasswordServlet",
-                      type: "POST",
-                      data: {
-                    	  currentpassword : currentpass,
-                    	  newpassword : newpass,
-                    	  confirmpassword : confirmpass
-                      },
-                      cache: false,
-                     
-                    	  success: function (data) {
-                            	
-                              $('#success').html("<div class='alert alert-success'>");
-                              $('#success > .alert-success').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-                                      .append("</button>");
-                              $('#success > .alert-success')
-                                      .append("<strong>"+data+". </strong>");
-                              $('#success > .alert-success')
-                                      .append('</div>');
-                              $('#changepasswordhide').hide();
-                          },
-                          error: function () {
-                              $('#success').html("<div class='alert alert-danger'>");
-                              $('#success > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-                                      .append("</button>");
-                              $('#success > .alert-danger').append($("<strong>").text("Sorry " + name + ", update failed. Please try again later!"));
-                              $('#success > .alert-danger').append('</div>');
-                             
-                          }
-                      
-                  });
-        			
-        		});
-          });
-	 </script>
-        <!-- About End -->
+						}
+						%>
+						<form id="trainerppchangepassword" name="trainerppchangepassword">
+							<h3>
+								<a class="trainerchangepassword">Change Password</a>
+							</h3>
+							<div id="changepasswordhide">
+								<p>
+									<input type="text" name="formcurrentpassword"
+										placeholder="Current Password.."
+										class="form-currentpassword form-control"
+										id="formcurrentpassword" required>
+								</p>
 
+								<p>
+									<input type="text" name="formnewpassword"
+										placeholder="New Password.."
+										class="form-newpassword form-control" id="formnewpassword"
+										required>
+								</p>
 
-       
+								<p>
+									<input type="text" name="formconfirmpassword"
+										placeholder="Confirm Password.."
+										class="form-confirmpassword form-control"
+										id="formconfirmpassword" required>
+								</p>
+								<input type="submit" class="btn" name="changepasswordbutton"
+									id="changepasswordbutton" value="Change">
 
+							</div>
+							<div id="success"></div>
+						</form>
+						<h3>
+							<a href="./TrainerLogoutServlet">Logout</a>
+						</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#trainerppchangepassword").validate({
+				rules : {
+					formcurrentpassword : {
+						required : true,
+						minlength : 6
+					},
 
-        <!-- Footer Start -->
-        <div class="footer wow fadeIn" data-wow-delay="0.3s">
-            <div class="container-fluid">
-                <div class="container">
-                    <div class="footer-info">
-                        <a href="index.jsp" class="footer-logo">DealWithFitness<span></span></a>
-                        
-                        <div class="footer-menu">
-                           
-                            <p>dealwithfitness64@gmail.com</p>
-                        </div>
-                        <div class="footer-social">
-                            <a href=""><i class="fab fa-twitter"></i></a>
-                            <a href=""><i class="fab fa-facebook-f"></i></a>
-                            <a href=""><i class="fab fa-youtube"></i></a>
-                            <a href=""><i class="fab fa-instagram"></i></a>
-                            <a href=""><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="container copyright">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <p>&copy; <a href="#">dealwithfitness</a>, All Right Reserved.</p>
-                        </div>
-                        <div class="col-md-6">
-                            <p>Designed By <Strong>Bluehorse Creative Team</Strong></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Footer End -->
+					formnewpassword : {
+						required : true,
+						minlength : 6
+					},
+					formconfirmpassword : {
+						required : true,
+						equalTo : "#formnewpassword"
+					}
+				},
+				messages : {
+					formcurrentpassword : {
+						required : "please enter password",
+						minlength : "Password min 6 characters"
+					},
+					formnewpassword : {
+						required : "please enter password",
+						minlength : "Password min 6 characters"
+					},
+					formconfirmpassword : {
+						required : "please enter confirm password",
+						equalTo : "password doesn match"
+					}
+				}
+			});
+		});
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#editprofilehide').hide();
+			$('#changepasswordhide').hide();
+			$('#addmoreclass2').hide();
+			$('#addmoreclass3').hide();
 
-        <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+			$(".trainereditprofile").click(function() {
+				$('#editprofilehide').show();
+			});
+			$(".trainerchangepassword").click(function() {
+				$('#changepasswordhide').show();
+			});
+			$("#addclass2").click(function() {
+				$('#addmoreclass2').show();
+				$('#addclass2').hide();
+				$('#addclass3').show();
+			});
+			$("#addclass3").click(function() {
+				$('#addmoreclass3').show();
+				$('#addclass3').hide();
+			});
+		});
+	</script>
+	<script type="text/javascript">
+		$(document)
+				.ready(
+						function() {
+							$("#updatebutton")
+									.click(
+											function() {
 
-        <!-- JavaScript Libraries -->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-        <script src="lib/easing/easing.min.js"></script>
-        <script src="lib/wow/wow.min.js"></script>
-        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-        <script src="lib/isotope/isotope.pkgd.min.js"></script>
-        <script src="lib/lightbox/js/lightbox.min.js"></script>
-        
-        <!-- Contact Javascript File -->
-        <script src="mail/jqBootstrapValidation.min.js"></script>
-        <script src="mail/contact.js"></script>
+												event.preventDefault();
+												var name = $("#form-name")
+														.val();
+												var exper = $(
+														"#form-experience")
+														.val();
+												var qua = $(
+														"#form-qualification")
+														.val();
 
-        <!-- Template Javascript -->
-        <script src="js/main.js"></script>
-        
-<script src="profile/js/jquery-3.2.1.min.js"></script>
-<script src="profile/js/popper.min.js"></script>
-<script src="profile/js/bootstrap.min.js"></script>
-<script src="profile/js/script.js"></script>
-    </body>
+												var exp = $("#form-expertise")
+														.val();
+
+												var message = $(
+														"#form-aboutself")
+														.val();
+
+												$
+														.ajax({
+															url : "TrainerProfileDetailsUpdateServlet",
+															type : "POST",
+															data : {
+																name : name,
+																experience : exper,
+																qualification : qua,
+																expertise : exp,
+																aboutyourself : message
+															},
+															cache : false,
+
+															success : function(
+																	data) {
+
+																$(
+																		'#updatesuccess')
+																		.html(
+																				"<div class='alert alert-success'>");
+																$(
+																		'#updatesuccess > .alert-success')
+																		.html(
+																				"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+																		.append(
+																				"</button>");
+																$(
+																		'#updatesuccess > .alert-success')
+																		.append(
+																				"<strong>"
+																						+ data
+																						+ ". </strong>");
+																$(
+																		'#updatesuccess > .alert-success')
+																		.append(
+																				'</div>');
+																$(
+																		'#editprofilehide')
+																		.hide();
+																document.location.href = './TrainerProfile';
+															},
+															error : function() {
+																$(
+																		'#updatesuccess')
+																		.html(
+																				"<div class='alert alert-danger'>");
+																$(
+																		'#updatesuccess > .alert-danger')
+																		.html(
+																				"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+																		.append(
+																				"</button>");
+																$(
+																		'#updatesuccess > .alert-danger')
+																		.append(
+																				$(
+																						"<strong>")
+																						.text(
+																								"Sorry "
+																										+ name
+																										+ ", update failed. Please try again later!"));
+																$(
+																		'#updatesuccess > .alert-danger')
+																		.append(
+																				'</div>');
+
+															}
+
+														});
+
+											});
+						});
+	</script>
+	<script type="text/javascript">
+		$(document)
+				.ready(
+						function() {
+							$("#changepasswordbutton")
+									.click(
+											function() {
+
+												event.preventDefault();
+												var currentpass = $(
+														'#formcurrentpassword')
+														.val();
+												var newpass = $(
+														'#formnewpassword')
+														.val();
+												var confirmpass = $(
+														'#formconfirmpassword')
+														.val();
+
+												$
+														.ajax({
+															url : "TrainersChangePasswordServlet",
+															type : "POST",
+															data : {
+																currentpassword : currentpass,
+																newpassword : newpass,
+																confirmpassword : confirmpass
+															},
+															cache : false,
+
+															success : function(
+																	data) {
+
+																$('#success')
+																		.html(
+																				"<div class='alert alert-success'>");
+																$(
+																		'#success > .alert-success')
+																		.html(
+																				"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+																		.append(
+																				"</button>");
+																$(
+																		'#success > .alert-success')
+																		.append(
+																				"<strong>"
+																						+ data
+																						+ ". </strong>");
+																$(
+																		'#success > .alert-success')
+																		.append(
+																				'</div>');
+																$(
+																		'#changepasswordhide')
+																		.hide();
+															},
+															error : function() {
+																$('#success')
+																		.html(
+																				"<div class='alert alert-danger'>");
+																$(
+																		'#success > .alert-danger')
+																		.html(
+																				"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+																		.append(
+																				"</button>");
+																$(
+																		'#success > .alert-danger')
+																		.append(
+																				$(
+																						"<strong>")
+																						.text(
+																								"Sorry "
+																										+ name
+																										+ ", update failed. Please try again later!"));
+																$(
+																		'#success > .alert-danger')
+																		.append(
+																				'</div>');
+
+															}
+
+														});
+
+											});
+						});
+	</script>
+	<!-- About End -->
+
+	<!-- Footer Start -->
+	<div class="footer wow fadeIn" data-wow-delay="0.3s">
+		<div class="container-fluid">
+			<div class="container">
+				<div class="footer-info">
+					<a href="index.jsp" class="footer-logo">DealWithFitness<span></span></a>
+
+					<div class="footer-menu">
+
+						<p>dealwithfitness64@gmail.com</p>
+					</div>
+					<div class="footer-social">
+						<a href=""><i class="fab fa-twitter"></i></a> <a href=""><i
+							class="fab fa-facebook-f"></i></a> <a href=""><i
+							class="fab fa-youtube"></i></a> <a href=""><i
+							class="fab fa-instagram"></i></a> <a href=""><i
+							class="fab fa-linkedin-in"></i></a>
+					</div>
+				</div>
+			</div>
+			<div class="container copyright">
+				<div class="row">
+					<div class="col-md-6">
+						<p>
+							&copy; <a href="#">dealwithfitness</a>, All Right Reserved.
+						</p>
+					</div>
+					<div class="col-md-6">
+						<p>
+							Designed By <Strong>Bluehorse Creative Team</Strong>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Footer End -->
+
+	<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+	<!-- JavaScript Libraries -->
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+	<script src="lib/easing/easing.min.js"></script>
+	<script src="lib/wow/wow.min.js"></script>
+	<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+	<script src="lib/isotope/isotope.pkgd.min.js"></script>
+	<script src="lib/lightbox/js/lightbox.min.js"></script>
+
+	<!-- Contact Javascript File -->
+	<script src="mail/jqBootstrapValidation.min.js"></script>
+	<script src="mail/contact.js"></script>
+
+	<!-- Template Javascript -->
+	<script src="js/main.js"></script>
+
+	<script src="profile/js/jquery-3.2.1.min.js"></script>
+	<script src="profile/js/popper.min.js"></script>
+	<script src="profile/js/bootstrap.min.js"></script>
+	<script src="profile/js/script.js"></script>
+</body>
 </html>

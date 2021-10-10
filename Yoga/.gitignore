@@ -1,0 +1,7 @@
+**/.settings/
+**/target/
+*.zip
+*.log
+.classpath
+.metadata/**
+**/.metadata/

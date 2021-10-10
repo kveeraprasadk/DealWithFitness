@@ -24,7 +24,7 @@ function AlertDialog() {
 function ConfirmDialog() {
 	const self = this;
 	self.callback = null;
-	
+
 	$(document).ready(() => {
 		$("#confirm-dialog-yes").click(e => {
 			if (self.callback) {
@@ -32,7 +32,7 @@ function ConfirmDialog() {
 			}
 		})
 	})
-	
+
 	self.show = function(message, callback) {
 		self.callback = callback;
 		$("#confirm-dialog-message").text(message);
@@ -43,3 +43,8 @@ function ConfirmDialog() {
 window.progressBar = new ProgressBar();
 window.alertDialog = new AlertDialog();
 window.confirmDialog = new ConfirmDialog();
+
+
+window.onerror = function(message, source, lineno, colno, error) {
+	console.log("Failed with js errors", message, source, lineno, colno, error);
+}

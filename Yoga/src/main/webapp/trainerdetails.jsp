@@ -100,53 +100,75 @@
 	</div>
 	<!-- Page Header End -->
 	<script type="text/javascript">
-		$(document).ready(function() {
-			$("#book1").hide();
-			$("#book2").hide();
-			$("#book3").hide();
-			var globalarray = [];
-			var arrLinks = [];
-			arrLinks = JSON.parse(window.localStorage.getItem("globalarray"));
-			/* console.log(arrLinks); */
-			var i = 1;
-			console.log("Start");
-			console.log(arrLinks[0]);
-			let details = JSON.parse(arrLinks[0]);
-			console.log(details[0].name);
-			$(".tname").html(details[0].name);
-			$(".texperience").html(details[0].experience);
-			$(".tqualification").html(details[0].qualification);
-			$(".texpertise").html(details[0].expertise);
-			$(".tmonthlyfees").html(details[0].monthlyfees);
-			$(".tschedules").html(details[0].schedule);
-			$(".tclasslevel").html(details[0].classlevel);
-			$(".texpertise2").html(details[0].expertise2);
-			$(".tmonthlyfees2").html(details[0].monthlyfees2);
-			$(".tschedules2").html(details[0].schedule2);
-			$(".tclasslevel2").html(details[0].classlevel2);
-			$(".texpertise3").html(details[0].expertise3);
-			$(".tmonthlyfees3").html(details[0].monthlyfees3);
-			$(".tschedules3").html(details[0].schedule3);
-			$(".tclasslevel3").html(details[0].classlevel3);
-			$(".taboutyourself").html(details[0].aboutyourself);
-			$(".tcertificate1filename").html(details[0].certificate1filename);
-			$(".tcertificate2filename").html(details[0].certificate2filename);
-			$(".tcertificate3filename").html(details[0].certificate3filename);
-			if (details[0].expertise.length > 5) {
-				$("#book1").show();
-			}
-			if (details[0].expertise2.length > 5) {
-				$("#book2").show();
-			}
-			if (details[0].expertise3.length > 5) {
-				$("#book3").show();
-			}
+		$(document).ready(
+				function() {
+					$("#book1").hide();
+					$("#book2").hide();
+					$("#book3").hide();
+					var globalarray = [];
+					var arrLinks = [];
+					arrLinks = JSON.parse(window.localStorage
+							.getItem("globalarray"));
+					/* console.log(arrLinks); */
+					var i = 1;
+					console.log("Start");
+					console.log(arrLinks[0]);
+					let details = JSON.parse(arrLinks[0]);
+					console.log(details[0].name);
+					$(".tname").html(details[0].name);
+					$(".texperience").html(details[0].experience);
+					$(".tqualification").html(details[0].qualification);
+					$(".texpertise").html(details[0].expertise);
+					$(".tmonthlyfees").html(details[0].monthlyfees);
+					$(".tschedules").html(details[0].schedule);
+					$(".tclasslevel").html(details[0].classlevel);
+					$(".texpertise2").html(details[0].expertise2);
+					$(".tmonthlyfees2").html(details[0].monthlyfees2);
+					$(".tschedules2").html(details[0].schedule2);
+					$(".tclasslevel2").html(details[0].classlevel2);
+					$(".texpertise3").html(details[0].expertise3);
+					$(".tmonthlyfees3").html(details[0].monthlyfees3);
+					$(".tschedules3").html(details[0].schedule3);
+					$(".tclasslevel3").html(details[0].classlevel3);
+					$(".taboutyourself").html(details[0].aboutyourself);
+					$(".tcertificate1filename").html(
+							details[0].certificate1filename);
+					$(".tcertificate2filename").html(
+							details[0].certificate2filename);
+					$(".tcertificate3filename").html(
+							details[0].certificate3filename);
 
-			/*    $.each(arrLinks, function(index, value){
-			 $(".profile"+i).html(value);
-			 console.log(".profile"+index);
-			 }); */
-		});
+					const image = details[0].base64Image
+					if (image) {
+						$("#profile-image-element").attr("src",
+								"data:image/*;base64," + image);
+						setTimeout(() => {
+							const width = $("#profile-image-element").width();
+							console.log("Image width",width)
+							if (width == 0) {
+								console.log("Invalid image hence alternative is displayed")
+								$("#profile-image-alternative").show();
+							}
+						}, 100);
+					} else {
+						console.log("No profile picture");
+						$("#profile-image-element").show();
+					}
+
+					if (details[0].expertise.length > 5) {
+						$("#book1").show();
+					}
+					if (details[0].expertise2.length > 5) {
+						$("#book2").show();
+					}
+					if (details[0].expertise3.length > 5) {
+						$("#book3").show();
+					}
+					/*    $.each(arrLinks, function(index, value){
+					 $(".profile"+i).html(value);
+					 console.log(".profile"+index);
+					 }); */
+				});
 	</script>
 
 	<!-- About Start -->
@@ -178,7 +200,7 @@
 					<div class="fx-ro">
 						Expertise : <b><div class="texpertise"></div></b>
 					</div>
-					
+
 					<h3>About Trainer</h3>
 					<p>
 						<b><div class="taboutyourself"></div></b>
@@ -196,13 +218,16 @@
 					</ul>
 
 				</div>
-				<div class="col-lg-4 col-md-5 leftgh">
-					<div class="img-box mt pt">
-						<img src="profile/images/gallery/gallery_12.jpg" alt="">
+				<div
+					class="col-lg-4 col-md-5 leftgh  flex-column flex-halign-center flex-valign-center">
+					<div class="bh-img">
+						<img id="profile-image-element" alt="">
+						<p id="profile-image-alternative" class="flex flex-halign-center"
+							style="display: none">
+							<i class="fa fa-user user-container"></i>
+						</p>
 					</div>
 					<div class="name-det">
-
-
 						<h2>
 							<div class="tname"></div>
 						</h2>
