@@ -8,11 +8,17 @@ function Utils() {
 		const end = moment(seriesDetails.endByDate).format("MMMM DD, YYYY");
 
 		if (seriesDetails.selectedDayNames && seriesDetails.selectedDayNames.length > 0) {
-			seriesDetails.schedule = "Occurs every " + seriesDetails.selectedDayNames.join(", ") + " effective " + start +
-				" until " + end + " from " + sTimeOnly + " to " + eTimeOnly;
+			const days = seriesDetails.selectedDayNames.join(", ");
+			seriesDetails.schedule = start + " - " + end + " <br> " + "Every " + days + " <br> " +
+				"Timings: <b>" + sTimeOnly + " - " + eTimeOnly + "</b>";
 		} else {
 			seriesDetails.schedule = start + " " + sTimeOnly + " - " + eTimeOnly;
 		}
+	}
+
+	self.validateEmail = function(email) {
+		const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		return re.test(String(email).toLowerCase());
 	}
 
 	self.combineDateTime = function(dateInputId, timeInputId) {
