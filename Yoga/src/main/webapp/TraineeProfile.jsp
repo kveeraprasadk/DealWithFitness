@@ -196,7 +196,7 @@
 					<div class="fx-ro">
 						<div class="dat col-lg-4"></div>
 						<div class="dat col-lg-8">
-							<button type="submit" class="btn btn-warning"
+							<button type="submit" class="btn btn-primary"
 								id="traineeprofileupdate">Update</button>
 						</div>
 					</div>
@@ -234,9 +234,9 @@
 
 						<form id="traineeppchangepassword" name="traineeppchangepassword">
 							<h3>
-								<a class="trainerchangepassword">Change Password</a>
+								<a class="trainerchangepassword" data-toggle="collapse" data-target="#changepasswordhide">Change Password</a>
 							</h3>
-							<div id="changepasswordhide">
+							<div id="changepasswordhide" class="collapse">
 								<p>
 									<input type="text" name="formcurrentpassword"
 										placeholder="Current Password.."
@@ -257,8 +257,10 @@
 										class="form-confirmpassword form-control"
 										id="formconfirmpassword" required>
 								</p>
-								<button type="button" class="btn" name="changepasswordbutton"
+								<button type="button" class="btn btn-primary" name="changepasswordbutton"
 									id="changepasswordbutton">Change</button>
+									<button type="button" class="btn btn-danger" 
+									id="closebutton">Close</button>
 
 							</div>
 							<div id="success"></div>
@@ -327,6 +329,9 @@
 			$(".classhide").click(function() {
 				$('.classlevelhide').show();
 				$('.schedulehide').show();
+			});
+			$("#closebutton").click(function() {
+				$('#changepasswordhide').hide();
 			});
 		});
 	</script>

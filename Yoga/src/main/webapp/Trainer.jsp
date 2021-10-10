@@ -11,8 +11,8 @@
 <meta content="Free Website Template" name="description">
 
 <!-- Favicon -->
-<link href="img/favicon.ico" rel="icon">
 
+<link rel="icon" href="img/yoga-icon1.jpg">
 <!-- Google Font -->
 <link
 	href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap"
@@ -198,6 +198,7 @@ label {
 																cache : false,
 																success : function(
 																		data) {
+																	console.log(data);
 																	if (data == "Login Success") {
 																		document.location.href = './TrainerProfile';
 																	} else {
@@ -307,7 +308,7 @@ label {
                             	<a class="btn btn-link-2" href="#">Button 2</a>
                             </div>       -->
 					</div>
-					<div class="col-sm-5 form-box ">
+					<div class="col-sm-5 form-box card bg-white">
 						<ul class="nav nav-tabs" id="myTab" role="tablist">
 							<li class="nav-item" role="presentation"><a
 								class="nav-link active" id="login-tab" data-toggle="tab"
@@ -344,10 +345,13 @@ label {
 												type="password" name="password" placeholder="Password..."
 												class="form-password form-control" id="password" required>
 										</div>
-										<button type="submit" class="btn trainerloginbutton"
+										<button type="submit" class="btn trainerloginbutton btn-primary"
 											id="trainerloginbutton">Login</button>
-									</form>
+									<div class="form-group">
 									<div id="regsuccess"></div>
+									</div>
+									</form>
+									
 								</div>
 							</div>
 							<div class="tab-pane fade" id="register" role="tabpanel"
@@ -688,15 +692,14 @@ label {
 
 										</div>
 										<div class="form-group">
-											<label for="form-image"><strong>Profile
-													Picture</strong></label> <input type="file" name="formimage"
+											<strong>Profile	Picture</strong> <input type="file" name="formimage"
 												class="form-image form-control" id="form-image"
 												accept="image/*" onchange="preview_image(event)" required>
 											<img id="output_image" />
 										</div>
 										<div class="form-group">
-											<label for="form-certificate"><strong>Upload
-													Certificates</strong></label>
+											<strong>Upload
+													Certificates</strong>
 											<div class="row">
 												<div class="col-8">
 													<input type="file" name="formcertificate1"
@@ -724,7 +727,7 @@ label {
 												</div>
 											</div>
 										</div>
-										<button type="submit" class="btn trainerregisterbutton"
+										<button type="submit" class="btn trainerregisterbutton btn-primary"
 											id="trainerregisterbutton">Register</button>
 									</form>
 								</div>
@@ -802,6 +805,7 @@ label {
 														required : true,
 														minlength : 3,
 														alphaNum : true
+														
 													},
 													formemail : {
 														required : true,
@@ -904,7 +908,7 @@ label {
 							$.validator.addMethod("alphaNum", function(value,
 									element) {
 								return this.optional(element)
-										|| value == value.match(/^[a-zA-Z]*$/);
+										|| value == value.match(/^[a-zA-Z\s]*$/);
 							}, "please enter a valid name");
 							$.validator.addMethod("onlyNum",
 									function(value, element) {

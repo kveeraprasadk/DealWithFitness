@@ -65,7 +65,7 @@
 <script src="./dist/dialogs.js"></script>
 <script src="./dist/whoami.js"></script>
 <script src="./dist/home-trainers.js"></script>
-
+<link rel="icon" href="img/yoga-icon1.jpg">
 
 <style type="text/css">
 label {
