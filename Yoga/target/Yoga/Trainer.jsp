@@ -198,6 +198,7 @@ label {
 																cache : false,
 																success : function(
 																		data) {
+																	console.log(data);
 																	if (data == "Login Success") {
 																		document.location.href = './TrainerProfile';
 																	} else {
@@ -344,10 +345,13 @@ label {
 												type="password" name="password" placeholder="Password..."
 												class="form-password form-control" id="password" required>
 										</div>
-										<button type="submit" class="btn trainerloginbutton"
+										<button type="submit" class="btn trainerloginbutton btn-primary"
 											id="trainerloginbutton">Login</button>
-									</form>
+									<div class="form-group">
 									<div id="regsuccess"></div>
+									</div>
+									</form>
+									
 								</div>
 							</div>
 							<div class="tab-pane fade" id="register" role="tabpanel"

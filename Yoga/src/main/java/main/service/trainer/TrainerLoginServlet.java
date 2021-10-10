@@ -32,7 +32,7 @@ public class TrainerLoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
-
+		String trainerName = null;
 		String username = (String) request.getParameter("username");
 		String pass = (String) request.getParameter("password");
 		Base64.Encoder enc = Base64.getEncoder();
@@ -46,30 +46,38 @@ public class TrainerLoginServlet extends HttpServlet {
 			try (PreparedStatement stat = con.prepareStatement(cntQuery)) {
 				try (ResultSet rs = stat.executeQuery()) {
 					if (rs.next()) {
-						String trainerName = rs.getString("trainername");
+						trainerName = rs.getString("trainername");
 						System.out.println("trainerName is::" + trainerName);
 						if (trainerName != null) {
 							HttpSession session = request.getSession(true);
 							session.setAttribute("traineremail", username);
-							
+
 							SessionUser sessionUser = new SessionUser();
 							sessionUser.setType("Trainer");
 							sessionUser.setEmail(username);
 							sessionUser.setName(trainerName);
 							session.setAttribute(AppConstants.SESSION_USER_INFO, sessionUser);
-							
+
 							System.out.println("Login successfull");
 							response.getWriter().write("Login Success");
 						} else {
 							System.out.println("Invalid Credentials");
 							response.getWriter().write("Invalid Credentials");
 						}
+					} else {
+						System.out.println("Null Values");
+						response.getWriter().write("Invalid Credentials");
 					}
+
 				}
 			}
+
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
+			System.out.println("catch block");
+
 			e1.printStackTrace();
+
 		}
 	}
 }
