@@ -1,4 +1,4 @@
-package main;
+package main.service.trainee;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -61,7 +61,7 @@ public class TraineeProfileViewServlet extends HttpServlet {
 				details.setEmail(rs.getString("username"));
 				details.setPassword(rs.getString("password"));
 				details.setName(rs.getString("traineename"));
-				details.setDob(rs.getString("dob"));
+	//			details.setDob(rs.getString("dob"));
 				details.setTarget(rs.getString("target"));
 				details.setAnyailment(rs.getString("ailment"));
 				details.setCity(rs.getString("city"));

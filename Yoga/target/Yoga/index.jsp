@@ -65,7 +65,7 @@
 <script src="./dist/dialogs.js"></script>
 <script src="./dist/whoami.js"></script>
 <script src="./dist/home-trainers.js"></script>
-
+<link rel="icon" href="img/yoga-icon1.jpg">
 
 <style type="text/css">
 label {
@@ -118,8 +118,9 @@ label {
 							<h4>{expertise}</h4>
 							<span class="pb" style="color: green">{title}</span>
 			            	<span class="flex flex-valign-center pb"><span class="mr">Level:</span> <h2 style="margin: 0px" class="ml">{classLevel}</h2></span>
-			            	<div class="class-meta flex flex-valign-start" style="color: #050df6">
-			                	<i class="far fa-clock"></i><p class="pl">{schedule}</p><br>
+			            	<div class="class-meta flex" style="color: #050df6; align-items: flex-start">
+			                	<i class="far fa-clock" style="font-size: 20px;color:gray"></i>
+								<p class="pl" style="text-align:center">{schedule}</p><br>
 			            	</div>
 			             	<div class="class-meta pt pb">
 			               		<p> <Strong>Fee per Month : <i class="fa fa-inr"> </i>{fee}</Strong></p>
