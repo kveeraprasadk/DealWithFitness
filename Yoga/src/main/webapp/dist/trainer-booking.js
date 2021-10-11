@@ -10,8 +10,8 @@ const TIME_SLOT_MIN_MESSAGE = "Your training length is less than 30 minutes. Min
 
 //const old = ScheduleDetailPopup.prototype.show;
 //ScheduleDetailPopup.prototype.show = () => {
-	//console.log("called.....")
-	//old();
+//console.log("called.....")
+//old();
 //}
 
 function TrainerCalender() {
@@ -51,7 +51,7 @@ function TrainerCalender() {
 				time: schedule => self.getTimeTemplate(schedule)
 			}
 		});
-		
+
 		self.calendar.on({
 			'beforeCreateSchedule': self.createNewScheduleCalendarEvent,
 			'beforeUpdateSchedule': self.updateScheduleCalendarEvent,
@@ -151,8 +151,8 @@ function TrainerCalender() {
 				attendees: [],
 				isAllDay: true,
 				category: 'time',
-				isPrivate: true,
 				bgColor: "#c2ffc6",
+				isReadOnly: true,
 				dragBgColor: "#f6deb76b",
 				borderColor: "#e1efff"
 			});
@@ -232,7 +232,7 @@ function TrainerCalender() {
 				// pass seriesId as transistion id so that system delete the existing series and add new series
 				self.addNewSeriesSchedules(scheduleRequest);
 			}
-		} else if (schedule.category == "time") {
+		} else {
 			// store which series is going be in edit mode
 			self.state.seriesIdInEditMode = self.state.scheduleIdToSeriesIdMap[schedule.id];
 			const scheduleSeries = self.state.seriesRecurringSchedules[self.state.seriesIdInEditMode]
@@ -278,45 +278,43 @@ function TrainerCalender() {
 	// This event is triggerd from calendar UI
 	self.deleteScheduleCalendarEvent = function(event) {
 		var schedule = event.schedule;
-		if (schedule.category === "time") {
-			const seriesId = self.state.scheduleIdToSeriesIdMap[schedule.id];
-			const title = self.state.seriesRecurringSchedules[seriesId].title;
+		const seriesId = self.state.scheduleIdToSeriesIdMap[schedule.id];
+		const title = self.state.seriesRecurringSchedules[seriesId].title;
 
-			if (self.state.seriesRecurringSchedules[seriesId].schedules.length == 1) {
-				confirmDialog.show("Would you like to delete this training schedule \"" + title + "\"?", () => {
-					// user confirmed hence set the deleting schedules
-					self.state.seriesIdInDeleteMode = {
-						seriesId: self.state.scheduleIdToSeriesIdMap[schedule.id],
-						scheduleId: schedule.id
-					}
-					progressBar.start();
-					// only one occurrence present in series hence we need to delete the entire series otherwise if
-					// we delete only schedule then series entries in db will be in limbo state.
-					// So in affect if a series with single schedule deletion would be equal to deleting entries series
-					$.ajax({
-						url: "TrainerBookings?seriesId=" + seriesId + "&trainerId=" + self.trainerId,
-						type: "DELETE",
-						cache: false,
-						success: function() {
-							console.log("Schedule series:", seriesId, " has been deleted")
-							self.calendar.deleteSchedule(schedule.id, "");
-						},
-						error: function() {
-							alertDialog.show("Service Failure", "Failed to delete schedules");
-						},
-						complete: () => progressBar.end()
-					});
-				});
-			} else {
+		if (self.state.seriesRecurringSchedules[seriesId].schedules.length == 1) {
+			confirmDialog.show("Would you like to delete this training schedule \"" + title + "\"?", () => {
 				// user confirmed hence set the deleting schedules
 				self.state.seriesIdInDeleteMode = {
 					seriesId: self.state.scheduleIdToSeriesIdMap[schedule.id],
 					scheduleId: schedule.id
 				}
-				$("#recurrence-dialog-message").text("Do you want to delete all occurrences of the recurrence schedule \"" + title + "\" or just this one?");
-				document.getElementById("recurrence-dialog-delete-ocurrence").checked = true;
-				$("#recurrence-confirmation-dialog").modal({ show: true });
+				progressBar.start();
+				// only one occurrence present in series hence we need to delete the entire series otherwise if
+				// we delete only schedule then series entries in db will be in limbo state.
+				// So in affect if a series with single schedule deletion would be equal to deleting entries series
+				$.ajax({
+					url: "TrainerBookings?seriesId=" + seriesId + "&trainerId=" + self.trainerId,
+					type: "DELETE",
+					cache: false,
+					success: function() {
+						console.log("Schedule series:", seriesId, " has been deleted")
+						self.calendar.deleteSchedule(schedule.id, "");
+					},
+					error: function() {
+						alertDialog.show("Service Failure", "Failed to delete schedules");
+					},
+					complete: () => progressBar.end()
+				});
+			});
+		} else {
+			// user confirmed hence set the deleting schedules
+			self.state.seriesIdInDeleteMode = {
+				seriesId: self.state.scheduleIdToSeriesIdMap[schedule.id],
+				scheduleId: schedule.id
 			}
+			$("#recurrence-dialog-message").text("Do you want to delete all occurrences of the recurrence schedule \"" + title + "\" or just this one?");
+			document.getElementById("recurrence-dialog-delete-ocurrence").checked = true;
+			$("#recurrence-confirmation-dialog").modal({ show: true });
 		}
 	}
 
