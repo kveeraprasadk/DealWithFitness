@@ -1,5 +1,7 @@
 package main.service.trainer;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -35,6 +37,21 @@ public class BookingService {
 	private static final String SCHEDULE_SQL = "select ss.*, tb.*, tr.traineename from schedulesSeries ss left join traineeBookings tb "
 			+ "on ss.traineremail =  tb.trainerId and ss.id = tb.seriesId left join traineeregister tr on tb.traineeId = tr.username "
 			+ "where ss.traineremail = '%s'";
+	private final Map holidays;
+
+	public BookingService() {
+		try {
+			holidays = Json.parse(
+					new String(Files.readAllBytes(Paths.get(this.getClass().getResource("/holidays.json").toURI()))),
+					Map.class);
+		} catch (Exception e) {
+			throw new IllegalArgumentException(e);
+		}
+	}
+
+	public Map getHolidays() {
+		return holidays;
+	}
 
 	public Optional<Collection<SeriesSchedulesVO>> getSeries(String trainerId) {
 		try (Connection con = DBConnection.createConnection()) {
@@ -211,8 +228,10 @@ public class BookingService {
 			// to be deleted from the db, hence remove the old one, if everything is
 			// successful commit the transaction
 			if (series.getSeriesTransitionFromId() != null) {
-				// here false indicates the trainee bookings related to this series should be retained 
-				// We are generating new series and its schedules only due to update happened at UI side.
+				// here false indicates the trainee bookings related to this series should be
+				// retained
+				// We are generating new series and its schedules only due to update happened at
+				// UI side.
 				deleteSeries(con, series.getTraineremail(), series.getSeriesTransitionFromId(), false);
 			}
 
@@ -229,9 +248,9 @@ public class BookingService {
 					// Series will have more than one schedule if its recurring schedule hence
 					// insert record per schedule
 					for (Schedule schedule : series.getSchedules()) {
-						List<? extends Object> schedulesParams = Arrays.asList(series.getTraineremail(), schedule.getId(),
-								series.getId(), schedule.getTitle(), schedule.getLocation(), schedule.getStart(),
-								schedule.getEnd());
+						List<? extends Object> schedulesParams = Arrays.asList(series.getTraineremail(),
+								schedule.getId(), series.getId(), schedule.getTitle(), schedule.getLocation(),
+								schedule.getStart(), schedule.getEnd());
 						for (int index = 0; index < schedulesParams.size(); index++) {
 							schedulePs.setObject(index + 1, schedulesParams.get(index));
 						}
@@ -253,7 +272,8 @@ public class BookingService {
 			}
 		} catch (SQLException exp) {
 			throw new IllegalArgumentException(
-					String.format("Failed while inserting series: %s, %s", series.getId(), series.getTraineremail()), exp);
+					String.format("Failed while inserting series: %s, %s", series.getId(), series.getTraineremail()),
+					exp);
 		}
 	}
 }

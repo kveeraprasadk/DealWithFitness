@@ -1,7 +1,12 @@
 package main.service.trainer;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.servlet.ServletException;
@@ -30,8 +35,14 @@ public class TrainerBookingServlet extends HttpServlet {
 			Optional<Collection<SeriesSchedulesVO>> series = bookingService
 					.getSeries(request.getParameter("trainerId"));
 			if (series.isPresent()) {
-				response.setContentType("application/json");
-				response.getWriter().write(Json.stringify(series.get()));
+				try {
+					Map<String, Object> result = new HashMap<>(Collections.singletonMap("series", series.get()));
+					result.put("holidays", bookingService.getHolidays());
+					response.setContentType("application/json");
+					response.getWriter().write(Json.stringify(result));
+				} catch (Exception e) {
+					throw new IllegalArgumentException(e);
+				}
 			} else {
 				response.setStatus(404); // not found trainer id
 				response.getWriter().write("Trainer id not found");

@@ -64,8 +64,6 @@
 
 
 <script src="./dist/external/tui-code-snippet.min.js"></script>
-<script src="./dist/external/tui-time-picker.min.js"></script>
-<script src="./dist/external/tui-date-picker.min.js"></script>
 <script src="./dist/external/moment.min.js"></script>
 <script src="./dist/external/tui-calendar.min.js"></script>
 <script src="./dist/utils.js"></script>
