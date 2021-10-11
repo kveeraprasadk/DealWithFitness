@@ -41,7 +41,7 @@
 	href="assets/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="assets/css/form-elements.css">
 <link rel="stylesheet" href="assets/css/style.css">
-
+<link rel="icon" href="img/yoga-icon1.jpg">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script
@@ -205,7 +205,7 @@
 										type="password" name="form-password" placeholder="Password..."
 										class="form-password form-control" id="form-password" required>
 								</div>
-								<button type="submit" class="btn adminloginbutton"
+								<button type="submit" class="btn-primary adminloginbutton"
 									id="adminloginbutton">Login</button>
 							</form>
 						</div>

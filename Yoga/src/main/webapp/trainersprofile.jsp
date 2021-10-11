@@ -60,6 +60,13 @@
 .toggle.ios .toggle-handle {
 	border-radius: 20px;
 }
+
+.unstyled-button {
+  border: none;
+  padding: 0;
+  background: none;
+}
+
 </style>
 
 
@@ -280,7 +287,7 @@
 							<br>
 						</p>
 						<h3>
-							<a class="trainereditprofile">Edit Profile</a>
+							<button class="unstyled-button trainereditprofile">Edit Profile</button>
 						</h3>
 						<div id="editprofilehide">
 
@@ -334,7 +341,7 @@
 						%>
 						<form id="trainerppchangepassword" name="trainerppchangepassword">
 							<h3>
-								<a class="trainerchangepassword">Change Password</a>
+								<button class="unstyled-button trainerchangepassword">Change Password</button>
 							</h3>
 							<div id="changepasswordhide">
 								<p>

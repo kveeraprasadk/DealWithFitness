@@ -50,6 +50,7 @@
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"
 	defer></script>
+	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <link href="css/style.css" rel="stylesheet">
 <script src="./dist/whoami.js"></script>
 </head>
@@ -150,23 +151,36 @@
 								disabled="disabled">
 						</div>
 					</div>
-					<div class="fx-ro">
+			<!-- 		<div class="fx-ro">
 						<div class="dat col-lg-4">DoB</div>
 						<div class="dat col-lg-8">
 							<input type="date" name="form-dob" class="form-dob form-control"
-								id="form-dob" value="<%=traineedetails.getDob()%>" required>
+								id="form-dob" value=" " required>
 						</div>
-					</div>
+					</div>         -->
 
 					<div class="fx-ro">
 						<div class="dat col-lg-4">Target</div>
 						<div class="dat col-lg-8">
-							<input type="text" name="form-target"
+					<!-- 		<input type="text" name="form-target"
 								class="form-target form-control" id="form-target"
-								value="<%=traineedetails.getTarget()%>" required>
+								value="" required>    -->
+						<select name="form-target" id="form-target"
+									class="form-control required" onfocus='this.size=5;'
+									onblur='this.size=1;' onchange='this.size=1; this.blur();'
+									required>
+									<option value="<%=traineedetails.getTarget()%>"><%=traineedetails.getTarget()%></option>
+									<option value="WeightLose">WeightLose</option>
+									<option value="BackPain">BackPain</option>
+									<option value="Stress">Stress</option>
+									<option value="Health">Health</option>
+									
+								</select>
 						</div>
 					</div>
-
+					
+					
+						
 					<div class="fx-ro">
 						<div class="dat col-lg-4">Any Ailment</div>
 						<div class="dat col-lg-8">
@@ -196,7 +210,7 @@
 					<div class="fx-ro">
 						<div class="dat col-lg-4"></div>
 						<div class="dat col-lg-8">
-							<button type="submit" class="btn btn-warning"
+							<button type="submit" class="btn btn-primary"
 								id="traineeprofileupdate">Update</button>
 						</div>
 					</div>
@@ -204,7 +218,7 @@
 					
 
 					<h3>Trainers</h3>
-					<!--          <ptraineedetails.getAboutyourself()f() %></p>     -->
+					<!--          <ptraineedetails.getAboutyourself() %></p>     -->
 
 
 
@@ -233,10 +247,11 @@
 						%>
 
 						<form id="traineeppchangepassword" name="traineeppchangepassword">
-							<h3>
-								<a class="trainerchangepassword">Change Password</a>
-							</h3>
-							<div id="changepasswordhide">
+							
+								<a class="trainerchangepassword" data-toggle="collapse" data-target="#changepasswordhide">Change Password</a>
+							<button type="submit" class="btn btn-primary"
+								id="traineeprofileupdate">Update</button>
+							<div id="changepasswordhide" class="collapse">
 								<p>
 									<input type="text" name="formcurrentpassword"
 										placeholder="Current Password.."
@@ -257,8 +272,9 @@
 										class="form-confirmpassword form-control"
 										id="formconfirmpassword" required>
 								</p>
-								<button type="button" class="btn" name="changepasswordbutton"
-									id="changepasswordbutton">Change</button>
+								<button type="button" class="btn btn-primary" name="changepasswordbutton"
+									id="changepasswordbutton">Change11</button>
+									
 
 							</div>
 							<div id="success"></div>
@@ -315,18 +331,21 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('#editprofilehide').hide();
-			$('#changepasswordhide').hide();
+		//	$('#changepasswordhide').hide();
 			$('.classlevelhide').hide();
 			$('.schedulehide').hide();
 			$(".trainereditprofile").click(function() {
 				$('#editprofilehide').show();
 			});
-			$(".trainerchangepassword").click(function() {
-				$('#changepasswordhide').show();
-			});
+	//		$(".trainerchangepassword").click(function() {
+	//			$('#changepasswordhide').show();
+	//		});
 			$(".classhide").click(function() {
 				$('.classlevelhide').show();
 				$('.schedulehide').show();
+			});
+			$("#closebutton").click(function() {
+				$('#changepasswordhide').hide();
 			});
 		});
 	</script>
@@ -343,7 +362,7 @@
 														.val();
 												var email = $("#form-email")
 														.val();
-												var dob = $("#form-dob").val();
+										//		var dob = $("#form-dob").val();
 												var target = $("#form-target")
 														.val();
 												var ailment = $("#form-ailment")
@@ -361,7 +380,7 @@
 															data : {
 																name : name,
 																email : email,
-																dob : dob,
+														//		dob : dob,
 																target : target,
 																ailment : ailment,
 																phone : phone,

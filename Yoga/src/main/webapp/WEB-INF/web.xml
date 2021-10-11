@@ -104,19 +104,19 @@
 		<servlet-name>TraineeProfileViewServlet</servlet-name>
 		<display-name>TraineeProfileViewServlet</display-name>
 		<description></description>
-		<servlet-class>main.TraineeProfileViewServlet</servlet-class>
+		<servlet-class>main.service.trainee.TraineeProfileViewServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>TraineeProfileDetailsUpdateServlet</servlet-name>
 		<display-name>TraineeProfileDetailsUpdateServlet</display-name>
 		<description></description>
-		<servlet-class>main.TraineeProfileDetailsUpdateServlet</servlet-class>
+		<servlet-class>main.service.trainee.TraineeProfileDetailsUpdateServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>TraineesChangePasswordServlet</servlet-name>
 		<display-name>TraineesChangePasswordServlet</display-name>
 		<description></description>
-		<servlet-class>main.TraineesChangePasswordServlet</servlet-class>
+		<servlet-class>main.service.trainee.TraineesChangePasswordServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>TrainerRequestDeleteServlet</servlet-name>
