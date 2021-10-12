@@ -42,7 +42,6 @@ main\service\trainer\TrainerDetailsView.class
 main\model\SeriesSchedulesVO.class
 main\AdminLogoutServlet.class
 main\service\trainee\TraineeConfirmTrainersServlet.class
-main\TrainerBookingServlet.class
 main\service\trainer\TrainersListServlet.class
 main\AdminCertificate1DownloadServlet.class
 main\common\Json.class

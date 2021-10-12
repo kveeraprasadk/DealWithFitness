@@ -331,8 +331,8 @@
 								<textarea class="form-control" id="form-aboutself"
 									name="form-aboutself" placeholder="About Yourself.." required><%=trainerdetails.getAboutyourself()%></textarea>
 							</p>
-							<button type="button" class="btn" name="updatebutton"
-								id="updatebutton">UPDATE</button>
+							<button type="button" class="btn btn-primary" name="updatebutton"
+								id="updatebutton">Update</button>
 						</div>
 						<div id="updatesuccess"></div>
 						<%
@@ -345,27 +345,27 @@
 							</h3>
 							<div id="changepasswordhide">
 								<p>
-									<input type="text" name="formcurrentpassword"
+									<input type="password" name="formcurrentpassword"
 										placeholder="Current Password.."
 										class="form-currentpassword form-control"
 										id="formcurrentpassword" required>
 								</p>
 
 								<p>
-									<input type="text" name="formnewpassword"
+									<input type="password" name="formnewpassword"
 										placeholder="New Password.."
 										class="form-newpassword form-control" id="formnewpassword"
 										required>
 								</p>
 
 								<p>
-									<input type="text" name="formconfirmpassword"
+									<input type="password" name="formconfirmpassword"
 										placeholder="Confirm Password.."
 										class="form-confirmpassword form-control"
 										id="formconfirmpassword" required>
 								</p>
-								<input type="submit" class="btn" name="changepasswordbutton"
-									id="changepasswordbutton" value="Change">
+								<button type="button" class="btn btn-primary"  name="changepasswordbutton"
+									id="changepasswordbutton">Change</button>
 
 							</div>
 							<div id="success"></div>

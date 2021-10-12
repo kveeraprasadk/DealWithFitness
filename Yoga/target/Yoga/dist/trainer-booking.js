@@ -4,18 +4,21 @@ const DAY_NAMES = ["sunday", "monday", "tuesday", "wednesday", "thursday", "frid
 const CALENDAR_ID = "taining-calendar";
 const TIME_SLOT_MIN = 30 * 60 * 1000;
 const TIME_SLOT_MAX = 5 * 60 * 60 * 1000;
-const SCREEN_MIN_WIDTH = 600;
+const DEFAULT_VIEW = "week";
 const TIME_SLOT_MAX_MESSAGE = "Your training length goes over 5 hours, You need adjusting End Time to limit training length within 5 hours.";
 const TIME_SLOT_MIN_MESSAGE = "Your training length is less than 30 minutes. Minimum duration should be more than 30 minutes.";
+
+//const old = ScheduleDetailPopup.prototype.show;
+//ScheduleDetailPopup.prototype.show = () => {
+//console.log("called.....")
+//old();
+//}
 
 function TrainerCalender() {
 	const self = this;
 	self.trainerId;
 	self.calendar;
 	self.scheduleEndTimePicker;
-	//	self.calendarStartTime;
-	//	self.calendarEndTime;
-	//	self.calendarEndBy;
 
 	self.state = {
 		seriesRecurringSchedules: [],
@@ -26,13 +29,7 @@ function TrainerCalender() {
 	}
 
 	self.init = function() {
-		// If there is a change in the window size then set the calendar size accordingly
-		window.addEventListener("resize", self.onWindowResizeEvent);
-
-		// Based on the resolution set the calendar view type
-		const defaultView = window.innerWidth > 600 ? "week" : "day";
-		$("#calendar-view-select").val(defaultView);
-
+		$("#calendar-view-select").val(DEFAULT_VIEW);
 		self.trainerId = document.getElementById("trainer-id").innerText;
 
 		self.calendar = new tui.Calendar("#tui-calendar-container", {
@@ -40,7 +37,7 @@ function TrainerCalender() {
 				id: CALENDAR_ID,
 				name: "Trainers Calendar"
 			}],
-			defaultView: window.innerWidth > 600 ? "week" : "day",
+			defaultView: DEFAULT_VIEW,
 			taskView: false,
 			scheduleView: true,
 			useCreationPopup: false,
@@ -50,41 +47,16 @@ function TrainerCalender() {
 			disableDblClick: false,
 			disableClick: true,
 			template: {
-				allday: schedule => self.getTimeTemplate(schedule, true),
-				time: schedule => self.getTimeTemplate(schedule, true)
+				allday: schedule => self.getTimeTemplate(schedule),
+				time: schedule => self.getTimeTemplate(schedule)
 			}
-		})
+		});
 
 		self.calendar.on({
 			'beforeCreateSchedule': self.createNewScheduleCalendarEvent,
 			'beforeUpdateSchedule': self.updateScheduleCalendarEvent,
 			'beforeDeleteSchedule': self.deleteScheduleCalendarEvent
 		});
-
-		/*	self.calendarStartTime = new tui.DatePicker('#startTime-container', {
-				timePicker: true,
-				input: {
-					element: '#starttime-datepicker-input',
-					format: 'MMM dd, yyyy hh:mm A'
-				}
-			});
-	
-			self.calendarEndTime = new tui.DatePicker('#endTime-container', {
-				timePicker: true,
-				input: {
-					element: '#endtime-datepicker-input',
-					format: 'MMM dd, yyyy hh:mm A'
-				}
-			});
-			*/
-
-		/*self.calendarEndBy = new tui.DatePicker('#endby-container', {
-			timePicker: false,
-			input: {
-				element: '#endby-datepicker-input',
-				format: 'MMM dd, yyyy'
-			}
-		});*/
 
 		$("#new-schedule-btn").click(function() {
 			self.openScheduleDailog({
@@ -123,31 +95,39 @@ function TrainerCalender() {
 			},
 			cache: false,
 			success: function(data) {
-				// For a trainer we will have multiple series so iterate over each series and populate calendar
-				for (const series of data) {
-					self.state.seriesRecurringSchedules[series.id] = series;
-					const uiSchedules = []
-					for (const schedule of series.schedules) {
-						uiSchedules.push({
-							id: schedule.id,
-							title: schedule.title,
-							location: schedule.location,
-							start: new Date(schedule.start),
-							end: new Date(schedule.end),
-							attendees: series.attendees ? series.attendees : [],
-							isAllDay: false,
-							category: 'time',
-							bgColor: "#e1efff",
-							dragBgColor: "#f6deb76b",
-							borderColor: "#e1efff"
-						});
-						self.state.scheduleIdToSeriesIdMap[schedule.id] = series.id;
+				if (data.holidays) {
+					self.loadHolidays(data.holidays);
+				}
+
+				// Load if series exists for trainer
+				if (data && data.series) {
+					const trainerSeries = data.series;
+					// For a trainer we will have multiple series so iterate over each series and populate calendar
+					for (const series of trainerSeries) {
+						self.state.seriesRecurringSchedules[series.id] = series;
+						const uiSchedules = []
+						for (const schedule of series.schedules) {
+							uiSchedules.push({
+								id: schedule.id,
+								title: schedule.title,
+								location: schedule.location,
+								start: new Date(schedule.start),
+								end: new Date(schedule.end),
+								attendees: series.attendees ? series.attendees : [],
+								isAllDay: false,
+								category: 'time',
+								bgColor: "#e1efff",
+								dragBgColor: "#f6deb76b",
+								borderColor: "#e1efff"
+							});
+							self.state.scheduleIdToSeriesIdMap[schedule.id] = series.id;
+						}
+						// Add recurrence rule to each schedule in the series
+						self.addRecurrenceRule(series, uiSchedules);
+						// Create schedules for this series in calendar ui
+						self.calendar.createSchedules(uiSchedules);
+						console.log(series.id, new Date(series.startTime), new Date(series.endTime), " -> ", uiSchedules.length);
 					}
-					// Add recurrence rule to each schedule in the series
-					self.addRecurrenceRule(series, uiSchedules);
-					// Create schedules for this series in calendar ui
-					self.calendar.createSchedules(uiSchedules);
-					console.log(series.id, new Date(series.startTime), new Date(series.endTime), " -> ", uiSchedules.length);
 				}
 			},
 			error: function(error) {
@@ -158,14 +138,29 @@ function TrainerCalender() {
 		});
 	}
 
-	self.onWindowResizeEvent = function() {
-		const view = window.innerWidth < 600 ? "day" : self.calendar.getViewName();
-		if (view != self.calendar.getViewName()) {
-			self.calendar.changeView(view);
-			$("#calendar-view-select").val(view);
+	self.loadHolidays = function(holidays) {
+		const uiSchedules = [];
+		for (const holidayDateStr in holidays) {
+			const holidayName = holidays[holidayDateStr];
+			uiSchedules.push({
+				id: holidayDateStr,
+				title: holidayName,
+				location: "",
+				start: moment(holidayDateStr, "YYYY-MM-DD").toDate(),
+				end: moment(holidayDateStr, "YYYY-MM-DD").toDate(),
+				attendees: [],
+				isAllDay: true,
+				category: 'time',
+				bgColor: "#c2ffc6",
+				isReadOnly: true,
+				dragBgColor: "#f6deb76b",
+				borderColor: "#e1efff"
+			});
 		}
+		self.calendar.createSchedules(uiSchedules);
 	}
 
+	// Triggered by view select dropdown change event
 	self.changeViewEvent = function(event) {
 		const viewName = $("#calendar-view-select").val();
 		self.calendar.changeView(viewName);
@@ -358,7 +353,7 @@ function TrainerCalender() {
 		const trainerPreference = $("#calendar-trainer-preference").val();
 		const startTime = Utils.combineDateTime("startdate-datepicker-input", "starttime-timepicker-input");
 		const endTime = Utils.combineDateTime("startdate-datepicker-input", "endtime-timepicker-input");
-		
+
 		// End by date is always end of day hence set the hours+mins+secs towards end of date
 		let endByDate = null;
 		let dayNamesSelected = [];
@@ -807,7 +802,6 @@ function TrainerCalender() {
 		}
 		renderRange.innerHTML = html.join('');
 	}
-
 
 	self.currentCalendarDate = function(format) {
 		var currentDate = moment([self.calendar.getDate().getFullYear(), self.calendar.getDate().getMonth(), self.calendar.getDate().getDate()]);

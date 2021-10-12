@@ -2,6 +2,7 @@ package main;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import main.common.DBConnection;
+import main.common.EncodeDecodeSHA256;
 
 /**
  * Servlet implementation class TrainersChangePasswordServlet
@@ -36,10 +38,25 @@ public class TrainersChangePasswordServlet extends HttpServlet {
 		String newpass=(String)request.getParameter("newpassword");
 	
 		
-		Base64.Encoder enc = Base64.getEncoder();
-		String newpassword = enc.encodeToString(newpass.getBytes());
-		String currentpassword = enc.encodeToString(curpassword.getBytes());
-Connection con = null;
+	//	Base64.Encoder enc = Base64.getEncoder();
+	//	String newpassword = enc.encodeToString(newpass.getBytes());
+	//	String currentpassword = enc.encodeToString(curpassword.getBytes());
+		String newpassword=null;
+		try {
+			newpassword = EncodeDecodeSHA256.toHexString(EncodeDecodeSHA256.getSHA(newpass));
+		} catch (NoSuchAlgorithmException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		String currentpassword=null;
+		try {
+			currentpassword = EncodeDecodeSHA256.toHexString(EncodeDecodeSHA256.getSHA(curpassword));
+		} catch (NoSuchAlgorithmException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+
+		Connection con = null;
         
         try
         {
