@@ -244,6 +244,13 @@ function Trainers() {
 		}, 500);
 	}
 
+	self.showRegisterDialogFromLoginEvent = function() {
+		$("#trainee-login-dialog").modal("hide");
+		setTimeout(() => {
+			self.showRegisterDialogEvent();
+		}, 500);
+	}
+
 	self.showRegisterDialogEvent = function() {
 		$("#register-traineeFullname").val("");
 		$("#register-traineeemailid").val("");
@@ -257,7 +264,6 @@ function Trainers() {
 		setTimeout(() => {
 			$("#register-traineeFullname").focus()
 		}, 500);
-
 	}
 
 	self.storeNewTraineeEvent = function() {
