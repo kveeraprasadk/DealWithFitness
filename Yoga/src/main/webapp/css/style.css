@@ -269,7 +269,7 @@ a:hover, a:active, a:focus {
 	position: relative;
 	width: 100%;
 	margin-bottom: 0px;
-	padding: 65px 20px 30px 20px;
+	padding: 55px 20px 20px 20px;
 	background: linear-gradient(110deg, transparent, #ecf4ffc4, #fff4dc, #bee1ff40,
 		#ebf2ff7a, transparent);
 	overflow: hidden;
@@ -440,7 +440,7 @@ a:hover, a:active, a:focus {
 	position: relative;
 	max-width: 600px;
 	margin: 0 auto;
-	margin-bottom: 45px;
+	margin-bottom: 35px;
 }
 
 .section-header p {
@@ -614,17 +614,25 @@ keyframes pulse-border { 0% {
 100
 
 
+
+
 %
 {
 transform
 
 
+
+
 :
+
+
 
 
 translateX
 
 
+
+
 (
 
 
@@ -634,17 +642,25 @@ translateX
 
 
 
+
+
 -50
+
+
 %
-
-
 )
+
+
 
 
 translateY
 
 
+
+
 (
+
+
 
 
 
@@ -654,16 +670,22 @@ translateY
 
 
 -50
+
+
 %
-
-
 )
+
+
 
 
 translateZ
 
 
+
+
 (
+
+
 
 
 
@@ -675,13 +697,21 @@ translateZ
 0
 
 
+
+
 )
+
+
 
 
 scale
 
 
+
+
 (
+
+
 
 
 
@@ -693,20 +723,32 @@ scale
 1
 
 
+
+
 .3
 
 
+
+
 )
+
+
 
 
 ;
 opacity
 
 
+
+
 :
 
 
+
+
 0
+
+
 
 
 ;
@@ -809,7 +851,7 @@ opacity
 	width: 100%;
 	display: flex;
 	align-items: center;
-/*	box-shadow: 2px 2px 5px rgb(0, 0, 0, 0.1);
+	/*	box-shadow: 2px 2px 5px rgb(0, 0, 0, 0.1);
 	border-radius: 40px;
 	border: 1px solid #ededee;*/
 }
@@ -2081,4 +2123,14 @@ opacity
 
 .navbar-nav {
 	justify-content: center;
+}
+
+@media screen and (max-width: 900px) {
+	.hero-image {
+		display: none
+	}
+	
+	.hero {
+		padding: 20px 20px;
+	}
 }
