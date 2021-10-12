@@ -111,16 +111,6 @@ label {
                             </div>
                         </div>    -->
 				</div>
-				<div class="col-md-4">
-					<div class="top-bar-right">
-						<div class="social">
-							<a href=""><i class="fab fa-twitter"></i></a> <a href=""><i
-								class="fab fa-facebook-f"></i></a> <a href=""><i
-								class="fab fa-linkedin-in"></i></a> <a href=""><i
-								class="fab fa-instagram"></i></a>
-						</div>
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>
@@ -139,7 +129,7 @@ label {
 				id="navbarCollapse">
 				<div class="navbar-nav ml-auto">
 					<a href="index.jsp" class="nav-item nav-link ">Home</a> <a
-						href="About.jsp" class="nav-item nav-link ">About</a> 
+						href="About.jsp" class="nav-item nav-link ">About</a>
 
 					<!--              <a href="blog.jsp" class="nav-item nav-link" >Blog</a>   -->
 
@@ -198,7 +188,8 @@ label {
 																cache : false,
 																success : function(
 																		data) {
-																	console.log(data);
+																	console
+																			.log(data);
 																	if (data == "Login Success") {
 																		document.location.href = './TrainerProfile';
 																	} else {
@@ -345,13 +336,17 @@ label {
 												type="password" name="password" placeholder="Password..."
 												class="form-password form-control" id="password" required>
 										</div>
-										<button type="submit" class="btn trainerloginbutton btn-primary"
+										<div class="form-group">
+											<div id="regsuccess"></div>
+										</div>
+										<div class="form-group">
+										<button type="submit"
+											class="btn trainerloginbutton btn-primary"
 											id="trainerloginbutton">Login</button>
-									<div class="form-group">
-									<div id="regsuccess"></div>
-									</div>
+											</div>
+										
 									</form>
-									
+
 								</div>
 							</div>
 							<div class="tab-pane fade" id="register" role="tabpanel"
@@ -409,16 +404,25 @@ label {
 										</div>
 										<div class="form-group">
 											<label class="sr-only" for="form-expertise1">Expertise-1</label>
-											<select name="formexpertise1" id="form-expertise1"
-												class="form-control required" onfocus='this.size=5;'
-												onblur='this.size=1;' onchange='this.size=1; this.blur();'
-												required>
-												<option value="">Expertise</option>
-												<option value="Yoga for health">Yoga for health</option>
-												<option value="Weight Loss">Weight Loss</option>
-												<option value="Kids Yoga">Kids Yoga</option>
-												<option value="Pregnancy Yoga">Pregnancy Yoga</option>
-												<option value="Meditation">Meditation</option>
+											<span style="font-size: 14px">Choose any Expert to
+												know your suitable fitness guru</span> <select
+												name="formexpertise1" id="form-expertise1"
+												class="form-control required">
+												<option value="">Choose Expertise</option>
+												<optgroup label="Yoga">
+													<option value="Yoga for health">Yoga for health</option>
+													<option value="Weight Loss">Weight Loss</option>
+													<option value="Kids Yoga">Kids Yoga</option>
+													<option value="Pregnancy Yoga">Pregnancy Yoga</option>
+													<option value="Meditation">Meditation</option>
+												</optgroup>
+												<optgroup label="Dance Group">
+													<option value="Tomcat v7.0 Server at localhost">Dance</option>
+													<option value="Zumba">Zumba</option>
+												</optgroup>
+												<option value="Weight / Body weight Workout">Weight
+													/ Body weight Workout</option>
+												<option value="Nutrition">Nutrition</option>
 											</select>
 										</div>
 										<!-- 
@@ -688,18 +692,20 @@ label {
 											<label class="sr-only" for="form-aboutself"><strong>About
 													Yourself</strong> </label>
 											<textarea class="form-control" id="form-aboutself"
-												name="formaboutself" placeholder="About Yourself.." required></textarea>
-
+												name="formaboutself" placeholder="About Yourself.." onKeyDown="limitText(this.form.formaboutself,this.form.countdown,1000);" 
+											onKeyUp="limitText(this.form.formaboutself,this.form.countdown,1000);" required></textarea>
+											<font size="1">(Maximum characters: 1000)
+											You have <input readonly type="text" class="projdesc" name="countdown" size="2" value="1000"> characters left.</font>
 										</div>
 										<div class="form-group">
-											<strong>Profile	Picture</strong> <input type="file" name="formimage"
-												class="form-image form-control" id="form-image"
-												accept="image/*" onchange="preview_image(event)" required>
-											<img id="output_image" />
+											<strong>Profile Picture</strong> <input type="file"
+												name="formimage" class="form-image form-control"
+												id="form-image" accept="image/*"
+												onchange="preview_image(event)" required> <img
+												id="output_image" />
 										</div>
 										<div class="form-group">
-											<strong>Upload
-													Certificates</strong>
+											<strong>Upload Certificates</strong>
 											<div class="row">
 												<div class="col-8">
 													<input type="file" name="formcertificate1"
@@ -727,7 +733,8 @@ label {
 												</div>
 											</div>
 										</div>
-										<button type="submit" class="btn trainerregisterbutton btn-primary"
+										<button type="submit"
+											class="btn trainerregisterbutton btn-primary"
 											id="trainerregisterbutton">Register</button>
 									</form>
 								</div>
@@ -740,6 +747,15 @@ label {
 		</div>
 
 	</div>
+	<script language="javascript" type="text/javascript">
+function limitText(limitField, limitCount, limitNum) {
+	if (limitField.value.length > limitNum) {
+		limitField.value = limitField.value.substring(0, limitNum);
+	} else {
+		limitCount.value = limitNum - limitField.value.length;
+	}
+}
+</script>
 	<script type='text/javascript'>
 		function preview_image(event) {
 			var reader = new FileReader();
@@ -805,7 +821,7 @@ label {
 														required : true,
 														minlength : 3,
 														alphaNum : true
-														
+
 													},
 													formemail : {
 														required : true,
@@ -908,7 +924,8 @@ label {
 							$.validator.addMethod("alphaNum", function(value,
 									element) {
 								return this.optional(element)
-										|| value == value.match(/^[a-zA-Z\s]*$/);
+										|| value == value
+												.match(/^[a-zA-Z\s]*$/);
 							}, "please enter a valid name");
 							$.validator.addMethod("onlyNum",
 									function(value, element) {

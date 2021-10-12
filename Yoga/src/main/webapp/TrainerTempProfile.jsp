@@ -128,7 +128,7 @@
             <div class="row">
                 <div class="col-lg-8 col-md-7 detail-px no-padding">
                    
-                   <p><b>! Important :</b>This is one time profile login. Just now you register to DealWithFitness, DWF can provide your Access ID's as soon as possible.</p>
+                   <p><span style="background-color: #FFFF00"><strong>! Important :</strong> This is one time profile login. Just now you register to DealWithFitness, Admin will provide your Access ID's as soon as possible.</span></p>
                     <h3 class="mth3">Profile</h3>
                     <div class="fx-ro">
                        

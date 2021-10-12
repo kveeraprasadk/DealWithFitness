@@ -1,6 +1,7 @@
 package main.service.trainer;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpSession;
 
 import main.common.AppConstants;
 import main.common.DBConnection;
+import main.common.EncodeDecodeSHA256;
 import main.model.SessionUser;
 
 /**
@@ -35,9 +37,16 @@ public class TrainerLoginServlet extends HttpServlet {
 		String trainerName = null;
 		String username = (String) request.getParameter("username");
 		String pass = (String) request.getParameter("password");
-		Base64.Encoder enc = Base64.getEncoder();
+	//	Base64.Encoder enc = Base64.getEncoder();
 		// encode data using BASE64
-		String password = enc.encodeToString(pass.getBytes());
+//		String password = enc.encodeToString(pass.getBytes());
+		String password=null;
+		try {
+			password = EncodeDecodeSHA256.toHexString(EncodeDecodeSHA256.getSHA(pass));
+		} catch (NoSuchAlgorithmException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		System.out.println("encoded value is \t" + password);
 
 		try (Connection con = DBConnection.createConnection()) {

@@ -336,12 +336,15 @@ label {
 												type="password" name="password" placeholder="Password..."
 												class="form-password form-control" id="password" required>
 										</div>
-										<button type="submit"
-											class="btn trainerloginbutton btn-primary"
-											id="trainerloginbutton">Login</button>
 										<div class="form-group">
 											<div id="regsuccess"></div>
 										</div>
+										<div class="form-group">
+										<button type="submit"
+											class="btn trainerloginbutton btn-primary"
+											id="trainerloginbutton">Login</button>
+											</div>
+										
 									</form>
 
 								</div>
@@ -689,8 +692,10 @@ label {
 											<label class="sr-only" for="form-aboutself"><strong>About
 													Yourself</strong> </label>
 											<textarea class="form-control" id="form-aboutself"
-												name="formaboutself" placeholder="About Yourself.." required></textarea>
-
+												name="formaboutself" placeholder="About Yourself.." onKeyDown="limitText(this.form.formaboutself,this.form.countdown,1000);" 
+											onKeyUp="limitText(this.form.formaboutself,this.form.countdown,1000);" required></textarea>
+											<font size="1">(Maximum characters: 1000)
+											You have <input readonly type="text" class="projdesc" name="countdown" size="2" value="1000"> characters left.</font>
 										</div>
 										<div class="form-group">
 											<strong>Profile Picture</strong> <input type="file"
@@ -742,6 +747,15 @@ label {
 		</div>
 
 	</div>
+	<script language="javascript" type="text/javascript">
+function limitText(limitField, limitCount, limitNum) {
+	if (limitField.value.length > limitNum) {
+		limitField.value = limitField.value.substring(0, limitNum);
+	} else {
+		limitCount.value = limitNum - limitField.value.length;
+	}
+}
+</script>
 	<script type='text/javascript'>
 		function preview_image(event) {
 			var reader = new FileReader();
@@ -846,14 +860,15 @@ label {
 														required : true,
 														minlength : 50
 													},
+										//			formcertificate1 : {
+										//				required : true
+										//			},
 													formimage : {
 														required : true,
 														extension : "png|jpeg|jpg",
 														filesize : 1048576,
-													},
-													formcertificate1 : {
-														required : true
 													}
+													
 												},
 												messages : {
 													formfirstname : {
@@ -896,9 +911,9 @@ label {
 													formimage : {
 														required : "File must be JPEG or PNG, less than 1MB"
 													},
-													formcertificate1 : {
-														required : "Please Upload your certificate"
-													}
+										//			formcertificate1 : {
+										//				required : "Please Upload your certificate"
+										//			}
 
 												}
 											});

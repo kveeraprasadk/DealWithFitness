@@ -212,12 +212,37 @@ while (rs.next()) {
 
 	details.setEmail(rs.getString("username"));
 	details.setPassword(rs.getString("password"));
-	details.setName(rs.getString("traineename"));
-	details.setDob(rs.getString("dob"));
-	details.setTarget(rs.getString("target"));
-	details.setAnyailment(rs.getString("ailment"));
-	details.setCity(rs.getString("city"));
-	details.setPhone(rs.getString("phone"));
+	if(rs.getString("traineename") != null){
+		details.setName(rs.getString("traineename"));
+		}else{
+		details.setName(" ");	
+		}
+//			details.setDob(rs.getString("dob"));
+		if(rs.getString("target") != null){
+		details.setTarget(rs.getString("target"));
+		}else{
+		details.setTarget(" ");
+		}
+		if(rs.getString("ailment") != null){
+		details.setAnyailment(rs.getString("ailment"));
+		}else{
+			details.setAnyailment(" ");
+		}
+		if(rs.getString("state") != null){
+		details.setState(rs.getString("state"));
+		}else{
+		details.setState(" ");
+		}
+		if(rs.getString("city") != null){
+		details.setCity(rs.getString("city"));
+		}else{
+		details.setCity(" ");
+		}
+		if(rs.getString("phone") != null){
+		details.setPhone(rs.getString("phone"));
+		}else{
+			details.setPhone(" ");
+		}
 	details.setCreatetime(rs.getTimestamp("createtime"));
 /*	Blob blob = rs.getBlob("photo");
 	

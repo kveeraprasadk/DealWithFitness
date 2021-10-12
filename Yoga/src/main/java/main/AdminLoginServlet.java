@@ -1,6 +1,7 @@
 package main;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import main.common.DBConnection;
+import main.common.EncodeDecodeSHA256;
 
 /**
  * Servlet implementation class AdminLoginServlet
@@ -33,9 +35,16 @@ public class AdminLoginServlet extends HttpServlet {
 	    String username = (String)request.getParameter("username");
         String pass = (String)request.getParameter("password");
         
-        Base64.Encoder enc = Base64.getEncoder();
+     //   Base64.Encoder enc = Base64.getEncoder();
         // encode data using BASE64
-           String password = enc.encodeToString(pass.getBytes());
+    //       String password = enc.encodeToString(pass.getBytes());
+        String password=null;
+		try {
+			password = EncodeDecodeSHA256.toHexString(EncodeDecodeSHA256.getSHA(pass));
+		} catch (NoSuchAlgorithmException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
            System.out.println("encoded value is \t" + password );
            
            Connection con = null;
@@ -57,8 +66,7 @@ public class AdminLoginServlet extends HttpServlet {
    			}
    			System.out.println("count is::"+Countrow);
          
-   			if(Countrow.equals("1")){
-   				
+   			if(Countrow.equals("1")){	
             	
               	   System.out.println("Login successfull");            	   
 	               response.getWriter().write("Login Success");   
