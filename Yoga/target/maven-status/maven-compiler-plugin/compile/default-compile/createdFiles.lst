@@ -1,3 +1,4 @@
+main\common\EncodeDecodeSHA256.class
 main\TrainersConfirmServlet$1.class
 main\AdminLoginServlet.class
 main\model\TrainerDetailsVO.class

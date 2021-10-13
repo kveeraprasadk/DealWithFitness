@@ -508,7 +508,6 @@ if(trainerslist != null && trainerslist.size() >0)  // Null check for the object
     <tr>
       <th>Name</th>
       <th>Email</th>      
-      <th>DateofBirth</th>
       <th>Target</th>
       <th>Ailment</th>
       <th>city</th>
@@ -536,8 +535,7 @@ if(traineeslist != null && traineeslist.size() >0)  // Null check for the object
 	%>
     <tr>
     	<td><%=tList.getName() %></td>
-      <td><%=tList.getEmail() %></td>
-       <td><%=tList.getDob() %></td>
+      <td><%=tList.getEmail() %></td>      
       <td><%=tList.getTarget() %></td>
       <td><%=tList.getAnyailment() %></td>
       <td><%=tList.getCity() %></td>

@@ -193,7 +193,7 @@ label {
 		<center></center>
 		<div class="container-fluid">
 			<div class="row align-items-center">
-				<div class="col-sm-12 col-md-6">
+				<div class="col-sm-12 col-md-12 col-lg-6">
 					<div class="hero-text">
 						<h1>Book Your Online Fitness Classes Now</h1>
 						<p>How much importance you give to yourself. Invest in self.</p>
@@ -210,7 +210,7 @@ label {
 							Bookings</button>
 					</div>
 				</div>
-				<div class="col-sm-12 col-md-6 d-md-block">
+				<div class="col-md-6 d-md-block">
 					<div class="hero-image">
 						<img src="img/hero.png" alt="Hero Image">
 					</div>

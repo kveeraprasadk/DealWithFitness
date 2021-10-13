@@ -89,6 +89,12 @@
 label {
 	color: #FF0000 !important;
 }
+.unstyled-button {
+  border: none;
+  padding: 0;
+  background: none;
+}
+
 </style>
 </head>
 
@@ -425,6 +431,14 @@ label {
 												<option value="Nutrition">Nutrition</option>
 											</select>
 										</div>
+										<div class="form-group">
+											<label class="sr-only" for="form-phone">Qualification</label>
+
+											<input type="text" name="formphone"
+												placeholder="Phone..."
+												class="form-phone form-control"
+												id="form-phone" required>
+										</div>
 										<!-- 
 								<div class="form-group">
 									<label for="form-schedule"><strong>Schedule
@@ -694,8 +708,8 @@ label {
 											<textarea class="form-control" id="form-aboutself"
 												name="formaboutself" placeholder="About Yourself.." onKeyDown="limitText(this.form.formaboutself,this.form.countdown,1000);" 
 											onKeyUp="limitText(this.form.formaboutself,this.form.countdown,1000);" required></textarea>
-											<font size="1">(Maximum characters: 1000)
-											You have <input readonly type="text" class="projdesc" name="countdown" size="2" value="1000"> characters left.</font>
+											<font size="2">(Maximum characters: 1000)
+											You have <input readonly type="text" class="projdesc unstyled-button" name="countdown" size="2" value="1000"> characters left.</font>
 										</div>
 										<div class="form-group">
 											<strong>Profile Picture</strong> <input type="file"
@@ -836,6 +850,12 @@ function limitText(limitField, limitCount, limitNum) {
 													formqualification : {
 														required : true
 													},
+													formphone : {
+														required : true,												
+														minlength : 10,
+														maxlength : 10,
+														onlyNum : true
+													},
 													formclasslevel1 : {
 														required : true
 													},
@@ -891,8 +911,14 @@ function limitText(limitField, limitCount, limitNum) {
 													formqualification : {
 														required : "Please enter Qualification"
 													},
+													formphone : {
+														required : "Please enter phone number",
+														minlength : "Phone Number must be 10 numbers",
+														maxlength : "Phone Number must be 10 numbers"
+													},
 													formfrom1 : {
-														required : "please enter class start time"
+														required : "please enter class start time",
+														
 													},
 													formto1 : {
 														required : "please enter class end time"
@@ -928,12 +954,11 @@ function limitText(limitField, limitCount, limitNum) {
 										|| value == value
 												.match(/^[a-zA-Z\s]*$/);
 							}, "please enter a valid name");
-							$.validator.addMethod("onlyNum",
-									function(value, element) {
+							$.validator.addMethod("onlyNum",function(value, element) {
 										return this.optional(element)
 												|| value == value
-														.match(/^[0-9]{10}*$/);
-									}, "mobile number must be 10 digits");
+														.match(/^[1-9]{1}[0-9]{9}$/);
+									}, "Phone number must be 10 numbers");
 
 						});
 	</script>

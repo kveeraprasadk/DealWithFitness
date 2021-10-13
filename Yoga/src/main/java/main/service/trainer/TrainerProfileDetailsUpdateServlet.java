@@ -1,4 +1,4 @@
-package main;
+package main.service.trainer;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -34,6 +34,7 @@ public class TrainerProfileDetailsUpdateServlet extends HttpServlet {
 		String name=(String)request.getParameter("name");			
 		String experience=(String)request.getParameter("experience");
 		String qualification=(String)request.getParameter("qualification");
+		String phoneno=(String)request.getParameter("phone");
 		
 		String expertise=(String)request.getParameter("expertise");	
 	/*	String monthlyfees=(String)request.getParameter("monthlyfees");
@@ -59,14 +60,15 @@ public class TrainerProfileDetailsUpdateServlet extends HttpServlet {
            con = DBConnection.createConnection();
               
            //String query = "update trainerregister set trainername=?,experience=?,qualification=?,expertise=?,schedules=?,classlevel=?,monthlyfees=?,expertise2=?,schedules2=?,classlevel2=?,monthlyfees2=?,expertise3=?,schedules3=?,classlevel3=?,monthlyfees3=?,aboutyourself=? where traineremail=?";
-           String query = "update trainerregister set trainername=?,experience=?,qualification=?,expertise=?,aboutyourself=? where traineremail=?";
+           String query = "update trainerregister set trainername=?,experience=?,qualification=?,phoneno=?,expertise=?,aboutyourself=? where traineremail=?";
            PreparedStatement statement = con.prepareStatement(query); //Making use of prepared statements here to insert bunch of data
            statement.setString(1, name);           
            statement.setString(2, experience);
            statement.setString(3, qualification);
-           statement.setString(4, expertise);          
-           statement.setString(5, abuotyourself);
-           statement.setString(6, traineremail);
+           statement.setString(4, phoneno); 
+           statement.setString(5, expertise);          
+           statement.setString(6, abuotyourself);
+           statement.setString(7, traineremail);
                       
            int i= statement.executeUpdate();
            

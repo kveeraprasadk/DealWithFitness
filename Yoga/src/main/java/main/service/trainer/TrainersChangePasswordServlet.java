@@ -1,4 +1,4 @@
-package main;
+package main.service.trainer;
 
 import java.io.IOException;
 import java.io.PrintWriter;

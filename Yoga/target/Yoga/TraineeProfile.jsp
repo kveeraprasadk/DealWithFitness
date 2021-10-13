@@ -53,7 +53,7 @@
 	 
 <link href="css/style.css" rel="stylesheet">
 <script src="./dist/whoami.js"></script>
-
+<script src="./dist/cities.js"></script>
 <style type="text/css">
 .unstyled-button {
   border: none;
@@ -138,8 +138,7 @@
 			%>
 			<div class="row">
 				<div class="col-lg-8 col-md-7 detail-px no-padding">
-
-
+				<form name=traineeupdateform" >
 					<h3 class="mth3">Please Update your profile with following
 						fields for better services</h3>
 					<div class="fx-ro">
@@ -159,6 +158,7 @@
 								disabled="disabled">
 						</div>
 					</div>
+					
 			<!-- 		<div class="fx-ro">
 						<div class="dat col-lg-4">DoB</div>
 						<div class="dat col-lg-8">
@@ -168,27 +168,20 @@
 					</div>         -->
 
 					<div class="fx-ro">
-						<div class="dat col-lg-4">Target</div>
+						<div class="dat col-lg-4">Expectation from Class</div>
 						<div class="dat col-lg-8">
 					<!-- 		<input type="text" name="form-target"
 								class="form-target form-control" id="form-target"
 								value="" required>    -->
-						<select name="form-target" id="form-target"
-									class="form-control required" onfocus='this.size=5;'
-									onblur='this.size=1;' onchange='this.size=1; this.blur();'
-									required>
-									<option value="<%=traineedetails.getTarget()%>"><%=traineedetails.getTarget()%></option>
-									<option value="WeightLose">WeightLose</option>
-									<option value="BackPain">BackPain</option>
-									<option value="Stress">Stress</option>
-									<option value="Health">Health</option>
-									
-								</select>
-						</div>
-					</div>
-					
-					
 						
+								<textarea class="form-control" id="form-target"
+												name="formtarget" placeholder="class target.." onKeyDown="limitText(this.form.formtarget,this.form.countdown,50);" 
+											onKeyUp="limitText(this.form.formtarget,this.form.countdown,50);" required><%=traineedetails.getTarget()%></textarea>
+											<font size="1">(Maximum characters: 50)
+											You have <input readonly type="text" class="projdesc" name="countdown" size="2" value="50"> characters left.</font>
+										
+						</div>
+					</div>						
 					<div class="fx-ro">
 						<div class="dat col-lg-4">Any Ailment</div>
 						<div class="dat col-lg-8">
@@ -197,7 +190,6 @@
 								value="<%=traineedetails.getAnyailment()%>" required>
 						</div>
 					</div>
-
 					<div class="fx-ro">
 						<div class="dat col-lg-4">Phone</div>
 						<div class="dat col-lg-8">
@@ -206,13 +198,25 @@
 								value="<%=traineedetails.getPhone()%>" required>
 						</div>
 					</div>
-
 					<div class="fx-ro">
-						<div class="dat col-lg-4">city</div>
+						<div class="dat col-lg-4">State</div>
 						<div class="dat col-lg-8">
-							<input type="text" name="form-city"
+							<select onchange="print_city('state', this.selectedIndex);" id="sts" name ="stt" class="form-control" required>
+							<option value="<%=traineedetails.getState()%>"><%=traineedetails.getState()%></option>
+							</select>
+							</div>
+					</div>
+					<div class="fx-ro">
+						<div class="dat col-lg-4">City</div>
+						<div class="dat col-lg-8">
+						<select id ="state" name="state" class="form-control" required>
+						<option value="<%=traineedetails.getCity()%>"><%=traineedetails.getCity()%></option>
+						</select>
+							<script language="javascript">print_state("sts");</script>
+						
+				<!-- 		<input type="text" name="form-city"
 								class="form-city form-control" id="form-city"
-								value="<%=traineedetails.getCity()%>" required>
+								value="" required>   -->	
 						</div>
 					</div>
 					<div class="fx-ro">
@@ -221,9 +225,9 @@
 							<button type="submit" class="btn btn-primary"
 								id="traineeprofileupdate">Update</button>
 						</div>
-					</div>
+					</div>					
 					<div id="updatesuccess"></div>
-					
+					</form>
 
 					<h3>Trainers</h3>
 					<!--          <ptraineedetails.getAboutyourself() %></p>     -->
@@ -260,21 +264,21 @@
 							</h3>
 							<div id="changepasswordhide" class="collapse">
 								<p>
-									<input type="text" name="formcurrentpassword"
+									<input type="password" name="formcurrentpassword"
 										placeholder="Current Password.."
 										class="form-currentpassword form-control"
 										id="formcurrentpassword" required>
 								</p>
 
 								<p>
-									<input type="text" name="formnewpassword"
+									<input type="password" name="formnewpassword"
 										placeholder="New Password.."
 										class="form-newpassword form-control" id="formnewpassword"
 										required>
 								</p>
 
 								<p>
-									<input type="text" name="formconfirmpassword"
+									<input type="password" name="formconfirmpassword"
 										placeholder="Confirm Password.."
 										class="form-confirmpassword form-control"
 										id="formconfirmpassword" required>
@@ -299,6 +303,15 @@
 
 		</div>
 	</div>
+	<script language="javascript" type="text/javascript">
+function limitText(limitField, limitCount, limitNum) {
+	if (limitField.value.length > limitNum) {
+		limitField.value = limitField.value.substring(0, limitNum);
+	} else {
+		limitCount.value = limitNum - limitField.value.length;
+	}
+}
+</script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("#traineeppchangepassword").validate({
@@ -376,9 +389,11 @@
 														.val();
 												var phone = $("#form-phone")
 														.val();
-												var city = $("#form-city")
+												var state = $("#sts")
 														.val();
-												alert(email);
+												var city = $("#state")
+														.val();
+												
 
 												$
 														.ajax({
@@ -391,6 +406,7 @@
 																target : target,
 																ailment : ailment,
 																phone : phone,
+																state : state,
 																city : city
 
 															},

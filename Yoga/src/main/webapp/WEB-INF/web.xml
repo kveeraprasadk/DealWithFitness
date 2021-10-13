@@ -8,7 +8,7 @@
 		<servlet-name>TrainerRegisterServlet</servlet-name>
 		<display-name>TrainerRegisterServlet</display-name>
 		<description></description>
-		<servlet-class>main.TrainerRegisterServlet</servlet-class>
+		<servlet-class>main.service.trainer.TrainerRegisterServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>ContactServlet</servlet-name>
@@ -92,13 +92,13 @@
 		<servlet-name>TrainersChangePasswordServlet</servlet-name>
 		<display-name>TrainersChangePasswordServlet</display-name>
 		<description></description>
-		<servlet-class>main.TrainersChangePasswordServlet</servlet-class>
+		<servlet-class>main.service.trainer.TrainersChangePasswordServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>TrainerProfileDetailsUpdateServlet</servlet-name>
 		<display-name>TrainerProfileDetailsUpdateServlet</display-name>
 		<description></description>
-		<servlet-class>main.TrainerProfileDetailsUpdateServlet</servlet-class>
+		<servlet-class>main.service.trainer.TrainerProfileDetailsUpdateServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>TraineeProfileViewServlet</servlet-name>
