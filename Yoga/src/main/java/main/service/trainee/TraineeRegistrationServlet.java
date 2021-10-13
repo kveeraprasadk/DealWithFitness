@@ -1,6 +1,7 @@
 package main.service.trainee;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,6 +20,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import main.common.DBConnection;
+import main.common.EncodeDecodeSHA256;
 
 @WebServlet(name = "/TraineeRegisterServlet", urlPatterns = "/TraineeRegisterServlet")
 public class TraineeRegistrationServlet extends HttpServlet {
@@ -34,7 +36,15 @@ public class TraineeRegistrationServlet extends HttpServlet {
 
 		if (name != null && username != null && pass != null) {
 			// encode data using BASE64
-			String password = Base64.getEncoder().encodeToString(pass.getBytes());
+			//String password = Base64.getEncoder().encodeToString(pass.getBytes());
+			
+			String password=null;
+			try {
+				password = EncodeDecodeSHA256.toHexString(EncodeDecodeSHA256.getSHA(pass));
+			} catch (NoSuchAlgorithmException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
 
 			try (Connection con = DBConnection.createConnection()) {
 				String cntQuery = "SELECT count(*) FROM traineeregister where (username='" + username + "')";

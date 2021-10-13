@@ -36,6 +36,7 @@ public class TrainerDetailsVO {
 	private String dob;
 	private String target;
 	private String anyailment;
+	private String state;
 	private String city;
 	private String phone;
 	private String demo1;
@@ -291,6 +292,14 @@ public class TrainerDetailsVO {
 
 	public void setAnyailment(String anyailment) {
 		this.anyailment = anyailment;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
 	}
 
 	public String getCity() {

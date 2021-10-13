@@ -2,6 +2,7 @@ package main;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -22,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import main.common.DBConnection;
+import main.common.EncodeDecodeSHA256;
 
 /**
  * Servlet implementation class TrainersConfirmServlet
@@ -49,8 +51,15 @@ public class TrainersConfirmServlet extends HttpServlet {
 		String traineremail = (String) request.getParameter("traineremail");
 
 		String pass = String.valueOf(UniqueIdCreate());
-		Base64.Encoder enc = Base64.getEncoder();
-		String password = enc.encodeToString(pass.getBytes());
+	//	Base64.Encoder enc = Base64.getEncoder();
+	//	String password = enc.encodeToString(pass.getBytes());
+		String password=null;
+		try {
+			password = EncodeDecodeSHA256.toHexString(EncodeDecodeSHA256.getSHA(pass));
+		} catch (NoSuchAlgorithmException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		System.out.println("encoded value is \t" + password);
 
 		Connection con = null;

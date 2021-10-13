@@ -50,9 +50,17 @@
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"
 	defer></script>
-	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	 
 <link href="css/style.css" rel="stylesheet">
 <script src="./dist/whoami.js"></script>
+
+<style type="text/css">
+.unstyled-button {
+  border: none;
+  padding: 0;
+  background: none;
+}
+</style>
 </head>
 
 <body onLoad="LoadingTrainersProfileData()">
@@ -247,10 +255,9 @@
 						%>
 
 						<form id="traineeppchangepassword" name="traineeppchangepassword">
-							
-								<a class="trainerchangepassword" data-toggle="collapse" data-target="#changepasswordhide">Change Password</a>
-							<button type="submit" class="btn btn-primary"
-								id="traineeprofileupdate">Update</button>
+							<h3>
+								<button class="unstyled-button trainerchangepassword" data-toggle="collapse" data-target="#changepasswordhide">Change Password</button>
+							</h3>
 							<div id="changepasswordhide" class="collapse">
 								<p>
 									<input type="text" name="formcurrentpassword"
@@ -273,7 +280,7 @@
 										id="formconfirmpassword" required>
 								</p>
 								<button type="button" class="btn btn-primary" name="changepasswordbutton"
-									id="changepasswordbutton">Change11</button>
+									id="changepasswordbutton">Change</button>
 									
 
 							</div>
