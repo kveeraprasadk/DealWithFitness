@@ -101,7 +101,7 @@ label {
 		    <div class="class-wrap">
 		        <div class="class-text flex-column flex-valign-center trainer-schedules">
 			        <div class="class-teacher">
-						<span class="far fa-check-circle flex flex-valign-center {attendee} trainee-selected" style="margin-left:10px"></span>
+						<span class="far fa-check-circle flex flex-valign-center {attendeeClass} trainee-selected" style="margin-left:10px"></span>
 		            	<span class="flex-grow trainer-name">{name}</span>
 						<span class="attendee-count-parent {zeroAttendeesClass} flex" title="Total {attendeeCount} Attendees">
 							<span class="fas fa-users" style="font-size:18px;">
@@ -130,7 +130,7 @@ label {
 			             <div class="class-meta">
 			                <p>
 								 <button class="btn btn-primary bookbutton" trainerId="{email}" seriesId="{id}" 
-									data-toggle="modal" title="{title}" attendee="{attendee}" 
+									data-toggle="modal" title="{title}" attendee="{attendeeClass}" 
 									onclick="trainers.bookScheduleEvent(event)">
 									Book
 								</button>
@@ -220,28 +220,51 @@ label {
 	</div>
 	<div class="class">
 		<div class="container">
-			<div class="section-header text-center">
+			<div class="section-header text-center" style="max-width: none">
 				<h3 style="color: #03287a">Find Your Fitness Guru</h3>
 				<span style="font-size: 14px">Choose any Expert to know your
-					suitable fitness guru</span> <select name="form-expertise"
-					id="form-expertise" class="form-control required mt"
-					onchange='trainers.filterTrainers(event)'
-					style="box-shadow: 0px 0px 10px #00afff4f;">
-					<option value="all">All Experts</option>
-					<optgroup label="Yoga">
-						<option value="Yoga for health">Yoga for health</option>
-						<option value="Weight Loss">Weight Loss</option>
-						<option value="Kids Yoga">Kids Yoga</option>
-						<option value="Pregnancy Yoga">Pregnancy Yoga</option>
-						<option value="Meditation">Meditation</option>
-					</optgroup>
-					<optgroup label="Dance">
-						<option value="Dance">Dance</option>
-						<option value="Zumba">Zumba</option>
-					</optgroup>
-					<option value="Weight / Body weight Workout">Weight / Body weight Workout</option>
-					<option value="Nutrition">Nutrition</option>
-				</select>
+					suitable fitness guru</span>
+				<div class="flex flex-wrap flex-valign-center flex-halign-center">
+					<select name="form-expertise" id="form-expertise"
+						class="form-control required mt mr ml flex-grow"
+						onchange='trainers.filterTrainers(event)' style="width: auto">
+						<option value="all">All Experts</option>
+						<optgroup label="Yoga">
+							<option value="Yoga for health">Yoga for health</option>
+							<option value="Weight Loss">Weight Loss</option>
+							<option value="Kids Yoga">Kids Yoga</option>
+							<option value="Pregnancy Yoga">Pregnancy Yoga</option>
+							<option value="Meditation">Meditation</option>
+						</optgroup>
+						<optgroup label="Dance">
+							<option value="Dance">Dance</option>
+							<option value="Zumba">Zumba</option>
+						</optgroup>
+						<option value="Weight / Body weight Workout">Weight /
+							Body weight Workout</option>
+						<option value="Nutrition">Nutrition</option>
+					</select> <select name="form-sort" id="form-filter-misc"
+						class="form-control required mt  mr ml flex-grow"
+						onchange='trainers.filterByMisc(event)' " style="width: auto">
+						<option value="all">All Timings</option>
+						<option value="04:00:00 11:59">Morning 04:00 AM to 11:59
+							AM</option>
+						<option value="12:00:00 16:59">Afternoon 12:00 PM to
+							04:59 PM</option>
+						<option value="17:00:00 23:59">Evening 05:00 PM to 11:59
+							PM</option>
+						<option value="00:00:00 03:59">Night 12:00 AM to 03:59 AM</option>
+					</select>
+					<div class="flex flex-valign-center">
+						<span>Sort By</span> <select name="form-sort" id="form-sortby"
+							onchange='trainers.sortTrainersList(event)'
+							class="form-control required mt  mr ml flex-grow"
+							style="width: auto">
+							<option value="asc">Fee Lowest to Highest</option>
+							<option value="desc" selected>Fee Highest to Lowest</option>
+						</select>
+					</div>
+				</div>
 				<div class="hero-btn"></div>
 			</div>
 			<div id="trainers-list-container" class="flex flex-wrap"></div>

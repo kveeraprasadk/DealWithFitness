@@ -14,13 +14,22 @@ public class SeriesSchedulesVO {
 	private long startTime;
 	private long endTime;
 	private Long endByDate;
-	private List<String> selectedDayNames;
 	private Float fee;
 	private String classLevel;
 	private String trainerPreference;
 	private String seriesTransitionFromId;
 	private List<Schedule> schedules;
 	private Set<String> attendees = new HashSet<>();
+	private List<String> selectedDayNames;
+	private TrainerDetailsVO trainer;
+	
+	public TrainerDetailsVO getTrainer() {
+		return trainer;
+	}
+
+	public void setTrainer(TrainerDetailsVO trainer) {
+		this.trainer = trainer;
+	}
 
 	public String getTraineremail() {
 		return traineremail;

@@ -31,12 +31,23 @@ function Trainers() {
 		}
 	}
 
-	self.dispatch = function(filterByExpertise) {
+	self.dispatch = function(queryRequest) {
 		const requestPayload = {
 			jsonResponse: true
 		}
-		if (filterByExpertise) {
-			requestPayload.filterByExpertise = filterByExpertise;
+
+		if (queryRequest) {
+			if (queryRequest.expertise) {
+				requestPayload.filterByExpertise = queryRequest.expertise;
+			}
+			if (queryRequest.startTime) {
+				requestPayload.startTime = queryRequest.startTime;
+				requestPayload.endTime = queryRequest.endTime
+				requestPayload.tzOffset = queryRequest.tzOffset
+			}
+			requestPayload.sort = queryRequest.sort;
+		} else {
+			requestPayload.sort = "desc";		// default when loaded first time by user
 		}
 
 		$.ajax({
@@ -148,13 +159,74 @@ function Trainers() {
 		}
 	}
 
+	self.sortTrainersList = function(event) {
+		progressBar.start();
+		let request = {};
+
+		const timingsSelection = $("#form-filter-misc").val();
+		const expertise = $("#form-expertise").val();
+
+		if (timingsSelection != "all") {
+			request = self.getTimings(timingsSelection);
+		}
+
+		if (expertise != "all") {
+			request.expertise = expertise
+		}
+
+		request.sort = event.target.value;
+		console.log("Querying: ", request);
+		self.dispatch(request);
+	}
+
 	self.filterTrainers = function(event) {
 		progressBar.start();
-		if (event.target.value && event.target.value != "all") {
-			self.dispatch(event.target.value);
-		} else {
-			self.dispatch();
+		let request = {};
+
+		const timingsSelection = $("#form-filter-misc").val();
+		if (timingsSelection != "all") {
+			request = self.getTimings(timingsSelection);
 		}
+
+		if (event.target.value && event.target.value != "all") {
+			request.expertise = event.target.value
+		}
+		request.sort = $("#form-sortby").val()
+
+		self.dispatch(request);
+		console.log("Querying: ", request);
+	}
+
+	self.filterByMisc = function(event) {
+		progressBar.start();
+		const expertise = $("#form-expertise").val();
+		let request = {};
+
+		if (event.target.value && event.target.value != "all") {
+			request = self.getTimings(event.target.value);
+		}
+
+		if (expertise && expertise != "all") {
+			request.expertise = expertise;
+		}
+		request.sort = $("#form-sortby").val()
+
+		console.log("Querying: ", request);
+		self.dispatch(request);
+	}
+
+	self.getTimings = function(value) {
+		let offset = new Date().getTimezoneOffset();
+		const timeInMins = Math.abs(offset);
+		offset = (offset < 0 ? "+" : "-") + ("00" + Math.floor(timeInMins / 60)).slice(-2) + ":" + ("00" + (timeInMins % 60)).slice(-2);
+		const values = value.split(" ");
+		const startTime = moment("2021-01-01 " + values[0], "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD HH:mm:00") + offset;
+		const endTime = (moment("2021-01-01 " + values[1], "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD HH:mm:00")) + offset;
+		return {
+			startTime: startTime,
+			endTime: endTime,
+			tzOffset: offset,
+		};
 	}
 
 	self.renderTrainers = function(trainers) {
@@ -162,32 +234,31 @@ function Trainers() {
 		const templeteForSeries = document.getElementById("Trainer-details-template");
 		const htmlSeriesTemplate = templeteForSeries.innerHTML;
 		const parentId = templeteForSeries.getAttribute("targetId");
-		const parent = $("#" + parentId);
-		parent.html("");
+		const parentHtmlNode = $("#" + parentId);
+		parentHtmlNode.html("");
 
-		for (const trainer of trainers) {
-			let dataNode;
-			if (trainer.series && trainer.series.length > 0) {
-				dataNode = Utils.fillTemplate(htmlSeriesTemplate, [trainer]);
-				for (const series of trainer.series) {
-					series.attendee = "hide";
-					series.zeroAttendeesClass = "hide";
-					if (series.attendees) {
-						series.attendeeCount = series.attendees.length;
-						series.zeroAttendeesClass = series.attendees.length > 0 ? "" : "hide";
-						// If currently logged in user is part of scheduled training then show checkbox otherwise hide it
-						if (series.attendees.includes(whoami.getUser())) {
-							series.attendee = "show";
-						}
+		for (const series of trainers) {
+			let childHtmlNode;
+			const trainer = series.trainer;
+			// If series id is there means then trainer will have series otherwise empty
+			if (series.id) {
+				series.attendeeClass = "hide";
+				series.zeroAttendeesClass = "hide";
+				if (series.attendees) {
+					series.attendeeCount = series.attendees.length;
+					series.zeroAttendeesClass = series.attendees.length > 0 ? "" : "hide";
+					// If currently logged in user is part of scheduled training then show checkbox otherwise hide it
+					if (series.attendees.includes(whoami.getUser())) {
+						series.attendee = "show";
 					}
-					// Convert the series information to a recurrence rule
-					Utils.addRecurrenceRule(series);
-					dataNode = Utils.fillTemplate(htmlSeriesTemplate, [trainer, series]);
-					parent.append(dataNode);
 				}
+				// Convert the series information to a recurrence rule
+				Utils.addRecurrenceRule(series);
+				childHtmlNode = Utils.fillTemplate(htmlSeriesTemplate, [trainer, series]);
+				parentHtmlNode.append(childHtmlNode);
 			} else {
-				dataNode = Utils.fillTemplate(templeteForEmptySeries.innerHTML, [trainer]);
-				parent.append(dataNode);
+				childHtmlNode = Utils.fillTemplate(templeteForEmptySeries.innerHTML, [trainer]);
+				parentHtmlNode.append(childHtmlNode);
 			}
 		}
 
