@@ -56,6 +56,7 @@ public class TrainersProfileViewServlet extends HttpServlet {
 						details.setEmail(rs.getString("traineremail"));
 						details.setExperience(rs.getString("experience"));
 						details.setQualification(rs.getString("qualification"));
+						details.setPhoneno(rs.getString("phoneno"));
 						details.setExpertise(rs.getString("expertise"));
 						details.setDemo3(rs.getString("class3demo"));
 						details.setAboutyourself(rs.getString("aboutyourself"));

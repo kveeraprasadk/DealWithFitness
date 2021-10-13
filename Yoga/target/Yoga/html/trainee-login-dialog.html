@@ -18,11 +18,17 @@
 					<input type="password" id="login-traineepassword"
 						class="form-control" placeholder="Password">
 				</p>
-				<div id="login-validation-error" class="error-message-container hide">
-				</div>
+				<div id="login-validation-error"
+					class="error-message-container hide"></div>
 				<div class="flex flex-halign-end pt">
 					<button class="btn bookbutton btn-primary"
 						id="login-trainee-action">Login</button>
+				</div>
+				<div class="flex-column flex-halign-center mt pt" style="border-top: 1px solid rgb(230,230,230)">
+					<span style="font-size:14px ">Not having an account?</span>
+					<button class="btn btn-success bookbutton mr"
+						onclick="trainers.showRegisterDialogFromLoginEvent()">New
+						Trainee Account</button>
 				</div>
 			</div>
 			<div class="modal-footer">

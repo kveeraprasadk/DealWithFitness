@@ -3,6 +3,17 @@ input {
 	font-family: "Open Sans";
 }
 
+select:focus, button:focus, input:focus {
+	box-shadow: 0px 0px 6px rgb(0, 135, 255, 0.78) !important;
+	border: 1px solid #0d7a40 !important;
+	box-sizing: border-box;
+}
+
+a:focus {
+	font-weight: bold;
+	box-sizing: border-box;
+}
+
 input[type=date] {
 	border: 1px solid #d0d0d0;
 	height: 36px;

@@ -177,8 +177,8 @@
 								<textarea class="form-control" id="form-target"
 												name="formtarget" placeholder="class target.." onKeyDown="limitText(this.form.formtarget,this.form.countdown,50);" 
 											onKeyUp="limitText(this.form.formtarget,this.form.countdown,50);" required><%=traineedetails.getTarget()%></textarea>
-											<font size="1">(Maximum characters: 50)
-											You have <input readonly type="text" class="projdesc" name="countdown" size="2" value="50"> characters left.</font>
+											<font size="2">(Maximum characters: 50)
+											You have <input readonly type="text" class="projdesc unstyled-button" name="countdown" size="1" value="50"> characters left.</font>
 										
 						</div>
 					</div>						
@@ -259,10 +259,10 @@
 						%>
 
 						<form id="traineeppchangepassword" name="traineeppchangepassword">
-							<h3>
-								<button class="unstyled-button trainerchangepassword" data-toggle="collapse" data-target="#changepasswordhide">Change Password</button>
-							</h3>
-							<div id="changepasswordhide" class="collapse">
+							<p>
+								<button class="btn btn-info trainerchangepassword" >Change Password</button>
+							</p>
+							<div id="changepasswordhide" >
 								<p>
 									<input type="password" name="formcurrentpassword"
 										placeholder="Current Password.."
@@ -290,9 +290,9 @@
 							</div>
 							<div id="success"></div>
 						</form>
-						<h3 style="display: none">
-							<a href="./TraineeLogoutServlet">Logout</a>
-						</h3>
+						<p>
+						<a href="index.jsp" class="btn btn-info">Book Your Online Fitness Classes</a>
+						</p>
 					</div>
 
 
@@ -351,22 +351,18 @@ function limitText(limitField, limitCount, limitNum) {
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('#editprofilehide').hide();
-		//	$('#changepasswordhide').hide();
+			$('#changepasswordhide').hide();
 			$('.classlevelhide').hide();
 			$('.schedulehide').hide();
-			$(".trainereditprofile").click(function() {
-				$('#editprofilehide').show();
+			
+			$(".trainerchangepassword").click(function() {
+				$('#changepasswordhide').toggle();
 			});
-	//		$(".trainerchangepassword").click(function() {
-	//			$('#changepasswordhide').show();
-	//		});
 			$(".classhide").click(function() {
 				$('.classlevelhide').show();
 				$('.schedulehide').show();
 			});
-			$("#closebutton").click(function() {
-				$('#changepasswordhide').hide();
-			});
+			
 		});
 	</script>
 	<script type="text/javascript">

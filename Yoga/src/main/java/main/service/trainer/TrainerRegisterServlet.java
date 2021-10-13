@@ -1,4 +1,4 @@
-package main;
+package main.service.trainer;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -43,7 +43,7 @@ public class TrainerRegisterServlet extends HttpServlet {
 		String abuotme = request.getParameter("formaboutself");
 		String experience = request.getParameter("formexperience");
 		String qualification = request.getParameter("formqualification");
-
+		String phoneno = request.getParameter("formphone");
 		String expertise = request.getParameter("formexpertise1");
 		/*
 		 * String monthlyfees=request.getParameter("formmonthlyfees1"); String
@@ -167,7 +167,7 @@ public class TrainerRegisterServlet extends HttpServlet {
 				// trainertemptable(trainername,traineremail,experience,qualification,expertise,classlevel,monthlyfees,schedules,expertise2,classlevel2,monthlyfees2,schedules2,expertise3,classlevel3,monthlyfees3,schedules3,aboutyourself,photoname,photo,creationtime,certificate1,certificate1filename,certificate2,certificate2filename,certificate3,certificate3filename)
 				// values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"; //Insert user
 				// details into the table 'USERS'
-				String query = "insert into trainertemptable(trainername,traineremail,experience,qualification,expertise,aboutyourself,photoname,photo,creationtime,certificate1,certificate1filename,certificate2,certificate2filename,certificate3,certificate3filename) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"; // Insert
+				String query = "insert into trainertemptable(trainername,traineremail,experience,qualification,phoneno,expertise,aboutyourself,photoname,photo,creationtime,certificate1,certificate1filename,certificate2,certificate2filename,certificate3,certificate3filename) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"; // Insert
 																																																																													// 'USERS'
 				PreparedStatement statement = con.prepareStatement(query); // Making use of prepared statements here to
 																			// insert bunch of data
@@ -175,17 +175,18 @@ public class TrainerRegisterServlet extends HttpServlet {
 				statement.setString(2, email);
 				statement.setString(3, experience);
 				statement.setString(4, qualification);
-				statement.setString(5, expertise);
-				statement.setString(6, abuotme);
-				statement.setString(7, fileName);
-				statement.setBlob(8, inputStream);
-				statement.setTimestamp(9, ts);
-				statement.setBlob(10, certificate1inputStream);
-				statement.setString(11, certificatefileName1);
-				statement.setBlob(12, certificate2inputStream);
-				statement.setString(13, certificatefileName2);
-				statement.setBlob(14, certificate3inputStream);
-				statement.setString(15, certificatefileName3);
+				statement.setString(5, phoneno);
+				statement.setString(6, expertise);
+				statement.setString(7, abuotme);
+				statement.setString(8, fileName);
+				statement.setBlob(9, inputStream);
+				statement.setTimestamp(10, ts);
+				statement.setBlob(11, certificate1inputStream);
+				statement.setString(12, certificatefileName1);
+				statement.setBlob(13, certificate2inputStream);
+				statement.setString(14, certificatefileName2);
+				statement.setBlob(15, certificate3inputStream);
+				statement.setString(16, certificatefileName3);
 
 				int i = statement.executeUpdate();
 

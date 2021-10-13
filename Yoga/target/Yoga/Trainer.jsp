@@ -860,14 +860,15 @@ function limitText(limitField, limitCount, limitNum) {
 														required : true,
 														minlength : 50
 													},
+										//			formcertificate1 : {
+										//				required : true
+										//			},
 													formimage : {
 														required : true,
 														extension : "png|jpeg|jpg",
 														filesize : 1048576,
-													},
-													formcertificate1 : {
-														required : true
 													}
+													
 												},
 												messages : {
 													formfirstname : {
@@ -910,9 +911,9 @@ function limitText(limitField, limitCount, limitNum) {
 													formimage : {
 														required : "File must be JPEG or PNG, less than 1MB"
 													},
-													formcertificate1 : {
-														required : "Please Upload your certificate"
-													}
+										//			formcertificate1 : {
+										//				required : "Please Upload your certificate"
+										//			}
 
 												}
 											});

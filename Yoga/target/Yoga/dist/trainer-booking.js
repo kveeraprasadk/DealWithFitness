@@ -609,8 +609,11 @@ function TrainerCalender() {
 		});
 	}
 
-	self.openScheduleDailog = function(currentSchedule) {
+	self.validateIfScheduleOverlap = function() {
 
+	}
+
+	self.openScheduleDailog = function(currentSchedule) {
 		const title = currentSchedule.title ? currentSchedule.title : "";
 		const location = currentSchedule.location ? currentSchedule.location : "";
 		const start = currentSchedule.startTime ? currentSchedule.startTime : new Date();
