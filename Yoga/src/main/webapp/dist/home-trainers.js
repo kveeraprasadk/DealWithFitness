@@ -19,6 +19,7 @@ function Trainers() {
 		$("#form-filter-misc").append("<option value='04:00:00 11:59'>Morning 04:00 AM to 11:59 AM " + timezoneOffset + "</option>");
 		$("#form-filter-misc").append("<option value='12:00:00 16:59'>Afternoon 12:00 PM to 04:59 PM " + timezoneOffset + "</option>");
 		$("#form-filter-misc").append("<option value='17:00:00 23:59'>Evening 05:00 PM to 11:59	PM " + timezoneOffset + "</option>");
+		$("#form-filter-misc").append("<option value='00:00:00 03:59'>Night 12:00 AM to 03:59 AM " + timezoneOffset + "</option>");
 	}
 
 	self.positionUserOptions = function() {
