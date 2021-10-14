@@ -203,13 +203,6 @@ body {
 	position: relative;
 }
 
-/** custom fontawesome */
-.fa {
-	width: 12px;
-	height: 12px;
-	margin-right: 2px;
-}
-
 .weekday-grid-more-schedules {
 	float: right;
 	margin-top: 4px;

@@ -17,9 +17,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import main.common.AppUtils;
@@ -33,14 +30,13 @@ import main.model.TrainerDetailsVO;
  */
 @WebServlet(name = "/TrainersListServlet", urlPatterns = "/Trainers")
 public class TrainersListServlet extends HttpServlet {
-	private static Logger log = LogManager.getLogger(TrainersListServlet.class);
 
 	private static final long serialVersionUID = 1L;
 	private static final String TIMING_CONDITION = " CONVERT(DATE_FORMAT(CONVERT_TZ(FROM_UNIXTIME(ss.startTime/1000), '+00:00', '#o'), '%H%i'),  UNSIGNED INTEGER) >= #s and "
 			+ "    CONVERT(DATE_FORMAT(CONVERT_TZ(FROM_UNIXTIME(ss.startTime/1000), '+00:00', '#o'), '%H%i'),  UNSIGNED INTEGER) <= #e ";
 	private static final String SQL = " select tr.traineremail, tr.trainername, tr.experience, tr.qualification, tr.expertise, ss.id as seriesId, ss.startTime, ss.endTime, ss.endByDate, ss.selectedDayNames, "
 			+ "	ss.fee, ss.classlevel, ss.title, ss.location, tb.traineeId  from trainerregister tr left join schedulesSeries ss on tr.traineremail =  ss.traineremail left join traineeBookings tb on "
-			+ "		ss.traineremail = tb.trainerId and ss.id = tb.seriesId %s order by fee %s";
+			+ "		ss.traineremail = tb.trainerId and ss.id = tb.seriesId %s order by ISNULL(fee), fee %s";
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse

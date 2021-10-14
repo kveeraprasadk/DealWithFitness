@@ -3,14 +3,27 @@ function Whoami() {
 	self.userDetails = "";
 
 	self.detect = function(callback) {
+		$("#logged-in-user-options-trigger").popover({
+			html: true,
+			content: function() {
+				return $('#logged-in-user-popover-options').html();
+			}
+		});
+
 		$.ajax({
 			url: "whoami",
 			type: "GET",
 			cache: false,
 			success: function(data) {
-				for (const key in data) {
-					self.userDetails = data[key];
-					self.bindUser(key);
+				if (data) {
+					for (const key in data) {
+						self.userDetails = data[key];
+						self.bindUser(key);
+					}
+				} else {
+					console.log("No user logged in");
+					const trainers = document.getElementsByName("trainer-hyperlink-element");
+					$(trainers).show();
 				}
 
 				if (callback) {
@@ -39,10 +52,17 @@ function Whoami() {
 		console.log("New user binding: ", user, self.userDetails);
 		window.__sessionUser = user;
 		if (self.isUserLoggedIn()) {
-			$("#user-logout-element").css("display", "block");
+			$("#logged-in-user-email").text(self.userDetails.email);
+			$("#logged-in-user-name").text(self.userDetails.name);
+			$("#logged-in-user-options-trigger").show();
+
 			// If logged in user is trainee then hide trainer hyperlink
 			if (self.isTrainee()) {
-				$("#trainer-hyperlink-element").hide();
+				const trainers = document.getElementsByName("trainer-hyperlink-element");
+				$(trainers).hide();
+				$("#trainee-extra-options").removeClass("hide");
+			} else {
+				$("#trainer-extra-options").removeClass("hide");
 			}
 		}
 	}

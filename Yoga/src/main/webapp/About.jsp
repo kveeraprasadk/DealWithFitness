@@ -64,33 +64,7 @@
 	<!-- Top Bar End -->
 
 	<!-- Nav Bar Start -->
-	<div class="navbar navbar-expand-lg bg-dark navbar-dark">
-		<div class="container-fluid">
-			<span class="logo-text">DEALWITHFITNESS</span>
-			<!--    <img alt="yogalogo" height="8%"; width="8%" src="./img/yogalogo.jpg"> -->
-			<button type="button" class="navbar-toggler" data-toggle="collapse"
-				data-target="#navbarCollapse">
-				<span class="fa fa-bars"
-					style="color: gray; margin: 5px 0px 5px 5px"></span>
-			</button>
-
-			<div class="collapse navbar-collapse justify-content-between"
-				id="navbarCollapse">
-				<div class="navbar-nav ml-auto">
-					<a href="index.jsp" class="nav-item nav-link ">Home</a>
-
-					<!--           <a href="blog.jsp" class="nav-item nav-link" >Blog</a>   -->
-
-					<a id="trainer-hyperlink-element"
-						href="javascript: whoami.redirectIfUserLoggedInOrElse('TrainerProfile', 'Trainer.jsp')"
-						class="nav-item nav-link"> Trainer</a> <a href="./logoutservice"
-						class="nav-item nav-link" id="user-logout-element"
-						style="display: none">Logout</a>
-
-				</div>
-			</div>
-		</div>
-	</div>
+	<%@include file="./html/navbar.html"%>
 	<!-- Nav Bar End -->
 
 
@@ -205,7 +179,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- Contact End -->
 
 

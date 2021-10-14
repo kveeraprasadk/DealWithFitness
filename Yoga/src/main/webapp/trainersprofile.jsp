@@ -34,7 +34,6 @@
 <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
 
 <link rel="shortcut icon" href="profile/images/fav.jpg">
-<link rel="stylesheet" href="profile/css/bootstrap.min.css">
 <link rel="stylesheet" href="profile/css/fontawsom-all.min.css">
 <link rel="stylesheet" type="text/css" href="profile/css/style.css" />
 
@@ -42,18 +41,11 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"
 	defer></script>
-<link href="css/style.css" rel="stylesheet">
 
-<link
-	href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css"
-	rel="stylesheet">
-<script
-	src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+<script src="./dist/whoami.js"></script>
 <style>
 .toggle.ios, .toggle-on.ios, .toggle-off.ios {
 	border-radius: 20px;
@@ -64,11 +56,10 @@
 }
 
 .unstyled-button {
-  border: none;
-  padding: 0;
-  background: none;
+	border: none;
+	padding: 0;
+	background: none;
 }
-
 </style>
 
 
@@ -85,10 +76,11 @@
 	href="./css/external/tui-time-picker.css">
 <link rel="stylesheet" type="text/css"
 	href="./css/external/tui-calendar.min.css">
-
-<link rel="stylesheet" type="text/css" href="./css/common.css">
+<link href="css/style.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="./css/bookings.css">
 <link rel="stylesheet" type="text/css" href="./css/icons.css">
+<link rel="stylesheet" type="text/css" href="./css/common.css">
+
 <script type="text/javascript">
 	var calendarInitialized = false;
 
@@ -108,62 +100,24 @@
 	}
 
 	function renderTrainerProfile() {
-		const image = $("#trainer-profile-base64-encoded-element").val();
-		if (image) {
-			console.log("Profile picture present")
-			$("#profile-image-element").attr("src",
-					"data:image/*;base64," + image);
-		} else {
-			console.log("No profile picture");
-		}
+		whoami.detect(()=> {
+			const image = $("#trainer-profile-base64-encoded-element").val();
+			if (image) {
+				console.log("Profile picture present")
+				$("#profile-image-element").attr("src",
+						"data:image/*;base64," + image);
+			} else {
+				console.log("No profile picture");
+			}		
+		})
 	}
 </script>
 </head>
 
 <body onLoad="renderTrainerProfile()">
 
-	<!-- Top Bar Start -->
-	<div class="top-bar d-none d-md-block">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-md-8">
-				</div>
-				<div class="col-md-4">
-					<div class="top-bar-right">
-						<div class="social">
-							<a href=""><i class="fab fa-twitter"></i></a> <a href=""><i
-								class="fab fa-facebook-f"></i></a> <a href=""><i
-								class="fab fa-linkedin-in"></i></a> <a href=""><i
-								class="fab fa-instagram"></i></a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Top Bar End -->
-
 	<!-- Nav Bar Start -->
-	<div class="navbar navbar-expand-lg bg-dark navbar-dark">
-		<div class="container-fluid">
-			<span class="logo-text">DEALWITHFITNESS</span>
-			<button type="button" class="navbar-toggler" data-toggle="collapse"
-				data-target="#navbarCollapse">
-				<span class="fa fa-bars"
-					style="color: gray; margin: 5px 0px 5px 5px"></span>
-			</button>
-
-			<div class="collapse navbar-collapse justify-content-between"
-				id="navbarCollapse">
-				<div class="navbar-nav ml-auto">
-
-					<a href="index.jsp" class="nav-item nav-link ">Home</a> <a
-						href="About.jsp" class="nav-item nav-link">About</a> <a
-						href="./TrainerLogoutServlet" class="nav-item nav-link">Logout</a>
-				</div>
-			</div>
-		</div>
-	</div>
+	<%@include file="./html/navbar.html"%>
 	<!-- Nav Bar End -->
 
 	<!-- Page Header Start -->
@@ -189,8 +143,7 @@
 	<!-- About Start -->
 	<div class="container-fluid overcover" id="profile-container">
 		<div class="container profile-box">
-			<div class="cover-image row">
-			</div>
+			<div class="cover-image row"></div>
 			<%
 			ArrayList<TrainerDetailsVO> trainers = (ArrayList<TrainerDetailsVO>) request.getAttribute("TrainerProfileData");
 			%>
@@ -280,7 +233,8 @@
 					</ul>
 
 				</div>
-				<div class="col-lg-4 col-md-5 leftgh flex-column flex-halign-center flex-valign-center">
+				<div
+					class="col-lg-4 col-md-5 leftgh flex-column flex-halign-center flex-valign-center">
 					<div class="bh-img">
 						<img id="profile-image-element" alt="">
 					</div>
@@ -294,7 +248,8 @@
 							<br>
 						</p>
 						<p>
-							<button class="btn btn-info trainereditprofile">Edit Profile</button>
+							<button class="btn btn-info trainereditprofile">Edit
+								Profile</button>
 						</p>
 						<div id="editprofilehide">
 
@@ -353,7 +308,8 @@
 						%>
 						<form id="trainerppchangepassword" name="trainerppchangepassword">
 							<p>
-								<button class="btn btn-info trainerchangepassword">Change Password</button>
+								<button class="btn btn-info trainerchangepassword">Change
+									Password</button>
 							</p>
 							<div id="changepasswordhide">
 								<p>
@@ -376,13 +332,13 @@
 										class="form-confirmpassword form-control"
 										id="formconfirmpassword" required>
 								</p>
-								<button type="button" class="btn btn-primary"  name="changepasswordbutton"
-									id="changepasswordbutton">Change</button>
+								<button type="button" class="btn btn-primary"
+									name="changepasswordbutton" id="changepasswordbutton">Change</button>
 
 							</div>
 							<div id="success"></div>
 						</form>
-						
+
 					</div>
 				</div>
 			</div>
@@ -464,9 +420,8 @@
 												var qua = $(
 														"#form-qualification")
 														.val();
-												var phone = $(
-												"#form-phone")
-												.val();
+												var phone = $("#form-phone")
+														.val();
 
 												var exp = $("#form-expertise")
 														.val();
@@ -694,8 +649,6 @@
 
 	<!-- Template Javascript -->
 	<script src="js/main.js"></script>
-
-	<script src="profile/js/jquery-3.2.1.min.js"></script>
 	<script src="profile/js/popper.min.js"></script>
 	<script src="profile/js/bootstrap.min.js"></script>
 	<script src="profile/js/script.js"></script>

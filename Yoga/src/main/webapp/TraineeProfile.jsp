@@ -50,15 +50,15 @@
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"
 	defer></script>
-	 
+
 <link href="css/style.css" rel="stylesheet">
 <script src="./dist/whoami.js"></script>
 <script src="./dist/cities.js"></script>
 <style type="text/css">
 .unstyled-button {
-  border: none;
-  padding: 0;
-  background: none;
+	border: none;
+	padding: 0;
+	background: none;
 }
 </style>
 </head>
@@ -67,7 +67,8 @@
 	<script type="text/javascript">
 		function LoadingTrainersProfileData() {
 			whoami.detect();
-			$.ajax({
+			$
+					.ajax({
 						type : 'GET',
 						url : "${pageContext.request.contextPath}/TraineeProfileViewServlet",
 					});
@@ -75,25 +76,7 @@
 	</script>
 
 	<!-- Nav Bar Start -->
-	<div class="navbar navbar-expand-lg bg-dark navbar-dark">
-		<div class="container-fluid">
-			<span class="logo-text">DEALWITHFITNESS</span>
-			<button type="button" class="navbar-toggler" data-toggle="collapse"
-				data-target="#navbarCollapse">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-
-			<div class="collapse navbar-collapse justify-content-between"
-				id="navbarCollapse">
-				<div class="navbar-nav ml-auto">
-					<a href="index.jsp" class="nav-item nav-link active">Home</a> <a
-						href="About.jsp" class="nav-item nav-link">About</a> <a
-						href="./logoutservice" class="nav-item nav-link"
-						id="user-logout-element" style="display: none">Logout</a>
-				</div>
-			</div>
-		</div>
-	</div>
+	<%@include file="./html/navbar.html"%>
 	<!-- Nav Bar End -->
 
 
@@ -105,7 +88,8 @@
 					<h2>Trainee's Zone</h2>
 				</div>
 				<div class="col-12">
-					<a href="traineelandingpage.jsp">My Trainings</a> <a href="javascript:">My Profile</a>
+					<a href="traineelandingpage.jsp">My Trainings</a> <a
+						href="javascript:">My Profile</a>
 				</div>
 			</div>
 		</div>
@@ -138,95 +122,102 @@
 			%>
 			<div class="row">
 				<div class="col-lg-8 col-md-7 detail-px no-padding">
-				<form name=traineeupdateform" id="traineeupdateform">
-					<h3 class="mth3">Please Update your profile with following
-						fields for better services</h3>
-					<div class="fx-ro">
-						<div class="dat col-lg-4">Trainee Name</div>
-						<div class="dat col-lg-8">
-							<input type="text" name="form-name"
-								class="form-name form-control" id="form-name"
-								value="<%=traineedetails.getName()%>" required>
+					<form name=traineeupdateform " id="traineeupdateform">
+						<h3 class="mth3">Please Update your profile with following
+							fields for better services</h3>
+						<div class="fx-ro">
+							<div class="dat col-lg-4">Trainee Name</div>
+							<div class="dat col-lg-8">
+								<input type="text" name="form-name"
+									class="form-name form-control" id="form-name"
+									value="<%=traineedetails.getName()%>" required>
+							</div>
 						</div>
-					</div>
-					<div class="fx-ro">
-						<div class="dat col-lg-4">Trainee Email</div>
-						<div class="dat col-lg-8">
-							<input type="text" name="form-email"
-								class="form-email form-control" id="form-email"
-								value="<%=traineedetails.getEmail()%>" required
-								disabled="disabled">
+						<div class="fx-ro">
+							<div class="dat col-lg-4">Trainee Email</div>
+							<div class="dat col-lg-8">
+								<input type="text" name="form-email"
+									class="form-email form-control" id="form-email"
+									value="<%=traineedetails.getEmail()%>" required
+									disabled="disabled">
+							</div>
 						</div>
-					</div>
-					
-			 		<div class="fx-ro">
-						<div class="dat col-lg-4">DoB</div>
-						<div class="dat col-lg-8">
-							<input type="date" name="formdob" class="form-dob form-control"
-								id="form-dob" value="<%=traineedetails.getDob() %>" required>
-						</div>
-					</div>         
 
-					<div class="fx-ro">
-						<div class="dat col-lg-4">Expectation from Class</div>
-						<div class="dat col-lg-8">
-					<!-- 		<input type="text" name="form-target"
+						<div class="fx-ro">
+							<div class="dat col-lg-4">DoB</div>
+							<div class="dat col-lg-8">
+								<input type="date" name="formdob" class="form-dob form-control"
+									id="form-dob" value="<%=traineedetails.getDob()%>" required>
+							</div>
+						</div>
+
+						<div class="fx-ro">
+							<div class="dat col-lg-4">Expectation from Class</div>
+							<div class="dat col-lg-8">
+								<!-- 		<input type="text" name="form-target"
 								class="form-target form-control" id="form-target"
 								value="" required>    -->
-						
+
 								<textarea class="form-control" id="form-target"
-												name="formtarget" placeholder="class target.." onKeyDown="limitText(this.form.formtarget,this.form.countdown,50);" 
-											onKeyUp="limitText(this.form.formtarget,this.form.countdown,50);" required><%=traineedetails.getTarget()%></textarea>
-											<font size="2">(Maximum characters: 50)
-											You have <input readonly type="text" class="projdesc unstyled-button" name="countdown" size="1" value="50"> characters left.</font>
-										
-						</div>
-					</div>						
-					<div class="fx-ro">
-						<div class="dat col-lg-4">Any Ailment</div>
-						<div class="dat col-lg-8">
-							<input type="text" name="form-ailment"
-								class="form-ailment form-control" id="form-ailment"
-								value="<%=traineedetails.getAnyailment()%>" required>
-						</div>
-					</div>
-					<div class="fx-ro">
-						<div class="dat col-lg-4">Phone</div>
-						<div class="dat col-lg-8">
-							<input type="text" name="form-phone"
-								class="form-phone form-control" id="form-phone"
-								value="<%=traineedetails.getPhone()%>" required>
-						</div>
-					</div>
-					<div class="fx-ro">
-						<div class="dat col-lg-4">State</div>
-						<div class="dat col-lg-8">
-							<select onchange="print_city('state', this.selectedIndex);" id="sts" name ="stt" class="form-control" required>
-							<option value="<%=traineedetails.getState()%>"><%=traineedetails.getState()%></option>
-							</select>
+									name="formtarget" placeholder="class target.."
+									onKeyDown="limitText(this.form.formtarget,this.form.countdown,50);"
+									onKeyUp="limitText(this.form.formtarget,this.form.countdown,50);"
+									required><%=traineedetails.getTarget()%></textarea>
+								<font size="2">(Maximum characters: 50) You have <input
+									readonly type="text" class="projdesc unstyled-button"
+									name="countdown" size="1" value="50"> characters left.
+								</font>
+
 							</div>
-					</div>
-					<div class="fx-ro">
-						<div class="dat col-lg-4">City</div>
-						<div class="dat col-lg-8">
-						<select id ="state" name="state" class="form-control" required>
-						<option value="<%=traineedetails.getCity()%>"><%=traineedetails.getCity()%></option>
-						</select>
-							<script language="javascript">print_state("sts");</script>
-						
-				<!-- 		<input type="text" name="form-city"
+						</div>
+						<div class="fx-ro">
+							<div class="dat col-lg-4">Any Ailment</div>
+							<div class="dat col-lg-8">
+								<input type="text" name="form-ailment"
+									class="form-ailment form-control" id="form-ailment"
+									value="<%=traineedetails.getAnyailment()%>" required>
+							</div>
+						</div>
+						<div class="fx-ro">
+							<div class="dat col-lg-4">Phone</div>
+							<div class="dat col-lg-8">
+								<input type="text" name="form-phone"
+									class="form-phone form-control" id="form-phone"
+									value="<%=traineedetails.getPhone()%>" required>
+							</div>
+						</div>
+						<div class="fx-ro">
+							<div class="dat col-lg-4">State</div>
+							<div class="dat col-lg-8">
+								<select onchange="print_city('state', this.selectedIndex);"
+									id="sts" name="stt" class="form-control" required>
+									<option value="<%=traineedetails.getState()%>"><%=traineedetails.getState()%></option>
+								</select>
+							</div>
+						</div>
+						<div class="fx-ro">
+							<div class="dat col-lg-4">City</div>
+							<div class="dat col-lg-8">
+								<select id="state" name="state" class="form-control" required>
+									<option value="<%=traineedetails.getCity()%>"><%=traineedetails.getCity()%></option>
+								</select>
+								<script language="javascript">
+									print_state("sts");
+								</script>
+
+								<!-- 		<input type="text" name="form-city"
 								class="form-city form-control" id="form-city"
-								value="" required>   -->	
+								value="" required>   -->
+							</div>
 						</div>
-					</div>
-					<div class="fx-ro">
-						<div class="dat col-lg-4"></div>
-						<div class="dat col-lg-8">
-							<button type="submit" class="btn btn-primary"
-								id="traineeprofileupdate">Update</button>
+						<div class="fx-ro">
+							<div class="dat col-lg-4"></div>
+							<div class="dat col-lg-8">
+								<button type="submit" class="btn btn-primary"
+									id="traineeprofileupdate">Update</button>
+							</div>
 						</div>
-					</div>					
-					<div id="updatesuccess"></div>
+						<div id="updatesuccess"></div>
 					</form>
 
 					<h3>Trainers</h3>
@@ -260,9 +251,10 @@
 
 						<form id="traineeppchangepassword" name="traineeppchangepassword">
 							<p>
-								<button class="btn btn-info trainerchangepassword" >Change Password</button>
+								<button class="btn btn-info trainerchangepassword">Change
+									Password</button>
 							</p>
-							<div id="changepasswordhide" >
+							<div id="changepasswordhide">
 								<p>
 									<input type="password" name="formcurrentpassword"
 										placeholder="Current Password.."
@@ -283,15 +275,16 @@
 										class="form-confirmpassword form-control"
 										id="formconfirmpassword" required>
 								</p>
-								<button type="button" class="btn btn-primary" name="changepasswordbutton"
-									id="changepasswordbutton">Change</button>
-									
+								<button type="button" class="btn btn-primary"
+									name="changepasswordbutton" id="changepasswordbutton">Change</button>
+
 
 							</div>
 							<div id="success"></div>
 						</form>
 						<p>
-						<a href="index.jsp" class="btn btn-info">Book Your Online Fitness Classes</a>
+							<a href="index.jsp" class="btn btn-info">Book Your Online
+								Fitness Classes</a>
 						</p>
 					</div>
 
@@ -304,69 +297,88 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		$(document).ready(function() {
-			$("#traineeupdateform").validate({
-				rules: {
-					formdob: {
-			            required: true,
-			            minAge: 5,
-			            maxAge: 70
-			        }
-			    },
-			    messages: {
-			    	formdob: {
-			            required: "Please enter you date of birth.",
-			            minAge: "You must be at least 5 years old!",
-			            maxAge: "You must be below 70 years old!"
-			        } 
-			    }
-			});
-			$.validator.addMethod("minAge", function(value, element, min) {
-			    var today = new Date();
-			    var birthDate = new Date(value);
-			    var age = today.getFullYear() - birthDate.getFullYear();
-			 
-			    if (age > min+1) {
-			        return true;
-			    }
-			 
-			    var m = today.getMonth() - birthDate.getMonth();
-			 
-			    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-			        age--;
-			    }
-			 
-			    return age >= min;
-			}, "You are not old enough!");
-			
-			$.validator.addMethod("maxAge", function(value, element, max) {
-			    var today = new Date();
-			    var birthDate = new Date(value);
-			    var age = birthDate.getFullYear() - today.getFullYear()  ;
-			 
-			    if (age < max+1) {
-			        return true;
-			    }
-			 
-			    var m =  birthDate.getMonth() - today.getMonth();
-			 
-			    if (m < 0 || (m === 0 && birthDate.getDate() < today.getDate())) {
-			        age--;
-			    }
-			 
-			    return age <= max;
-			}, "You are not old enough!");
-		});
+		$(document)
+				.ready(
+						function() {
+							$("#traineeupdateform")
+									.validate(
+											{
+												rules : {
+													formdob : {
+														required : true,
+														minAge : 5,
+														maxAge : 70
+													}
+												},
+												messages : {
+													formdob : {
+														required : "Please enter you date of birth.",
+														minAge : "You must be at least 5 years old!",
+														maxAge : "You must be below 70 years old!"
+													}
+												}
+											});
+							$.validator
+									.addMethod(
+											"minAge",
+											function(value, element, min) {
+												var today = new Date();
+												var birthDate = new Date(value);
+												var age = today.getFullYear()
+														- birthDate
+																.getFullYear();
+
+												if (age > min + 1) {
+													return true;
+												}
+
+												var m = today.getMonth()
+														- birthDate.getMonth();
+
+												if (m < 0
+														|| (m === 0 && today
+																.getDate() < birthDate
+																.getDate())) {
+													age--;
+												}
+
+												return age >= min;
+											}, "You are not old enough!");
+
+							$.validator.addMethod("maxAge",
+									function(value, element, max) {
+										var today = new Date();
+										var birthDate = new Date(value);
+										var age = birthDate.getFullYear()
+												- today.getFullYear();
+
+										if (age < max + 1) {
+											return true;
+										}
+
+										var m = birthDate.getMonth()
+												- today.getMonth();
+
+										if (m < 0
+												|| (m === 0 && birthDate
+														.getDate() < today
+														.getDate())) {
+											age--;
+										}
+
+										return age <= max;
+									}, "You are not old enough!");
+						});
 	</script>
 	<script language="javascript" type="text/javascript">
-function limitText(limitField, limitCount, limitNum) {
-	if (limitField.value.length > limitNum) {
-		limitField.value = limitField.value.substring(0, limitNum);
-	} else {
-		limitCount.value = limitNum - limitField.value.length;
-	}
-}
-</script>
+		function limitText(limitField, limitCount, limitNum) {
+			if (limitField.value.length > limitNum) {
+				limitField.value = limitField.value.substring(0, limitNum);
+			} else {
+				limitCount.value = limitNum - limitField.value.length;
+			}
+		}
+	</script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("#traineeppchangepassword").validate({
@@ -409,7 +421,7 @@ function limitText(limitField, limitCount, limitNum) {
 			$('#changepasswordhide').hide();
 			$('.classlevelhide').hide();
 			$('.schedulehide').hide();
-			
+
 			$(".trainerchangepassword").click(function() {
 				$('#changepasswordhide').toggle();
 			});
@@ -417,7 +429,7 @@ function limitText(limitField, limitCount, limitNum) {
 				$('.classlevelhide').show();
 				$('.schedulehide').show();
 			});
-			
+
 		});
 	</script>
 	<script type="text/javascript">
@@ -433,18 +445,15 @@ function limitText(limitField, limitCount, limitNum) {
 														.val();
 												var email = $("#form-email")
 														.val();
-										//		var dob = $("#form-dob").val();
+												//		var dob = $("#form-dob").val();
 												var target = $("#form-target")
 														.val();
 												var ailment = $("#form-ailment")
 														.val();
 												var phone = $("#form-phone")
 														.val();
-												var state = $("#sts")
-														.val();
-												var city = $("#state")
-														.val();
-												
+												var state = $("#sts").val();
+												var city = $("#state").val();
 
 												$
 														.ajax({
@@ -453,7 +462,7 @@ function limitText(limitField, limitCount, limitNum) {
 															data : {
 																name : name,
 																email : email,
-														//		dob : dob,
+																//		dob : dob,
 																target : target,
 																ailment : ailment,
 																phone : phone,
