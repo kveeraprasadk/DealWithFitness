@@ -32,6 +32,7 @@ public class TrainerDetailsVO {
 	private String password;
 	private String qualification;
 	private String experience;
+	private String phoneno;
 	private String username;
 	private String dob;
 	private String target;
@@ -260,6 +261,14 @@ public class TrainerDetailsVO {
 
 	public void setExperience(String experience) {
 		this.experience = experience;
+	}
+
+	public String getPhoneno() {
+		return phoneno;
+	}
+
+	public void setPhoneno(String phoneno) {
+		this.phoneno = phoneno;
 	}
 
 	public String getUsername() {

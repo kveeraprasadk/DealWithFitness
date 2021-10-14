@@ -235,6 +235,11 @@
 					</div>
 					<div class="fx-ro">
 						<div class="dat">
+							Phoneno : <b><%=trainerdetails.getPhoneno()%></b>
+						</div>
+					</div>
+					<div class="fx-ro">
+						<div class="dat">
 							Expertise : <b><%=trainerdetails.getExpertise()%></b>
 						</div>
 					</div>
@@ -288,9 +293,9 @@
 						<p><%=trainerdetails.getEmail()%>
 							<br>
 						</p>
-						<h3>
-							<button class="unstyled-button trainereditprofile">Edit Profile</button>
-						</h3>
+						<p>
+							<button class="btn btn-info trainereditprofile">Edit Profile</button>
+						</p>
 						<div id="editprofilehide">
 
 							<p>
@@ -315,6 +320,11 @@
 									<option value="10 to 20Yrs">10 to 20Yrs</option>
 									<option value="Above 20Yrs">Above 20Yrs</option>
 								</select>
+							</p>
+							<p>
+								<input type="text" name="form-phone"
+									class="form-phone form-control" id="form-phone"
+									value="<%=trainerdetails.getPhoneno()%>" required>
 							</p>
 							<p>
 								<select name="form-expertise" id="form-expertise"
@@ -342,9 +352,9 @@
 						}
 						%>
 						<form id="trainerppchangepassword" name="trainerppchangepassword">
-							<h3>
-								<button class="unstyled-button trainerchangepassword">Change Password</button>
-							</h3>
+							<p>
+								<button class="btn btn-info trainerchangepassword">Change Password</button>
+							</p>
 							<div id="changepasswordhide">
 								<p>
 									<input type="password" name="formcurrentpassword"
@@ -372,9 +382,7 @@
 							</div>
 							<div id="success"></div>
 						</form>
-						<h3>
-							<a href="./TrainerLogoutServlet">Logout</a>
-						</h3>
+						
 					</div>
 				</div>
 			</div>
@@ -423,10 +431,10 @@
 			$('#addmoreclass3').hide();
 
 			$(".trainereditprofile").click(function() {
-				$('#editprofilehide').show();
+				$('#editprofilehide').toggle();
 			});
 			$(".trainerchangepassword").click(function() {
-				$('#changepasswordhide').show();
+				$('#changepasswordhide').toggle();
 			});
 			$("#addclass2").click(function() {
 				$('#addmoreclass2').show();
@@ -456,6 +464,9 @@
 												var qua = $(
 														"#form-qualification")
 														.val();
+												var phone = $(
+												"#form-phone")
+												.val();
 
 												var exp = $("#form-expertise")
 														.val();
@@ -472,6 +483,7 @@
 																name : name,
 																experience : exper,
 																qualification : qua,
+																phone : phone,
 																expertise : exp,
 																aboutyourself : message
 															},
