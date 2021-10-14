@@ -64,7 +64,11 @@ public class TraineeProfileViewServlet extends HttpServlet {
 				}else{
 				details.setName(" ");	
 				}
-	//			details.setDob(rs.getString("dob"));
+				if(rs.getString("dob") != null){
+				details.setDob(rs.getString("dob"));
+				}else{
+				details.setDob(" ");
+				}
 				if(rs.getString("target") != null){
 				details.setTarget(rs.getString("target"));
 				}else{
