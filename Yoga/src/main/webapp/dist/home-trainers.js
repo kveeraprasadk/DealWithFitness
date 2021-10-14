@@ -14,6 +14,11 @@ function Trainers() {
 			self.dispatch();
 			self.attachLoginActions();
 		})
+		// Add timings options with timezone offset
+		const timezoneOffset = "GMT" + self.clientTzOffset();
+		$("#form-filter-misc").append("<option value='04:00:00 11:59'>Morning 04:00 AM to 11:59 AM " + timezoneOffset + "</option>");
+		$("#form-filter-misc").append("<option value='12:00:00 16:59'>Afternoon 12:00 PM to 04:59 PM " + timezoneOffset + "</option>");
+		$("#form-filter-misc").append("<option value='17:00:00 23:59'>Evening 05:00 PM to 11:59	PM " + timezoneOffset + "</option>");
 	}
 
 	self.positionUserOptions = function() {
@@ -216,9 +221,7 @@ function Trainers() {
 	}
 
 	self.getTimings = function(value) {
-		let offset = new Date().getTimezoneOffset();
-		const timeInMins = Math.abs(offset);
-		offset = (offset < 0 ? "+" : "-") + ("00" + Math.floor(timeInMins / 60)).slice(-2) + ":" + ("00" + (timeInMins % 60)).slice(-2);
+		let offset = self.clientTzOffset();
 		const values = value.split(" ");
 		const startTime = moment("2021-01-01 " + values[0], "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD HH:mm:00") + offset;
 		const endTime = (moment("2021-01-01 " + values[1], "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD HH:mm:00")) + offset;
@@ -227,6 +230,12 @@ function Trainers() {
 			endTime: endTime,
 			tzOffset: offset,
 		};
+	}
+
+	self.clientTzOffset = function() {
+		let offset = new Date().getTimezoneOffset();
+		const timeInMins = Math.abs(offset);
+		return (offset < 0 ? "+" : "-") + ("00" + Math.floor(timeInMins / 60)).slice(-2) + ":" + ("00" + (timeInMins % 60)).slice(-2);
 	}
 
 	self.renderTrainers = function(trainers) {

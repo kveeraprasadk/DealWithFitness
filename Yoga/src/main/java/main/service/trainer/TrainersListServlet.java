@@ -17,6 +17,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import main.common.AppUtils;
@@ -30,6 +33,8 @@ import main.model.TrainerDetailsVO;
  */
 @WebServlet(name = "/TrainersListServlet", urlPatterns = "/Trainers")
 public class TrainersListServlet extends HttpServlet {
+	private static Logger log = LogManager.getLogger(TrainersListServlet.class);
+
 	private static final long serialVersionUID = 1L;
 	private static final String TIMING_CONDITION = " CONVERT(DATE_FORMAT(CONVERT_TZ(FROM_UNIXTIME(ss.startTime/1000), '+00:00', '#o'), '%H%i'),  UNSIGNED INTEGER) >= #s and "
 			+ "    CONVERT(DATE_FORMAT(CONVERT_TZ(FROM_UNIXTIME(ss.startTime/1000), '+00:00', '#o'), '%H%i'),  UNSIGNED INTEGER) <= #e ";
@@ -78,7 +83,6 @@ public class TrainersListServlet extends HttpServlet {
 
 		// If filter is passed then change the sql to add where clause
 		String sql = new String(String.format(SQL, whereClause.toString(), sortOrder));
-
 		try (Connection connection = DBConnection.createConnection()) {
 			try (Statement statement = connection.createStatement()) {
 				try (ResultSet rs = statement.executeQuery(sql)) {
@@ -152,8 +156,8 @@ public class TrainersListServlet extends HttpServlet {
 
 	private String getTimingsSqlWhereClass(String startTime, String endTime, String tzOffset) {
 		try {
-			String sTimeHourMinute = AppUtils.convertTimeToUTC(startTime);
-			String eTimeHourMinute = AppUtils.convertTimeToUTC(endTime);
+			String sTimeHourMinute = AppUtils.getTimeWithCallerTz(startTime, tzOffset);
+			String eTimeHourMinute = AppUtils.getTimeWithCallerTz(endTime, tzOffset);
 			// We are not using String.format because of %i is present in the sql which
 			// causing problems to String.format()
 			return TIMING_CONDITION.replace("#s", sTimeHourMinute).replace("#e", eTimeHourMinute).replace("#o",

@@ -1,8 +1,6 @@
 package main.service.trainer;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -23,7 +21,7 @@ import main.model.SeriesSchedulesVO;
 
 @WebServlet(name = "/TrainerBookingServlet", urlPatterns = "/TrainerBookings")
 public class TrainerBookingServlet extends HttpServlet {
-	private static Logger log = LogManager.getLogger("BookingServlet");
+	private static Logger log = LogManager.getLogger(TrainerBookingServlet.class);
 
 	private static final long serialVersionUID = 1L;
 	private static final BookingService bookingService = new BookingService();
@@ -32,6 +30,7 @@ public class TrainerBookingServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		if (request.getParameter("trainerId") != null) {
+			log.info("Booking get for: " + request.getParameter("trainerId"));
 			Optional<Collection<SeriesSchedulesVO>> series = bookingService
 					.getSeries(request.getParameter("trainerId"));
 			if (series.isPresent()) {
@@ -83,7 +82,7 @@ public class TrainerBookingServlet extends HttpServlet {
 				String classLevel = request.getParameter("classLevel");
 
 				if (trainerId != null && seriesId != null && (title != null || location != null) && fee != null) {
-					log.info("Received update series: {} request for trainer: {}", seriesId, trainerId);
+					log.info("Received update series: {} request for trainer: {}" + seriesId + trainerId);
 					bookingService.updateSeries(trainerId, seriesId, title, location, fee, classLevel);
 				} else {
 					response.setStatus(400); // bad request if trainer and series id not provided
@@ -94,11 +93,11 @@ public class TrainerBookingServlet extends HttpServlet {
 				String payload = request.getParameter("schedules");
 				if (payload != null) {
 					SeriesSchedulesVO series = Json.parse(payload, SeriesSchedulesVO.class);
-					log.info("Received new series: {}, payload of size: {} for tainer: {}", series.getId(),
-							payload.length(), series.getTraineremail());
+					log.info("Received new series: {}, payload of size: {} for tainer: {}"+ series.getId() +
+							payload.length()+ series.getTraineremail());
 
 					bookingService.newSeries(series);
-					log.info("new series: {} saved successfully for trainer: {}", series.getId(),
+					log.info("new series: {} saved successfully for trainer: {}" + series.getId() +
 							series.getTraineremail());
 					response.setStatus(201);
 				}

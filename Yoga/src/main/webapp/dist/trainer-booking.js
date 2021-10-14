@@ -8,12 +8,6 @@ const DEFAULT_VIEW = "week";
 const TIME_SLOT_MAX_MESSAGE = "Your training length goes over 5 hours, You need adjusting End Time to limit training length within 5 hours.";
 const TIME_SLOT_MIN_MESSAGE = "Your training length is less than 30 minutes. Minimum duration should be more than 30 minutes.";
 
-//const old = ScheduleDetailPopup.prototype.show;
-//ScheduleDetailPopup.prototype.show = () => {
-//console.log("called.....")
-//old();
-//}
-
 function TrainerCalender() {
 	const self = this;
 	self.trainerId;
@@ -105,6 +99,8 @@ function TrainerCalender() {
 					// For a trainer we will have multiple series so iterate over each series and populate calendar
 					for (const series of trainerSeries) {
 						self.state.seriesRecurringSchedules[series.id] = series;
+						// Add recurrence rule to each schedule in the series so that it appear in calendar
+						const recurrenceRuleForUI = self.getRecurrenceRule(series);
 						const uiSchedules = []
 						for (const schedule of series.schedules) {
 							uiSchedules.push({
@@ -118,12 +114,12 @@ function TrainerCalender() {
 								category: 'time',
 								bgColor: "#e1efff",
 								dragBgColor: "#f6deb76b",
-								borderColor: "#e1efff"
+								borderColor: "#e1efff",
+								recurrenceRule: recurrenceRuleForUI
 							});
 							self.state.scheduleIdToSeriesIdMap[schedule.id] = series.id;
 						}
-						// Add recurrence rule to each schedule in the series
-						self.addRecurrenceRule(series, uiSchedules);
+
 						// Create schedules for this series in calendar ui
 						self.calendar.createSchedules(uiSchedules);
 						console.log(series.id, new Date(series.startTime), new Date(series.endTime), " -> ", uiSchedules.length);
@@ -297,8 +293,7 @@ function TrainerCalender() {
 					type: "DELETE",
 					cache: false,
 					success: function() {
-						console.log("Schedule series:", seriesId, " has been deleted")
-						self.calendar.deleteSchedule(schedule.id, "");
+						self.clearSeries(seriesId);
 					},
 					error: function() {
 						alertDialog.show("Service Failure", "Failed to delete schedules");
@@ -324,10 +319,16 @@ function TrainerCalender() {
 			const seriesSchedules = self.state.seriesRecurringSchedules[seriesId];
 			for (let index = 0; index < seriesSchedules.schedules.length; index++) {
 				if (seriesSchedules.schedules[index].id == scheduleId) {
+					// Remove the cached schedule for a series
 					seriesSchedules.schedules.splice(index, 1);
 					const remainingSchedulesLength = self.state.seriesRecurringSchedules[seriesId].schedules.length;
 					console.log("Scheduled occurrence: ", scheduleId, " has been removed and remaing schedules:", remainingSchedulesLength);
+					// release the schedule from series
+					self.state.scheduleIdToSeriesIdMap[scheduleId] = undefined;
+					delete self.state.scheduleIdToSeriesIdMap[scheduleId];
+					// Clear from UI
 					self.calendar.deleteSchedule(scheduleId, "");
+					console.log("Schedule series: ", seriesId, " schedule: ", scheduleId, " deleted");
 					return;
 				}
 			}
@@ -392,6 +393,8 @@ function TrainerCalender() {
 				// any other field change require dropping old recurrence and create new recurrence series
 				if (status === "Update") {
 					self.updateSeriesSchedules(self.state.seriesIdInEditMode, title, location, fee, classLevel, trainerPreference);
+					// Hide the dialog
+					$("#calendar-new-schedule-dialog").modal("hide");
 				} else if (status === "New") {
 					const scheduleRequest = {
 						title: title,
@@ -406,7 +409,13 @@ function TrainerCalender() {
 						trainerPreference: trainerPreference
 					}
 					// If this event fired after start of edit mode then clear the series and add new series
-					self.addNewSeriesSchedules(scheduleRequest);
+					if (self.addNewSeriesSchedules(scheduleRequest)) {
+						$("#calendar-new-schedule-dialog").modal("hide");
+					} else {
+						console.log("Updating of series cannot be completed due to validation errors", self.state.seriesIdInEditMode);
+					}
+				} else {
+					self.showValidationMessage("Please make a change to save the infomation");
 				}
 			} else {
 				const scheduleRequest = {
@@ -422,11 +431,12 @@ function TrainerCalender() {
 					trainerPreference: trainerPreference
 				}
 				// If this event fired after start of edit mode then clear the series and add new series
-				self.addNewSeriesSchedules(scheduleRequest);
+				if (self.addNewSeriesSchedules(scheduleRequest)) {
+					$("#calendar-new-schedule-dialog").modal("hide");
+				} else {
+					console.log("New series cannot be added due to failure in validation");
+				}
 			}
-
-			// Close the dialog.
-			$("#calendar-new-schedule-dialog").modal("hide");
 		}
 	}
 
@@ -469,6 +479,38 @@ function TrainerCalender() {
 		});
 	}
 
+	self.validateIfScheduleOverlap = function(newSchedules) {
+		const allScheduleTimeRange = [];
+		for (const seriesId in self.state.seriesRecurringSchedules) {
+			const seriesDetails = self.state.seriesRecurringSchedules[seriesId];
+			// series details may not be preesnt if series id related entries are deleted, just check and ignore
+			if (seriesDetails) {
+				for (const schedule of seriesDetails.schedules) {
+					allScheduleTimeRange.push({
+						seriesId: schedule.seriesId,
+						start: schedule.start,
+						end: schedule.end,
+						title: schedule.title // this is to show the error message
+					})
+				}
+			}
+		}
+
+		// Lookup for new schedule in existing series schedule if anywhere it is found then return the schedule
+		for (const newSchedule of newSchedules) {
+			for (const scheduleRange of allScheduleTimeRange) {
+				// In edit mode of series same schedule would be present in self.state.seriesRecurringSchedules
+				// hence better to not validate if both ids are same
+				if (scheduleRange.seriesId != newSchedule.seriesId) {
+					if ((newSchedule.start >= scheduleRange.start && newSchedule.start <= scheduleRange.end) ||
+						(newSchedule.end >= scheduleRange.start && newSchedule.end <= scheduleRange.end)) {
+						return scheduleRange;
+					}
+				}
+			}
+		}
+	}
+
 	//	seriesTransitionFromId comes into picture when a series is edited then old series will be deleted and new series will be added
 	self.addNewSeriesSchedules = function(request) {
 		const { title, location, startTime, endTime, endByDate, dayNamesSelected, seriesTransitionFromId, fee, classLevel, trainerPreference } = request;
@@ -480,15 +522,10 @@ function TrainerCalender() {
 		const uiSchedules = []
 		// If end by date is not there means its not recurring hence choose end time as target
 		const targetDate = endByDate ? endByDate : endTime;
-
-		// Clear the transistion series first and then update the backend then add new schedules.
-		if (seriesTransitionFromId) {
-			self.clearSeries(seriesTransitionFromId);
-			console.log("Old series from UI schedules has been cleared");
-		}
+		const generatedSeriesIds = [];
 		// Store the schedules so that we can delete/modify entire series when delete operation is performed on calendar
 		// Similarly when time slot is moved/modified we can update all schedules present in that series		
-		self.state.seriesRecurringSchedules[seriesIdentifier] = {
+		const seriesMetadata = {
 			id: seriesIdentifier,
 			traineremail: self.trainerId,
 			title: title,
@@ -507,6 +544,10 @@ function TrainerCalender() {
 		};
 
 		if (endByDate) {
+			// Add recurrence rule to each ui schedule and the same being show when user
+			// click on the ui schedule event in calendar ui
+			const recurrenceRuleForUI = self.getRecurrenceRule(seriesMetadata);
+
 			for (let lpDate = new Date(startTime.getTime()); lpDate.getTime() < targetDate.getTime(); lpDate.setDate(lpDate.getDate() + 1)) {
 				const lpDayName = DAY_NAMES[lpDate.getDay()];
 				if (dayNamesSelected.includes(lpDayName)) {
@@ -520,7 +561,7 @@ function TrainerCalender() {
 						start: lpDate.getTime(),
 						end: targetEnd.getTime(),
 					};
-					apiSchedules.push(schedule);
+					// These schedule information is used by the calendar ui
 					uiSchedules.push({
 						id: schedule.id,
 						title: title,
@@ -531,13 +572,14 @@ function TrainerCalender() {
 						category: 'time',
 						bgColor: "#e1efff",
 						dragBgColor: "#f6deb76b",
-						borderColor: "#e1efff"
-					})
-					self.state.scheduleIdToSeriesIdMap[schedule.id] = seriesIdentifier;
+						borderColor: "#e1efff",
+						recurrenceRule: recurrenceRuleForUI
+					});
+					// add the schedule to the api schedule and these will be passed to backend for storing
+					apiSchedules.push(schedule);
+					generatedSeriesIds.push(schedule.id);
 				}
 			}
-			// Add recurrence rule which is used when a schedule is clicked
-			self.addRecurrenceRule(self.state.seriesRecurringSchedules[seriesIdentifier], uiSchedules);
 		} else {
 			const schedule = {
 				id: "schedule-" + (new Date()).getTime() + Math.random(),
@@ -560,28 +602,45 @@ function TrainerCalender() {
 				dragBgColor: "#f6deb76b",
 				borderColor: "#e1efff"
 			});
-			self.state.scheduleIdToSeriesIdMap[schedule.id] = seriesIdentifier;
+			generatedSeriesIds.push(schedule.id);
 		}
 
-		// Store the series and its schedules
-		self.storeSchedules(self.state.seriesRecurringSchedules[seriesIdentifier], uiSchedules, () => {
-			console.log("series schedules has been updated in the backed with seriesId", seriesTransitionFromId);
-		});
+		// Check if there no conflicts with other series schedules
+		const conflictSchedule = self.validateIfScheduleOverlap(seriesMetadata.schedules);
+		if (conflictSchedule) {
+			const message = "Schedule title: <b>" + conflictSchedule.title + "</b><br>Timings: " + moment(new Date(conflictSchedule.start)).format("MMMM DD,YYYY hh:mm") + " - " +
+				moment(new Date(conflictSchedule.end)).format("MMMM DD,YYYY hh:mm");
+			self.showValidationMessage("The new schedule has conflict timing with existing schedule. <br>" + message);
+			return false;
+		} else {
+			// Store the series and its schedules then update the UI calendar and internal cache
+			self.storeSchedules(seriesMetadata, uiSchedules, () => {
+				// Clear the transistion series first and then update the backend then add new schedules.
+				if (seriesTransitionFromId) {
+					self.clearSeries(seriesTransitionFromId);
+					console.log("Old series id from UI schedules has been cleared", seriesTransitionFromId);
+				}
+				// Populate the mapping between schedule id to its series parent
+				for (const scheduleId of generatedSeriesIds) {
+					self.state.scheduleIdToSeriesIdMap[scheduleId] = seriesIdentifier;
+				}
+				self.state.seriesRecurringSchedules[seriesIdentifier] = seriesMetadata;
+				console.log("Series schedules has been added / updated in the backed with seriesId",
+					seriesTransitionFromId ? seriesTransitionFromId : seriesIdentifier);
+			});
+		}
+
+		return true;
 	}
 
-	self.addRecurrenceRule = function(seriesDetails, uiSchedules) {
-		// Update the recurrence rule per schedule
-		if (uiSchedules.length > 1) {
+	self.getRecurrenceRule = function(seriesDetails) {
+		if (seriesDetails.schedules && seriesDetails.schedules.length > 1) {
 			const start = moment(seriesDetails.startTime).format("MMMM DD, YYYY");
 			const sTimeOnly = moment(seriesDetails.startTime).format("hh:mm A");
 			const eTimeOnly = moment(seriesDetails.endTime).format("hh:mm A");
 			const end = moment(seriesDetails.endByDate).format("MMMM DD, YYYY");
-			const recurrenceRule = "Occurs every " + seriesDetails.selectedDayNames.join(", ") + " effective " + start +
+			return "Occurs every " + seriesDetails.selectedDayNames.join(", ") + " effective " + start +
 				" until " + end + " from " + sTimeOnly + " to " + eTimeOnly;
-			// Update each schedule in the series with recurrence rule
-			for (const schedule of uiSchedules) {
-				schedule.recurrenceRule = recurrenceRule;
-			}
 		}
 	}
 
@@ -607,10 +666,6 @@ function TrainerCalender() {
 			},
 			complete: () => progressBar.end()
 		});
-	}
-
-	self.validateIfScheduleOverlap = function() {
-
 	}
 
 	self.openScheduleDailog = function(currentSchedule) {
@@ -669,13 +724,8 @@ function TrainerCalender() {
 		}, 500);
 	}
 
-	self.showValidationMessage = message => {
-		$("#recurrence-dialog-alert-message").text(message);
-		$("#recurrence-dialog-alert-instance").css("dsplay", "block");
-	}
-
 	self.showValidationMessage = function(message) {
-		$("#recurrence-validation-message").text(message);
+		$("#recurrence-validation-message").html(message);
 		$("#recurrence-validation-alert").show()
 	};
 
@@ -753,9 +803,17 @@ function TrainerCalender() {
 		// Go over each schedule and remove from calendar
 		for (const schedule of allSchedulesOfThisSeries.schedules) {
 			self.calendar.deleteSchedule(schedule.id, "");
+			// Clear the mapping from schedule id to parent series
+
+			self.state.scheduleIdToSeriesIdMap[schedule.id] = undefined;
+			delete self.state.scheduleIdToSeriesIdMap[schedule.id];
 		}
+
 		// as the schedules are cleared hence remove the value
 		self.state.seriesRecurringSchedules[seriesId] = undefined;
+		delete self.state.seriesRecurringSchedules[seriesId];
+
+		console.log("Schedule series:", seriesId, " has been deleted");
 	}
 
 	self.getTimeTemplate = function(schedule) {

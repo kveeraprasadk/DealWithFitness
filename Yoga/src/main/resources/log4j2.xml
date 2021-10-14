@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout
+				pattern="%date [%thread] %-5level %logger.%M\(%line\) - %msg%n" />
+		</Console>
+		<RollingFile name="ServerLog"
+			fileName="/home/ec2-user/dwflogs/dwf.server.log"
+			filePattern="dwf.server-%d{yyyy-MM-dd}-%i.log">
+			<PatternLayout
+				pattern="%date [%thread] %-5level %logger.%M\(%line\) - %msg%n" />
+			<Policies>
+				<SizeBasedTriggeringPolicy size="5MB" />
+			</Policies>
+		</RollingFile>
+	</Appenders>
+	<Loggers>
+		<Root level="info">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="ServerLog" />
+		</Root>
+	</Loggers>
+</Configuration>

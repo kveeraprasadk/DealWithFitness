@@ -58,16 +58,18 @@
 								maxlength="512">
 						</div>
 						<div class="flex flex-wrap pt-sm">
-							<div class="flex-column flex-grow" style="width: 33%; min-width: 140px; padding-right:10px; box-sizing: border-box">
+							<div class="flex-column flex-grow"
+								style="width: 33%; min-width: 140px; padding-right: 10px; box-sizing: border-box">
 								<label class="label-plain no-wrap">Start Date</label>
 								<div style="position: relative">
-								 <input type="date" id="startdate-datepicker-input">
+									<input type="date" id="startdate-datepicker-input">
 								</div>
 							</div>
-							<div class="flex-column flex-grow" style="width: 33%; min-width: 140px; padding-right:10px; box-sizing: border-box">
+							<div class="flex-column flex-grow"
+								style="width: 33%; min-width: 140px; padding-right: 10px; box-sizing: border-box">
 								<label class="label-plain no-wrap">Start Time</label>
 								<div style="position: relative">
-								 <input type="time" id="starttime-timepicker-input">
+									<input type="time" id="starttime-timepicker-input">
 								</div>
 							</div>
 							<div class="flex-column flex-grow" style="width: 33%;">
@@ -78,7 +80,8 @@
 							</div>
 						</div>
 						<div class="flex flex-wrap pt-sm pt-sm">
-							<div class="flex-column" style="width: 33%; min-width: 140px; padding-right:10px; box-sizing: border-box" >
+							<div class="flex-column"
+								style="width: 33%; min-width: 140px; padding-right: 10px; box-sizing: border-box">
 								<label class="label-plain no-wrap">Training For</label> <select
 									class="form-control" id="calendar-trainer-preference">
 									<option value="All" selected>All</option>
@@ -87,7 +90,8 @@
 									<option value="Kids">Kids</option>
 								</select>
 							</div>
-							<div class="flex-column" style="width: 33%; min-width: 140px;  padding-right:10px; box-sizing: border-box">
+							<div class="flex-column"
+								style="width: 33%; min-width: 140px; padding-right: 10px; box-sizing: border-box">
 								<label class="label-plain no-wrap">Training Level</label> <select
 									class="form-control" id="calendar-class-level">
 									<option value="Beginner" selected>Beginner</option>
@@ -105,7 +109,7 @@
 								</div>
 							</div>
 						</div>
-						
+
 						<div class="flex-column flex-valign-end pr pt">
 							<a href="javascript: trainerCalendar.showRecurrenceEvent()"
 								style="color: #075cdc; font-size: 14px;"> <span
@@ -127,8 +131,8 @@
 													id="schedule-startby"></label>
 											</div>
 											<div class="flex-column  flex-grow">
-												<label class="label-plain mr no-wrap">End by Date</label>
-												<input type="date" id="endby-datepicker-input">
+												<label class="label-plain mr no-wrap">End by Date</label> <input
+													type="date" id="endby-datepicker-input">
 											</div>
 										</div>
 									</div>
@@ -181,10 +185,12 @@
 						</div>
 					</form>
 				</div>
-				<div class="alert-message-container"
+				<div class="alert-message-container mt"
 					id="recurrence-validation-alert">
-					<i class="bi-exclamation-triangle-fill"></i> <span
-						id="recurrence-validation-message"></span>
+					<div class="flex flex-valign-center">
+						<p class="fa  fa-info-circle mr" style="font-size:20px; height: 24px; width: 24px; margin: 0px 7px"></p> <span
+							id="recurrence-validation-message"></span>
+					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
