@@ -197,6 +197,7 @@ label {
 					<div class="hero-text">
 						<h1>Book Your Online Fitness Classes Now</h1>
 						<p>How much importance you give to yourself. Invest in self.</p>
+						<p>Don't wish for it, work for it.</p>
 					</div>
 					<div class="pl">
 						<button class="btn btn-primary bookbutton mr hide"

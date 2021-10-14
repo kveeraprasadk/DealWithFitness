@@ -92,7 +92,7 @@ label {
 .unstyled-button {
   border: none;
   padding: 0;
-  background: none;
+  background: none; 
 }
 
 </style>
