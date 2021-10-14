@@ -247,6 +247,13 @@ label {
 						class="form-control required mt  mr ml flex-grow"
 						onchange='trainers.filterByMisc(event)' " style="width: auto">
 						<option value="all">All Timings</option>
+						<option value="04:00:00 11:59">Morning 04:00 AM to 11:59
+							AM</option>
+						<option value="12:00:00 16:59">Afternoon 12:00 PM to
+							04:59 PM</option>
+						<option value="17:00:00 23:59">Evening 05:00 PM to 11:59
+							PM</option>
+						<option value="00:00:00 03:59">Night 12:00 AM to 03:59 AM</option>
 					</select>
 					<div class="flex flex-valign-center">
 						<span>Sort By</span> <select name="form-sort" id="form-sortby"

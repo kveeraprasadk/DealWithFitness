@@ -7,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.Base64;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -21,6 +20,7 @@ import org.apache.logging.log4j.Logger;
 
 import main.common.DBConnection;
 import main.common.EncodeDecodeSHA256;
+import main.service.common.UserSession;
 
 @WebServlet(name = "/TraineeRegisterServlet", urlPatterns = "/TraineeRegisterServlet")
 public class TraineeRegistrationServlet extends HttpServlet {
@@ -31,14 +31,14 @@ public class TraineeRegistrationServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String name = (String) request.getParameter("name");
 		String mobileNumber = (String) request.getParameter("mobileNumber");
-		String username = (String) request.getParameter("username");
+		String userEmail = (String) request.getParameter("username");
 		String pass = (String) request.getParameter("password");
 
-		if (name != null && username != null && pass != null) {
+		if (name != null && userEmail != null && pass != null) {
 			// encode data using BASE64
-			//String password = Base64.getEncoder().encodeToString(pass.getBytes());
-			
-			String password=null;
+			// String password = Base64.getEncoder().encodeToString(pass.getBytes());
+
+			String password = null;
 			try {
 				password = EncodeDecodeSHA256.toHexString(EncodeDecodeSHA256.getSHA(pass));
 			} catch (NoSuchAlgorithmException e2) {
@@ -47,7 +47,7 @@ public class TraineeRegistrationServlet extends HttpServlet {
 			}
 
 			try (Connection con = DBConnection.createConnection()) {
-				String cntQuery = "SELECT count(*) FROM traineeregister where (username='" + username + "')";
+				String cntQuery = "SELECT count(*) FROM traineeregister where (username='" + userEmail + "')";
 				String Countrow = null;
 				try (PreparedStatement stat = con.prepareStatement(cntQuery)) {
 					ResultSet rs = stat.executeQuery();
@@ -59,8 +59,8 @@ public class TraineeRegistrationServlet extends HttpServlet {
 
 				if (Countrow.equals("0")) {
 					String query = "insert into traineeregister(username, traineename, phone, password, createtime) values (?, ? ,?, ?, ?)";
-					PreparedStatement statement = con.prepareStatement(query); 
-					statement.setString(1, username);
+					PreparedStatement statement = con.prepareStatement(query);
+					statement.setString(1, userEmail);
 					statement.setString(2, name);
 					statement.setString(3, mobileNumber);
 					statement.setString(4, password);
@@ -68,6 +68,8 @@ public class TraineeRegistrationServlet extends HttpServlet {
 					int count = statement.executeUpdate();
 
 					if (count == 1) {
+						UserSession.createUserSession(request.getSession(true), UserSession.Type.TRAINEE, name,
+								userEmail);
 						response.getWriter().write("Trainee Register successfull");
 					} else {
 						response.getWriter().write("Trainee Register Failed");

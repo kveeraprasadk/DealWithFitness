@@ -6,21 +6,19 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Base64;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import main.common.AppConstants;
 import main.common.DBConnection;
 import main.common.EncodeDecodeSHA256;
-import main.model.SessionUser;
+import main.service.common.UserSession;
+import main.service.common.UserSession.Type;
 
 /**
  * Servlet implementation class TraineeClassLoginPayment
@@ -39,13 +37,13 @@ public class TraineeClassLoginPayment extends HttpServlet {
 		response.setContentType("text/plain");
 		response.setCharacterEncoding("UTF-8");
 
-		String username = (String) request.getParameter("email");
+		String traineeEmail = (String) request.getParameter("email");
 		String pass = (String) request.getParameter("password");
 
-		//Base64.Encoder enc = Base64.getEncoder();
+		// Base64.Encoder enc = Base64.getEncoder();
 		// encode data using BASE64
-		//String password = enc.encodeToString(pass.getBytes());
-		String password=null;
+		// String password = enc.encodeToString(pass.getBytes());
+		String password = null;
 		try {
 			password = EncodeDecodeSHA256.toHexString(EncodeDecodeSHA256.getSHA(pass));
 		} catch (NoSuchAlgorithmException e2) {
@@ -55,22 +53,18 @@ public class TraineeClassLoginPayment extends HttpServlet {
 		System.out.println("encoded value is \t" + password);
 
 		try (Connection con = DBConnection.createConnection()) {
-			String cntQuery = "SELECT traineename FROM traineeregister where (username='" + username
+			String cntQuery = "SELECT traineename FROM traineeregister where (username='" + traineeEmail
 					+ "' and password='" + password + "')";
 			try (PreparedStatement stat = con.prepareStatement(cntQuery)) {
 				try (ResultSet rs = stat.executeQuery()) {
 					if (rs.next()) {
 						// If session already exists then invalidate it and create new one
-						HttpSession session = request.getSession(true);
-						SessionUser user = new SessionUser();
-						user.setType("Trainee");
-						user.setName(rs.getString("traineename"));
-						user.setEmail(username);
-						session.setAttribute(AppConstants.SESSION_IDENTIFICATION_KEY, username);
-						session.setAttribute(AppConstants.SESSION_USER_INFO, user);
+						UserSession.createUserSession(request.getSession(true), UserSession.Type.TRAINEE,
+								rs.getString("traineename"), traineeEmail);
 						response.getWriter().write("Login Success");
 					} else {
-						response.getWriter().write("Invalid User name or Password");
+						response.getWriter().write(
+								"Not a valid Email/Password. If you are a new user then please create a trainee account before login into Deal with fitness.");
 					}
 				}
 			}

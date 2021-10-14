@@ -1,5 +1,5 @@
 <div class="modal fade" id="trainee-login-dialog" role="dialog">
-	<div class="modal-dialog modal-sm">
+	<div class="modal-dialog modal-sm" style="max-width: 800px">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="modal-title text-center">Trainee Login</h4>
@@ -7,28 +7,46 @@
 			</div>
 			<div class="modal-body text-center"
 				id="trainee-login-container-parent">
-				<p>
-					<i class="fa fa-user user-container"></i>
-				</p>
-				<p class="flex-column">
-					<input type="email" id="login-traineeemailid" class="form-control"
-						placeholder="Email">
-				</p>
-				<p class="flex -column">
-					<input type="password" id="login-traineepassword"
-						class="form-control" placeholder="Password">
-				</p>
-				<div id="login-validation-error"
-					class="error-message-container hide"></div>
-				<div class="flex flex-halign-end pt">
-					<button class="btn bookbutton btn-primary"
-						id="login-trainee-action">Login</button>
-				</div>
-				<div class="flex-column flex-halign-center mt pt" style="border-top: 1px solid rgb(230,230,230)">
-					<span style="font-size:14px ">Not having an account?</span>
-					<button class="btn btn-success bookbutton mr"
-						onclick="trainers.showRegisterDialogFromLoginEvent()">New
-						Trainee Account</button>
+				<div class="flex flex-wrap flex-halign-center">
+					<div class="flex-column col-12 col-md-6 pb">
+						<p>
+							<i class="fa fa-user user-container"></i>
+						</p>
+						<p>
+							<span class="fa fa-info-circle pr-sm"
+								style="font-size: 18px; color: green"></span> <span
+								style="color: gray; font-size: 14px">If you are an
+								existing user then provide following details, otherwise create
+								an account and then login</span>
+						</p>
+						<p class="flex-column">
+							<input type="email" id="login-traineeemailid"
+								class="form-control" placeholder="Email">
+						</p>
+						<p class="flex -column">
+							<input type="password" id="login-traineepassword"
+								class="form-control" placeholder="Password">
+						</p>
+						<div id="login-validation-error"
+							class="error-message-container hide"></div>
+						<div class="flex flex-halign-end pt">
+							<button class="btn bookbutton btn-primary"
+								id="login-trainee-action">Login</button>
+						</div>
+					</div>
+					<div
+						class="flex-column pt pl pr pb col-12 col-md-6 flex-valign-center"
+						style="background: #f6f6f6; border-radius: 10px; padding: 10px 30px;">
+						<div class="user-container mb">
+							<span class="fa fa-user-plus" style="font-size: 56px; color: green"></span>
+						</div>
+						<span style="font-size: 14px" class="pb mt">Are you new to
+							Deal with fitness family? then create a trainee account to find
+							your fitness guru</span>
+						<button class="btn btn-success bookbutton mr"
+							onclick="trainers.showRegisterDialogFromLoginEvent()">New
+							Trainee Account</button>
+					</div>
 				</div>
 			</div>
 			<div class="modal-footer">

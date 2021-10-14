@@ -6,7 +6,8 @@ const LOGIN_ERROR_MSG_ID = "login-validation-error";
 function Trainers() {
 	self = this;
 	self.selectedTrainerSeriesId = null;
-
+	self.timezoneOffset = null;
+	
 	self.init = function() {
 		progressBar.start();
 		whoami.detect(() => {
@@ -15,11 +16,7 @@ function Trainers() {
 			self.attachLoginActions();
 		})
 		// Add timings options with timezone offset
-		const timezoneOffset = "GMT" + self.clientTzOffset();
-		$("#form-filter-misc").append("<option value='04:00:00 11:59'>Morning 04:00 AM to 11:59 AM " + timezoneOffset + "</option>");
-		$("#form-filter-misc").append("<option value='12:00:00 16:59'>Afternoon 12:00 PM to 04:59 PM " + timezoneOffset + "</option>");
-		$("#form-filter-misc").append("<option value='17:00:00 23:59'>Evening 05:00 PM to 11:59	PM " + timezoneOffset + "</option>");
-		$("#form-filter-misc").append("<option value='00:00:00 03:59'>Night 12:00 AM to 03:59 AM " + timezoneOffset + "</option>");
+		self.timezoneOffset = self.clientTzOffset();
 	}
 
 	self.positionUserOptions = function() {
@@ -104,6 +101,7 @@ function Trainers() {
 	}
 
 	self.loginEvent = function() {
+		progressBar.start();
 		var emailId = $('#login-traineeemailid').val();
 		var pass = $('#login-traineepassword').val();
 		if (self.validateLogin(emailId, pass)) {
@@ -118,23 +116,64 @@ function Trainers() {
 				cache: false,
 				success: function(data) {
 					if (data == "Login Success") {
-						if (self.selectedTrainerSeriesId) {
-							whoami.bindUser(emailId);
-							// as the login is successful hence redirect to trainee booking page
-							self.submitTraineeBooking();
-						} else {
-							self.showMyBookingsEvent();
-						}
+						self.postAuthNEvent();
 					} else {
-						alertDialog.show("Authentication Failed", data);
+						self.validationError(LOGIN_ERROR_MSG_ID, data);
 					}
 				},
 				error: function(data) {
 					alertDialog.show("Service Failure", data.statusText);
-				}
+				},
+				complete: () => progressBar.end()
 			});
 		}
 	}
+
+	self.postAuthNEvent = function() {
+		if (self.selectedTrainerSeriesId) {
+			whoami.bindUser(emailId);
+			// as the login is successful hence redirect to trainee booking page
+			self.submitTraineeBooking();
+		} else {
+			self.showMyBookingsEvent();
+		}
+	}
+
+	// Triggered when register button is clicked	
+	self.storeNewTraineeEvent = function() {
+		if (self.validateRegistration()) {
+			progressBar.start();
+			$.ajax({
+				url: "TraineeRegisterServlet",
+				type: "POST",
+				data: {
+					name: $("#register-traineeFullname").val(),
+					username: $("#register-traineeemailid").val(),
+					password: $("#register-traineepassword").val(),
+					mobileNumber: $("#register-traineephone").val()
+				},
+				cache: false,
+				success: function(data) {
+					console.log("Registration status", data);
+					if (data == "Email exists") {
+						self.validationError(REG_ERROR_MSG_ID, "Trainee email: " + $("#register-traineeemailid").val()
+							+ " already exists, please choose anyother email.", true);
+						$("#register-traineeemailid").focus();
+					} else {
+						$("#register-trainee-dialog").modal("hide");
+						self.postAuthNEvent();
+					}
+				},
+				error: function(error, more) {
+					console.error(error, more)
+					alertDialog.show("Service Failure", "Failed to get trainers data ");
+				},
+				complete: () => progressBar.end()
+			});
+
+		}
+	}
+
 
 	// Triggerd by book button in the trainers list
 	self.bookScheduleEvent = function(event) {
@@ -222,14 +261,13 @@ function Trainers() {
 	}
 
 	self.getTimings = function(value) {
-		let offset = self.clientTzOffset();
 		const values = value.split(" ");
-		const startTime = moment("2021-01-01 " + values[0], "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD HH:mm:00") + offset;
-		const endTime = (moment("2021-01-01 " + values[1], "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD HH:mm:00")) + offset;
+		const startTime = moment("2021-01-01 " + values[0], "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD HH:mm:00") + self.timezoneOffset;
+		const endTime = (moment("2021-01-01 " + values[1], "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD HH:mm:00")) + self.timezoneOffset;
 		return {
 			startTime: startTime,
 			endTime: endTime,
-			tzOffset: offset,
+			tzOffset: self.timezoneOffset,
 		};
 	}
 
@@ -345,42 +383,6 @@ function Trainers() {
 		setTimeout(() => {
 			$("#register-traineeFullname").focus()
 		}, 500);
-	}
-
-	self.storeNewTraineeEvent = function() {
-		if (self.validateRegistration()) {
-			progressBar.start();
-			$.ajax({
-				url: "TraineeRegisterServlet",
-				type: "POST",
-				data: {
-					name: $("#register-traineeFullname").val(),
-					username: $("#register-traineeemailid").val(),
-					password: $("#register-traineepassword").val(),
-					mobileNumber: $("#register-traineephone").val()
-				},
-				cache: false,
-				success: function(data) {
-					console.log(data);
-					if (data == "Email exists") {
-						self.validationError(REG_ERROR_MSG_ID, "Trainee email: " + $("#register-traineeemailid").val()
-							+ " already exists, please choose anyother email.", true);
-						$("#register-traineeemailid").focus();
-					} else {
-						$("#register-trainee-dialog").modal("hide");
-						setTimeout(() => {
-							alertDialog.show("Confirmantion", "Account created successfully, please use Sign In to login into your account");
-						}, 50)
-					}
-				},
-				error: function(error, more) {
-					console.error(error, more)
-					alertDialog.show("Service Failure", "Failed to get trainers data ");
-				},
-				complete: () => progressBar.end()
-			});
-
-		}
 	}
 
 	self.validateRegistration = function() {
