@@ -138,7 +138,7 @@
 			%>
 			<div class="row">
 				<div class="col-lg-8 col-md-7 detail-px no-padding">
-				<form name=traineeupdateform" >
+				<form name=traineeupdateform" id="traineeupdateform">
 					<h3 class="mth3">Please Update your profile with following
 						fields for better services</h3>
 					<div class="fx-ro">
@@ -159,13 +159,13 @@
 						</div>
 					</div>
 					
-			<!-- 		<div class="fx-ro">
+			 		<div class="fx-ro">
 						<div class="dat col-lg-4">DoB</div>
 						<div class="dat col-lg-8">
-							<input type="date" name="form-dob" class="form-dob form-control"
-								id="form-dob" value=" " required>
+							<input type="date" name="formdob" class="form-dob form-control"
+								id="form-dob" value="<%=traineedetails.getDob() %>" required>
 						</div>
-					</div>         -->
+					</div>         
 
 					<div class="fx-ro">
 						<div class="dat col-lg-4">Expectation from Class</div>
@@ -303,6 +303,61 @@
 
 		</div>
 	</div>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#traineeupdateform").validate({
+				rules: {
+					formdob: {
+			            required: true,
+			            minAge: 5,
+			            maxAge: 70
+			        }
+			    },
+			    messages: {
+			    	formdob: {
+			            required: "Please enter you date of birth.",
+			            minAge: "You must be at least 5 years old!",
+			            maxAge: "You must be below 70 years old!"
+			        } 
+			    }
+			});
+			$.validator.addMethod("minAge", function(value, element, min) {
+			    var today = new Date();
+			    var birthDate = new Date(value);
+			    var age = today.getFullYear() - birthDate.getFullYear();
+			 
+			    if (age > min+1) {
+			        return true;
+			    }
+			 
+			    var m = today.getMonth() - birthDate.getMonth();
+			 
+			    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+			        age--;
+			    }
+			 
+			    return age >= min;
+			}, "You are not old enough!");
+			
+			$.validator.addMethod("maxAge", function(value, element, max) {
+			    var today = new Date();
+			    var birthDate = new Date(value);
+			    var age = birthDate.getFullYear() - today.getFullYear()  ;
+			 
+			    if (age < max+1) {
+			        return true;
+			    }
+			 
+			    var m =  birthDate.getMonth() - today.getMonth();
+			 
+			    if (m < 0 || (m === 0 && birthDate.getDate() < today.getDate())) {
+			        age--;
+			    }
+			 
+			    return age <= max;
+			}, "You are not old enough!");
+		});
+	</script>
 	<script language="javascript" type="text/javascript">
 function limitText(limitField, limitCount, limitNum) {
 	if (limitField.value.length > limitNum) {
