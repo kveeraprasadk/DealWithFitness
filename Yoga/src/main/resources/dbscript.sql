@@ -123,8 +123,11 @@ create table schedulesSeries (
 	endByDate			long,
 	selectedDayNames	varchar(512),
 	trainerPreference	varchar(20),
+	expertise			varchar(40),
+	demoClass			boolean default false,
 	fee					float,
 	classLevel			varchar(20),
+	
 	PRIMARY KEY (traineremail, id)
 );
 

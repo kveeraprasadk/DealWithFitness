@@ -126,6 +126,14 @@ label {
 				<td class="pl">{trainerPreference}</td>
 			</tr>
 			<tr>
+				<td align="left" class="pr">Expertise</td>
+				<td class="pl">{expertise}</td>
+			</tr>
+			<tr>
+				<td align="left" class="pr">Demo Class</td>
+				<td class="pl">{demoPresent}</td>
+			</tr>
+			<tr>
 				<td align="left" class="pr">Schedule</td>
 				<td class="pl" style="color:blue;">
 					<div class="flex flex-valign-center">
@@ -151,25 +159,7 @@ label {
 	int i = 0;
 	%>
 	<!-- Nav Bar Start -->
-	<div class="navbar navbar-expand-lg bg-dark navbar-dark">
-		<div class="container-fluid">
-			<span class="logo-text">DEALWITHFITNESS</span>
-			<button type="button" class="navbar-toggler" data-toggle="collapse"
-				data-target="#navbarCollapse">
-				<span class="fa fa-bars"
-					style="color: gray; margin: 5px 0px 5px 5px"></span>
-			</button>
-			<div class="collapse navbar-collapse justify-content-between"
-				id="navbarCollapse">
-				<div class="navbar-nav ml-auto">
-					<a href="index.jsp" class="nav-item nav-link active">Home</a> <a
-						href="About.jsp" class="nav-item nav-link">About</a> <a
-						href="./logoutservice" class="nav-item nav-link"
-						id="user-logout-element" style="display: none">Logout</a>
-				</div>
-			</div>
-		</div>
-	</div>
+	<%@include file="./html/navbar.html"%>
 	<!-- Nav Bar End -->
 	<%@include file="./html/dialogs.html"%>
 	<!-- Hero Start -->
@@ -181,11 +171,8 @@ label {
 					<h2>Trainee's Zone</h2>
 				</div>
 				<div class="col-12">
-					<a
-						href="javascript:">My
-						Trainings</a> <a
-						href="javascript: trainee.switchView('profile')">My
-						Profile</a>
+					<a href="javascript:">My Trainings</a> <a
+						href="javascript: trainee.switchView('profile')">My Profile</a>
 				</div>
 			</div>
 		</div>

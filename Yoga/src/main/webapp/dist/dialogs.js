@@ -37,13 +37,14 @@ function ConfirmDialog() {
 		self.callback = callback;
 		$("#confirm-dialog-message").text(message);
 		$("#confirm-dialog").modal("show");
+		// Focus the confirm yes button
+		setTimeout(() => $("#confirm-dialog-yes").focus(), 500);
 	}
 }
 
 window.progressBar = new ProgressBar();
 window.alertDialog = new AlertDialog();
 window.confirmDialog = new ConfirmDialog();
-
 
 window.onerror = function(message, source, lineno, colno, error) {
 	console.log("Failed with js errors", message, source, lineno, colno, error);

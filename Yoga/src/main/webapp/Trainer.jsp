@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>DEALWITHFITNESS</title>
+<title>DealWithFitness</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta content="Free Website Template" name="keywords">
 <meta content="Free Website Template" name="description">
@@ -36,7 +36,6 @@
 <!-- CSS -->
 <link rel="stylesheet"
 	href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
-<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="assets/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="assets/css/form-elements.css">
@@ -46,12 +45,12 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"
 	defer></script>
-
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="./dist/whoami.js"></script>
 <!-- jQuery library -->
 
 
@@ -80,7 +79,7 @@
 	href="assets/ico/apple-touch-icon-72-precomposed.png">
 <link rel="apple-touch-icon-precomposed"
 	href="assets/ico/apple-touch-icon-57-precomposed.png">
-
+<link rel="stylesheet" type="text/css" href="./css/common.css">
 
 <!-- Popper JS -->
 <script
@@ -99,52 +98,9 @@ label {
 </head>
 
 <body>
-	<!-- Top Bar Start -->
-	<div class="top-bar d-md-block">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-md-8">
-					<!--              <div class="top-bar-left">
-                            <div class="text">
-                                <i class="far fa-clock"></i>
-                                <h2>8:00 - 9:00</h2>
-                                <p>Mon - Fri</p>
-                            </div>
-                            <div class="text">
-                                <i class="fa fa-phone-alt"></i>
-                                <h2>+123 456 7890</h2>
-                                <p>For Appointment</p>
-                            </div>
-                        </div>    -->
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Top Bar End -->
-
 	<!-- Nav Bar Start -->
-	<div class="navbar navbar-expand-lg bg-dark navbar-dark">
-		<div class="container-fluid">
-			<a href="index.jsp" class="navbar-brand">Dealwithfitness<span></span></a>
-			<button type="button" class="navbar-toggler" data-toggle="collapse"
-				data-target="#navbarCollapse">
-				<span class="navbar-toggler-icon"></span>
-			</button>
+	<%@include file="./html/navbar.html" %>
 
-			<div class="collapse navbar-collapse justify-content-between"
-				id="navbarCollapse">
-				<div class="navbar-nav ml-auto">
-					<a href="index.jsp" class="nav-item nav-link ">Home</a> <a
-						href="About.jsp" class="nav-item nav-link ">About</a>
-
-					<!--              <a href="blog.jsp" class="nav-item nav-link" >Blog</a>   -->
-
-					<a href="Trainer.jsp" class="nav-item nav-link active">Trainer</a>
-
-				</div>
-			</div>
-		</div>
-	</div>
 	<!-- Nav Bar End -->
 	<script type="text/javascript">
 		$(document)
@@ -1148,10 +1104,6 @@ function limitText(limitField, limitCount, limitNum) {
 
 	<!-- JavaScript Libraries -->
 
-
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 	<script src="lib/easing/easing.min.js"></script>
 	<script src="lib/wow/wow.min.js"></script>
 	<script src="lib/owlcarousel/owl.carousel.min.js"></script>
@@ -1164,9 +1116,6 @@ function limitText(limitField, limitCount, limitNum) {
 	<!-- Template Javascript -->
 	<script src="js/main.js"></script>
 	<!-- Javascript -->
-	<script src="assets/js/jquery-1.11.1.min.js"></script>
-	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
-	<script src="assets/js/retina-1.1.0.min.js"></script>
 	<script src="assets/js/scripts.js"></script>
 
 	<!--[if lt IE 10]>

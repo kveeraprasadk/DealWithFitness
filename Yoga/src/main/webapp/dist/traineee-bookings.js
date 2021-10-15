@@ -46,8 +46,12 @@ function TraineeBookings() {
 					// We get triness trainings details by trainer that this trainee trained for
 					for (const trainerDetails of data) {
 						const scheduleSeries = trainerDetails.series;
+						
 						for (const traineeBookedSchedule of scheduleSeries) {
 							Utils.addRecurrenceRule(traineeBookedSchedule);
+							// Add if demoClass is present in the schedule
+							traineeBookedSchedule.demoPresent = traineeBookedSchedule.demoClass ? "Yes" : "No";
+							
 							const bookingFragment = Utils.fillTemplate(templateHtml, [traineeBookedSchedule, trainerDetails]);
 							parent.append(bookingFragment);
 							traineeSchedules++;

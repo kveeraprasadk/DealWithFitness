@@ -7,7 +7,7 @@ function Trainers() {
 	self = this;
 	self.selectedTrainerSeriesId = null;
 	self.timezoneOffset = null;
-	
+
 	self.init = function() {
 		progressBar.start();
 		whoami.detect(() => {
@@ -101,10 +101,10 @@ function Trainers() {
 	}
 
 	self.loginEvent = function() {
-		progressBar.start();
 		var emailId = $('#login-traineeemailid').val();
 		var pass = $('#login-traineepassword').val();
 		if (self.validateLogin(emailId, pass)) {
+			progressBar.start();
 			// Validations are done push the payload to backend
 			$.ajax({
 				url: "TraineeClassLoginPayment",
@@ -116,7 +116,7 @@ function Trainers() {
 				cache: false,
 				success: function(data) {
 					if (data == "Login Success") {
-						self.postAuthNEvent();
+						self.postAuthNEvent(emailId);
 					} else {
 						self.validationError(LOGIN_ERROR_MSG_ID, data);
 					}
@@ -129,7 +129,7 @@ function Trainers() {
 		}
 	}
 
-	self.postAuthNEvent = function() {
+	self.postAuthNEvent = function(emailId) {
 		if (self.selectedTrainerSeriesId) {
 			whoami.bindUser(emailId);
 			// as the login is successful hence redirect to trainee booking page
@@ -161,7 +161,7 @@ function Trainers() {
 						$("#register-traineeemailid").focus();
 					} else {
 						$("#register-trainee-dialog").modal("hide");
-						self.postAuthNEvent();
+						self.postAuthNEvent($("#register-traineeemailid").val());
 					}
 				},
 				error: function(error, more) {
@@ -277,7 +277,7 @@ function Trainers() {
 		return (offset < 0 ? "+" : "-") + ("00" + Math.floor(timeInMins / 60)).slice(-2) + ":" + ("00" + (timeInMins % 60)).slice(-2);
 	}
 
-	self.renderTrainers = function(trainers) {
+	self.renderTrainers = function(seriesSchedules) {
 		const templeteForEmptySeries = document.getElementById("Trainer-details-template-empty");
 		const templeteForSeries = document.getElementById("Trainer-details-template");
 		const htmlSeriesTemplate = templeteForSeries.innerHTML;
@@ -285,48 +285,60 @@ function Trainers() {
 		const parentHtmlNode = $("#" + parentId);
 		parentHtmlNode.html("");
 
-		for (const series of trainers) {
-			let childHtmlNode;
-			const trainer = series.trainer;
-			// If series id is there means then trainer will have series otherwise empty
-			if (series.id) {
-				series.attendeeClass = "hide";
-				series.zeroAttendeesClass = "hide";
-				if (series.attendees) {
-					series.attendeeCount = series.attendees.length;
-					series.zeroAttendeesClass = series.attendees.length > 0 ? "" : "hide";
-					// If currently logged in user is part of scheduled training then show checkbox otherwise hide it
-					if (series.attendees.includes(whoami.getUser())) {
-						series.attendee = "show";
+		if (seriesSchedules && seriesSchedules.length > 0) {
+			for (const series of seriesSchedules) {
+				let childHtmlNode;
+				const trainer = series.trainer;
+				// If series id is there means then trainer will have series otherwise empty
+				if (series.id) {
+					series.attendeeSubscribedClass = "hide";
+					series.zeroAttendeesClass = "hide";
+					if (series.attendees) {
+						series.attendeeCount = series.attendees.length;
+						series.zeroAttendeesClass = series.attendees.length > 0 ? "" : "hide";
+						// If currently logged in user is part of scheduled training then show checkbox otherwise hide it
+						if (series.attendees.includes(whoami.getUser())) {
+							series.attendeeSubscribedClass = "show";
+						}
 					}
+					
+					if (series.demoClass == true) {
+						trainer.name = "Demo by " + trainer.name;
+						trainer.demoClass = "demo-class"
+					}
+					
+					// If series has overriden expretise then take that otherwise trainer expretise
+					trainer.expertise = series.expertise ? series.expertise : trainer.expertise;
+					// Convert the series information to a recurrence rule
+					Utils.addRecurrenceRule(series);
+					childHtmlNode = Utils.fillTemplate(htmlSeriesTemplate, [trainer, series]);
+					parentHtmlNode.append(childHtmlNode);
+				} else {
+					childHtmlNode = Utils.fillTemplate(templeteForEmptySeries.innerHTML, [trainer]);
+					parentHtmlNode.append(childHtmlNode);
 				}
-				// Convert the series information to a recurrence rule
-				Utils.addRecurrenceRule(series);
-				childHtmlNode = Utils.fillTemplate(htmlSeriesTemplate, [trainer, series]);
-				parentHtmlNode.append(childHtmlNode);
-			} else {
-				childHtmlNode = Utils.fillTemplate(templeteForEmptySeries.innerHTML, [trainer]);
-				parentHtmlNode.append(childHtmlNode);
 			}
-		}
 
-		// This is to add listener to view profile button
-		$(document).on(
-			"click",
-			".profiledata", //".home-trainer-list-a",
-			function(event) {
-				var useremail = $(this).val();
-				$.get("TrainerDetailsView", {
-					trainersemail: useremail
-				}, function(responseText) {
-					console.log(responseText);
-					var globalarray = [];
-					globalarray.push(responseText);
-					window.localStorage.setItem("globalarray", JSON
-						.stringify(globalarray));
-					document.location.href = './trainerdetails.jsp';
+			// This is to add listener to view profile button
+			$(document).on(
+				"click",
+				".profiledata", //".home-trainer-list-a",
+				function(event) {
+					var useremail = $(this).val();
+					$.get("TrainerDetailsView", {
+						trainersemail: useremail
+					}, function(responseText) {
+						console.log(responseText);
+						var globalarray = [];
+						globalarray.push(responseText);
+						window.localStorage.setItem("globalarray", JSON
+							.stringify(globalarray));
+						document.location.href = './trainerdetails.jsp';
+					});
 				});
-			});
+		} else {
+			parentHtmlNode.append("<span class='no-results'>No results found with the matching filters. Choose different filter to see results</span>");
+		}
 
 	}
 

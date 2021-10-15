@@ -2,13 +2,17 @@ function Utils() {
 	const self = this;
 
 	self.addRecurrenceRule = function(seriesDetails) {
-		const start = moment(seriesDetails.startTime).format("MMMM DD, YYYY");
+		const start = moment(seriesDetails.startTime).format("MMM DD, YYYY");
+		const end = moment(seriesDetails.endByDate).format("MMM DD, YYYY");
 		const sTimeOnly = moment(seriesDetails.startTime).format("hh:mm A");
 		const eTimeOnly = moment(seriesDetails.endTime).format("hh:mm A");
-		const end = moment(seriesDetails.endByDate).format("MMMM DD, YYYY");
 
 		if (seriesDetails.selectedDayNames && seriesDetails.selectedDayNames.length > 0) {
-			const days = seriesDetails.selectedDayNames.join(", ");
+			const daysCapitalize = [];
+			for (const dayName of seriesDetails.selectedDayNames) {
+				daysCapitalize.push(dayName.charAt(0).toUpperCase() + dayName.substr(1));
+			}
+			const days = daysCapitalize.join(", ");
 			seriesDetails.schedule = start + " - " + end + " <br> " + "Every " + days + " <br> " +
 				"Timings: <b>" + sTimeOnly + " - " + eTimeOnly + "</b>";
 		} else {

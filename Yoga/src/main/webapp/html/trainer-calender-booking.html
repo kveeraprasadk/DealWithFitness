@@ -36,7 +36,8 @@
 	</div>
 	<div class="modal fade" id="calendar-new-schedule-dialog" tabindex="-1"
 		role="dialog" aria-labelledby="calendar-new-schedule-dialog">
-		<div class="modal-dialog modal-dialog-scrollable" role="document">
+		<div class="modal-dialog modal-dialog-scrollable" role="document"
+			style="max-width: 750px">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h4 class="modal-title">Create New Training Schedule</h4>
@@ -57,32 +58,41 @@
 								placeholder="Mention location details like  zoom/google duo e.t.c"
 								maxlength="512">
 						</div>
-						<div class="flex flex-wrap pt-sm">
-							<div class="flex-column flex-grow"
-								style="width: 33%; min-width: 140px; padding-right: 10px; box-sizing: border-box">
-								<label class="label-plain no-wrap">Start Date</label>
-								<div style="position: relative">
-									<input type="date" id="startdate-datepicker-input">
-								</div>
+						<div class="flex flex-wrap">
+							<div class="flex-column pr">
+								<label class="label-plain no-wrap">Choose expertise</label> <select
+									id="schedule-expertise"
+									class="form-control required flex-grow"
+									style="width: auto; max-width: 230px;">
+									<option value="">None</option>
+									<optgroup label="Yoga">
+										<option value="Yoga for health">Yoga for health</option>
+										<option value="Weight Loss">Weight Loss</option>
+										<option value="Kids Yoga">Kids Yoga</option>
+										<option value="Pregnancy Yoga">Pregnancy Yoga</option>
+										<option value="Meditation">Meditation</option>
+									</optgroup>
+									<optgroup label="Dance">
+										<option value="Dance">Dance</option>
+										<option value="Zumba">Zumba</option>
+									</optgroup>
+									<option value="Weight / Body weight Workout">Weight /
+										Body weight Workout</option>
+									<option value="Nutrition">Nutrition</option>
+								</select>
+							</div>
+							<div class="flex-column pr flex-grow"
+								style="min-width: 140px; box-sizing: border-box">
+								<label class="label-plain no-wrap">Expertise Level</label> <select
+									class="form-control" id="calendar-class-level">
+									<option value="Beginner" selected>Beginner</option>
+									<option value="Intermediate">Intermediate</option>
+									<option value="Advanced">Advanced</option>
+								</select>
 							</div>
 							<div class="flex-column flex-grow"
-								style="width: 33%; min-width: 140px; padding-right: 10px; box-sizing: border-box">
-								<label class="label-plain no-wrap">Start Time</label>
-								<div style="position: relative">
-									<input type="time" id="starttime-timepicker-input">
-								</div>
-							</div>
-							<div class="flex-column flex-grow" style="width: 33%;">
-								<label class="label-plain no-wrap">End Time</label>
-								<div style="position: relative">
-									<input type="time" id="endtime-timepicker-input">
-								</div>
-							</div>
-						</div>
-						<div class="flex flex-wrap pt-sm pt-sm">
-							<div class="flex-column"
-								style="width: 33%; min-width: 140px; padding-right: 10px; box-sizing: border-box">
-								<label class="label-plain no-wrap">Training For</label> <select
+								style="min-width: 140px; box-sizing: border-box">
+								<label class="label-plain no-wrap">Training Preference</label> <select
 									class="form-control" id="calendar-trainer-preference">
 									<option value="All" selected>All</option>
 									<option value="Female">Female</option>
@@ -90,16 +100,32 @@
 									<option value="Kids">Kids</option>
 								</select>
 							</div>
-							<div class="flex-column"
+						</div>
+						<div class="flex flex-wrap">
+							<div class="flex-column flex-grow pt-sm"
 								style="width: 33%; min-width: 140px; padding-right: 10px; box-sizing: border-box">
-								<label class="label-plain no-wrap">Training Level</label> <select
-									class="form-control" id="calendar-class-level">
-									<option value="Beginner" selected>Beginner</option>
-									<option value="Intermediate">Intermediate</option>
-									<option value="Advanced">Advanced</option>
-								</select>
+								<label class="label-plain no-wrap">Start Date</label>
+								<div style="position: relative">
+									<input type="date" id="startdate-datepicker-input">
+								</div>
 							</div>
-							<div class="flex-column" style="width: 33%">
+							<div class="flex-column flex-grow pt-sm"
+								style="width: 33%; min-width: 140px; padding-right: 10px; box-sizing: border-box">
+								<label class="label-plain no-wrap">Start Time</label>
+								<div style="position: relative">
+									<input type="time" id="starttime-timepicker-input">
+								</div>
+							</div>
+							<div class="flex-column flex-grow pt-sm"
+								style="width: 33%; min-width: 140px; box-sizing: border-box">
+								<label class="label-plain no-wrap">End Time</label>
+								<div style="position: relative">
+									<input type="time" id="endtime-timepicker-input">
+								</div>
+							</div>
+						</div>
+						<div class="flex flex-wrap">
+							<div class="flex-column pt-sm pr">
 								<label class="label-plain no-wrap">Monthly Fee</label>
 								<div class="input-group">
 									<span class="input-currency-symbol">&#x20B9;</span> <input
@@ -109,13 +135,25 @@
 								</div>
 							</div>
 						</div>
-
-						<div class="flex-column flex-valign-end pr pt">
-							<a href="javascript: trainerCalendar.showRecurrenceEvent()"
-								style="color: #075cdc; font-size: 14px;"> <span
-								class="calendar-font-icon ic-repeat-b mr-sm"></span> <span
-								id="recurrence-option-toggle">Make Recurrence</span>
-							</a>
+						<div
+							class="flex flex-valign-center flex-wrap flex-halign-space-between">
+							<div class="flex flex-valign-center pt pr">
+								<label class="label-plain no-wrap pr">Is it a demo class</label>
+								<label class="switch"> <input type="checkbox"
+									id="schedule-demo-class-checkbox"> <span
+									class="slider round"></span>
+								</label>
+							</div>
+							<div class="flex flex-valign-center  pt">
+								<label class="label-plain no-wrap pr">Schedule
+									Repeat/Recurrence</label>
+								<!-- new -->
+								<label class="switch"> <input type="checkbox"
+									id="schedule-recurring-checkbox"
+									onchange="trainerCalendar.showRecurrenceEvent()"> <span
+									class="slider round"></span>
+								</label>
+							</div>
 						</div>
 						<div class="collapse pt" id="recurrence-schedule-enable">
 							<div class="card card-body recurrence-dialog-body">
@@ -188,8 +226,9 @@
 				<div class="alert-message-container mt"
 					id="recurrence-validation-alert">
 					<div class="flex flex-valign-center">
-						<p class="fa  fa-info-circle mr" style="font-size:20px; height: 24px; width: 24px; margin: 0px 7px"></p> <span
-							id="recurrence-validation-message"></span>
+						<p class="fa  fa-info-circle mr"
+							style="font-size: 20px; height: 24px; width: 24px; margin: 0px 7px"></p>
+						<span id="recurrence-validation-message"></span>
 					</div>
 				</div>
 				<div class="modal-footer">
