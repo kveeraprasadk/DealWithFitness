@@ -50,8 +50,7 @@ function TraineeBookings() {
 						for (const traineeBookedSchedule of scheduleSeries) {
 							Utils.addRecurrenceRule(traineeBookedSchedule);
 							// Add if demoClass is present in the schedule
-							traineeBookedSchedule.demoPresent = traineeBookedSchedule.demoClass ? "Yes" : "No";
-							
+							traineeBookedSchedule.demoPresent = traineeBookedSchedule.demoClass == true ? "Yes" : "No";
 							const bookingFragment = Utils.fillTemplate(templateHtml, [traineeBookedSchedule, trainerDetails]);
 							parent.append(bookingFragment);
 							traineeSchedules++;
