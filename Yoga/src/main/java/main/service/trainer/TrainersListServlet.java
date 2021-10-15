@@ -66,7 +66,7 @@ public class TrainersListServlet extends HttpServlet {
 		if (filterByExpertise != null || startTime != null) {
 			whereClause.append(" where ");
 			if (filterByExpertise != null) {
-				whereClause.append(String.format(" expertise = '%s' ", filterByExpertise));
+				whereClause.append(String.format(" ss.expertise = '%s' ", filterByExpertise));
 			}
 			if (startTime != null) {
 				if (filterByExpertise != null) {

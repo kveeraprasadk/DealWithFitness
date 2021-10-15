@@ -237,6 +237,8 @@ input[type=time] {
 	font-size: 16px !important;
 	width: 32px;
 	height: 32px;
+	min-height: 32px;
+	min-width: 32px;
 	color: #6f747a;
 	padding: 2px;
 	cursor: pointer;
