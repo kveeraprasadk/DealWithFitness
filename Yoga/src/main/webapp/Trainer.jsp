@@ -262,14 +262,16 @@ label {
                             </div>       -->
 					</div>
 					<div class="col-sm-5 form-box card bg-white">
-						<ul class="nav nav-tabs" id="myTab" role="tablist">
+					
+					
+						<ul class="nav nav-tabs md-tabs tabs-2 light-blue darken-3" id="myTab" role="tablist">
 							<li class="nav-item" role="presentation"><a
 								class="nav-link active" id="login-tab" data-toggle="tab"
 								href="#login" role="tab" aria-controls="login"
-								aria-selected="true">Login</a></li>
+								aria-selected="true"><i class="fas fa-user mr-1"></i>Login</a></li>
 							<li class="nav-item" role="presentation"><a class="nav-link"
 								id="register-tab" data-toggle="tab" href="#register" role="tab"
-								aria-controls="register" aria-selected="false">Register</a></li>
+								aria-controls="register" aria-selected="false"><i class="fas fa-user-plus mr-1"></i>Register</a></li>
 						</ul>
 
 						<div class="tab-content" id="myTabContent">
@@ -304,8 +306,12 @@ label {
 										<div class="form-group">
 										<button type="submit"
 											class="btn trainerloginbutton btn-primary"
-											id="trainerloginbutton">Login</button>
+											id="trainerloginbutton">Login <i class="fas fa-sign-in-alt ml-1"></i></button>
 											</div>
+											<div class="options text-center text-md-right mt-1">
+                							
+                							<p>Forgot <a href="#" class="blue-text">Password?</a></p>
+             								 </div>
 										
 									</form>
 
@@ -657,7 +663,22 @@ label {
   											</label><br>  										
 			                        </div>    -->
 
+										<div class="form-group">
+											<label class="sr-only" for="form-password">Password</label>
 
+											<input type="password" name="formpassword"
+												placeholder="Password..."
+												class="form-password form-control"
+												id="form-password" required>
+										</div>
+										<div class="form-group">
+											<label class="sr-only" for="form-password">ConfirmPassword</label>
+
+											<input type="password" name="formcpassword"
+												placeholder="Confirm Password..."
+												class="form-cpassword form-control"
+												id="form-cpassword" required>
+										</div>
 										<div class="form-group">
 											<label class="sr-only" for="form-aboutself"><strong>About
 													Yourself</strong> </label>
@@ -667,6 +688,7 @@ label {
 											<font size="2">(Maximum characters: 1000)
 											You have <input readonly type="text" class="projdesc unstyled-button" name="countdown" size="2" value="1000"> characters left.</font>
 										</div>
+										
 										<div class="form-group">
 											<strong>Profile Picture</strong> <input type="file"
 												name="formimage" class="form-image form-control"
@@ -705,7 +727,7 @@ label {
 										</div>
 										<button type="submit"
 											class="btn trainerregisterbutton btn-primary"
-											id="trainerregisterbutton">Register</button>
+											id="trainerregisterbutton">Register <i class="fas fa-sign-in-alt ml-1"></i></button>
 									</form>
 								</div>
 								<div id="success"></div>
@@ -832,6 +854,14 @@ function limitText(limitField, limitCount, limitNum) {
 														required : true
 
 													},
+													formpassword : {
+														required : true,
+														minlength : 6
+													},
+													formcpassword : {
+														required : true,
+														equalTo : "#form-password"
+													},
 													formaboutself : {
 														required : true,
 														minlength : 50
@@ -842,7 +872,8 @@ function limitText(limitField, limitCount, limitNum) {
 													formimage : {
 														required : true,
 														extension : "png|jpeg|jpg",
-														filesize : 1048576,
+													//	filesize : 1048576
+														filesize : 204576
 													}
 													
 												},
@@ -886,12 +917,20 @@ function limitText(limitField, limitCount, limitNum) {
 														required : "please enter monthly fees"
 
 													},
+													formpassword : {
+														required : "please enter password",
+														minlength : "Password min 6 characters"
+													},
+													formcpassword : {
+														required : "please enter confirm password",
+														equalTo : "password doesn match"
+													},
 													formaboutself : {
 														required : "please enter about yourself",
 														minlength : "Please enter atleast 50 chars"
 													},
 													formimage : {
-														required : "File must be JPEG or PNG, less than 1MB"
+														required : "File must be JPEG or PNG, less than 200Kb"
 													},
 										//			formcertificate1 : {
 										//				required : "Please Upload your certificate"
