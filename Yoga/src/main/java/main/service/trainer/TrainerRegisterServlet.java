@@ -45,6 +45,7 @@ public class TrainerRegisterServlet extends HttpServlet {
 		String qualification = request.getParameter("formqualification");
 		String phoneno = request.getParameter("formphone");
 		String expertise = request.getParameter("formexpertise1");
+		String password = request.getParameter("formpassword");
 		/*
 		 * String monthlyfees=request.getParameter("formmonthlyfees1"); String
 		 * classlevel=request.getParameter("formclasslevel1"); String
@@ -167,7 +168,7 @@ public class TrainerRegisterServlet extends HttpServlet {
 				// trainertemptable(trainername,traineremail,experience,qualification,expertise,classlevel,monthlyfees,schedules,expertise2,classlevel2,monthlyfees2,schedules2,expertise3,classlevel3,monthlyfees3,schedules3,aboutyourself,photoname,photo,creationtime,certificate1,certificate1filename,certificate2,certificate2filename,certificate3,certificate3filename)
 				// values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"; //Insert user
 				// details into the table 'USERS'
-				String query = "insert into trainertemptable(trainername,traineremail,experience,qualification,phoneno,expertise,aboutyourself,photoname,photo,creationtime,certificate1,certificate1filename,certificate2,certificate2filename,certificate3,certificate3filename) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"; // Insert
+				String query = "insert into trainertemptable(trainername,traineremail,experience,qualification,phoneno,expertise,aboutyourself,photoname,photo,creationtime,certificate1,certificate1filename,certificate2,certificate2filename,certificate3,certificate3filename,password,adminapprove) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"; // Insert
 																																																																													// 'USERS'
 				PreparedStatement statement = con.prepareStatement(query); // Making use of prepared statements here to
 																			// insert bunch of data
@@ -187,6 +188,8 @@ public class TrainerRegisterServlet extends HttpServlet {
 				statement.setString(14, certificatefileName2);
 				statement.setBlob(15, certificate3inputStream);
 				statement.setString(16, certificatefileName3);
+				statement.setString(17, password);
+				statement.setString(18, "false");
 
 				int i = statement.executeUpdate();
 
@@ -197,6 +200,8 @@ public class TrainerRegisterServlet extends HttpServlet {
 					session.setAttribute("trainerexperience", experience);
 					session.setAttribute("trainerqualification", qualification);
 					session.setAttribute("trainerexpertise", expertise);
+					session.setAttribute("trainerphone", phoneno);
+					session.setAttribute("trainerpassword", password);
 					/*
 					 * session.setAttribute("trainerschedule", schedule);
 					 * session.setAttribute("trainerclasslevel", classlevel);

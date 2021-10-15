@@ -707,7 +707,22 @@ label {
   											</label><br>  										
 			                        </div>    -->
 
+										<div class="form-group">
+											<label class="sr-only" for="form-password">Password</label>
 
+											<input type="password" name="formpassword"
+												placeholder="Password..."
+												class="form-password form-control"
+												id="form-password" required>
+										</div>
+										<div class="form-group">
+											<label class="sr-only" for="form-password">ConfirmPassword</label>
+
+											<input type="password" name="formcpassword"
+												placeholder="Confirm Password..."
+												class="form-cpassword form-control"
+												id="form-cpassword" required>
+										</div>
 										<div class="form-group">
 											<label class="sr-only" for="form-aboutself"><strong>About
 													Yourself</strong> </label>
@@ -717,6 +732,7 @@ label {
 											<font size="2">(Maximum characters: 1000)
 											You have <input readonly type="text" class="projdesc unstyled-button" name="countdown" size="2" value="1000"> characters left.</font>
 										</div>
+										
 										<div class="form-group">
 											<strong>Profile Picture</strong> <input type="file"
 												name="formimage" class="form-image form-control"
@@ -882,6 +898,14 @@ function limitText(limitField, limitCount, limitNum) {
 														required : true
 
 													},
+													formpassword : {
+														required : true,
+														minlength : 6
+													},
+													formcpassword : {
+														required : true,
+														equalTo : "#form-password"
+													},
 													formaboutself : {
 														required : true,
 														minlength : 50
@@ -936,6 +960,14 @@ function limitText(limitField, limitCount, limitNum) {
 													formmonthlyfees1 : {
 														required : "please enter monthly fees"
 
+													},
+													formpassword : {
+														required : "please enter password",
+														minlength : "Password min 6 characters"
+													},
+													formcpassword : {
+														required : "please enter confirm password",
+														equalTo : "password doesn match"
 													},
 													formaboutself : {
 														required : "please enter about yourself",
