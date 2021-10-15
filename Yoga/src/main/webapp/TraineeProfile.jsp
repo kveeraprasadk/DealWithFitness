@@ -325,7 +325,7 @@
 			    var today = new Date();
 			    var birthDate = new Date(value);
 			    var age = today.getFullYear() - birthDate.getFullYear();
-			 
+			 	
 			    if (age > min+1) {
 			        return true;
 			    }
@@ -340,22 +340,22 @@
 			}, "You are not old enough!");
 			
 			$.validator.addMethod("maxAge", function(value, element, max) {
-			    var today = new Date();
-			    var birthDate = new Date(value);
-			    var age = birthDate.getFullYear() - today.getFullYear()  ;
-			 
-			    if (age < max+1) {
+			    var today1 = new Date();
+			    var birthDate1 = new Date(value);
+			    var age1 = today1.getFullYear() - birthDate1.getFullYear()  ;
+			   
+			    if (age1 < max+1) {
 			        return true;
 			    }
 			 
-			    var m =  birthDate.getMonth() - today.getMonth();
+			    var m =  today1.getMonth() - birthDate1.getMonth();
 			 
-			    if (m < 0 || (m === 0 && birthDate.getDate() < today.getDate())) {
-			        age--;
+			    if (m < 0 || (m === 0 && birthDate1.getDate() < today1.getDate())) {
+			        age1--;
 			    }
 			 
-			    return age <= max;
-			}, "You are not old enough!");
+			    return age1 <= max;
+			}, "You are too old enough!");
 		});
 	</script>
 	<script language="javascript" type="text/javascript">
