@@ -48,6 +48,8 @@
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"
 	defer></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 <script src="./dist/whoami.js"></script>
 <!-- jQuery library -->
 
@@ -1063,10 +1065,6 @@ function limitText(limitField, limitCount, limitNum) {
 
 	<!-- JavaScript Libraries -->
 
-
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 	<script src="lib/easing/easing.min.js"></script>
 	<script src="lib/wow/wow.min.js"></script>
 	<script src="lib/owlcarousel/owl.carousel.min.js"></script>
@@ -1079,9 +1077,6 @@ function limitText(limitField, limitCount, limitNum) {
 	<!-- Template Javascript -->
 	<script src="js/main.js"></script>
 	<!-- Javascript -->
-	<script src="assets/js/jquery-1.11.1.min.js"></script>
-	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
-	<script src="assets/js/retina-1.1.0.min.js"></script>
 	<script src="assets/js/scripts.js"></script>
 
 	<!--[if lt IE 10]>
