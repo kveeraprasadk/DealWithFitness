@@ -131,7 +131,7 @@ label {
 			</tr>
 			<tr>
 				<td align="left" class="pr">Demo Class</td>
-				<td class="pl">{demoClass}</td>
+				<td class="pl">{demoPresent}</td>
 			</tr>
 			<tr>
 				<td align="left" class="pr">Schedule</td>
