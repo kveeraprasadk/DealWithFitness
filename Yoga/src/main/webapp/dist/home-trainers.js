@@ -301,6 +301,14 @@ function Trainers() {
 							series.attendeeSubscribedClass = "show";
 						}
 					}
+					
+					if (series.demoClass == true) {
+						trainer.name = "Demo by " + trainer.name;
+						trainer.demoClass = "demo-class"
+					}
+					
+					// If series has overriden expretise then take that otherwise trainer expretise
+					trainer.expertise = series.expertise ? series.expertise : trainer.expertise;
 					// Convert the series information to a recurrence rule
 					Utils.addRecurrenceRule(series);
 					childHtmlNode = Utils.fillTemplate(htmlSeriesTemplate, [trainer, series]);

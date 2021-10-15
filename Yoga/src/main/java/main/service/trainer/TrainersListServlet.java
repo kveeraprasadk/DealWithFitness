@@ -35,7 +35,7 @@ public class TrainersListServlet extends HttpServlet {
 	private static final String TIMING_CONDITION = " CONVERT(DATE_FORMAT(CONVERT_TZ(FROM_UNIXTIME(ss.startTime/1000), '+00:00', '#o'), '%H%i'),  UNSIGNED INTEGER) >= #s and "
 			+ "    CONVERT(DATE_FORMAT(CONVERT_TZ(FROM_UNIXTIME(ss.startTime/1000), '+00:00', '#o'), '%H%i'),  UNSIGNED INTEGER) <= #e ";
 	private static final String SQL = " select tr.traineremail, tr.trainername, tr.experience, tr.qualification, tr.expertise, ss.id as seriesId, ss.startTime, ss.endTime, ss.endByDate, ss.selectedDayNames, "
-			+ "	ss.fee, ss.classlevel, ss.title, ss.location, tb.traineeId  from trainerregister tr left join schedulesSeries ss on tr.traineremail =  ss.traineremail left join traineeBookings tb on "
+			+ "	ss.fee, ss.classlevel, ss.title, ss.location, ss.expertise as ssExpertise, ss.demoClass, tb.traineeId  from trainerregister tr left join schedulesSeries ss on tr.traineremail =  ss.traineremail left join traineeBookings tb on "
 			+ "		ss.traineremail = tb.trainerId and ss.id = tb.seriesId %s order by ISNULL(fee), fee %s";
 
 	/**
@@ -104,6 +104,10 @@ public class TrainersListServlet extends HttpServlet {
 											seriesVo.setEndTime(rs.getLong("endTime"));
 											seriesVo.setEndByDate(rs.getLong("endByDate"));
 											seriesVo.setFee(rs.getFloat("fee"));
+											// If series level overriden is there for expertise
+											seriesVo.setExpertise(rs.getString("ssExpertise"));
+											seriesVo.setDemoClass(rs.getBoolean("demoClass"));
+											
 											seriesVo.setClassLevel(rs.getString("classlevel"));
 											List<String> dayNames = Json.convert(rs.getString("selectedDayNames"),
 													new TypeReference<List<String>>() {

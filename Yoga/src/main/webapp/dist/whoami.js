@@ -70,6 +70,11 @@ function Whoami() {
 	self.isUserLoggedIn = function() {
 		return window.__sessionUser && window.__sessionUser != "null" ? true : false;
 	}
+
+	// Called form small screen devices more options button
+	self.closeMoreOptionsCollapse = function() {
+		$("#navbarCollapse-sm").collapse("hide");
+	}
 }
 
 window.whoami = new Whoami();

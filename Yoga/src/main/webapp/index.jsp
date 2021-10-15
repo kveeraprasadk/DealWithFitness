@@ -110,7 +110,7 @@ label {
 								style="border-radius: 50%; background: #cce0fc;" title="View Trainer Profile">
 						</button>
 		        	</div>
-					<div style=" width:100%;" class="flex-column flex-valign-center flex-grow trainer-details-card-ineer-container">
+					<div style=" width:100%;" class="flex-column flex-valign-center flex-grow trainer-details-card-inner-container {demoClass}">
 						<div class="flex-column flex-valign-center flex-grow">
 							<h4>{expertise}</h4>
 							<span class="pb" style="color: green">{title}</span>
@@ -122,7 +122,7 @@ label {
 								</span>
 			            	</div>
 			             	<div class="class-meta pt pb">
-			               		<Strong>Fee per Month : <i class="fa fa-inr"> </i>{fee}</Strong>
+			               		<Strong>Fee per Month : <span class="pr-sm">&#x20B9;</span>{fee}</Strong>
 			            	</div>
 		            	</div>
 			             <div class="class-meta">
@@ -149,7 +149,7 @@ label {
 						</button>
 					</a>
 	        	</div>
-		    	<div class="flex-column flex-valign-center trainer-details-card-ineer-container flex-grow">
+		    	<div class="flex-column flex-valign-center trainer-details-card-inner-container flex-grow">
 					<h4>{expertise}</h4>
 					<span style="color:red; padding: 10px" class="flex flex-valign-center">
 						<span class="fa fa-info-circle pr-sm" style="font-size:20px"></span>Trainings are not scheduled yet.
@@ -205,11 +205,11 @@ label {
 				<div
 					class="flex flex-wrap flex-valign-center flex-halign-center pb filter-container">
 					<div class="flex-column mt mr ml  flex-grow">
-						<span style="font-size: 14px; text-align: left" class="pb-sm">Expert
+						<span style="font-size: 14px; text-align: left" class="pb-sm">Expertise
 							of your choice</span> <select name="form-expertise" id="form-expertise"
 							class="form-control required flex-grow"
 							onchange='trainers.filterTrainers(event)' style="width: auto">
-							<option value="all">All Experts</option>
+							<option value="all">All Expertise</option>
 							<optgroup label="Yoga">
 								<option value="Yoga for health">Yoga for health</option>
 								<option value="Weight Loss">Weight Loss</option>
@@ -257,148 +257,148 @@ label {
 			</div>
 		</div>
 		<!-- Hero End -->
+	</div>
+	<!-- Service Start -->
+	<div class="service" style="background: white">
+		<div class="container">
+			<div class="section-header text-center wow zoomIn"
+				data-wow-delay="0.1s">
+				<p>What we do</p>
+				<h2>Yoga For Health</h2>
+			</div>
+			<div class="row">
+				<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.0s">
+					<div class="service-item">
+						<div class="service-icon">
+							<i class="flaticon-workout"></i>
+						</div>
+						<h3>Heal emotions</h3>
+						<p>Practicing yoga can help the body more flexible and avoid
+							further injuries or fracture in the bone. So, this exercise will
+							help to optimize the muscle capability and help to avoid muscle
+							pain too. Yoga could help reduce many types of chronic pain.</p>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+					<div class="service-item active">
+						<div class="service-icon">
+							<i class="flaticon-workout-1"></i>
+						</div>
+						<h3>Body Refreshes</h3>
+						<p>Yoga will help to get a better body balance. Mostly we are
+							having difficulties with the balance due to any lack in the back
+							brain. So, it can stimulate a good body balancing system and
+							avoid frequent sickness or nausea.</p>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.4s">
+					<div class="service-item">
+						<div class="service-icon">
+							<i class="flaticon-workout-2"></i>
+						</div>
+						<h3>Mind & Serenity</h3>
+						<p>Yoga can help us to feel relax. So, this activity can help
+							to manage a better mind and thinking. Yoga is one of the best
+							solutions for stress relief. Yoga could be a useful adjunct
+							therapy to help reduce migraine(headache) frequency.</p>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.6s">
+					<div class="service-item">
+						<div class="service-icon">
+							<i class="flaticon-workout-3"></i>
+						</div>
+						<h3>Enjoy Your life</h3>
+						<p>Yoga could improve quality of life and may be used as an
+							adjunct therapy for some conditions. Yoga helps for inner peace,
+							improves immunity and increase energy.</p>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.8s">
+					<div class="service-item">
+						<div class="service-icon">
+							<i class="flaticon-workout-4"></i>
+						</div>
+						<h3>Body & Spirituality</h3>
+						<p>Yoga improves the body coordination. It is good to let we
+							perform various coordination between our body parts. It can
+							optimize the coordination between mind and body reflects.</p>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="1s">
+					<div class="service-item">
+						<div class="service-icon">
+							<i class="flaticon-yoga-pose"></i>
+						</div>
+						<h3>Body & Mind</h3>
+						<p>
+							Practicing Yoga helps develop the body and mind, yet is not a
+							substitute for medicine. It is essential to learn and practice
+							yoga under the supervision of a trained Yoga teacher.
+							<!--  Yoga may help enhance sleep quality because of its effects on melatonin and its impact on several common contributors to sleep problems. -->
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Service End -->
 
-		<!-- Service Start -->
-		<div class="service" style="background: white">
+	<!-- Footer Start -->
+	<div class="footer wow fadeIn" data-wow-delay="0.3s">
+		<div class="container-fluid">
 			<div class="container">
-				<div class="section-header text-center wow zoomIn"
-					data-wow-delay="0.1s">
-					<p>What we do</p>
-					<h2>Yoga For Health</h2>
+				<div class="footer-info">
+					<a class="footer-logo">DealWithFitness<span></span></a>
+
+					<div class="footer-menu">
+
+						<p>dealwithfitness64@gmail.com</p>
+					</div>
+					<div class="footer-social">
+						<a href=""><i class="fab fa-twitter"></i></a> <a href=""><i
+							class="fab fa-facebook-f"></i></a> <a href=""><i
+							class="fab fa-youtube"></i></a> <a href=""><i
+							class="fab fa-instagram"></i></a> <a href=""><i
+							class="fab fa-linkedin-in"></i></a>
+					</div>
 				</div>
+			</div>
+			<div class="container copyright">
 				<div class="row">
-					<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.0s">
-						<div class="service-item">
-							<div class="service-icon">
-								<i class="flaticon-workout"></i>
-							</div>
-							<h3>Heal emotions</h3>
-							<p>Practicing yoga can help the body more flexible and avoid
-								further injuries or fracture in the bone. So, this exercise will
-								help to optimize the muscle capability and help to avoid muscle
-								pain too. Yoga could help reduce many types of chronic pain.</p>
-						</div>
+					<div class="col-md-6">
+						<p>
+							&copy; <a href="#">dealwithfitness</a>, All Right Reserved.
+						</p>
 					</div>
-					<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
-						<div class="service-item active">
-							<div class="service-icon">
-								<i class="flaticon-workout-1"></i>
-							</div>
-							<h3>Body Refreshes</h3>
-							<p>Yoga will help to get a better body balance. Mostly we are
-								having difficulties with the balance due to any lack in the back
-								brain. So, it can stimulate a good body balancing system and
-								avoid frequent sickness or nausea.</p>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.4s">
-						<div class="service-item">
-							<div class="service-icon">
-								<i class="flaticon-workout-2"></i>
-							</div>
-							<h3>Mind & Serenity</h3>
-							<p>Yoga can help us to feel relax. So, this activity can help
-								to manage a better mind and thinking. Yoga is one of the best
-								solutions for stress relief. Yoga could be a useful adjunct
-								therapy to help reduce migraine(headache) frequency.</p>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.6s">
-						<div class="service-item">
-							<div class="service-icon">
-								<i class="flaticon-workout-3"></i>
-							</div>
-							<h3>Enjoy Your life</h3>
-							<p>Yoga could improve quality of life and may be used as an
-								adjunct therapy for some conditions. Yoga helps for inner peace,
-								improves immunity and increase energy.</p>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.8s">
-						<div class="service-item">
-							<div class="service-icon">
-								<i class="flaticon-workout-4"></i>
-							</div>
-							<h3>Body & Spirituality</h3>
-							<p>Yoga improves the body coordination. It is good to let we
-								perform various coordination between our body parts. It can
-								optimize the coordination between mind and body reflects.</p>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="1s">
-						<div class="service-item">
-							<div class="service-icon">
-								<i class="flaticon-yoga-pose"></i>
-							</div>
-							<h3>Body & Mind</h3>
-							<p>
-								Practicing Yoga helps develop the body and mind, yet is not a
-								substitute for medicine. It is essential to learn and practice
-								yoga under the supervision of a trained Yoga teacher.
-								<!--  Yoga may help enhance sleep quality because of its effects on melatonin and its impact on several common contributors to sleep problems. -->
-							</p>
-						</div>
+					<div class="col-md-6">
+						<p>
+							Designed By <Strong>Bluehorse Creative Team</Strong>
+						</p>
 					</div>
 				</div>
 			</div>
 		</div>
-		<!-- Service End -->
+	</div>
+	<!-- Footer End -->
 
-		<!-- Footer Start -->
-		<div class="footer wow fadeIn" data-wow-delay="0.3s">
-			<div class="container-fluid">
-				<div class="container">
-					<div class="footer-info">
-						<a class="footer-logo">DealWithFitness<span></span></a>
+	<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 
-						<div class="footer-menu">
+	<!-- JavaScript Libraries -->
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+	<script src="lib/easing/easing.min.js"></script>
+	<script src="lib/wow/wow.min.js"></script>
+	<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+	<script src="lib/isotope/isotope.pkgd.min.js"></script>
+	<script src="lib/lightbox/js/lightbox.min.js"></script>
 
-							<p>dealwithfitness64@gmail.com</p>
-						</div>
-						<div class="footer-social">
-							<a href=""><i class="fab fa-twitter"></i></a> <a href=""><i
-								class="fab fa-facebook-f"></i></a> <a href=""><i
-								class="fab fa-youtube"></i></a> <a href=""><i
-								class="fab fa-instagram"></i></a> <a href=""><i
-								class="fab fa-linkedin-in"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="container copyright">
-					<div class="row">
-						<div class="col-md-6">
-							<p>
-								&copy; <a href="#">dealwithfitness</a>, All Right Reserved.
-							</p>
-						</div>
-						<div class="col-md-6">
-							<p>
-								Designed By <Strong>Bluehorse Creative Team</Strong>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- Footer End -->
+	<!-- Contact Javascript File -->
+	<script src="mail/jqBootstrapValidation.min.js"></script>
+	<script src="mail/contact.js"></script>
 
-		<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
-
-		<!-- JavaScript Libraries -->
-		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-		<script
-			src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-		<script src="lib/easing/easing.min.js"></script>
-		<script src="lib/wow/wow.min.js"></script>
-		<script src="lib/owlcarousel/owl.carousel.min.js"></script>
-		<script src="lib/isotope/isotope.pkgd.min.js"></script>
-		<script src="lib/lightbox/js/lightbox.min.js"></script>
-
-		<!-- Contact Javascript File -->
-		<script src="mail/jqBootstrapValidation.min.js"></script>
-		<script src="mail/contact.js"></script>
-
-		<!-- Template Javascript -->
-		<script src="js/main.js"></script>
+	<!-- Template Javascript -->
+	<script src="js/main.js"></script>
 </body>
 </html>

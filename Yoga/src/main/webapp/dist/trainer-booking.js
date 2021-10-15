@@ -59,14 +59,7 @@ function TrainerCalender() {
 		});
 
 		// when new schedule dialog closes clear the edit series id 
-		$("#calendar-new-schedule-dialog").on("hide.bs.modal", () => {
-			self.state.seriesIdInEditMode = null
-			self.state.isEditingSeriesInRecurrence = false;
-			// Always collapse the recurrence panel, we can open when dialog activated again
-			$("#recurrence-validation-alert").hide();
-			$("#recurrence-schedule-enable").collapse("hide");
-			$("#recurrence-option-toggle").text("Make Recurrence");
-		});
+		$("#calendar-new-schedule-dialog").on("hide.bs.modal", self.scheduleDialogCloseEvent);
 		// when delete schedule confimation dialog closes clear the delete series id
 		$("#recurrence-confirmation-dialog").on("hide.bs.modal", () => self.state.seriesIdInDeleteMode = null);
 
@@ -77,6 +70,16 @@ function TrainerCalender() {
 		setTimeout(() => {
 			self.fetchSchedulesFromBackend();
 		}, 0);
+	}
+
+	self.scheduleDialogCloseEvent = function() {
+		self.state.seriesIdInEditMode = null
+		self.state.isEditingSeriesInRecurrence = false;
+		// Always collapse the recurrence panel, we can open when dialog activated again
+		$("#recurrence-validation-alert").hide();
+		$("#recurrence-schedule-enable").collapse("hide");
+		$("#schedule-recurring-checkbox").prop("checked", false);
+		$("#schedule-demo-class-checkbox").prop("checked", false);
 	}
 
 	self.fetchSchedulesFromBackend = function() {
@@ -223,7 +226,9 @@ function TrainerCalender() {
 					seriesTransitionFromId: seriesId,
 					fee: scheduleSeries.fee,
 					classLevel: scheduleSeries.classLevel,
-					trainerPreference: scheduleSeries.trainerPreference
+					trainerPreference: scheduleSeries.trainerPreference,
+					demoClass: scheduleSeries.demoClass,
+					expertise: scheduleSeries.expertise
 				}
 				// pass seriesId as transistion id so that system delete the existing series and add new series
 				self.addNewSeriesSchedules(scheduleRequest);
@@ -242,7 +247,9 @@ function TrainerCalender() {
 				selectedDayNames: scheduleSeries.selectedDayNames ? scheduleSeries.selectedDayNames : [],
 				fee: scheduleSeries.fee,
 				classLevel: scheduleSeries.classLevel,
-				trainerPreference: scheduleSeries.trainerPreference
+				trainerPreference: scheduleSeries.trainerPreference,
+				demoClass: scheduleSeries.demoClass,
+				expertise: scheduleSeries.expertise
 			});
 		}
 	}
@@ -354,7 +361,9 @@ function TrainerCalender() {
 		const trainerPreference = $("#calendar-trainer-preference").val();
 		const startTime = Utils.combineDateTime("startdate-datepicker-input", "starttime-timepicker-input");
 		const endTime = Utils.combineDateTime("startdate-datepicker-input", "endtime-timepicker-input");
-
+		const expertise = $("#schedule-expertise").val();
+		const demoClass = $("#schedule-demo-class-checkbox").is(":checked");
+		
 		// End by date is always end of day hence set the hours+mins+secs towards end of date
 		let endByDate = null;
 		let dayNamesSelected = [];
@@ -371,20 +380,23 @@ function TrainerCalender() {
 			}
 		}
 
-		if (self.validateSchedule(title, location, startTime, endTime, endByDate, dayNamesSelected)) {
+		if (self.validateSchedule(title, location, startTime, endTime, endByDate, expertise, dayNamesSelected)) {
 			// If there is value in seriesIdInEditMode then series in edit mode 
 			if (self.state.seriesIdInEditMode) {
 				const seriesSchedules = self.state.seriesRecurringSchedules[self.state.seriesIdInEditMode];
 				const qeryStatus = {
 					seriesSchedules: seriesSchedules,
-					title: title, location: location,
+					title: title,
+					location: location,
 					startTime: startTime,
 					endTime: endTime,
 					endByDate: endByDate,
 					dayNamesSelected: dayNamesSelected,
 					fee: fee,
 					classLevel: classLevel,
-					trainerPreference: trainerPreference
+					trainerPreference: trainerPreference,
+					demoClass: demoClass,
+					expertise: expertise
 				};
 				// If there is any change in dates/recurrence then new schedules will be created othrewise if there are changes
 				// to only title and location then update would happen
@@ -392,7 +404,7 @@ function TrainerCalender() {
 				// If the status is update means only title and/or location is modified otherwise 
 				// any other field change require dropping old recurrence and create new recurrence series
 				if (status === "Update") {
-					self.updateSeriesSchedules(self.state.seriesIdInEditMode, title, location, fee, classLevel, trainerPreference);
+					self.updateSeriesSchedules(self.state.seriesIdInEditMode, qeryStatus);
 					// Hide the dialog
 					$("#calendar-new-schedule-dialog").modal("hide");
 				} else if (status === "New") {
@@ -406,7 +418,9 @@ function TrainerCalender() {
 						seriesTransitionFromId: self.state.seriesIdInEditMode,
 						fee: fee,
 						classLevel: classLevel,
-						trainerPreference: trainerPreference
+						trainerPreference: trainerPreference,
+						demoClass: demoClass,
+						expertise: expertise
 					}
 					// If this event fired after start of edit mode then clear the series and add new series
 					if (self.addNewSeriesSchedules(scheduleRequest)) {
@@ -428,7 +442,9 @@ function TrainerCalender() {
 					seriesTransitionFromId: self.state.seriesIdInEditMode,
 					fee: fee,
 					classLevel: classLevel,
-					trainerPreference: trainerPreference
+					trainerPreference: trainerPreference,
+					demoClass: demoClass,
+					expertise: expertise
 				}
 				// If this event fired after start of edit mode then clear the series and add new series
 				if (self.addNewSeriesSchedules(scheduleRequest)) {
@@ -440,7 +456,8 @@ function TrainerCalender() {
 		}
 	}
 
-	self.updateSeriesSchedules = function(seriesId, title, location, fee, classLevel, trainerPreference) {
+	self.updateSeriesSchedules = function(seriesId, payload) {
+		const { title, location, fee, classLevel, trainerPreference, expertise, demoClass } = payload
 		progressBar.start();
 		// Store the schedules in database
 		$.ajax({
@@ -453,7 +470,9 @@ function TrainerCalender() {
 				location: location,
 				fee: fee,
 				classLevel: classLevel,
-				trainerPreference: trainerPreference
+				trainerPreference: trainerPreference,
+				expertise: expertise,
+				demoClass: demoClass
 			},
 			cache: false,
 			success: function() {
@@ -463,6 +482,8 @@ function TrainerCalender() {
 				seriesSchedules.fee = fee;
 				seriesSchedules.classLevel = classLevel;
 				seriesSchedules.trainerPreference = trainerPreference;
+				seriesSchedules.expertise = expertise;
+				seriesSchedules.demoClass = demoClass;
 
 				for (const schedule of seriesSchedules.schedules) {
 					self.calendar.updateSchedule(schedule.id, "", {
@@ -513,7 +534,8 @@ function TrainerCalender() {
 
 	//	seriesTransitionFromId comes into picture when a series is edited then old series will be deleted and new series will be added
 	self.addNewSeriesSchedules = function(request) {
-		const { title, location, startTime, endTime, endByDate, dayNamesSelected, seriesTransitionFromId, fee, classLevel, trainerPreference } = request;
+		const { title, location, startTime, endTime, endByDate, dayNamesSelected, seriesTransitionFromId, fee, demoClass, expertise,
+			classLevel, trainerPreference } = request;
 		// if the request has id value then use the same otherwise generate new one
 		// Id will be passed during edit of the series otherwise will be empty
 		let seriesIdentifier = seriesTransitionFromId ? seriesTransitionFromId : "series-" + Math.random();
@@ -540,7 +562,9 @@ function TrainerCalender() {
 			// Each schedule falls in this recurring series
 			schedules: apiSchedules,
 			// If the old ser
-			seriesTransitionFromId: seriesTransitionFromId
+			seriesTransitionFromId: seriesTransitionFromId,
+			demoClass: demoClass,
+			expertise: expertise
 		};
 
 		if (endByDate) {
@@ -677,6 +701,8 @@ function TrainerCalender() {
 		const fee = currentSchedule.fee;
 		const classLevel = currentSchedule.classLevel;
 		const trainerPreference = currentSchedule.trainerPreference;
+		const expertise = currentSchedule.expertise;
+		const demoClass = currentSchedule.demoClass;
 
 		// if end time is not define then default add an hour
 		if (!currentSchedule.endTime) {
@@ -691,6 +717,8 @@ function TrainerCalender() {
 		$("#series-schedule-fee").val(fee ? fee : 1000);
 		$("#calendar-class-level").val(classLevel ? classLevel : "Beginner");
 		$("#calendar-trainer-preference").val(trainerPreference ? trainerPreference : "All");
+		$("#schedule-expertise").val(expertise);
+		$("#schedule-demo-class-checkbox").prop("checked", demoClass);
 
 		// Set the values to the date and time components
 		$("#startdate-datepicker-input").val(Utils.formatDate(start));
@@ -729,7 +757,7 @@ function TrainerCalender() {
 		$("#recurrence-validation-alert").show()
 	};
 
-	self.validateSchedule = function(title, location, startTime, endTime, endByDate, dayNamesSelected) {
+	self.validateSchedule = function(title, location, startTime, endTime, endByDate, expertise, dayNamesSelected) {
 		if (!title || title.trim().length == 0) {
 			self.showValidationMessage("Title is mandatory");
 			return false;
@@ -744,10 +772,24 @@ function TrainerCalender() {
 		today.setSeconds(0);
 		today.setMilliseconds(0);
 
-		if (startTime.getTime() < today.getTime()) {
-			self.showValidationMessage("Start time should be same or more than Today.");
-			return false;
+		if (self.state.seriesIdInEditMode) {
+			// If recurrence then check the end by date for expiry otherwise check if start time is in past
+			if (endByDate && endByDate.getTime() < today.getTime()) {
+				self.showValidationMessage("This series schedule is already expired, update your recurrence end by date to make it active");
+				return false;
+			} else if (!endByDate) { // single slot series
+				if (startTime.getTime() < today.getTime()) {
+					self.showValidationMessage("This series schedule is already expired, change dates to make it active");
+					return false;
+				}
+			}
+		} else { // For new schedule
+			if (startTime.getTime() < today.getTime()) {
+				self.showValidationMessage("Start time should be same or more than Today.");
+				return false;
+			}
 		}
+
 		if (endTime.getTime() < startTime.getTime()) {
 			self.showValidationMessage("End time should be more than Start time");
 			return false;
@@ -764,6 +806,12 @@ function TrainerCalender() {
 			self.showValidationMessage("End by date should always be more than end time")
 			return false;
 		}
+
+		if (!expertise || expertise.trim().length == 0) {
+			self.showValidationMessage("Expertise is mandatory to choose")
+			return false;
+		}
+
 		if (endByDate && dayNamesSelected.length === 0) {
 			self.showValidationMessage("Recurrence pattern is not valid, choose atleast a day");
 			return false;
@@ -774,7 +822,7 @@ function TrainerCalender() {
 
 	// If title or location changed then series updatable otherwise it is not updatable
 	self.getSeriesUpdatableStatus = function(query) {
-		const { seriesSchedules, title, location, startTime, endTime, endByDate, dayNamesSelected, fee, classLevel, trainerPreference } = query;
+		const { seriesSchedules, title, location, startTime, endTime, endByDate, dayNamesSelected, fee, classLevel, trainerPreference, expertise, demoClass } = query;
 		// Any change to recurrence then its a new schedule recurrence
 		if (seriesSchedules.startTime != startTime.getTime() || seriesSchedules.endTime != endTime.getTime()) {
 			return "New";
@@ -790,7 +838,8 @@ function TrainerCalender() {
 		if (!isDayNamesSame) {
 			return "New";
 		} else if (title != seriesSchedules.title || location != seriesSchedules.location
-			|| fee != seriesSchedules.fee || classLevel != seriesSchedules.classLevel || trainerPreference != seriesSchedules.trainerPreference) {
+			|| fee != seriesSchedules.fee || classLevel != seriesSchedules.classLevel || trainerPreference != seriesSchedules.trainerPreference
+			|| expertise != seriesSchedules.expertise || demoClass != seriesSchedules.demoClass) {
 			return "Update"
 		} else {
 			// Nothing changed hence no action
@@ -833,11 +882,12 @@ function TrainerCalender() {
 		if (show) {
 			$("#recurrence-schedule-enable").collapse("show");
 			self.state.isEditingSeriesInRecurrence = true;
-			$("#recurrence-option-toggle").text("Cancel Recurrence");
+			$("#schedule-recurring-checkbox").attr("checked", "checked");
 		} else {
 			$("#recurrence-schedule-enable").collapse("hide");
 			self.state.isEditingSeriesInRecurrence = false;
-			$("#recurrence-option-toggle").text("Make Recurrence");
+			$("#schedule-recurring-checkbox").removeAttr("checked");
+
 		}
 	}
 

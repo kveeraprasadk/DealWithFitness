@@ -301,11 +301,14 @@ body {
 
 #calendar-container {
 	background: white;
-	display: none;
 	border-bottom: 1px solid #dadada;
 	border-radius: 5px;
 	background: white;
 	overflow: hidden;
+}
+
+#calendar-container select {
+	font-size: 14px;
 }
 
 .recurrence-dialog-body {

@@ -22,7 +22,25 @@ public class SeriesSchedulesVO {
 	private Set<String> attendees = new HashSet<>();
 	private List<String> selectedDayNames;
 	private TrainerDetailsVO trainer;
+	private String expertise;
+	private boolean demoClass;
 	
+	public String getExpertise() {
+		return expertise;
+	}
+
+	public void setExpertise(String expertise) {
+		this.expertise = expertise;
+	}
+
+	public boolean isDemoClass() {
+		return demoClass;
+	}
+
+	public void setDemoClass(boolean demoClass) {
+		this.demoClass = demoClass;
+	}
+
 	public TrainerDetailsVO getTrainer() {
 		return trainer;
 	}

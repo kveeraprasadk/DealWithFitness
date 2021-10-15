@@ -78,27 +78,31 @@ public class TrainerBookingServlet extends HttpServlet {
 				String seriesId = request.getParameter("seriesId");
 				String title = request.getParameter("title");
 				String location = request.getParameter("location");
+				String trainerPreference = request.getParameter("trainerPreference");
 				Float fee = Float.parseFloat(request.getParameter("fee") != null ? request.getParameter("fee") : null);
 				String classLevel = request.getParameter("classLevel");
+				String expertise = request.getParameter("expertise");
+				String demoClass = request.getParameter("demoClass");
 
-				if (trainerId != null && seriesId != null && (title != null || location != null) && fee != null) {
+				if (trainerId != null && seriesId != null) {
 					log.info("Received update series: {} request for trainer: {}" + seriesId + trainerId);
-					bookingService.updateSeries(trainerId, seriesId, title, location, fee, classLevel);
+					bookingService.updateSeries(trainerId, seriesId, title, location, fee, trainerPreference, classLevel, expertise,
+							demoClass != null ? Boolean.parseBoolean(demoClass) : false);
 				} else {
 					response.setStatus(400); // bad request if trainer and series id not provided
 					response.getWriter().write(
-							"Mandatory to pass trainer id, series id and either/both title and location, fee and classLevel for update request to process");
+							"Mandatory to pass trainer id, series id for update request to process");
 				}
 			} else {
 				String payload = request.getParameter("schedules");
 				if (payload != null) {
 					SeriesSchedulesVO series = Json.parse(payload, SeriesSchedulesVO.class);
-					log.info("Received new series: {}, payload of size: {} for tainer: {}"+ series.getId() +
-							payload.length()+ series.getTraineremail());
+					log.info("Received new series: {}, payload of size: {} for tainer: {}" + series.getId()
+							+ payload.length() + series.getTraineremail());
 
 					bookingService.newSeries(series);
-					log.info("new series: {} saved successfully for trainer: {}" + series.getId() +
-							series.getTraineremail());
+					log.info("new series: {} saved successfully for trainer: {}" + series.getId()
+							+ series.getTraineremail());
 					response.setStatus(201);
 				}
 			}

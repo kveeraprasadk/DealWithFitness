@@ -29,7 +29,8 @@ import main.model.SeriesSchedulesVO.Schedule;
 public class BookingService {
 	private static Logger log = LogManager.getLogger("BookingService");
 	private static final List<String> SERIES_COLUMNS_LIST = Arrays.asList("traineremail", "id", "title", "location",
-			"startTime", "endTime", "endByDate", "selectedDayNames", "fee", "classLevel");
+			"startTime", "endTime", "endByDate", "selectedDayNames", "fee", "classLevel", "trainerPreference",
+			"expertise", "demoClass");
 	private static final List<String> SCHEDULE_COLUMNS_LIST = Arrays.asList("trainerId", "id", "seriesId", "title",
 			"location", "start", "end");
 	private static final String SERIES_COLUMNS = SERIES_COLUMNS_LIST.stream().collect(Collectors.joining(","));
@@ -179,18 +180,22 @@ public class BookingService {
 	}
 
 	public void updateSeries(String trainerId, String seriesId, String title, String location, float fee,
-			String classLevel) throws SQLException {
+			String trainerPreference, String classLevel, String expertise, boolean demoClass) throws SQLException {
 		try (Connection con = DBConnection.createConnection()) {
 			con.setAutoCommit(false);
 			try (PreparedStatement ps = con.prepareStatement(
-					"update schedulesSeries set title = ?, location = ?, fee = ?, classLevel = ? where traineremail = ? and id = ?")) {
+					"update schedulesSeries set title = ?, location = ?, fee = ?, trainerPreference = ?, classLevel = ?, expertise = ?, demoClass = ? where traineremail = ? and id = ?")) {
 				ps.setObject(1, title);
 				ps.setObject(2, location);
 				ps.setFloat(3, fee);
-				ps.setString(4, classLevel);
-				ps.setObject(5, trainerId);
-				ps.setObject(6, seriesId);
+				ps.setString(4, trainerPreference);
+				ps.setString(5, classLevel);
+				ps.setString(6, expertise);
+				ps.setBoolean(7, demoClass);
 
+				// Where class fields
+				ps.setObject(8, trainerId);
+				ps.setObject(9, seriesId);
 				int seriesCount = ps.executeUpdate();
 
 				// update the schedules of the series
@@ -218,7 +223,8 @@ public class BookingService {
 	public void newSeries(SeriesSchedulesVO series) {
 		List<? extends Object> params = Arrays.asList(series.getTraineremail(), series.getId(), series.getTitle(),
 				series.getLocation(), series.getStartTime(), series.getEndTime(), series.getEndByDate(),
-				Json.stringify(series.getSelectedDayNames()), series.getFee(), series.getClassLevel());
+				Json.stringify(series.getSelectedDayNames()), series.getFee(), series.getClassLevel(),
+				series.getTrainerPreference(), series.getExpertise(), series.isDemoClass());
 
 		try (Connection con = DBConnection.createConnection()) {
 			// We are going to use batch insert
@@ -236,7 +242,7 @@ public class BookingService {
 			}
 
 			try (PreparedStatement seriesPs = con.prepareStatement(String.format(
-					"insert into schedulesSeries (%s) values(?, ?, ?, ? , ?, ?, ?, ?, ?, ?)", SERIES_COLUMNS))) {
+					"insert into schedulesSeries (%s) values(?, ?, ?, ? , ?, ?, ?, ?, ?, ?, ? , ?, ?)", SERIES_COLUMNS))) {
 				for (int index = 0; index < params.size(); index++) {
 					seriesPs.setObject(index + 1, params.get(index));
 				}

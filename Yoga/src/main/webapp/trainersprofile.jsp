@@ -100,6 +100,7 @@
 	}
 
 	function renderTrainerProfile() {
+		switchView("calendar");
 		whoami.detect(()=> {
 			const image = $("#trainer-profile-base64-encoded-element").val();
 			if (image) {
@@ -129,7 +130,7 @@
 				</div>
 				<div class="col-12">
 					<a href="javascript: switchView('calendar')">My Training
-						Calendar</a> <a href="">My Profile</a>
+						Calendar</a> <a href="javascript: switchView('profile')">My Profile</a>
 				</div>
 			</div>
 		</div>
@@ -141,7 +142,7 @@
 	<%@include file="./html/recurrence-confirmation-dialog.html"%>
 
 	<!-- About Start -->
-	<div class="container-fluid overcover" id="profile-container">
+	<div class="container-fluid overcover" id="profile-container" style="display: none">
 		<div class="container profile-box">
 			<div class="cover-image row"></div>
 			<%
