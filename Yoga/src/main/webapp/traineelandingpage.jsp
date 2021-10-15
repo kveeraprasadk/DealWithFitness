@@ -126,6 +126,14 @@ label {
 				<td class="pl">{trainerPreference}</td>
 			</tr>
 			<tr>
+				<td align="left" class="pr">Expertise</td>
+				<td class="pl">{expertise}</td>
+			</tr>
+			<tr>
+				<td align="left" class="pr">Demo Class</td>
+				<td class="pl">{demoClass}</td>
+			</tr>
+			<tr>
 				<td align="left" class="pr">Schedule</td>
 				<td class="pl" style="color:blue;">
 					<div class="flex flex-valign-center">

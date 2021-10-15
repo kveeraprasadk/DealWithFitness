@@ -48,6 +48,7 @@ function TraineeBookings() {
 						const scheduleSeries = trainerDetails.series;
 						for (const traineeBookedSchedule of scheduleSeries) {
 							Utils.addRecurrenceRule(traineeBookedSchedule);
+							traineeBookedSchedule.demoClass = traineeBookedSchedule.demoClass ? "Yes" : "No";
 							const bookingFragment = Utils.fillTemplate(templateHtml, [traineeBookedSchedule, trainerDetails]);
 							parent.append(bookingFragment);
 							traineeSchedules++;

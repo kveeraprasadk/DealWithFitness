@@ -66,6 +66,8 @@ public class TraineeBookingsServlet extends HttpServlet {
 							series.setTrainerPreference(
 									rs.getString("trainerPreference") != null ? rs.getString("trainerPreference")
 											: "All");
+							series.setExpertise(rs.getString("expertise"));
+							series.setDemoClass(rs.getBoolean("demoClass"));
 							List<String> selectedDayNames = rs.getString("selectedDayNames") != null
 									? Json.convert(rs.getString("selectedDayNames"), new TypeReference<List<String>>() {
 									})
