@@ -56,7 +56,7 @@
 		<servlet-name>TrainerLogoutServlet</servlet-name>
 		<display-name>TrainerLogoutServlet</display-name>
 		<description></description>
-		<servlet-class>main.TrainerLogoutServlet</servlet-class>
+		<servlet-class>main.service.trainer.TrainerLogoutServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>AdminCertificateDownloadServlet</servlet-name>
@@ -184,6 +184,24 @@
 		<description></description>
 		<servlet-class>main.TrainerClassListOptionalServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>TrainerTempProfileUpdateServlet</servlet-name>
+		<display-name>TrainerTempProfileUpdateServlet</display-name>
+		<description></description>
+		<servlet-class>main.service.trainer.TrainerTempProfileUpdateServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>TrainerTempChangePassword</servlet-name>
+		<display-name>TrainerTempChangePassword</display-name>
+		<description></description>
+		<servlet-class>main.service.trainer.TrainerTempChangePassword</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>TrainerTempProfileView</servlet-name>
+		<display-name>TrainerTempProfileView</display-name>
+		<description></description>
+		<servlet-class>main.service.trainer.TrainerTempProfileView</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>TrainerRegisterServlet</servlet-name>
@@ -304,6 +322,18 @@
 	<servlet-mapping>
 		<servlet-name>TraineeConfirmTrainersServlet</servlet-name>
 		<url-pattern>/TraineeConfirmTrainersServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>TrainerTempProfileUpdateServlet</servlet-name>
+		<url-pattern>/TrainerTempProfileUpdateServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>TrainerTempChangePassword</servlet-name>
+		<url-pattern>/TrainerTempChangePassword</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>TrainerTempProfileView</servlet-name>
+		<url-pattern>/TrainerTempProfileView</url-pattern>
 	</servlet-mapping>
 	<listener>
 		<listener-class>main.common.MysqlDatasource</listener-class>

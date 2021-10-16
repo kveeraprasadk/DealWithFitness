@@ -37,46 +37,47 @@
     <!-- jQuery library -->
     <!-- Popper JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-        
+    <script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"
+	defer></script>    
         <!-- Template Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
+        <script type="text/javascript">
+	var calendarInitialized = false;
+
+	function switchView(viewName) {
+		$("#profile-container").css("display",
+				viewName === "profile" ? "block" : "none");
+		if (viewName === "calendar") {
+			$("#calendar-container").css("display", "block");
+			// Very first time do a lazy init
+			if (!calendarInitialized) {
+				trainerCalendar.init();
+				calendarInitialized = true;
+			}
+		} else {
+			$("#calendar-container").css("display", "none");
+		}
+	}
+
+	function renderTrainerProfile() {
+		switchView("calendar");
+		whoami.detect(()=> {
+			const image = $("#trainer-profile-base64-encoded-element").val();
+			if (image) {
+				console.log("Profile picture present")
+				$("#profile-image-element").attr("src",
+						"data:image/*;base64," + image);
+			} else {
+				console.log("No profile picture");
+			}		
+		})
+	}
+</script>
     </head>
 
     <body >
    
-        <!-- Top Bar Start -->
-        <div class="top-bar d-none d-md-block">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-8">
-           <!--              <div class="top-bar-left">
-                            <div class="text">
-                                <i class="far fa-clock"></i>
-                                <h2>8:00 - 9:00</h2>
-                                <p>Mon - Fri</p>
-                            </div>
-                            <div class="text">
-                                <i class="fa fa-phone-alt"></i>
-                                <h2>+123 456 7890</h2>
-                                <p>For Appointment</p>
-                            </div>
-                        </div>    -->
-                    </div>
-                    <div class="col-md-4">
-                        <div class="top-bar-right">
-                            <div class="social">
-                                <a href=""><i class="fab fa-twitter"></i></a>
-                                <a href=""><i class="fab fa-facebook-f"></i></a>
-                                <a href=""><i class="fab fa-linkedin-in"></i></a>
-                                <a href=""><i class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Top Bar End -->
-
         <!-- Nav Bar Start -->
         <div class="navbar navbar-expand-lg bg-dark navbar-dark">
             <div class="container-fluid">
@@ -109,7 +110,7 @@
                         <h2>Trainers Profile</h2>
                     </div>
                     <div class="col-12">
-                        <a href="index.jsp">Home</a>
+                       
                         <a href="">Trainers Profile</a>
                     </div>
                 </div>
@@ -130,20 +131,20 @@
                    
                    <p><span style="background-color: #FFFF00"><strong>! Important :</strong> This is one time profile login. Just now you register to DealWithFitness, Admin will provide your Access ID's as soon as possible.</span></p>
                     <h3 class="mth3">Profile</h3>
-                    <div class="fx-ro">
-                       
+                    <div class="fx-ro">        
                         
                             Name : <b>${trainername}</b>
-                            	 
-                            
-                     
+                            	                 
+                    </div>
+                    <div class="fx-ro">
                         
+                            Email	:	<b>${traineremail}</b>
+                                              
                     </div>
                     <div class="fx-ro">
                         
                             Experience	:	<b>${trainerexperience}</b>
-                       
-                       
+                                              
                     </div>
                     <div class="fx-ro">
                         
@@ -157,6 +158,11 @@
                        
                        
                     </div>
+                    <div class="fx-ro">
+						
+							Phoneno : <b>${trainerphone}</b>
+						
+					</div>
                      
                     
                     
@@ -189,14 +195,350 @@
                      <b>${traineremail}</b>
                      </p>
                      
-                    </div>
-                    
-                </div>
-            </div>
-            
-        </div>
-    </div>
-        <!-- About End -->
+                    <p>
+							<button class="btn btn-info trainereditprofile">Edit Profile</button>
+						</p>
+						<div id="editprofilehide">
+
+							<p>
+								<input type="text" name="form-name"
+									class="form-name form-control" id="form-name"
+									value="${trainername}" required>
+							</p>
+							<p>
+								<input type="text" name="form-qualification"
+									class="form-qualification form-control" id="form-qualification"
+									value="${trainerqualification}" required>
+							</p>
+							<p>
+								<select name="form-experience" id="form-experience"
+									class="form-control required" onfocus='this.size=5;'
+									onblur='this.size=1;' onchange='this.size=1; this.blur();'
+									required>
+									<option value="${trainerexperience}">${trainerexperience}</option>
+									<option value="upto 2Yr">upto 2Yr</option>
+									<option value="2 to 5Yrs">2 to 5Yrs</option>
+									<option value="5 to 10Yrs">5 to 10Yrs</option>
+									<option value="10 to 20Yrs">10 to 20Yrs</option>
+									<option value="Above 20Yrs">Above 20Yrs</option>
+								</select>
+							</p>
+							<p>
+								<input type="text" name="form-phone"
+									class="form-phone form-control" id="form-phone"
+									value="${trainerphone}" required>
+							</p>
+							<p>
+								<select name="form-expertise" id="form-expertise"
+									class="form-control required" onfocus='this.size=5;'
+									onblur='this.size=1;' onchange='this.size=1; this.blur();'
+									required>
+									<option value="${trainerexpertise}">${trainerexpertise}</option>
+									<option value="Yoga for health">Yoga for health</option>
+									<option value="Weight Loss">Weight Loss</option>
+									<option value="Kids Yoga">Kids Yoga</option>
+									<option value="Pregnancy Yoga">Pregnancy Yoga</option>
+									<option value="Meditation">Meditation</option>
+								</select>
+							</p>
+							<p>
+								<textarea class="form-control" id="form-aboutself"
+									name="form-aboutself" placeholder="About Yourself.." required>${traineraboutme}</textarea>
+							</p>
+							<p>
+							<button type="button" class="btn btn-primary" name="updatebutton"
+								id="updatebutton">Update</button>
+								</p>
+						</div>
+						<div id="updatesuccess"></div>
+						
+						<form id="trainerppchangepassword" name="trainerppchangepassword">
+							<p>
+								<button class="btn btn-info trainerchangepassword">Change Password</button>
+							</p>
+							<div id="changepasswordhide">
+								<p>
+									<input type="password" name="formcurrentpassword"
+										placeholder="Current Password.."
+										class="form-currentpassword form-control"
+										id="formcurrentpassword" required>
+								</p>
+
+								<p>
+									<input type="password" name="formnewpassword"
+										placeholder="New Password.."
+										class="form-newpassword form-control" id="formnewpassword"
+										required>
+								</p>
+
+								<p>
+									<input type="password" name="formconfirmpassword"
+										placeholder="Confirm Password.."
+										class="form-confirmpassword form-control"
+										id="formconfirmpassword" required>
+								</p>
+								<button type="button" class="btn btn-primary"  name="changepasswordbutton"
+									id="changepasswordbutton">Change</button>
+
+							</div>
+							<div id="success"></div>
+						</form>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#trainerppchangepassword").validate({
+				rules : {
+					formcurrentpassword : {
+						required : true,
+						minlength : 6
+					},
+
+					formnewpassword : {
+						required : true,
+						minlength : 6
+					},
+					formconfirmpassword : {
+						required : true,
+						equalTo : "#formnewpassword"
+					}
+				},
+				messages : {
+					formcurrentpassword : {
+						required : "please enter password",
+						minlength : "Password min 6 characters"
+					},
+					formnewpassword : {
+						required : "please enter password",
+						minlength : "Password min 6 characters"
+					},
+					formconfirmpassword : {
+						required : "please enter confirm password",
+						equalTo : "password doesn match"
+					}
+				}
+			});
+		});
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#editprofilehide').hide();
+			$('#changepasswordhide').hide();
+			$('#addmoreclass2').hide();
+			$('#addmoreclass3').hide();
+
+			$(".trainereditprofile").click(function() {
+				$('#editprofilehide').toggle();
+			});
+			$(".trainerchangepassword").click(function() {
+				$('#changepasswordhide').toggle();
+			});
+			$("#addclass2").click(function() {
+				$('#addmoreclass2').show();
+				$('#addclass2').hide();
+				$('#addclass3').show();
+			});
+			$("#addclass3").click(function() {
+				$('#addmoreclass3').show();
+				$('#addclass3').hide();
+			});
+		});
+	</script>
+	<script type="text/javascript">
+		$(document)
+				.ready(
+						function() {
+							$("#updatebutton")
+									.click(
+											function() {
+
+												event.preventDefault();
+												var name = $("#form-name")
+														.val();
+												var exper = $(
+														"#form-experience")
+														.val();
+												var qua = $(
+														"#form-qualification")
+														.val();
+												var phone = $(
+												"#form-phone")
+												.val();
+
+												var exp = $("#form-expertise")
+														.val();
+
+												var message = $(
+														"#form-aboutself")
+														.val();
+
+												$
+														.ajax({
+															url : "TrainerTempProfileUpdateServlet",
+															type : "POST",
+															data : {
+																name : name,
+																experience : exper,
+																qualification : qua,
+																phone : phone,
+																expertise : exp,
+																aboutyourself : message
+															},
+															cache : false,
+
+															success : function(
+																	data) {
+
+																$(
+																		'#updatesuccess')
+																		.html(
+																				"<div class='alert alert-success'>");
+																$(
+																		'#updatesuccess > .alert-success')
+																		.html(
+																				"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+																		.append(
+																				"</button>");
+																$(
+																		'#updatesuccess > .alert-success')
+																		.append(
+																				"<strong>"
+																						+ data
+																						+ ". </strong>");
+																$(
+																		'#updatesuccess > .alert-success')
+																		.append(
+																				'</div>');
+																$(
+																		'#editprofilehide')
+																		.hide();
+																document.location.href = './TrainerTempProfileshowing';
+															},
+															error : function() {
+																$(
+																		'#updatesuccess')
+																		.html(
+																				"<div class='alert alert-danger'>");
+																$(
+																		'#updatesuccess > .alert-danger')
+																		.html(
+																				"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+																		.append(
+																				"</button>");
+																$(
+																		'#updatesuccess > .alert-danger')
+																		.append(
+																				$(
+																						"<strong>")
+																						.text(
+																								"Sorry "
+																										+ name
+																										+ ", update failed. Please try again later!"));
+																$(
+																		'#updatesuccess > .alert-danger')
+																		.append(
+																				'</div>');
+
+															}
+
+														});
+
+											});
+						});
+	</script>
+	<script type="text/javascript">
+		$(document)
+				.ready(
+						function() {
+							$("#changepasswordbutton")
+									.click(
+											function() {
+
+												event.preventDefault();
+												var currentpass = $(
+														'#formcurrentpassword')
+														.val();
+												var newpass = $(
+														'#formnewpassword')
+														.val();
+												var confirmpass = $(
+														'#formconfirmpassword')
+														.val();
+
+												$
+														.ajax({
+															url : "TrainerTempChangePassword",
+															type : "POST",
+															data : {
+																currentpassword : currentpass,
+																newpassword : newpass,
+																confirmpassword : confirmpass
+															},
+															cache : false,
+
+															success : function(
+																	data) {
+
+																$('#success')
+																		.html(
+																				"<div class='alert alert-success'>");
+																$(
+																		'#success > .alert-success')
+																		.html(
+																				"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+																		.append(
+																				"</button>");
+																$(
+																		'#success > .alert-success')
+																		.append(
+																				"<strong>"
+																						+ data
+																						+ ". </strong>");
+																$(
+																		'#success > .alert-success')
+																		.append(
+																				'</div>');
+																$(
+																		'#changepasswordhide')
+																		.hide();
+															},
+															error : function() {
+																$('#success')
+																		.html(
+																				"<div class='alert alert-danger'>");
+																$(
+																		'#success > .alert-danger')
+																		.html(
+																				"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+																		.append(
+																				"</button>");
+																$(
+																		'#success > .alert-danger')
+																		.append(
+																				$(
+																						"<strong>")
+																						.text(
+																								"Sorry "
+																										+ name
+																										+ ", update failed. Please try again later!"));
+																$(
+																		'#success > .alert-danger')
+																		.append(
+																				'</div>');
+
+															}
+
+														});
+
+											});
+						});
+	</script>
+	<!-- About End -->
+      
 
 
        

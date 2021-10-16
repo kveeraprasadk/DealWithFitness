@@ -60,6 +60,9 @@
 	padding: 0;
 	background: none;
 }
+label {
+	color: #FF0000 !important;
+}
 </style>
 </head>
 
@@ -297,78 +300,61 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		$(document)
-				.ready(
-						function() {
-							$("#traineeupdateform")
-									.validate(
-											{
-												rules : {
-													formdob : {
-														required : true,
-														minAge : 5,
-														maxAge : 70
-													}
-												},
-												messages : {
-													formdob : {
-														required : "Please enter you date of birth.",
-														minAge : "You must be at least 5 years old!",
-														maxAge : "You must be below 70 years old!"
-													}
-												}
-											});
-							$.validator
-									.addMethod(
-											"minAge",
-											function(value, element, min) {
-												var today = new Date();
-												var birthDate = new Date(value);
-												var age = today.getFullYear()
-														- birthDate
-																.getFullYear();
 
-												if (age > min + 1) {
-													return true;
-												}
+		$(document).ready(function() {
+			$("#traineeupdateform").validate({
+				rules: {
+					formdob: {
+			            required: true,
+			            minAge: 5,
+			            maxAge: 70
+			        }
+			    },
+			    messages: {
+			    	formdob: {
+			            required: "Please enter you date of birth.",
+			            minAge: "You must be at least 5 years old!",
+			            maxAge: "You must be below 70 years old!"
+			        } 
+			    }
+			});
+			$.validator.addMethod("minAge", function(value, element, min) {
+			    var today = new Date();
+			    var birthDate = new Date(value);
+			    var age = today.getFullYear() - birthDate.getFullYear();
+			 	
+			    if (age > min+1) {
+			        return true;
+			    }
+			 
+			    var m = today.getMonth() - birthDate.getMonth();
+			 
+			    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+			        age--;
+			    }
+			 
+			    return age >= min;
+			}, "You are not old enough!");
+			
+			$.validator.addMethod("maxAge", function(value, element, max) {
+			    var today1 = new Date();
+			    var birthDate1 = new Date(value);
+			    var age1 = today1.getFullYear() - birthDate1.getFullYear()  ;
+			   
+			    if (age1 < max+1) {
+			        return true;
+			    }
+			 
+			    var m =  today1.getMonth() - birthDate1.getMonth();
+			 
+			    if (m < 0 || (m === 0 && birthDate1.getDate() < today1.getDate())) {
+			        age1--;
+			    }
+			 
+			    return age1 <= max;
+			}, "You are too old enough!");
+		});
 
-												var m = today.getMonth()
-														- birthDate.getMonth();
-
-												if (m < 0
-														|| (m === 0 && today
-																.getDate() < birthDate
-																.getDate())) {
-													age--;
-												}
-
-												return age >= min;
-											}, "You are not old enough!");
-
-							$.validator.addMethod("maxAge",
-									function(value, element, max) {
-										var today = new Date();
-										var birthDate = new Date(value);
-										var age = birthDate.getFullYear()
-												- today.getFullYear();
-
-										if (age < max + 1) {
-											return true;
-										}
-
-										var m = birthDate.getMonth()
-												- today.getMonth();
-
-										if (m < 0
-												|| (m === 0 && birthDate
-														.getDate() < today
-														.getDate())) {
-											age--;
-										}
-
-										return age <= max;
-									}, "You are not old enough!");
-						});
 	</script>
 	<script language="javascript" type="text/javascript">
 		function limitText(limitField, limitCount, limitNum) {

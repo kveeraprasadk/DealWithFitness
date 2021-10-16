@@ -23,7 +23,7 @@ public class AdminLogoutServlet extends HttpServlet {
 		session.removeAttribute("adminemail");
 		session.invalidate(); 
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("AdminLogin.jsp");
         dispatcher.forward(request, response);
         // response.sendRedirect("home.jsp");
 	}

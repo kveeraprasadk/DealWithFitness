@@ -32,7 +32,7 @@ public class TrainersConfirmServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	// AWS SMTP Credentials
 	public static final String SMTP_USERNAME = "dealwithfitness64@gmail.com";
-	public static final String SMTP_PASSWORD = "password";
+	public static final String SMTP_PASSWORD = "Harsha.2019";
 
 	// Amazon SES SMTP host name.
 	public static final String HOST = "smtp.gmail.com";
@@ -67,24 +67,22 @@ public class TrainersConfirmServlet extends HttpServlet {
 		try {
 			con = DBConnection.createConnection();
 
-			String query1 = "insert into trainerregister select * from trainertemptable where traineremail=?";
-			PreparedStatement statement1 = con.prepareStatement(query1); // Making use of prepared statements here to
+	//		String query1 = "insert into trainerregister select * from trainertemptable where traineremail=?";
+	//		PreparedStatement statement1 = con.prepareStatement(query1); // Making use of prepared statements here to
 																			// insert bunch of data
-			statement1.setString(1, traineremail);
-			i = statement1.executeUpdate();
-			if (i != 0) {
-				String query2 = "update trainerregister set password=?,class1demo=?,class2demo=?,class3demo=? where traineremail=?";
+	//		statement1.setString(1, traineremail);
+	///		i = statement1.executeUpdate();
+	//		if (i != 0) {
+				String query2 = "update trainerregister set password=?,adminapprove=? where traineremail=?";
 				PreparedStatement statement2 = con.prepareStatement(query2); // Making use of prepared statements here
 																				// to insert bunch of data
 				statement2.setString(1, password);
-				statement2.setString(2, "No");
-				statement2.setString(3, "No");
-				statement2.setString(4, "No");
-				statement2.setString(5, traineremail);
+				statement2.setString(2, "true");				
+				statement2.setString(3, traineremail);
 
 				j = statement2.executeUpdate();
-			}
-			if (i != 0 && j != 0) {
+	//		}
+		/*	if (i != 0 && j != 0) {
 
 				String query3 = "delete from trainertemptable where traineremail=?";
 				PreparedStatement statement3 = con.prepareStatement(query3); // Making use of prepared statements here
@@ -92,9 +90,9 @@ public class TrainersConfirmServlet extends HttpServlet {
 				statement3.setString(1, traineremail);
 
 				k = statement3.executeUpdate();
-			}
-			if (i != 0 && j != 0 && k != 0) {
-
+			}         
+			if (i != 0 && j != 0 && k != 0) {      */
+				if (j != 0 ) {
 				out.write("Trainer Confirmed Successfully");
 
 				System.out.println("success");
