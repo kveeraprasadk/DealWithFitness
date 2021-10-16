@@ -23,10 +23,10 @@ List<TrainerDetailsVO> TrainersReq = new ArrayList<TrainerDetailsVO>();
 		try{
 
 		connection = DBConnection.createConnection();
-String sql ="select * from trainertemptable order by creationtime desc"; 
+String sql ="select * from trainerregister where adminapprove=? order by creationtime desc"; 
 
 statement = connection.prepareStatement(sql);
-
+statement.setString(1, "false");
 ResultSet rs = statement.executeQuery();
 
 
@@ -41,6 +41,7 @@ while (rs.next()) {
 	details.setExperience(rs.getString("experience"));
 	details.setQualification(rs.getString("qualification"));
 	details.setExpertise(rs.getString("expertise"));
+	details.setPhone(rs.getString("phoneno"));
 /*	details.setSchedule(rs.getString("schedules"));
 	details.setClasslevel(rs.getString("classlevel"));
 	details.setMonthlyfees(rs.getString("monthlyfees"));
@@ -110,10 +111,10 @@ List<TrainerDetailsVO> TrainersList = new ArrayList<TrainerDetailsVO>();
 		try{
 
 		connection = DBConnection.createConnection();
-String sql ="select * from trainerregister order by creationtime desc"; 
+String sql ="select * from trainerregister where adminapprove=? order by creationtime desc"; 
 
 statement = connection.prepareStatement(sql);
-
+statement.setString(1, "true");
 ResultSet rs = statement.executeQuery();
 
 

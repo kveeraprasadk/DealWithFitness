@@ -6,6 +6,7 @@ const LOGIN_ERROR_MSG_ID = "login-validation-error";
 function Trainers() {
 	self = this;
 	self.selectedTrainerSeriesId = null;
+	self.timezoneOffset = null;
 
 	self.init = function() {
 		progressBar.start();
@@ -15,11 +16,7 @@ function Trainers() {
 			self.attachLoginActions();
 		})
 		// Add timings options with timezone offset
-		const timezoneOffset = "GMT" + self.clientTzOffset();
-		$("#form-filter-misc").append("<option value='04:00:00 11:59'>Morning 04:00 AM to 11:59 AM " + timezoneOffset + "</option>");
-		$("#form-filter-misc").append("<option value='12:00:00 16:59'>Afternoon 12:00 PM to 04:59 PM " + timezoneOffset + "</option>");
-		$("#form-filter-misc").append("<option value='17:00:00 23:59'>Evening 05:00 PM to 11:59	PM " + timezoneOffset + "</option>");
-		$("#form-filter-misc").append("<option value='00:00:00 03:59'>Night 12:00 AM to 03:59 AM " + timezoneOffset + "</option>");
+		self.timezoneOffset = self.clientTzOffset();
 	}
 
 	self.positionUserOptions = function() {
@@ -107,6 +104,7 @@ function Trainers() {
 		var emailId = $('#login-traineeemailid').val();
 		var pass = $('#login-traineepassword').val();
 		if (self.validateLogin(emailId, pass)) {
+			progressBar.start();
 			// Validations are done push the payload to backend
 			$.ajax({
 				url: "TraineeClassLoginPayment",
@@ -118,23 +116,64 @@ function Trainers() {
 				cache: false,
 				success: function(data) {
 					if (data == "Login Success") {
-						if (self.selectedTrainerSeriesId) {
-							whoami.bindUser(emailId);
-							// as the login is successful hence redirect to trainee booking page
-							self.submitTraineeBooking();
-						} else {
-							self.showMyBookingsEvent();
-						}
+						self.postAuthNEvent(emailId);
 					} else {
-						alertDialog.show("Authentication Failed", data);
+						self.validationError(LOGIN_ERROR_MSG_ID, data);
 					}
 				},
 				error: function(data) {
 					alertDialog.show("Service Failure", data.statusText);
-				}
+				},
+				complete: () => progressBar.end()
 			});
 		}
 	}
+
+	self.postAuthNEvent = function(emailId) {
+		if (self.selectedTrainerSeriesId) {
+			whoami.bindUser(emailId);
+			// as the login is successful hence redirect to trainee booking page
+			self.submitTraineeBooking();
+		} else {
+			self.showMyBookingsEvent();
+		}
+	}
+
+	// Triggered when register button is clicked	
+	self.storeNewTraineeEvent = function() {
+		if (self.validateRegistration()) {
+			progressBar.start();
+			$.ajax({
+				url: "TraineeRegisterServlet",
+				type: "POST",
+				data: {
+					name: $("#register-traineeFullname").val(),
+					username: $("#register-traineeemailid").val(),
+					password: $("#register-traineepassword").val(),
+					mobileNumber: $("#register-traineephone").val()
+				},
+				cache: false,
+				success: function(data) {
+					console.log("Registration status", data);
+					if (data == "Email exists") {
+						self.validationError(REG_ERROR_MSG_ID, "Trainee email: " + $("#register-traineeemailid").val()
+							+ " already exists, please choose anyother email.", true);
+						$("#register-traineeemailid").focus();
+					} else {
+						$("#register-trainee-dialog").modal("hide");
+						self.postAuthNEvent($("#register-traineeemailid").val());
+					}
+				},
+				error: function(error, more) {
+					console.error(error, more)
+					alertDialog.show("Service Failure", "Failed to get trainers data ");
+				},
+				complete: () => progressBar.end()
+			});
+
+		}
+	}
+
 
 	// Triggerd by book button in the trainers list
 	self.bookScheduleEvent = function(event) {
@@ -222,14 +261,13 @@ function Trainers() {
 	}
 
 	self.getTimings = function(value) {
-		let offset = self.clientTzOffset();
 		const values = value.split(" ");
-		const startTime = moment("2021-01-01 " + values[0], "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD HH:mm:00") + offset;
-		const endTime = (moment("2021-01-01 " + values[1], "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD HH:mm:00")) + offset;
+		const startTime = moment("2021-01-01 " + values[0], "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD HH:mm:00") + self.timezoneOffset;
+		const endTime = (moment("2021-01-01 " + values[1], "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD HH:mm:00")) + self.timezoneOffset;
 		return {
 			startTime: startTime,
 			endTime: endTime,
-			tzOffset: offset,
+			tzOffset: self.timezoneOffset,
 		};
 	}
 
@@ -239,7 +277,7 @@ function Trainers() {
 		return (offset < 0 ? "+" : "-") + ("00" + Math.floor(timeInMins / 60)).slice(-2) + ":" + ("00" + (timeInMins % 60)).slice(-2);
 	}
 
-	self.renderTrainers = function(trainers) {
+	self.renderTrainers = function(seriesSchedules) {
 		const templeteForEmptySeries = document.getElementById("Trainer-details-template-empty");
 		const templeteForSeries = document.getElementById("Trainer-details-template");
 		const htmlSeriesTemplate = templeteForSeries.innerHTML;
@@ -247,48 +285,60 @@ function Trainers() {
 		const parentHtmlNode = $("#" + parentId);
 		parentHtmlNode.html("");
 
-		for (const series of trainers) {
-			let childHtmlNode;
-			const trainer = series.trainer;
-			// If series id is there means then trainer will have series otherwise empty
-			if (series.id) {
-				series.attendeeClass = "hide";
-				series.zeroAttendeesClass = "hide";
-				if (series.attendees) {
-					series.attendeeCount = series.attendees.length;
-					series.zeroAttendeesClass = series.attendees.length > 0 ? "" : "hide";
-					// If currently logged in user is part of scheduled training then show checkbox otherwise hide it
-					if (series.attendees.includes(whoami.getUser())) {
-						series.attendee = "show";
+		if (seriesSchedules && seriesSchedules.length > 0) {
+			for (const series of seriesSchedules) {
+				let childHtmlNode;
+				const trainer = series.trainer;
+				// If series id is there means then trainer will have series otherwise empty
+				if (series.id) {
+					series.attendeeSubscribedClass = "hide";
+					series.zeroAttendeesClass = "hide";
+					if (series.attendees) {
+						series.attendeeCount = series.attendees.length;
+						series.zeroAttendeesClass = series.attendees.length > 0 ? "" : "hide";
+						// If currently logged in user is part of scheduled training then show checkbox otherwise hide it
+						if (series.attendees.includes(whoami.getUser())) {
+							series.attendeeSubscribedClass = "show";
+						}
 					}
+					
+					if (series.demoClass == true) {
+						trainer.name = "Demo by " + trainer.name;
+						trainer.demoClass = "demo-class"
+					}
+					
+					// If series has overriden expretise then take that otherwise trainer expretise
+					trainer.expertise = series.expertise ? series.expertise : trainer.expertise;
+					// Convert the series information to a recurrence rule
+					Utils.addRecurrenceRule(series);
+					childHtmlNode = Utils.fillTemplate(htmlSeriesTemplate, [trainer, series]);
+					parentHtmlNode.append(childHtmlNode);
+				} else {
+					childHtmlNode = Utils.fillTemplate(templeteForEmptySeries.innerHTML, [trainer]);
+					parentHtmlNode.append(childHtmlNode);
 				}
-				// Convert the series information to a recurrence rule
-				Utils.addRecurrenceRule(series);
-				childHtmlNode = Utils.fillTemplate(htmlSeriesTemplate, [trainer, series]);
-				parentHtmlNode.append(childHtmlNode);
-			} else {
-				childHtmlNode = Utils.fillTemplate(templeteForEmptySeries.innerHTML, [trainer]);
-				parentHtmlNode.append(childHtmlNode);
 			}
-		}
 
-		// This is to add listener to view profile button
-		$(document).on(
-			"click",
-			".profiledata", //".home-trainer-list-a",
-			function(event) {
-				var useremail = $(this).val();
-				$.get("TrainerDetailsView", {
-					trainersemail: useremail
-				}, function(responseText) {
-					console.log(responseText);
-					var globalarray = [];
-					globalarray.push(responseText);
-					window.localStorage.setItem("globalarray", JSON
-						.stringify(globalarray));
-					document.location.href = './trainerdetails.jsp';
+			// This is to add listener to view profile button
+			$(document).on(
+				"click",
+				".profiledata", //".home-trainer-list-a",
+				function(event) {
+					var useremail = $(this).val();
+					$.get("TrainerDetailsView", {
+						trainersemail: useremail
+					}, function(responseText) {
+						console.log(responseText);
+						var globalarray = [];
+						globalarray.push(responseText);
+						window.localStorage.setItem("globalarray", JSON
+							.stringify(globalarray));
+						document.location.href = './trainerdetails.jsp';
+					});
 				});
-			});
+		} else {
+			parentHtmlNode.append("<span class='no-results'>No results found with the matching filters. Choose different filter to see results</span>");
+		}
 
 	}
 
@@ -345,42 +395,6 @@ function Trainers() {
 		setTimeout(() => {
 			$("#register-traineeFullname").focus()
 		}, 500);
-	}
-
-	self.storeNewTraineeEvent = function() {
-		if (self.validateRegistration()) {
-			progressBar.start();
-			$.ajax({
-				url: "TraineeRegisterServlet",
-				type: "POST",
-				data: {
-					name: $("#register-traineeFullname").val(),
-					username: $("#register-traineeemailid").val(),
-					password: $("#register-traineepassword").val(),
-					mobileNumber: $("#register-traineephone").val()
-				},
-				cache: false,
-				success: function(data) {
-					console.log(data);
-					if (data == "Email exists") {
-						self.validationError(REG_ERROR_MSG_ID, "Trainee email: " + $("#register-traineeemailid").val()
-							+ " already exists, please choose anyother email.", true);
-						$("#register-traineeemailid").focus();
-					} else {
-						$("#register-trainee-dialog").modal("hide");
-						setTimeout(() => {
-							alertDialog.show("Confirmantion", "Account created successfully, please use Sign In to login into your account");
-						}, 50)
-					}
-				},
-				error: function(error, more) {
-					console.error(error, more)
-					alertDialog.show("Service Failure", "Failed to get trainers data ");
-				},
-				complete: () => progressBar.end()
-			});
-
-		}
 	}
 
 	self.validateRegistration = function() {

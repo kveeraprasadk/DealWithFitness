@@ -56,7 +56,7 @@
 		<servlet-name>TrainerLogoutServlet</servlet-name>
 		<display-name>TrainerLogoutServlet</display-name>
 		<description></description>
-		<servlet-class>main.TrainerLogoutServlet</servlet-class>
+		<servlet-class>main.service.trainer.TrainerLogoutServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>AdminCertificateDownloadServlet</servlet-name>
@@ -196,6 +196,12 @@
 		<description></description>
 		<servlet-class>main.service.trainer.TrainerTempChangePassword</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>TrainerTempProfileView</servlet-name>
+		<display-name>TrainerTempProfileView</display-name>
+		<description></description>
+		<servlet-class>main.service.trainer.TrainerTempProfileView</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>TrainerRegisterServlet</servlet-name>
@@ -324,6 +330,10 @@
 	<servlet-mapping>
 		<servlet-name>TrainerTempChangePassword</servlet-name>
 		<url-pattern>/TrainerTempChangePassword</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>TrainerTempProfileView</servlet-name>
+		<url-pattern>/TrainerTempProfileView</url-pattern>
 	</servlet-mapping>
 	<listener>
 		<listener-class>main.common.MysqlDatasource</listener-class>
