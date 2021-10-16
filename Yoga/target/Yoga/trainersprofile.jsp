@@ -130,7 +130,8 @@
 				</div>
 				<div class="col-12">
 					<a href="javascript: switchView('calendar')">My Training
-						Calendar</a> <a href="javascript: switchView('profile')">My Profile</a>
+						Calendar</a>
+					<a href="javascript: switchView('profile')">My Profile</a>
 				</div>
 			</div>
 		</div>
@@ -142,7 +143,8 @@
 	<%@include file="./html/recurrence-confirmation-dialog.html"%>
 
 	<!-- About Start -->
-	<div class="container-fluid overcover" id="profile-container" style="display: none">
+	<div class="container-fluid overcover" id="profile-container"
+		style="display: none">
 		<div class="container profile-box">
 			<div class="cover-image row"></div>
 			<%
@@ -168,7 +170,8 @@
 						value="<%=trainerdetails.getBase64Image()%>" />
 					<div class="fx-ro">
 						<div class="dat">
-							Name : <b><%=trainerdetails.getName()%></b>
+							Name :
+							<b><%=trainerdetails.getName()%></b>
 						</div>
 
 					</div>
@@ -176,27 +179,32 @@
 
 					<div class="fx-ro">
 						<div class="dat">
-							Email : <b id="trainer-id"><%=trainerdetails.getEmail()%></b>
+							Email :
+							<b id="trainer-id"><%=trainerdetails.getEmail()%></b>
 						</div>
 					</div>
 					<div class="fx-ro">
 						<div class="dat">
-							Experience : <b><%=trainerdetails.getExperience()%></b>
+							Experience :
+							<b><%=trainerdetails.getExperience()%></b>
 						</div>
 					</div>
 					<div class="fx-ro">
 						<div class="dat">
-							Qualification : <b><%=trainerdetails.getQualification()%></b>
+							Qualification :
+							<b><%=trainerdetails.getQualification()%></b>
 						</div>
 					</div>
 					<div class="fx-ro">
 						<div class="dat">
-							Phoneno : <b><%=trainerdetails.getPhoneno()%></b>
+							Phoneno :
+							<b><%=trainerdetails.getPhoneno()%></b>
 						</div>
 					</div>
 					<div class="fx-ro">
 						<div class="dat">
-							Expertise : <b><%=trainerdetails.getExpertise()%></b>
+							Expertise :
+							<b><%=trainerdetails.getExpertise()%></b>
 						</div>
 					</div>
 					<h3>About Trainer</h3>
@@ -210,28 +218,31 @@
 							<%
 							if (trainerdetails.getCertificate1filename().length() > 3) {
 							%>
-							<button class="btn">Download</button> <%
- }
- %>
+							<button class="btn">Download</button>
+							<%
+							}
+							%>
 						</li>
 						<li><%=trainerdetails.getCertificate2filename()%></li>
 						<li>
 							<%
 							if (trainerdetails.getCertificate2filename().length() > 3) {
 							%>
-							<button class="btn">Download</button> <%
- System.out.println("tt::" + trainerdetails.getCertificate2filename().length());
- }
- %>
+							<button class="btn">Download</button>
+							<%
+							System.out.println("tt::" + trainerdetails.getCertificate2filename().length());
+							}
+							%>
 						</li>
 						<li><%=trainerdetails.getCertificate3filename()%></li>
 						<li>
 							<%
 							if (trainerdetails.getCertificate3filename().length() > 3) {
 							%>
-							<button class="btn">Download</button> <%
- }
- %>
+							<button class="btn">Download</button>
+							<%
+							}
+							%>
 						</li>
 					</ul>
 
@@ -611,18 +622,31 @@
 		<div class="container-fluid">
 			<div class="container">
 				<div class="footer-info">
-					<a href="index.jsp" class="footer-logo">DealWithFitness<span></span></a>
+					<a href="index.jsp" class="footer-logo">
+						DealWithFitness
+						<span></span>
+					</a>
 
 					<div class="footer-menu">
 
 						<p>dealwithfitness64@gmail.com</p>
 					</div>
 					<div class="footer-social">
-						<a href=""><i class="fab fa-twitter"></i></a> <a href=""><i
-							class="fab fa-facebook-f"></i></a> <a href=""><i
-							class="fab fa-youtube"></i></a> <a href=""><i
-							class="fab fa-instagram"></i></a> <a href=""><i
-							class="fab fa-linkedin-in"></i></a>
+						<a href="">
+							<i class="fab fa-twitter"></i>
+						</a>
+						<a href="">
+							<i class="fab fa-facebook-f"></i>
+						</a>
+						<a href="">
+							<i class="fab fa-youtube"></i>
+						</a>
+						<a href="">
+							<i class="fab fa-instagram"></i>
+						</a>
+						<a href="">
+							<i class="fab fa-linkedin-in"></i>
+						</a>
 					</div>
 				</div>
 			</div>
@@ -630,12 +654,15 @@
 				<div class="row">
 					<div class="col-md-6">
 						<p>
-							&copy; <a href="#">dealwithfitness</a>, All Right Reserved.
+							&copy;
+							<a href="#">dealwithfitness</a>
+							, All Right Reserved.
 						</p>
 					</div>
 					<div class="col-md-6">
 						<p>
-							Designed By <Strong>Bluehorse Creative Team</Strong>
+							Designed By
+							<Strong>Bluehorse Creative Team</Strong>
 						</p>
 					</div>
 				</div>
@@ -644,7 +671,9 @@
 	</div>
 	<!-- Footer End -->
 
-	<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+	<a href="#" class="back-to-top">
+		<i class="fa fa-chevron-up"></i>
+	</a>
 
 	<!-- JavaScript Libraries -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

@@ -14,7 +14,11 @@ function Trainers() {
 			self.positionUserOptions();
 			self.dispatch();
 			self.attachLoginActions();
-		})
+		});
+		// When this dialog close do cleaup
+		$("#register-trainee-dialog").on("hide.bs.modal", ()=> {
+			$("#redirect-signin-button").hide();
+		});
 		// Add timings options with timezone offset
 		self.timezoneOffset = self.clientTzOffset();
 	}
@@ -135,12 +139,16 @@ function Trainers() {
 			// as the login is successful hence redirect to trainee booking page
 			self.submitTraineeBooking();
 		} else {
-			self.showMyBookingsEvent();
+			self.showHomePage();
 		}
 	}
 
 	// Triggered when register button is clicked	
 	self.storeNewTraineeEvent = function() {
+		// If sign in button is visible then hide it and then validate it, if email already exists
+		// then we anyway show this button agian
+		$("#redirect-signin-button").hide();
+		
 		if (self.validateRegistration()) {
 			progressBar.start();
 			$.ajax({
@@ -156,8 +164,13 @@ function Trainers() {
 				success: function(data) {
 					console.log("Registration status", data);
 					if (data == "Email exists") {
-						self.validationError(REG_ERROR_MSG_ID, "Trainee email: " + $("#register-traineeemailid").val()
-							+ " already exists, please choose anyother email.", true);
+						const newTraineeEmail = $("#register-traineeemailid").val();
+						// Show login button
+						$("#redirect-signin-button").show();
+						$("#redirect-signin-button").text("Sign in " + newTraineeEmail);
+						// Show error message
+						self.validationError(REG_ERROR_MSG_ID, "Trainee email: " + newTraineeEmail
+							+ " already exists, please choose anyother email for registration or Sign in with same email id", true);
 						$("#register-traineeemailid").focus();
 					} else {
 						$("#register-trainee-dialog").modal("hide");
@@ -301,12 +314,12 @@ function Trainers() {
 							series.attendeeSubscribedClass = "show";
 						}
 					}
-					
+
 					if (series.demoClass == true) {
 						trainer.name = "Demo by " + trainer.name;
 						trainer.demoClass = "demo-class"
 					}
-					
+
 					// If series has overriden expretise then take that otherwise trainer expretise
 					trainer.expertise = series.expertise ? series.expertise : trainer.expertise;
 					// Convert the series information to a recurrence rule
@@ -360,18 +373,26 @@ function Trainers() {
 		}
 	}
 
-	self.showMyBookingsEvent = function() {
-		document.location.href = "traineelandingpage.jsp";
+	self.showHomePage = function() {
+		document.location.href = "index.jsp";
 	}
 
-	self.showLoginDialogEvent = function() {
-		$("#login-traineeemailid").val("");
+	self.showLoginDialogEvent = function(withEmailId) {
+		$("#login-traineeemailid").val(withEmailId ? withEmailId : "");
 		$("#login-traineepassword").val("");
 		$("#login-validation-error").hide();
 
 		$("#trainee-login-dialog").modal("show");
 		setTimeout(() => {
 			$("#login-traineeemailid").focus()
+		}, 500);
+	}
+	
+	self.redirectToSignInFromRegistration = function(event) {
+		const emailId = event.target.innerText.split(" ")[2];
+		$("#register-trainee-dialog").modal("hide");
+		setTimeout(() => {
+			self.showLoginDialogEvent(emailId);
 		}, 500);
 	}
 
@@ -419,7 +440,7 @@ function Trainers() {
 			return false;
 		}
 		if (phone && phone.trim().length < 10) {
-			self.validationError(REG_ERROR_MSG_ID, "Monile number should be atleast 10 digits");
+			self.validationError(REG_ERROR_MSG_ID, "Mobile number should be atleast 10 digits");
 			$("#register-traineephone").focus();
 			return false;
 		}

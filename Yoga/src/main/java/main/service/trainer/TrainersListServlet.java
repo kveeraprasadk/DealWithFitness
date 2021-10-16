@@ -35,15 +35,15 @@ public class TrainersListServlet extends HttpServlet {
 	private static final String TIMING_CONDITION = " CONVERT(DATE_FORMAT(CONVERT_TZ(FROM_UNIXTIME(ss.startTime/1000), '+00:00', '#o'), '%H%i'),  UNSIGNED INTEGER) >= #s and "
 			+ "    CONVERT(DATE_FORMAT(CONVERT_TZ(FROM_UNIXTIME(ss.startTime/1000), '+00:00', '#o'), '%H%i'),  UNSIGNED INTEGER) <= #e ";
 	private static final String SQL = " select tr.traineremail, tr.trainername, tr.experience, tr.qualification, tr.expertise, ss.id as seriesId, ss.startTime, ss.endTime, ss.endByDate, ss.selectedDayNames, "
-			+ "	ss.fee, ss.classlevel, ss.title, ss.location, ss.expertise as ssExpertise, ss.demoClass, tb.traineeId  from trainerregister tr left join schedulesSeries ss on tr.traineremail =  ss.traineremail left join traineeBookings tb on "
-			+ "		ss.traineremail = tb.trainerId and tr.adminapprove=true and ss.id = tb.seriesId %s order by ISNULL(fee), fee %s";
+			+ "	ss.fee, ss.classlevel, ss.title, ss.location, ss.expertise as ssExpertise, ss.demoClass, tb.traineeId  from (select * from trainerregister where adminapprove = true) tr "
+			+ " left join schedulesSeries ss on tr.traineremail =  ss.traineremail left join traineeBookings tb on "
+			+ "		ss.traineremail = tb.trainerId and ss.id = tb.seriesId %s order by ISNULL(fee), fee %s";
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		response.setCharacterEncoding("UTF-8");
 		String filterByExpertise = request.getParameter("filterByExpertise");
@@ -81,7 +81,7 @@ public class TrainersListServlet extends HttpServlet {
 		String sql = new String(String.format(SQL, whereClause.toString(), sortOrder));
 		try (Connection connection = DBConnection.createConnection()) {
 			try (Statement statement = connection.createStatement()) {
-				
+
 				try (ResultSet rs = statement.executeQuery(sql)) {
 					// Maintaining this map to keep only unique series for a trainer as the
 					// TrainerDetailsVO schedule series field
@@ -93,41 +93,39 @@ public class TrainersListServlet extends HttpServlet {
 						if (rs.getString("seriesId") != null) {
 							// very first time add schedule series and trainer for that schedule series
 							// Consecutive times its only attendees change so add it.
-							SeriesSchedulesVO scheduleSeries = schedulesSeriesByTrainer
-									.computeIfAbsent(rs.getString("seriesId"), seriesNotFound -> {
-										SeriesSchedulesVO seriesVo = new SeriesSchedulesVO();
-										try {
-											seriesVo.setId(rs.getString("seriesId"));
-											seriesVo.setTitle(rs.getString("title"));
-											seriesVo.setLocation(rs.getString("location"));
-											seriesVo.setTraineremail(rs.getString("traineremail"));
-											seriesVo.setStartTime(rs.getLong("startTime"));
-											seriesVo.setEndTime(rs.getLong("endTime"));
-											seriesVo.setEndByDate(rs.getLong("endByDate"));
-											seriesVo.setFee(rs.getFloat("fee"));
-											// If series level overriden is there for expertise
-											seriesVo.setExpertise(rs.getString("ssExpertise"));
-											seriesVo.setDemoClass(rs.getBoolean("demoClass"));
-											
-											seriesVo.setClassLevel(rs.getString("classlevel"));
-											List<String> dayNames = Json.convert(rs.getString("selectedDayNames"),
-													new TypeReference<List<String>>() {
-													});
-											seriesVo.setSelectedDayNames(dayNames);
+							SeriesSchedulesVO scheduleSeries = schedulesSeriesByTrainer.computeIfAbsent(rs.getString("seriesId"), seriesNotFound -> {
+								SeriesSchedulesVO seriesVo = new SeriesSchedulesVO();
+								try {
+									seriesVo.setId(rs.getString("seriesId"));
+									seriesVo.setTitle(rs.getString("title"));
+									seriesVo.setLocation(rs.getString("location"));
+									seriesVo.setTraineremail(rs.getString("traineremail"));
+									seriesVo.setStartTime(rs.getLong("startTime"));
+									seriesVo.setEndTime(rs.getLong("endTime"));
+									seriesVo.setEndByDate(rs.getLong("endByDate"));
+									seriesVo.setFee(rs.getFloat("fee"));
+									// If series level overriden is there for expertise
+									seriesVo.setExpertise(rs.getString("ssExpertise"));
+									seriesVo.setDemoClass(rs.getBoolean("demoClass"));
 
-											TrainerDetailsVO trainerDetails = new TrainerDetailsVO();
-											trainerDetails.setName(rs.getString("trainername"));
-											trainerDetails.setEmail(rs.getString("traineremail"));
-											trainerDetails.setExperience(rs.getString("experience"));
-											trainerDetails.setQualification(rs.getString("qualification"));
-											trainerDetails.setExpertise(rs.getString("expertise"));
-
-											seriesVo.setTrainer(trainerDetails);
-											return seriesVo;
-										} catch (SQLException e) {
-											throw new IllegalArgumentException(e);
-										}
+									seriesVo.setClassLevel(rs.getString("classlevel"));
+									List<String> dayNames = Json.convert(rs.getString("selectedDayNames"), new TypeReference<List<String>>() {
 									});
+									seriesVo.setSelectedDayNames(dayNames);
+
+									TrainerDetailsVO trainerDetails = new TrainerDetailsVO();
+									trainerDetails.setName(rs.getString("trainername"));
+									trainerDetails.setEmail(rs.getString("traineremail"));
+									trainerDetails.setExperience(rs.getString("experience"));
+									trainerDetails.setQualification(rs.getString("qualification"));
+									trainerDetails.setExpertise(rs.getString("expertise"));
+
+									seriesVo.setTrainer(trainerDetails);
+									return seriesVo;
+								} catch (SQLException e) {
+									throw new IllegalArgumentException(e);
+								}
+							});
 							if (rs.getString("traineeId") != null) {
 								scheduleSeries.getAttendees().add(rs.getString("traineeId"));
 							}
@@ -161,8 +159,7 @@ public class TrainersListServlet extends HttpServlet {
 			String eTimeHourMinute = AppUtils.getTimeWithCallerTz(endTime, tzOffset);
 			// We are not using String.format because of %i is present in the sql which
 			// causing problems to String.format()
-			return TIMING_CONDITION.replace("#s", sTimeHourMinute).replace("#e", eTimeHourMinute).replace("#o",
-					tzOffset);
+			return TIMING_CONDITION.replace("#s", sTimeHourMinute).replace("#e", eTimeHourMinute).replace("#o", tzOffset);
 		} catch (ParseException e) {
 			throw new IllegalArgumentException(e);
 		}

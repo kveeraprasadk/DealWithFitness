@@ -173,8 +173,9 @@ label {
 					<div class="hero-text">
 						<h1>Book Your Online Fitness Classes Now</h1>
 						<span>How much importance you give to yourself. Invest in
-							self.</span> <span style="font-size: 14px; color: #1000ff">Don't
-							wish for it, work for it.</span>
+							self.</span>
+						<span style="font-size: 14px; color: #1000ff">Don't wish
+							for it, work for it.</span>
 					</div>
 					<div class="pl pt">
 						<button class="btn btn-primary bookbutton mr hide"
@@ -206,7 +207,8 @@ label {
 					class="flex flex-wrap flex-valign-center flex-halign-center pb filter-container">
 					<div class="flex-column mt mr ml  flex-grow">
 						<span style="font-size: 14px; text-align: left" class="pb-sm">Expertise
-							of your choice</span> <select name="form-expertise" id="form-expertise"
+							of your choice</span>
+						<select name="form-expertise" id="form-expertise"
 							class="form-control required flex-grow"
 							onchange='trainers.filterTrainers(event)' style="width: auto">
 							<option value="all">All Expertise</option>
@@ -228,7 +230,8 @@ label {
 					</div>
 					<div class="flex-column mt mr ml  flex-grow">
 						<span style="font-size: 14px; text-align: left" class="pb-sm">Your
-							preferred timings</span> <select name="form-sort" id="form-filter-misc"
+							preferred timings</span>
+						<select name="form-sort" id="form-filter-misc"
 							class="form-control required flex-grow"
 							onchange='trainers.filterByMisc(event)' " style="width: auto">
 							<option value="all">All Timings</option>
@@ -244,7 +247,8 @@ label {
 					</div>
 					<div class="flex-column mt mr ml flex-grow">
 						<span style="font-size: 14px; text-align: left" class="pb-sm">Sort
-							by</span><select name="form-sort" id="form-sortby"
+							by</span>
+						<select name="form-sort" id="form-sortby"
 							onchange='trainers.sortTrainersList(event)'
 							class="form-control required flex-grow" style="width: auto">
 							<option value="asc">Fee Lowest to Highest</option>
@@ -349,18 +353,31 @@ label {
 		<div class="container-fluid">
 			<div class="container">
 				<div class="footer-info">
-					<a class="footer-logo">DealWithFitness<span></span></a>
+					<a class="footer-logo">
+						DealWithFitness
+						<span></span>
+					</a>
 
 					<div class="footer-menu">
 
 						<p>dealwithfitness64@gmail.com</p>
 					</div>
 					<div class="footer-social">
-						<a href=""><i class="fab fa-twitter"></i></a> <a href=""><i
-							class="fab fa-facebook-f"></i></a> <a href=""><i
-							class="fab fa-youtube"></i></a> <a href=""><i
-							class="fab fa-instagram"></i></a> <a href=""><i
-							class="fab fa-linkedin-in"></i></a>
+						<a href="">
+							<i class="fab fa-twitter"></i>
+						</a>
+						<a href="">
+							<i class="fab fa-facebook-f"></i>
+						</a>
+						<a href="">
+							<i class="fab fa-youtube"></i>
+						</a>
+						<a href="">
+							<i class="fab fa-instagram"></i>
+						</a>
+						<a href="">
+							<i class="fab fa-linkedin-in"></i>
+						</a>
 					</div>
 				</div>
 			</div>
@@ -368,12 +385,15 @@ label {
 				<div class="row">
 					<div class="col-md-6">
 						<p>
-							&copy; <a href="#">dealwithfitness</a>, All Right Reserved.
+							&copy;
+							<a href="#">dealwithfitness</a>
+							, All Right Reserved.
 						</p>
 					</div>
 					<div class="col-md-6">
 						<p>
-							Designed By <Strong>Bluehorse Creative Team</Strong>
+							Designed By
+							<Strong>Bluehorse Creative Team</Strong>
 						</p>
 					</div>
 				</div>
@@ -382,7 +402,9 @@ label {
 	</div>
 	<!-- Footer End -->
 
-	<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+	<a href="#" class="back-to-top">
+		<i class="fa fa-chevron-up"></i>
+	</a>
 
 	<!-- JavaScript Libraries -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
