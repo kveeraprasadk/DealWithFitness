@@ -1,5 +1,5 @@
 **/.settings/
-**/target/
+target/
 *.zip
 *.log
 .classpath
