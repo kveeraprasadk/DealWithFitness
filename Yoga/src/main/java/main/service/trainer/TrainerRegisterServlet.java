@@ -154,6 +154,7 @@ public class TrainerRegisterServlet extends HttpServlet {
 
 		Connection con = null;
 		String Countrow = null;
+		boolean isapprove=false;
 		try {
 			con = DBConnection.createConnection();
 			String cnt = "select count(*) from trainerregister where traineremail=?";
@@ -189,7 +190,7 @@ public class TrainerRegisterServlet extends HttpServlet {
 				statement.setBlob(15, certificate3inputStream);
 				statement.setString(16, certificatefileName3);
 				statement.setString(17, password);
-				statement.setString(18, "false");
+				statement.setBoolean(18, isapprove);
 
 				int i = statement.executeUpdate();
 
