@@ -60,7 +60,7 @@ public class TrainerTempProfileUpdateServlet extends HttpServlet {
           con = DBConnection.createConnection();
              
           //String query = "update trainerregister set trainername=?,experience=?,qualification=?,expertise=?,schedules=?,classlevel=?,monthlyfees=?,expertise2=?,schedules2=?,classlevel2=?,monthlyfees2=?,expertise3=?,schedules3=?,classlevel3=?,monthlyfees3=?,aboutyourself=? where traineremail=?";
-          String query = "update trainertemptable set trainername=?,experience=?,qualification=?,phoneno=?,expertise=?,aboutyourself=? where traineremail=?";
+          String query = "update trainerregister set trainername=?,experience=?,qualification=?,phoneno=?,expertise=?,aboutyourself=? where traineremail=?";
           PreparedStatement statement = con.prepareStatement(query); //Making use of prepared statements here to insert bunch of data
           statement.setString(1, name);           
           statement.setString(2, experience);

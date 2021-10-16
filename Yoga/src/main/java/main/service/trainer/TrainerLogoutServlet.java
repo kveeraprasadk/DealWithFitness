@@ -1,4 +1,4 @@
-package main;
+package main.service.trainer;
 
 import java.io.IOException;
 
@@ -26,6 +26,9 @@ public class TrainerLogoutServlet extends HttpServlet {
             	session.removeAttribute("trainerexperience");
             	session.removeAttribute("trainerqualification");
             	session.removeAttribute("trainerexpertise");
+            	session.removeAttribute("trainerphone");
+            	session.removeAttribute("trainerpassword");
+            	
             	session.removeAttribute("trainerschedule");
             	session.removeAttribute("trainerclasslevel");
             	session.removeAttribute("trainermonthlyfees");

@@ -154,7 +154,10 @@ label {
 																			.log(data);
 																	if (data == "Login Success") {
 																		document.location.href = './TrainerProfile';
-																	} else {
+																	} else if(data == "Trainer Temp Login Success"){
+																		document.location.href = './TrainerTempProfileshowing';
+																		$('#prasad').hide();
+																	}else{
 																		$(
 																				'#regsuccess')
 																				.html(

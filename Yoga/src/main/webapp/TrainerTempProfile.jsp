@@ -37,46 +37,47 @@
     <!-- jQuery library -->
     <!-- Popper JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-        
+    <script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"
+	defer></script>    
         <!-- Template Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
+        <script type="text/javascript">
+	var calendarInitialized = false;
+
+	function switchView(viewName) {
+		$("#profile-container").css("display",
+				viewName === "profile" ? "block" : "none");
+		if (viewName === "calendar") {
+			$("#calendar-container").css("display", "block");
+			// Very first time do a lazy init
+			if (!calendarInitialized) {
+				trainerCalendar.init();
+				calendarInitialized = true;
+			}
+		} else {
+			$("#calendar-container").css("display", "none");
+		}
+	}
+
+	function renderTrainerProfile() {
+		switchView("calendar");
+		whoami.detect(()=> {
+			const image = $("#trainer-profile-base64-encoded-element").val();
+			if (image) {
+				console.log("Profile picture present")
+				$("#profile-image-element").attr("src",
+						"data:image/*;base64," + image);
+			} else {
+				console.log("No profile picture");
+			}		
+		})
+	}
+</script>
     </head>
 
     <body >
    
-        <!-- Top Bar Start -->
-        <div class="top-bar d-none d-md-block">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-8">
-           <!--              <div class="top-bar-left">
-                            <div class="text">
-                                <i class="far fa-clock"></i>
-                                <h2>8:00 - 9:00</h2>
-                                <p>Mon - Fri</p>
-                            </div>
-                            <div class="text">
-                                <i class="fa fa-phone-alt"></i>
-                                <h2>+123 456 7890</h2>
-                                <p>For Appointment</p>
-                            </div>
-                        </div>    -->
-                    </div>
-                    <div class="col-md-4">
-                        <div class="top-bar-right">
-                            <div class="social">
-                                <a href=""><i class="fab fa-twitter"></i></a>
-                                <a href=""><i class="fab fa-facebook-f"></i></a>
-                                <a href=""><i class="fab fa-linkedin-in"></i></a>
-                                <a href=""><i class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Top Bar End -->
-
         <!-- Nav Bar Start -->
         <div class="navbar navbar-expand-lg bg-dark navbar-dark">
             <div class="container-fluid">
@@ -109,7 +110,7 @@
                         <h2>Trainers Profile</h2>
                     </div>
                     <div class="col-12">
-                        <a href="index.jsp">Home</a>
+                       
                         <a href="">Trainers Profile</a>
                     </div>
                 </div>
@@ -244,8 +245,10 @@
 								<textarea class="form-control" id="form-aboutself"
 									name="form-aboutself" placeholder="About Yourself.." required>${traineraboutme}</textarea>
 							</p>
+							<p>
 							<button type="button" class="btn btn-primary" name="updatebutton"
 								id="updatebutton">Update</button>
+								</p>
 						</div>
 						<div id="updatesuccess"></div>
 						
@@ -413,7 +416,7 @@
 																$(
 																		'#editprofilehide')
 																		.hide();
-																document.location.href = './TrainerProfile';
+																document.location.href = './TrainerTempProfileshowing';
 															},
 															error : function() {
 																$(

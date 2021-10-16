@@ -61,7 +61,7 @@ public class TrainerTempChangePassword extends HttpServlet {
        {
            con = DBConnection.createConnection();
               
-           String query = "update trainertemptable set password=? where traineremail=? and password=?";
+           String query = "update trainerregister set password=? where traineremail=? and password=?";
            PreparedStatement statement = con.prepareStatement(query); //Making use of prepared statements here to insert bunch of data
            statement.setString(1, newpassword);
            statement.setString(2, traineremail);

@@ -1,7 +1,7 @@
 create table dwfadmin(
 	dwfid		int	NOT NULL auto_increment,
 	username	varchar(50)	NOT NULL	UNIQUE,		
-	password	varchar(50)	NOT NULL,
+	password	varchar(100)	NOT NULL,
 	PRIMARY KEY(dwfid,username)
 )
 
@@ -10,11 +10,12 @@ create table traineeregister(
 	traineename	varchar(50),			
 	dob			varchar(50),			
 	target		varchar(50),		
-	ailment		varchar(50),			
+	ailment		varchar(50),
+	state		varchar(50),
 	city		varchar(50),			
 	phone		varchar(50),			
 	username	varchar(50)	NOT NULL UNIQUE,		
-	password	varchar(50)	NOT NULL,			
+	password	varchar(100)	NOT NULL,			
 	createtime	timestamp,	
 	PRIMARY KEY (traineeid,username)
 );
@@ -24,7 +25,8 @@ create table trainerregister(
 	trainername				varchar(50)	NOT NULL,			
 	traineremail			varchar(50)	NOT	NULL,		
 	experience				varchar(50)	NOT	NULL,		
-	qualification			varchar(50)	NOT	NULL,		
+	qualification			varchar(50)	NOT	NULL,	
+	phoneno					varchar(50),
 	expertise				varchar(50),			
 	classlevel				varchar(50),
 	schedules				varchar(50),			
@@ -50,7 +52,8 @@ create table trainerregister(
 	certificate2filename	varchar(50),			
 	certificate3			mediumblob,	
 	certificate3filename	varchar(50),			
-	password				varchar(50),
+	password				varchar(100),
+	adminapprove			varchar(50),
 	PRIMARY KEY (trainerid)
 );
 
@@ -85,7 +88,8 @@ create table trainertemptable(
 	certificate2filename	varchar(50),			
 	certificate3			mediumblob,	
 	certificate3filename	varchar(50),			
-	password				varchar(50),
+	password				varchar(100),
+	adminapprove			varchar(50),
 	PRIMARY KEY (trainerid)
 );
 
@@ -109,7 +113,8 @@ create table trainerrejectlist(
 	certificate2filename	varchar(50),			
 	certificate3			mediumblob,	
 	certificate3filename	varchar(50),			
-	password				varchar(50),
+	password				varchar(100),
+	adminapprove			varchar(50),
 	PRIMARY KEY (tid)
 );
 
@@ -127,7 +132,8 @@ create table schedulesSeries (
 	demoClass			boolean default false,
 	fee					float,
 	classLevel			varchar(20),
-	
+	expertise			varchar(40),	
+	demoClass			tinyint(1),
 	PRIMARY KEY (traineremail, id)
 );
 

@@ -36,7 +36,7 @@ public class TrainersListServlet extends HttpServlet {
 			+ "    CONVERT(DATE_FORMAT(CONVERT_TZ(FROM_UNIXTIME(ss.startTime/1000), '+00:00', '#o'), '%H%i'),  UNSIGNED INTEGER) <= #e ";
 	private static final String SQL = " select tr.traineremail, tr.trainername, tr.experience, tr.qualification, tr.expertise, ss.id as seriesId, ss.startTime, ss.endTime, ss.endByDate, ss.selectedDayNames, "
 			+ "	ss.fee, ss.classlevel, ss.title, ss.location, ss.expertise as ssExpertise, ss.demoClass, tb.traineeId  from trainerregister tr left join schedulesSeries ss on tr.traineremail =  ss.traineremail left join traineeBookings tb on "
-			+ "		ss.traineremail = tb.trainerId and ss.id = tb.seriesId %s order by ISNULL(fee), fee %s";
+			+ "		ss.traineremail = tb.trainerId and tr.adminapprove=true and ss.id = tb.seriesId %s order by ISNULL(fee), fee %s";
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -81,6 +81,7 @@ public class TrainersListServlet extends HttpServlet {
 		String sql = new String(String.format(SQL, whereClause.toString(), sortOrder));
 		try (Connection connection = DBConnection.createConnection()) {
 			try (Statement statement = connection.createStatement()) {
+				
 				try (ResultSet rs = statement.executeQuery(sql)) {
 					// Maintaining this map to keep only unique series for a trainer as the
 					// TrainerDetailsVO schedule series field

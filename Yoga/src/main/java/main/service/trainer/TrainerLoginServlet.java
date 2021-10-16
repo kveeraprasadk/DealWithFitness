@@ -34,7 +34,7 @@ public class TrainerLoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
-		String trainerName = null;
+		String trainerName = null,adminapprove=null;
 		String username = (String) request.getParameter("username");
 		String pass = (String) request.getParameter("password");
 	//	Base64.Encoder enc = Base64.getEncoder();
@@ -50,25 +50,31 @@ public class TrainerLoginServlet extends HttpServlet {
 		System.out.println("encoded value is \t" + password);
 
 		try (Connection con = DBConnection.createConnection()) {
-			String cntQuery = "SELECT trainername FROM trainerregister where (traineremail='" + username
+			String cntQuery = "SELECT trainername,adminapprove FROM trainerregister where (traineremail='" + username
 					+ "' and password='" + password + "')";
 			try (PreparedStatement stat = con.prepareStatement(cntQuery)) {
 				try (ResultSet rs = stat.executeQuery()) {
 					if (rs.next()) {
 						trainerName = rs.getString("trainername");
+						adminapprove=rs.getString("adminapprove");
 						System.out.println("trainerName is::" + trainerName);
 						if (trainerName != null) {
 							HttpSession session = request.getSession(true);
 							session.setAttribute("traineremail", username);
 
 							SessionUser sessionUser = new SessionUser();
-							sessionUser.setType("Trainer");
+							sessionUser.setType("Trainer"+adminapprove);
 							sessionUser.setEmail(username);
 							sessionUser.setName(trainerName);
 							session.setAttribute(AppConstants.SESSION_USER_INFO, sessionUser);
-
-							System.out.println("Login successfull");
+							System.out.println("Trainer :"+adminapprove);
+							if(adminapprove.equals("false")){
+								System.out.println("Trainer temp Login successfull");
+								response.getWriter().write("Trainer Temp Login Success");
+							}else{
+							System.out.println("Approved Login successfull");
 							response.getWriter().write("Login Success");
+							}
 						} else {
 							System.out.println("Invalid Credentials");
 							response.getWriter().write("Invalid Credentials");

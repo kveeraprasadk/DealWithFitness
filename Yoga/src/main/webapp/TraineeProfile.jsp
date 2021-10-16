@@ -60,6 +60,9 @@
 	padding: 0;
 	background: none;
 }
+label {
+	color: #FF0000 !important;
+}
 </style>
 </head>
 
@@ -297,7 +300,7 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-<<<<<<< HEAD
+
 		$(document).ready(function() {
 			$("#traineeupdateform").validate({
 				rules: {
@@ -351,80 +354,7 @@
 			    return age1 <= max;
 			}, "You are too old enough!");
 		});
-=======
-		$(document)
-				.ready(
-						function() {
-							$("#traineeupdateform")
-									.validate(
-											{
-												rules : {
-													formdob : {
-														required : true,
-														minAge : 5,
-														maxAge : 70
-													}
-												},
-												messages : {
-													formdob : {
-														required : "Please enter you date of birth.",
-														minAge : "You must be at least 5 years old!",
-														maxAge : "You must be below 70 years old!"
-													}
-												}
-											});
-							$.validator
-									.addMethod(
-											"minAge",
-											function(value, element, min) {
-												var today = new Date();
-												var birthDate = new Date(value);
-												var age = today.getFullYear()
-														- birthDate
-																.getFullYear();
 
-												if (age > min + 1) {
-													return true;
-												}
-
-												var m = today.getMonth()
-														- birthDate.getMonth();
-
-												if (m < 0
-														|| (m === 0 && today
-																.getDate() < birthDate
-																.getDate())) {
-													age--;
-												}
-
-												return age >= min;
-											}, "You are not old enough!");
-
-							$.validator.addMethod("maxAge",
-									function(value, element, max) {
-										var today = new Date();
-										var birthDate = new Date(value);
-										var age = birthDate.getFullYear()
-												- today.getFullYear();
-
-										if (age < max + 1) {
-											return true;
-										}
-
-										var m = birthDate.getMonth()
-												- today.getMonth();
-
-										if (m < 0
-												|| (m === 0 && birthDate
-														.getDate() < today
-														.getDate())) {
-											age--;
-										}
-
-										return age <= max;
-									}, "You are not old enough!");
-						});
->>>>>>> 16819e18899cddb5b780edeaf6a85ee4f28e7112
 	</script>
 	<script language="javascript" type="text/javascript">
 		function limitText(limitField, limitCount, limitNum) {

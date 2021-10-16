@@ -29,8 +29,6 @@
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
 	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <link href="lib/animate/animate.min.css" rel="stylesheet">
 <link href="lib/flaticon/font/flaticon.css" rel="stylesheet">
@@ -101,40 +99,38 @@ label {
 		    <div class="class-wrap">
 		        <div class="class-text flex-column flex-valign-center trainer-schedules">
 			        <div class="class-teacher">
-						<span class="far fa-check-circle flex flex-valign-center {attendeeClass} trainee-selected" style="margin-left:10px"></span>
+						<span class="far fa-check-circle flex flex-valign-center {attendeeSubscribedClass} trainee-selected" style="margin-left:10px"></span>
 		            	<span class="flex-grow trainer-name">{name}</span>
 						<span class="attendee-count-parent {zeroAttendeesClass} flex" title="Total {attendeeCount} Attendees">
-							<span class="fas fa-users" style="font-size:18px;">
+							<span class="fas fa-users" style="font-size:24px;">
 								<span class="attendee-count">{attendeeCount}</span>
 							</span>
 						</span>
-						<a style="height: 32px;width: 32px" title="View Trainer Profile">
-							<button class="btn profiledata home-trainer-list-a fas fa-external-link-alt" value="{email}"
-									style="font-size:18px">
-							</button>
-						</a>
+						<button class="btn profiledata home-trainer-list-a fas fa-external-link-alt" value="{email}"
+								style="border-radius: 50%; background: #cce0fc;" title="View Trainer Profile">
+						</button>
 		        	</div>
-					<div style=" width:100%;" class="flex-column flex-valign-center flex-grow trainer-details-card-ineer-container">
+					<div style=" width:100%;" class="flex-column flex-valign-center flex-grow trainer-details-card-inner-container {demoClass}">
 						<div class="flex-column flex-valign-center flex-grow">
 							<h4>{expertise}</h4>
 							<span class="pb" style="color: green">{title}</span>
 			            	<span class="flex flex-valign-center pb"><span class="mr">Level:</span> <h2 style="margin: 0px" class="ml">{classLevel}</h2></span>
 			            	<div class="class-meta flex" style="color: #050df6; align-items: flex-start">
-			                	<i class="far fa-clock" style="font-size: 20px;color:gray"></i>
-								<p class="pl" style="text-align:center">{schedule}</p><br>
+								<span class="pl" style="text-align:center">
+									<i class="far fa-clock pr-sm" style="font-size: 18px;color:gray"></i>
+									{schedule}
+								</span>
 			            	</div>
 			             	<div class="class-meta pt pb">
-			               		<p> <Strong>Fee per Month : <i class="fa fa-inr"> </i>{fee}</Strong></p>
+			               		<Strong>Fee per Month : <span class="pr-sm">&#x20B9;</span>{fee}</Strong>
 			            	</div>
 		            	</div>
 			             <div class="class-meta">
-			                <p>
-								 <button class="btn btn-primary bookbutton" trainerId="{email}" seriesId="{id}" 
-									data-toggle="modal" title="{title}" attendee="{attendeeClass}" 
-									onclick="trainers.bookScheduleEvent(event)">
-									Book
-								</button>
-							</p>
+							<button class="btn btn-primary bookbutton" trainerId="{email}" seriesId="{id}" 
+								data-toggle="modal" title="{title}" attendee="{attendeeClass}" 
+								onclick="trainers.bookScheduleEvent(event)">
+								Book
+							</button>
 			            </div>
 					</div>
 		        </div>
@@ -153,7 +149,7 @@ label {
 						</button>
 					</a>
 	        	</div>
-		    	<div class="flex-column flex-valign-center trainer-details-card-ineer-container flex-grow">
+		    	<div class="flex-column flex-valign-center trainer-details-card-inner-container flex-grow">
 					<h4>{expertise}</h4>
 					<span style="color:red; padding: 10px" class="flex flex-valign-center">
 						<span class="fa fa-info-circle pr-sm" style="font-size:20px"></span>Trainings are not scheduled yet.
@@ -163,27 +159,7 @@ label {
 		</div>
 	</script>
 	<!-- Nav Bar Start -->
-	<div class="navbar navbar-expand-lg bg-dark navbar-dark">
-		<div class="container-fluid">
-			<span class="logo-text">DEALWITHFITNESS</span>
-			<button type="button" class="navbar-toggler" data-toggle="collapse"
-				data-target="#navbarCollapse">
-				<span class="fa fa-bars"
-					style="color: gray; margin: 5px 0px 5px 5px"></span>
-			</button>
-			<div class="collapse navbar-collapse justify-content-between"
-				id="navbarCollapse">
-				<div class="navbar-nav ml-auto">
-					<a href="About.jsp" class="nav-item nav-link">About</a> <a
-						id="trainer-hyperlink-element"
-						href="javascript: whoami.redirectIfUserLoggedInOrElse('TrainerProfile', 'Trainer.jsp')"
-						class="nav-item nav-link"> Trainer</a> <a href="./logoutservice"
-						class="nav-item nav-link" id="user-logout-element"
-						style="display: none">Logout</a>
-				</div>
-			</div>
-		</div>
-	</div>
+	<%@include file="./html/navbar.html"%>
 	<!-- Nav Bar End -->
 	<%@include file="./html/dialogs.html"%>
 	<%@include file="./html/trainee-login-dialog.html"%>
@@ -196,10 +172,11 @@ label {
 				<div class="col-sm-12 col-md-12 col-lg-6">
 					<div class="hero-text">
 						<h1>Book Your Online Fitness Classes Now</h1>
-						<p>How much importance you give to yourself. Invest in self.</p>
-						<p>Don't wish for it, work for it.</p>
+						<span>How much importance you give to yourself. Invest in
+							self.</span> <span style="font-size: 14px; color: #1000ff">Don't
+							wish for it, work for it.</span>
 					</div>
-					<div class="pl">
+					<div class="pl pt">
 						<button class="btn btn-primary bookbutton mr hide"
 							id="existing-trinee-signin"
 							onclick="trainers.showLoginDialogEvent()">Sign In</button>
@@ -208,7 +185,7 @@ label {
 							id="new-trainee-ac-create">New Trainee Account</button>
 						<button class="btn btn-primary bookbutton hide"
 							onclick="trainers.showMyBookingsEvent()" id="trainee-ac-bookings">My
-							Bookings</button>
+							Trainings</button>
 					</div>
 				</div>
 				<div class="col-md-6 d-md-block">
@@ -222,50 +199,65 @@ label {
 	<div class="class">
 		<div class="container">
 			<div class="section-header text-center" style="max-width: none">
-				<h3 style="color: #03287a">Find Your Fitness Guru</h3>
-				<span style="font-size: 14px">Choose any Expert to know your
-					suitable fitness guru</span>
-				<div class="flex flex-wrap flex-valign-center flex-halign-center">
-					<select name="form-expertise" id="form-expertise"
-						class="form-control required mt mr ml flex-grow"
-						onchange='trainers.filterTrainers(event)' style="width: auto">
-						<option value="all">All Experts</option>
-						<optgroup label="Yoga">
-							<option value="Yoga for health">Yoga for health</option>
-							<option value="Weight Loss">Weight Loss</option>
-							<option value="Kids Yoga">Kids Yoga</option>
-							<option value="Pregnancy Yoga">Pregnancy Yoga</option>
-							<option value="Meditation">Meditation</option>
-						</optgroup>
-						<optgroup label="Dance">
-							<option value="Dance">Dance</option>
-							<option value="Zumba">Zumba</option>
-						</optgroup>
-						<option value="Weight / Body weight Workout">Weight /
-							Body weight Workout</option>
-						<option value="Nutrition">Nutrition</option>
-					</select> <select name="form-sort" id="form-filter-misc"
-						class="form-control required mt  mr ml flex-grow"
-						onchange='trainers.filterByMisc(event)' " style="width: auto">
-						<option value="all">All Timings</option>
-					</select>
-					<div class="flex flex-valign-center">
-						<span>Sort By</span> <select name="form-sort" id="form-sortby"
+				<h3
+					style="color: #03287a; font-size: 18px; letter-spacing: 1px; text-transform: uppercase;">Find
+					Your Fitness Guru</h3>
+				<div
+					class="flex flex-wrap flex-valign-center flex-halign-center pb filter-container">
+					<div class="flex-column mt mr ml  flex-grow">
+						<span style="font-size: 14px; text-align: left" class="pb-sm">Expertise
+							of your choice</span> <select name="form-expertise" id="form-expertise"
+							class="form-control required flex-grow"
+							onchange='trainers.filterTrainers(event)' style="width: auto">
+							<option value="all">All Expertise</option>
+							<optgroup label="Yoga">
+								<option value="Yoga for health">Yoga for health</option>
+								<option value="Weight Loss">Weight Loss</option>
+								<option value="Kids Yoga">Kids Yoga</option>
+								<option value="Pregnancy Yoga">Pregnancy Yoga</option>
+								<option value="Meditation">Meditation</option>
+							</optgroup>
+							<optgroup label="Dance">
+								<option value="Dance">Dance</option>
+								<option value="Zumba">Zumba</option>
+							</optgroup>
+							<option value="Weight / Body weight Workout">Weight /
+								Body weight Workout</option>
+							<option value="Nutrition">Nutrition</option>
+						</select>
+					</div>
+					<div class="flex-column mt mr ml  flex-grow">
+						<span style="font-size: 14px; text-align: left" class="pb-sm">Your
+							preferred timings</span> <select name="form-sort" id="form-filter-misc"
+							class="form-control required flex-grow"
+							onchange='trainers.filterByMisc(event)' " style="width: auto">
+							<option value="all">All Timings</option>
+							<option value="04:00:00 11:59">Morning 04:00 AM to 11:59
+								AM</option>
+							<option value="12:00:00 16:59">Afternoon 12:00 PM to
+								04:59 PM</option>
+							<option value="17:00:00 23:59">Evening 05:00 PM to 11:59
+								PM</option>
+							<option value="00:00:00 03:59">Night 12:00 AM to 03:59
+								AM</option>
+						</select>
+					</div>
+					<div class="flex-column mt mr ml flex-grow">
+						<span style="font-size: 14px; text-align: left" class="pb-sm">Sort
+							by</span><select name="form-sort" id="form-sortby"
 							onchange='trainers.sortTrainersList(event)'
-							class="form-control required mt  mr ml flex-grow"
-							style="width: auto">
+							class="form-control required flex-grow" style="width: auto">
 							<option value="asc">Fee Lowest to Highest</option>
 							<option value="desc" selected>Fee Highest to Lowest</option>
 						</select>
 					</div>
+					<div class="hero-btn"></div>
 				</div>
-				<div class="hero-btn"></div>
+				<div id="trainers-list-container" class="flex flex-wrap"></div>
 			</div>
-			<div id="trainers-list-container" class="flex flex-wrap"></div>
 		</div>
+		<!-- Hero End -->
 	</div>
-	<!-- Hero End -->
-
 	<!-- Service Start -->
 	<div class="service" style="background: white">
 		<div class="container">
