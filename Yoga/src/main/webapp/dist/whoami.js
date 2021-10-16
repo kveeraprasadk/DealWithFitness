@@ -3,12 +3,8 @@ function Whoami() {
 	self.userDetails = "";
 
 	self.detect = function(callback) {
-		$("#logged-in-user-options-trigger").popover({
-			html: true,
-			content: function() {
-				return $('#logged-in-user-popover-options').html();
-			}
-		});
+		// Initialize the addtional user options for navbar which are common for all screens
+		self.initNavBar()
 
 		$.ajax({
 			url: "whoami",
@@ -23,7 +19,7 @@ function Whoami() {
 				} else {
 					console.log("No user logged in");
 					const trainers = document.getElementsByName("trainer-hyperlink-element");
-					$(trainers).show();
+					$(trainers).removeClass("hide");
 				}
 
 				if (callback) {
@@ -59,16 +55,34 @@ function Whoami() {
 			// If logged in user is trainee then hide trainer hyperlink
 			if (self.isTrainee()) {
 				const trainers = document.getElementsByName("trainer-hyperlink-element");
-				$(trainers).hide();
+				$(trainers).addClass("hide");
 				$("#trainee-extra-options").removeClass("hide");
 			} else {
 				$("#trainer-extra-options").removeClass("hide");
 			}
-		}
+		} 
 	}
 
 	self.isUserLoggedIn = function() {
 		return window.__sessionUser && window.__sessionUser != "null" ? true : false;
+	}
+
+	// Nav bar related changes below
+	// Initialize the addtional user options for navbar which are common for all screens
+	self.initNavBar = function() {
+		$("#logged-in-user-options-trigger").popover({
+			html: true,
+			content: function() {
+				return $('#logged-in-user-popover-options').html();
+			}
+		});
+
+		$("#sm-more-options-trigger").popover({
+			html: true,
+			content: function() {
+				return $('#sm-navbar-more-options').html();
+			}
+		});
 	}
 
 	// Called form small screen devices more options button
