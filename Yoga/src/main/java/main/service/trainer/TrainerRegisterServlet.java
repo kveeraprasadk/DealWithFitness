@@ -165,7 +165,7 @@ public class TrainerRegisterServlet extends HttpServlet {
 			Countrow = rs.getString(1);
 			if (Countrow.equals("0")) {
 
-				// String query = "insert into
+				// String query11 = "insert into
 				// trainertemptable(trainername,traineremail,experience,qualification,expertise,classlevel,monthlyfees,schedules,expertise2,classlevel2,monthlyfees2,schedules2,expertise3,classlevel3,monthlyfees3,schedules3,aboutyourself,photoname,photo,creationtime,certificate1,certificate1filename,certificate2,certificate2filename,certificate3,certificate3filename)
 				// values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"; //Insert user
 				// details into the table 'USERS'
@@ -210,7 +210,7 @@ public class TrainerRegisterServlet extends HttpServlet {
 					 * session.setAttribute("trainerexpertise2", expertise2);
 					 * session.setAttribute("trainerschedule2", schedule2);
 					 * session.setAttribute("trainerclasslevel2", classlevel2);
-					 * session.setAttribute("trainermonthlyfees2", monthlyfees2);
+					 * session.setAttribute("trainer2", monthlyfees2);
 					 * session.setAttribute("trainerexpertise3", expertise3);
 					 * session.setAttribute("trainerschedule3", schedule3);
 					 * session.setAttribute("trainerclasslevel3", classlevel3);

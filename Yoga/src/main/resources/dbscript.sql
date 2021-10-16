@@ -53,7 +53,7 @@ create table trainerregister(
 	certificate3			mediumblob,	
 	certificate3filename	varchar(50),			
 	password				varchar(100),
-	adminapprove			varchar(50),
+	adminapprove			boolean default false,
 	PRIMARY KEY (trainerid)
 );
 
