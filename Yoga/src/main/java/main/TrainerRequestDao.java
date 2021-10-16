@@ -26,7 +26,7 @@ List<TrainerDetailsVO> TrainersReq = new ArrayList<TrainerDetailsVO>();
 String sql ="select * from trainerregister where adminapprove=? order by creationtime desc"; 
 
 statement = connection.prepareStatement(sql);
-statement.setString(1, "false");
+statement.setBoolean(1, false);
 ResultSet rs = statement.executeQuery();
 
 
@@ -114,7 +114,7 @@ List<TrainerDetailsVO> TrainersList = new ArrayList<TrainerDetailsVO>();
 String sql ="select * from trainerregister where adminapprove=? order by creationtime desc"; 
 
 statement = connection.prepareStatement(sql);
-statement.setString(1, "true");
+statement.setBoolean(1, true);
 ResultSet rs = statement.executeQuery();
 
 

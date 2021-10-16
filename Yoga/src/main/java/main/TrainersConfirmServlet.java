@@ -77,7 +77,7 @@ public class TrainersConfirmServlet extends HttpServlet {
 				PreparedStatement statement2 = con.prepareStatement(query2); // Making use of prepared statements here
 																				// to insert bunch of data
 				statement2.setString(1, password);
-				statement2.setString(2, "true");				
+				statement2.setBoolean(2, true);				
 				statement2.setString(3, traineremail);
 
 				j = statement2.executeUpdate();

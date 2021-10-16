@@ -239,8 +239,16 @@
 				<div
 					class="col-lg-4 col-md-5 leftgh flex-column flex-halign-center flex-valign-center">
 					<div class="bh-img">
+					 <a href="#">          
 						<img id="profile-image-element" alt="">
+						<span class="glyphicon glyphicon-camera"></span>
+        			</a>
 					</div>
+					<div >
+					
+				<!-- 	<button class="btn btn-info changetrainerpic">Change
+								Profile Pic</button>      -->
+								</div>
 					<div class="name-det">
 						<h2><%=trainerdetails.getName()%></h2>
 						<h3>Contact</h3>
@@ -301,8 +309,10 @@
 								<textarea class="form-control" id="form-aboutself"
 									name="form-aboutself" placeholder="About Yourself.." required><%=trainerdetails.getAboutyourself()%></textarea>
 							</p>
+							<p>
 							<button type="button" class="btn btn-primary" name="updatebutton"
 								id="updatebutton">Update</button>
+								</p>
 						</div>
 						<div id="updatesuccess"></div>
 						<%

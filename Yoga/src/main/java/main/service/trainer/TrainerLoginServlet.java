@@ -34,7 +34,8 @@ public class TrainerLoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
-		String trainerName = null,adminapprove=null;
+		String trainerName = null;
+			boolean	adminapprove;
 		String username = (String) request.getParameter("username");
 		String pass = (String) request.getParameter("password");
 	//	Base64.Encoder enc = Base64.getEncoder();
@@ -56,7 +57,7 @@ public class TrainerLoginServlet extends HttpServlet {
 				try (ResultSet rs = stat.executeQuery()) {
 					if (rs.next()) {
 						trainerName = rs.getString("trainername");
-						adminapprove=rs.getString("adminapprove");
+						adminapprove=rs.getBoolean("adminapprove");
 						System.out.println("trainerName is::" + trainerName);
 						if (trainerName != null) {
 							HttpSession session = request.getSession(true);
@@ -68,7 +69,7 @@ public class TrainerLoginServlet extends HttpServlet {
 							sessionUser.setName(trainerName);
 							session.setAttribute(AppConstants.SESSION_USER_INFO, sessionUser);
 							System.out.println("Trainer :"+adminapprove);
-							if(adminapprove.equals("false")){
+							if(!adminapprove){
 								System.out.println("Trainer temp Login successfull");
 								response.getWriter().write("Trainer Temp Login Success");
 							}else{
