@@ -80,10 +80,11 @@
 <link rel="apple-touch-icon-precomposed"
 	href="assets/ico/apple-touch-icon-57-precomposed.png">
 <link rel="stylesheet" type="text/css" href="./css/common.css">
-
-<!-- Popper JS -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script>
+	function init() {
+		whoami.detect();
+	}
+</script>
 <style type="text/css">
 label {
 	color: #FF0000 !important;
@@ -97,7 +98,7 @@ label {
 </style>
 </head>
 
-<body>
+<body onload="init()">
 	<!-- Nav Bar Start -->
 	<%@include file="./html/navbar.html"%>
 
@@ -191,7 +192,7 @@ label {
 		<div class="inner-bg">
 			<div class="container">
 				<div class="row pl pr">
-					<div class="col-sm-5 form-box card bg-white" style="padding:0px;">
+					<div class="col-sm-5 form-box card bg-white" style="padding: 0px;">
 						<ul class="nav nav-tabs md-tabs tabs-2 light-blue darken-3"
 							id="myTab" role="tablist">
 							<li class="nav-item" role="presentation">
@@ -686,8 +687,9 @@ label {
 							</div>
 						</div>
 					</div>
-					<div class="col-sm-7 text" style="margin-top:0px;padding-top:0px">
-						<h1 >
+					<div class="col-sm-7 text"
+						style="margin-top: 0px; padding-top: 0px">
+						<h1>
 							<strong>DealWithFitness</strong>
 							Trainer Login and Registration Forms
 						</h1>

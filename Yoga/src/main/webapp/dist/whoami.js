@@ -2,9 +2,10 @@ function Whoami() {
 	const self = this;
 	self.userDetails = "";
 	// Pages which does not required authentication
-	self.whitelistedPages = ["index.jsp", "About.jsp"];
+	self.whitelistedPages = ["index.jsp", "About.jsp", "trainerdetails.jsp", "Trainer.jsp"];
 
 	self.detect = function(callback) {
+		console.log("Login detection started");
 		// Initialize the addtional user options for navbar which are common for all screens
 		self.initNavBar()
 
@@ -18,7 +19,7 @@ function Whoami() {
 			error: function(data) {
 				// If this is the status then user not logged in
 				if (data.status == 401) {
-					if(self.isWhitelisted(document.location.href)) {
+					if (self.isWhitelisted(document.location.href) || self.isItRoot()) {
 						return self.handleLoginQueryResponse(null, callback);
 					} else {
 						document.location.href = "./session-expiry.jsp";
@@ -30,9 +31,17 @@ function Whoami() {
 		});
 	}
 
+	self.isItRoot = function() {
+		const path = document.location.href;
+		const values = path.split("/");
+		const root = values[values.length - 1].trim().length == 0;
+		console.log("Root location: ", root);
+		return root;
+	}
+
 	self.isWhitelisted = function(value) {
 		for (const whitelistedPage of self.whitelistedPages) {
-			if(value.endsWith(whitelistedPage)) {
+			if (value.endsWith(whitelistedPage)) {
 				return true;
 			}
 		}
@@ -94,6 +103,7 @@ function Whoami() {
 	// Nav bar related changes below
 	// Initialize the addtional user options for navbar which are common for all screens
 	self.initNavBar = function() {
+		console.log($("#sm-more-options-trigger"))
 		$("#logged-in-user-options-trigger").popover({
 			html: true,
 			content: function() {
