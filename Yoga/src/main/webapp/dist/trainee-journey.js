@@ -53,6 +53,7 @@ function Journey() {
 		for (const inp of inputs) {
 			self.clearFileSelection(inp);
 		}
+		
 		$(inputs).on('change', (event) => {
 			const input = event.target;
 			const fileName = input.files[0].name;
@@ -89,7 +90,8 @@ function Journey() {
 			alertDialog.show("Validation error", "Both the chosen photographs are the same, please choose different one")
 			return flase;
 		}
-
+		// start the progress bar and let the page redirect
+		progressBar.start();
 		$("#traineeId").val(whoami.getUser());
 	}
 }
@@ -208,7 +210,6 @@ function Stories() {
 		});
 	}
 }
-
 
 window.journey = new Journey();
 window.stories = new Stories();

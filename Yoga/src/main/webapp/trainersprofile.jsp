@@ -48,16 +48,7 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 
 <script src="./dist/whoami.js"></script>
-<script>
-$(document).ready(function(){
-    $('[data-toggle="popover"]').popover({
-        placement : 'top',
-		trigger : 'hover',
-        html : true,
-        content : '<div class="media"><img src="img/editpic.jpg" class="mr-3" alt="Sample Image"><div class="media-body"><h5 class="media-heading">Dear</h5><p>Click on Profile Picture to change the Image.</p></div></div>'
-    });
-});
-</script>
+
 <style>
 .toggle.ios, .toggle-on.ios, .toggle-off.ios {
 	border-radius: 20px;
