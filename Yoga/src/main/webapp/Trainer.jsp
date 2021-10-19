@@ -190,8 +190,8 @@ label {
 
 		<div class="inner-bg">
 			<div class="container">
-				<div class="row">
-					<div class="col-sm-5 form-box card bg-white" style="padding:0px">
+				<div class="row pl pr">
+					<div class="col-sm-5 form-box card bg-white" style="padding:0px;">
 						<ul class="nav nav-tabs md-tabs tabs-2 light-blue darken-3"
 							id="myTab" role="tablist">
 							<li class="nav-item" role="presentation">
