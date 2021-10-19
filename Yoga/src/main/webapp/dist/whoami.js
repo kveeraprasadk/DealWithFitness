@@ -2,7 +2,7 @@ function Whoami() {
 	const self = this;
 	self.userDetails = "";
 	// Pages which does not required authentication
-	self.whitelistedPages = ["index.jsp", "about.jsp"];
+	self.whitelistedPages = ["index.jsp", "About.jsp"];
 
 	self.detect = function(callback) {
 		// Initialize the addtional user options for navbar which are common for all screens
@@ -18,19 +18,25 @@ function Whoami() {
 			error: function(data) {
 				// If this is the status then user not logged in
 				if (data.status == 401) {
-					for (const whitelistedPage of self.whitelistedPages) {
-						// if page access is not whitelisted then these pages are secured ones
-						if (!document.location.href.endsWith(whitelistedPage)) {
-							document.location.href = "./session-expiry.jsp";
-						} else {
-							return self.handleLoginQueryResponse(null, callback);
-						}
+					if(self.isWhitelisted(document.location.href)) {
+						return self.handleLoginQueryResponse(null, callback);
+					} else {
+						document.location.href = "./session-expiry.jsp";
 					}
 				} else {
 					alertDialog.show("Service Failure", data.statusText);
 				}
 			},
 		});
+	}
+
+	self.isWhitelisted = function(value) {
+		for (const whitelistedPage of self.whitelistedPages) {
+			if(value.endsWith(whitelistedPage)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	self.handleLoginQueryResponse = function(data, callback) {
