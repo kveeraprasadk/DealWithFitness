@@ -51,6 +51,11 @@
 <script src="lib/lightbox/js/lightbox.min.js"></script>
 <script src="./dist/external/moment.min.js"></script>
 
+<!-- Added this for fixating the header otherwise not needed -->
+<script src="js/main.js"></script>
+<script src="assets/js/scripts.js"></script>
+
+
 <script id="view-stories-fragment" type="text/html"
 	targetId="view-stories-container">
     <div class="flex-column mt pb story-fragment">

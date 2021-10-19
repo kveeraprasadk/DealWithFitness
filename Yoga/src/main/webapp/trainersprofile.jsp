@@ -214,7 +214,7 @@ hr {
 				<div class="col-12">
 					<h2>Trainer's Zone</h2>
 				</div>
-				<div class="col-12">
+				<div class="col-12"> 
 					<a href="javascript: switchView('calendar')">My Training
 						Calendar</a>
 					<a href="javascript: switchView('profile')">My Profile</a>

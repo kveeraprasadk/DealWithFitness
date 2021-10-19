@@ -50,6 +50,12 @@
 <script src="lib/isotope/isotope.pkgd.min.js"></script>
 <script src="lib/lightbox/js/lightbox.min.js"></script>
 
+
+<!-- Added this for fixtating the header otherwise not needed -->
+<script src="js/main.js"></script>
+<script src="assets/js/scripts.js"></script>
+
+
 <style>
 .photo-trigger-button {
 	opacity: 0;
@@ -110,9 +116,11 @@
 							maxlength="7500" id="journey-story-text" name="story"></textarea>
 					</div>
 					<div class="flex-column flex-valign-start">
-						<label class="label-plain" style="text-align: left"><b>Optional:</b>
+						<label class="label-plain" style="text-align: left">
+							<b>Optional:</b>
 							choose upto maximum 2 photographs with total size not exceeding
-							512KB</label>
+							512KB
+						</label>
 						<label style="font-size: 12px; color: blue">Supported
 							formats are jpeg, jpg, png, gif, tif and tiff</label>
 					</div>
@@ -177,12 +185,17 @@
 						<div class="flex-column">
 							<h5 style="text-align: left">Story Compose & Review Process</h5>
 							<ul style="color: red">
-								<li style="text-align: left">Once you compose the story, please click on submit button which then goes through review process.</li>
-								<li style="text-align: left">Deal with fitness Administrator will review your story and then approves it.</li>
-								<li style="text-align: left">Once the story is approved it will be published and available for public consumption.</li>
+								<li style="text-align: left">Once you compose the story,
+									please click on submit button which then goes through review
+									process.</li>
+								<li style="text-align: left">Deal with fitness
+									Administrator will review your story and then approves it.</li>
+								<li style="text-align: left">Once the story is approved it
+									will be published and available for public consumption.</li>
 							</ul>
 						</div>
-						<div class="flex flex-halign-end pt" style="border-top: 1px solid rgb(220, 220, 220)">
+						<div class="flex flex-halign-end pt"
+							style="border-top: 1px solid rgb(220, 220, 220)">
 							<input type="submit" value="Submit" class="btn btn-primary">
 						</div>
 					</div>
