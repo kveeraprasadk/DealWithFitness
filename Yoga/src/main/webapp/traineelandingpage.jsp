@@ -188,6 +188,8 @@ label {
 				</div>
 				<div class="hide mt pt pb " id="no-trainings-message">
 					<h4 style="color: red">No Training's you signed up for!</h4>
+					<a href="index.jsp" class="btn btn-info">Book Your Online
+								Fitness Classes</a>
 				</div>
 				<div id="trainee-booking-container" class="flex flex-wrap mt pt pb">
 

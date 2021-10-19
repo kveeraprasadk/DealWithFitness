@@ -208,6 +208,12 @@
 		<description></description>
 		<servlet-class>main.service.trainer.TrainerTempProfileView</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>TrainerProfilePicUpdateServlet</servlet-name>
+		<display-name>TrainerProfilePicUpdateServlet</display-name>
+		<description></description>
+		<servlet-class>main.service.trainer.TrainerProfilePicUpdateServlet</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>TrainerRegisterServlet</servlet-name>
@@ -344,6 +350,10 @@
 	<servlet-mapping>
 		<servlet-name>TrainerTempProfileView</servlet-name>
 		<url-pattern>/TrainerTempProfileView</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>TrainerProfilePicUpdateServlet</servlet-name>
+		<url-pattern>/TrainerProfilePicUpdateServlet</url-pattern>
 	</servlet-mapping>
 	<listener>
 		<listener-class>main.common.MysqlDatasource</listener-class>
