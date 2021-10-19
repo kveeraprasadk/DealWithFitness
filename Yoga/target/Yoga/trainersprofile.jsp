@@ -44,8 +44,20 @@
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"
 	defer></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 
 <script src="./dist/whoami.js"></script>
+<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover({
+        placement : 'top',
+		trigger : 'hover',
+        html : true,
+        content : '<div class="media"><img src="img/editpic.jpg" class="mr-3" alt="Sample Image"><div class="media-body"><h5 class="media-heading">Dear</h5><p>Click on Profile Picture to change the Image.</p></div></div>'
+    });
+});
+</script>
 <style>
 .toggle.ios, .toggle-on.ios, .toggle-off.ios {
 	border-radius: 20px;
@@ -61,7 +73,90 @@
 	background: none;
 }
 </style>
+<style>
+/* Float cancel and delete buttons and add an equal width */
+.cancelbtn, .deletebtn {
+  float: left;
+  width: 50%;
+}
 
+/* Add a color to the cancel button */
+.cancelbtn {
+  background-color: #ccc;
+  color: black;
+}
+
+/* Add a color to the delete button */
+.deletebtn {
+  background-color: #f44336;
+}
+
+
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 395px;
+  top: 90px;
+  width: 40%; /* Full width */
+  height: 80%; /* Full height */
+
+  padding-top: 50px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #828282;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888; 
+  width: 80%; /* Full width */
+  height: 100%; /* Full height */
+}
+
+/* Style the horizontal ruler */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+ 
+/* The Modal Close Button (x) */
+.close {
+  position: absolute;
+  right: 35px;
+  top: 15px;
+  font-size: 40px;
+  font-weight: bold;
+  color: red;
+}
+
+.close:hover,
+.close:focus {
+  color: red;
+  cursor: pointer;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.unstyled-button {
+  border: none;
+  padding: 0;
+  background: none;
+}
+/* Change styles for cancel button and delete button on extra small screens */
+@media screen and (max-width: 300px) {
+  .cancelbtn, .deletebtn {
+     width: 100%;
+  }
+}
+
+
+</style>
 
 <script src="./dist/external/tui-code-snippet.min.js"></script>
 <script src="./dist/external/moment.min.js"></script>
@@ -247,19 +342,68 @@
 					</ul>
 
 				</div>
+				
 				<div
 					class="col-lg-4 col-md-5 leftgh flex-column flex-halign-center flex-valign-center">
-					<div class="bh-img">
-					 <a href="#">          
-						<img id="profile-image-element" alt="">
-						<span class="glyphicon glyphicon-camera"></span>
-        			</a>
-					</div>
-					<div >
 					
-				<!-- 	<button class="btn btn-info changetrainerpic">Change
-								Profile Pic</button>      -->
-								</div>
+					<a onclick="document.getElementById('id01').style.display='block'" href="#" title="Profile Picture Update" data-toggle="popover" data-placement="bottom" >
+					<div class="bh-img">
+					        
+						<img id="profile-image-element" alt="">
+					<!-- 	<span class="glyphicon glyphicon-camera"></span>  -->   			
+        				
+					</div>
+					</a>
+					
+					
+				
+					
+				
+
+<div id="id01" class="modal">
+  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
+  
+  <form class="modal-content" action="TrainerProfilePicUpdateServlet" id="trainerprofilepictureupdate" name="trainerprofilepictureupdate" method="post">
+    <div class="container">
+      <h3>Update Profile Picture</h3>
+      <p>Please Select Update Picture !</p>
+    	<p class="text-center"><input type="file" name="formimage" class="form-image form-control"
+												id="form-image" accept="image/*"
+												onchange="preview_image(event)"> 
+												<div class="bh-img text-center">
+												<img id="output_image" />
+												</div>
+												</p><br>
+      <div class="clearfix">
+        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+        <button type="submit" onclick="document.getElementById('id01').style.display='none'" class="deletebtn">Save</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script type='text/javascript'>
+		function preview_image(event) {
+			var reader = new FileReader();
+			reader.onload = function() {
+				var output = document.getElementById('output_image');
+				output.src = reader.result;
+			}
+			reader.readAsDataURL(event.target.files[0]);
+		}
+	</script>
+<script>
+// Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+						
 					<div class="name-det">
 						<h2><%=trainerdetails.getName()%></h2>
 						<h3>Contact</h3>
@@ -615,6 +759,7 @@
 											});
 						});
 	</script>
+	
 	<!-- About End -->
 
 	<!-- Footer Start -->

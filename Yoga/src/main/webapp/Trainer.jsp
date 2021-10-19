@@ -156,7 +156,7 @@ label {
 																		document.location.href = './TrainerProfile';
 																	} else if(data == "Trainer Temp Login Success"){
 																		document.location.href = './TrainerTempProfileshowing';
-																		$('#prasad').hide();
+																		
 																	}else{
 																		$(
 																				'#regsuccess')
@@ -309,7 +309,7 @@ label {
 										<div class="form-group">
 										<button type="submit"
 											class="btn trainerloginbutton btn-primary"
-											id="trainerloginbutton">Login <i class="fas fa-sign-in-alt ml-1"></i></button>
+											id="trainerloginbutton"><i class="fas fa-sign-in-alt ml-1"></i> &nbsp Login </button>
 											</div>
 											<div class="options text-center text-md-right mt-1">
                 							
@@ -730,7 +730,7 @@ label {
 										</div>
 										<button type="submit"
 											class="btn trainerregisterbutton btn-primary"
-											id="trainerregisterbutton">Register <i class="fas fa-sign-in-alt ml-1"></i></button>
+											id="trainerregisterbutton"><i class="fas fa-sign-in-alt ml-1"></i> &nbsp Register </button>
 									</form>
 								</div>
 								<div id="success"></div>
