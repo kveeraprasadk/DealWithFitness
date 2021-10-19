@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import main.common.AppUtils;
 import main.common.DBConnection;
 
 /**
@@ -99,7 +100,7 @@ public class TrainerRegisterServlet extends HttpServlet {
 		 * System.out.println("path:"+request.getContextPath()); }
 		 */
 
-		String fileName = extractFileName(filePart);
+		String fileName = AppUtils.getFileNameFromFormPart(filePart);
 		if (filePart != null) {
 			// prints out some information for debugging
 			System.out.println(filePart.getName());
@@ -110,7 +111,7 @@ public class TrainerRegisterServlet extends HttpServlet {
 			inputStream = filePart.getInputStream();
 		}
 		Part certificate1 = request.getPart("formcertificate1");
-		String certificatefileName1 = extractFileName(certificate1);
+		String certificatefileName1 = AppUtils.getFileNameFromFormPart(certificate1);
 		if (certificate1 != null) {
 			// prints out some information for debugging
 			System.out.println("certificate1::::" + certificate1.getName());
@@ -124,7 +125,7 @@ public class TrainerRegisterServlet extends HttpServlet {
 			certificatefileName1 = "";
 		}
 		Part certificate2 = request.getPart("form-certificate2");
-		String certificatefileName2 = extractFileName(certificate2);
+		String certificatefileName2 = AppUtils.getFileNameFromFormPart(certificate2);
 		if (certificate2 != null) {
 			// prints out some information for debugging
 			System.out.println("certificate2::::" + certificate2.getName());
@@ -138,7 +139,7 @@ public class TrainerRegisterServlet extends HttpServlet {
 			certificatefileName2 = "";
 		}
 		Part certificate3 = request.getPart("form-certificate3");
-		String certificatefileName3 = extractFileName(certificate3);
+		String certificatefileName3 = AppUtils.getFileNameFromFormPart(certificate3);
 		if (certificate3 != null) {
 			// prints out some information for debugging
 			System.out.println("certificate3::::" + certificate3.getName());
@@ -248,23 +249,4 @@ public class TrainerRegisterServlet extends HttpServlet {
 
 	}
 
-	private String extractFileName(Part part) {
-		// form-data; name="file"; filename="C:\file1.zip"
-		// form-data; name="file"; filename="C:\Note\file2.zip"
-		String contentDisp = part.getHeader("content-disposition");
-		String[] items = contentDisp.split(";");
-		for (String s : items) {
-			if (s.trim().startsWith("filename")) {
-				// C:\file1.zip
-				// C:\Note\file2.zip
-				String clientFileName = s.substring(s.indexOf("=") + 2, s.length() - 1);
-				clientFileName = clientFileName.replace("\\", "/");
-				int i = clientFileName.lastIndexOf('/');
-				// file1.zip
-				// file2.zip
-				return clientFileName.substring(i + 1);
-			}
-		}
-		return null;
-	}
 }

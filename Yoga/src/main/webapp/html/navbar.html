@@ -5,9 +5,9 @@
 		<div class="container-fluid"
 			style="padding: 0px; justify-content: flex-start; min-height: 40px">
 			<a tabindex="0" id="sm-more-options-trigger" role="button"
-				class="btn btn-default small-screen" data-trigger="focus" data-container="body"
-				data-placement="bottom" data-toggle="popover" data-html="true"
-				style="padding-left: 8px">
+				class="btn btn-default small-screen" data-trigger="focus"
+				data-container="body" data-placement="bottom" data-toggle="popover"
+				data-html="true" style="padding-left: 8px">
 				<span class="fa fa-bars"></span>
 			</a>
 			<span class="logo-text flex-grow pl" style="text-align: left">DEALWITHFITNESS</span>
@@ -16,8 +16,7 @@
 				<div class="navbar-nav ml-auto flex flex-valign-center">
 					<a href="index.jsp" class="nav-item nav-link ">Home</a>
 					<a href="About.jsp" class="nav-item nav-link">About</a>
-					<a name="trainer-hyperlink-element"
-						href="Trainer.jsp"
+					<a name="trainer-hyperlink-element" href="Trainer.jsp"
 						class="nav-item nav-link hide"> Trainer</a>
 				</div>
 			</div>
@@ -29,7 +28,8 @@
 			</a>
 		</div>
 		<!-- This is for smaller screens  -->
-		<div class="small-screen hide flex-column hide" id="sm-navbar-more-options">
+		<div class="small-screen hide flex-column hide"
+			id="sm-navbar-more-options">
 			<div class="navbar-nav ml-auto flex-column pl pr pb pt">
 				<div class="flex flex-valign-center pb-sm">
 					<i class="fa fa-home icon-color pr" style="font-size: 20px"></i>
@@ -43,8 +43,7 @@
 				<div class="flex flex-valign-center pb-sm hide"
 					name="trainer-hyperlink-element">
 					<i class="fa fa-user icon-color pr" style="font-size: 20px"></i>
-					<a id="trainer-sm-link"
-						href="Trainer.jsp"
+					<a id="trainer-sm-link" href="Trainer.jsp"
 						class="nav-item nav-link user-name"> Trainer</a>
 				</div>
 			</div>
@@ -63,27 +62,34 @@
 				<span id="logged-in-user-email" class="user-name"></span>
 			</div>
 			<span class="divider"></span>
+			<!-- This is for trainee login options -->
 			<div class="flex-column hide" id="trainee-extra-options">
 				<div class="flex flex-valign-center pb-sm">
 					<i class="fa fa-clock icon-color pr" style="font-size: 20px"></i>
-					<a href="./traineelandingpage.jsp" class="user-name pt pb-sm">My
+					<a href="./traineelandingpage.jsp" class="user-name pt pb-sm">
 						Training's</a>
+				</div>
+				<div class="flex flex-valign-center pb-sm">
+					<i class="fa fa-heart icon-color pr" style="font-size: 20px"></i>
+					<a href="./testimonials.jsp" class="user-name pt pb-sm">My
+						Fitness Journey</a>
 				</div>
 				<div class="flex flex-valign-center">
 					<i class="fa fa-file icon-color pr" style="font-size: 20px"></i>
-					<a href="./TraineeProfile" class="user-name pt-sm">My Profile</a>
+					<a href="./TraineeProfile" class="user-name pt-sm">Profile</a>
 				</div>
 			</div>
+			<!-- This is for trainer login options -->
 			<div class="flex-column hide" id="trainer-extra-options">
 				<div class="flex flex-valign-center pb-sm">
 					<i class="fa fa-calendar-week icon-color pr"
 						style="font-size: 20px"></i>
-					<a href="./TrainerProfile?view=calendar" class="user-name pt pb-sm">My
+					<a href="./TrainerProfile?view=calendar" class="user-name pt pb-sm">
 						Training Calendar </a>
 				</div>
 				<div class="flex flex-valign-center">
 					<i class="fa fa-file icon-color pr" style="font-size: 20px"></i>
-					<a href="./TrainerProfile?view=profile" class="user-name pt-sm pb">My
+					<a href="./TrainerProfile?view=profile" class="user-name pt-sm pb">
 						Profile </a>
 				</div>
 			</div>

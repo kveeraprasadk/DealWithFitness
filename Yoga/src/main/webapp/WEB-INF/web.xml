@@ -11,6 +11,12 @@
 		<servlet-class>main.service.trainer.TrainerRegisterServlet</servlet-class>
 	</servlet>
 	<servlet>
+		<servlet-name>TraineeStoryServlet</servlet-name>
+		<display-name>TraineeStoryServlet</display-name>
+		<description></description>
+		<servlet-class>main.service.trainee.TraineeStoryServlet</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>ContactServlet</servlet-name>
 		<display-name>ContactServlet</display-name>
 		<description></description>
@@ -206,6 +212,10 @@
 	<servlet-mapping>
 		<servlet-name>TrainerRegisterServlet</servlet-name>
 		<url-pattern>/TrainerRegisterServlet</url-pattern>
+	</servlet-mapping>
+		<servlet-mapping>
+		<servlet-name>TraineeStoryServlet</servlet-name>
+		<url-pattern>/TraineeStoryServlet</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>ContactServlet</servlet-name>

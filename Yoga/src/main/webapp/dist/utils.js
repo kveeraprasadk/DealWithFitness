@@ -55,6 +55,17 @@ function Utils() {
 			}
 		);
 	}
+
+	self.isBlank = function(str) {
+		if (str == undefined || str == null || (typeof str) != "string" || str.trim().length == 0) {
+			return true;
+		}
+		return false;
+	}
+	
+	self.isNotBlank = function(str) {
+		return !self.isBlank(str);
+	}
 }
 
 window.Utils = new Utils();

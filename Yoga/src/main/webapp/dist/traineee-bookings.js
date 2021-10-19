@@ -8,21 +8,17 @@ function TraineeBookings() {
 		progressBar.start();
 		// Check if user already logged in otherwise redirect to index.jsp where trinee can login
 		self.whoami.detect(() => {
-			if (self.whoami.isUserLoggedIn()) {
-				self.dispatch();
-			} else {
-				document.location.href = "index.jsp";
-			}
+			self.dispatch();
 		});
 	}
-	
+
 	self.switchView = function(view) {
-		if(view == "bookings") {
+		if (view == "bookings") {
 			document.location.href = "traineelandingpage.jsp";
 		} else {
 			document.location.href = "TraineeProfile";
 		}
-		
+
 	}
 
 	self.dispatch = function() {
@@ -46,7 +42,7 @@ function TraineeBookings() {
 					// We get triness trainings details by trainer that this trainee trained for
 					for (const trainerDetails of data) {
 						const scheduleSeries = trainerDetails.series;
-						
+
 						for (const traineeBookedSchedule of scheduleSeries) {
 							Utils.addRecurrenceRule(traineeBookedSchedule);
 							// Add if demoClass is present in the schedule
@@ -77,7 +73,7 @@ function TraineeBookings() {
 		const title = event.target.getAttribute("title")
 
 		if (self.whoami.isUserLoggedIn()) {
-			confirmDialog.show("Would you like to delete the training schedule \"" + title+"\"", () => {
+			confirmDialog.show("Would you like to delete the training schedule \"" + title + "\"", () => {
 				progressBar.start();
 				if (self.whoami.isUserLoggedIn()) {
 					$.ajax({

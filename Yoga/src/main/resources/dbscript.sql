@@ -57,6 +57,18 @@ create table trainerregister(
 	PRIMARY KEY (trainerid)
 );
 
+create table traineeStories(
+	traineeId 			varchar(50)	NOT	NULL,	
+	trainerId			varchar(50)	NOT	NULL,
+	storyId				varchar(50) NOT NULL,
+	story				varchar(7600) NOT NULL,
+	adminapprove		boolean default false,
+	photo1				mediumblob,
+	photo2				mediumblob,
+	creationTime		long,
+	PRIMARY KEY (traineeId, trainerId, storyId)
+);
+
 create table trainertemptable(
 	trainerid				int	NOT NULL auto_increment,
 	trainername				varchar(50)	NOT NULL,			

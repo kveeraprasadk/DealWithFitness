@@ -16,7 +16,7 @@ function Trainers() {
 			self.attachLoginActions();
 		});
 		// When this dialog close do cleaup
-		$("#register-trainee-dialog").on("hide.bs.modal", ()=> {
+		$("#register-trainee-dialog").on("hide.bs.modal", () => {
 			$("#redirect-signin-button").hide();
 		});
 		// Add timings options with timezone offset
@@ -148,7 +148,7 @@ function Trainers() {
 		// If sign in button is visible then hide it and then validate it, if email already exists
 		// then we anyway show this button agian
 		$("#redirect-signin-button").hide();
-		
+
 		if (self.validateRegistration()) {
 			progressBar.start();
 			$.ajax({
@@ -377,6 +377,10 @@ function Trainers() {
 		document.location.href = "index.jsp";
 	}
 
+	self.showMyBookingsEvent = function() {
+		document.location.href = "traineelandingpage.jsp";
+	}
+
 	self.showLoginDialogEvent = function(withEmailId) {
 		$("#login-traineeemailid").val(withEmailId ? withEmailId : "");
 		$("#login-traineepassword").val("");
@@ -387,7 +391,7 @@ function Trainers() {
 			$("#login-traineeemailid").focus()
 		}, 500);
 	}
-	
+
 	self.redirectToSignInFromRegistration = function(event) {
 		const emailId = event.target.innerText.split(" ")[2];
 		$("#register-trainee-dialog").modal("hide");

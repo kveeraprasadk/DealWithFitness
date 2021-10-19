@@ -75,9 +75,6 @@
 				<div class="col-12">
 					<h2>About Us</h2>
 				</div>
-				<div class="col-12">
-					<a href="index.jsp">Home</a> <a href="">About Us</a>
-				</div>
 			</div>
 		</div>
 	</div>

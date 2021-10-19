@@ -23,6 +23,8 @@ public class LoginQueryServlet extends HttpServlet {
 		if (user != null) {
 			response.setContentType("applicaton/json");
 			response.getWriter().write(Json.stringify(Collections.singletonMap(user.getEmail(), user)));
-		} 
+		} else {
+			response.setStatus(401);
+		}
 	}
 }

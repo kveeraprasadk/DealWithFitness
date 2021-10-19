@@ -1,6 +1,8 @@
 function Whoami() {
 	const self = this;
 	self.userDetails = "";
+	// Pages which does not required authentication
+	self.whitelistedPages = ["index.jsp", "about.jsp"];
 
 	self.detect = function(callback) {
 		// Initialize the addtional user options for navbar which are common for all screens
@@ -11,25 +13,41 @@ function Whoami() {
 			type: "GET",
 			cache: false,
 			success: function(data) {
-				if (data) {
-					for (const key in data) {
-						self.userDetails = data[key];
-						self.bindUser(key);
-					}
-				} else {
-					console.log("No user logged in");
-					const trainers = document.getElementsByName("trainer-hyperlink-element");
-					$(trainers).removeClass("hide");
-				}
-
-				if (callback) {
-					callback();
-				}
+				self.handleLoginQueryResponse(data, callback);
 			},
 			error: function(data) {
-				alertDialog.show("Service Failure", data.statusText);
-			}
+				// If this is the status then user not logged in
+				if (data.status == 401) {
+					for (const whitelistedPage of self.whitelistedPages) {
+						// if page access is not whitelisted then these pages are secured ones
+						if (!document.location.href.endsWith(whitelistedPage)) {
+							document.location.href = "./session-expiry.jsp";
+						} else {
+							return self.handleLoginQueryResponse(null, callback);
+						}
+					}
+				} else {
+					alertDialog.show("Service Failure", data.statusText);
+				}
+			},
 		});
+	}
+
+	self.handleLoginQueryResponse = function(data, callback) {
+		if (data) {
+			for (const key in data) {
+				self.userDetails = data[key];
+				self.bindUser(key);
+			}
+		} else {
+			console.log("No user logged in");
+			const trainers = document.getElementsByName("trainer-hyperlink-element");
+			$(trainers).removeClass("hide");
+		}
+
+		if (callback) {
+			callback();
+		}
 	}
 
 	self.redirectIfUserLoggedInOrElse = function(pathIfPresent, pathOrElse) {
@@ -60,7 +78,7 @@ function Whoami() {
 			} else {
 				$("#trainer-extra-options").removeClass("hide");
 			}
-		} 
+		}
 	}
 
 	self.isUserLoggedIn = function() {
