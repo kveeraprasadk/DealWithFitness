@@ -192,25 +192,57 @@ label {
 						<div class="fx-ro">
 							<div class="dat col-lg-4">State</div>
 							<div class="dat col-lg-8">
-								<select onchange="print_city('state', this.selectedIndex);"
-									id="sts" name="stt" class="form-control" required>
+								<select id="form-state" name="form-state" class="form-control" required>
 									<option value="<%=traineedetails.getState()%>"><%=traineedetails.getState()%></option>
+									<option value="Andaman & Nicobar">Andaman & Nicobar</option>
+									<option value="Andhra Pradesh">Andhra Pradesh</option>
+									<option value="Arunachal Pradesh">Arunachal Pradesh</option>
+									<option value="Assam">Assam</option>
+									<option value="Bihar">Bihar</option>
+									<option value="Chandigarh">Chandigarh</option>
+									<option value="Chhattisgarh">Chhattisgarh</option>
+									<option value="Dadra & Nagar Haveli">Dadra & Nagar Haveli</option>
+									<option value="Daman & Diu">Daman & Diu</option>
+									<option value="Delhi">Delhi</option>
+									<option value="Goa">Goa</option>
+									<option value="Gujarat">Gujarat</option>
+									<option value="Haryana">Haryana</option>
+									<option value="Himachal Pradesh">Himachal Pradesh</option>
+									<option value="Jammu & Kashmir">Jammu & Kashmir</option>
+									<option value="Jharkhand">Jharkhand</option>
+									<option value="Karnataka">Karnataka</option>
+									<option value="Kerala">Kerala</option>
+									<option value="Lakshadweep">Lakshadweep</option>
+									<option value="Madhya Pradesh">Madhya Pradesh</option>
+									<option value="Maharashtra">Maharashtra</option>
+									<option value="Manipur">Manipur</option>
+									<option value="Meghalaya">Meghalaya</option>
+									<option value="Mizoram">Mizoram</option>
+									<option value="Nagaland">Nagaland</option>
+									<option value="Orissa">Orissa</option>
+									<option value="Pondicherry">Pondicherry</option>
+									<option value="Punjab">Punjab</option>
+									<option value="Rajasthan">Rajasthan</option>
+									<option value="Sikkim">Sikkim</option>
+									<option value="Tamil Nadu">Tamil Nadu</option>
+									<option value="Telangana">Telangana</option>
+									<option value="Tripura">Tripura</option>
+									<option value="Uttar Pradesh">Uttar Pradesh</option>
+									<option value="Uttaranchal">Uttaranchal</option>
+									<option value="West Bengal">West Bengal</option>
+									
+									
 								</select>
 							</div>
 						</div>
 						<div class="fx-ro">
 							<div class="dat col-lg-4">City</div>
 							<div class="dat col-lg-8">
-								<select id="state" name="state" class="form-control" required>
-									<option value="<%=traineedetails.getCity()%>"><%=traineedetails.getCity()%></option>
-								</select>
-								<script language="javascript">
-									print_state("sts");
-								</script>
+								<input type="text" name="form-city"
+									class="form-city form-control" id="form-city"
+									value="<%=traineedetails.getCity()%>" required>							
 
-								<!-- 		<input type="text" name="form-city"
-								class="form-city form-control" id="form-city"
-								value="" required>   -->
+								
 							</div>
 						</div>
 						<div class="fx-ro">
@@ -431,16 +463,16 @@ label {
 														.val();
 												var email = $("#form-email")
 														.val();
-												//		var dob = $("#form-dob").val();
+												var dob = $("#form-dob").val();
 												var target = $("#form-target")
 														.val();
 												var ailment = $("#form-ailment")
 														.val();
 												var phone = $("#form-phone")
 														.val();
-												var state = $("#sts").val();
-												var city = $("#state").val();
-
+												var state = $("#form-state").val();
+												var city = $("#form-city").val();
+												
 												$
 														.ajax({
 															url : "TraineeProfileDetailsUpdateServlet",
@@ -448,7 +480,7 @@ label {
 															data : {
 																name : name,
 																email : email,
-																//		dob : dob,
+														   		dob : dob,
 																target : target,
 																ailment : ailment,
 																phone : phone,
