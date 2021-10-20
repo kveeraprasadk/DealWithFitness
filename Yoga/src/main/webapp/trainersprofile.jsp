@@ -372,7 +372,21 @@ hr {
     </div>
   </form>
 </div>
-
+<script src="jquery.js"></script>
+<script src="jquery.form.js"></script>
+<script>
+    $(function() {
+        $('#trainerprofilepictureupdate').ajaxForm({
+            success: function(msg) {
+                alert("File has been uploaded successfully");
+            },
+            error: function(msg) {
+            	 alert("File has been uploaded failed");
+                $("#upload-error").text("Couldn't upload file");
+            }
+        });
+    });
+</script>
 <script type='text/javascript'>
 		function preview_image(event) {
 			var reader = new FileReader();

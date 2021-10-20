@@ -244,6 +244,7 @@ label {
 											<div id="regsuccess"></div>
 										</div>
 										<div class="form-group">
+<<<<<<< Updated upstream
 											<button type="submit"
 												class="btn trainerloginbutton btn-primary"
 												id="trainerloginbutton">
@@ -259,6 +260,33 @@ label {
 											</p>
 										</div>
 
+=======
+										<button type="submit"
+											class="btn trainerloginbutton btn-primary"
+											id="trainerloginbutton"><i class="fas fa-sign-in-alt ml-1"></i> &nbsp Login </button>
+											</div>
+											</form>
+											<div class="options text-center text-md-right mt-1">
+                							
+                							<p>Forgot <a href="#" class="blue-text forgotpasswordshow">Password?</a></p>
+             								 </div>
+             								 <form role="form" id="trainerforgotform" name="trainerforgotform"
+										class="forgot-form">
+             								 <div class="form-group forgotusername">
+											<label class="sr-only" for="form-forgotusername">User Name</label>
+											<input type="email" name="username"
+												placeholder="User Name..."
+												class="form-forgotusername form-control" id="formforgotusername" required>
+										</div>
+										<div class="form-group forgotbutton">
+										<button type="submit"
+											class="btn trainerforgotbutton btn-primary"
+											id="trainerfotgotbutton"> &nbsp Send </button>
+											</div>
+										<div class="form-group">
+											<div id="forgotsuccess"></div>
+										</div>
+>>>>>>> Stashed changes
 									</form>
 
 								</div>
@@ -345,267 +373,7 @@ label {
 											<input type="text" name="formphone" placeholder="Phone..."
 												class="form-phone form-control" id="form-phone" required>
 										</div>
-										<!-- 
-								<div class="form-group">
-									<label for="form-schedule"><strong>Schedule
-											Preference</strong></label><br>
-									<div id="addsch1" class="form-group">
-										<div class="form-group">
-											<label class="sr-only" for="form-expertise1">Expertise-1</label>
-											<select name="formexpertise1" id="form-expertise1"
-												class="form-control required" onfocus='this.size=5;'
-												onblur='this.size=1;' onchange='this.size=1; this.blur();'
-												required>
-												<option value="">Expertise-1</option>
-												<option value="Yoga for health">Yoga for health</option>
-												<option value="Weight Loss">Weight Loss</option>
-												<option value="Kids Yoga">Kids Yoga</option>
-												<option value="Pregnancy Yoga">Pregnancy Yoga</option>
-												<option value="Meditation">Meditation</option>
-											</select>
-											
-										</div>
-										<div class="form-group">
-											<label class="sr-only" for="form-classlevel1">Classlevel-1</label>
-											<select name="formclasslevel1" id="form-classlevel1"
-												class="form-control required" onfocus='this.size=3;'
-												onblur='this.size=1;' onchange='this.size=1; this.blur();'
-												required>
-												<option value="">Classlevel-1</option>
-												<option value="Level 1 - Beginner Class">Level 1 -
-													Beginner Class</option>
-												<option value="Level 2 - Intermediate Class">Level
-													2 - Intermediate Class</option>
-												<option value="Level 3 - Advance Class">Level 3 -
-													Advance Class</option>
-											</select>
-											
-										</div>
-										<div class="form-group">
-											<label class="sr-only" for="form-monthly-fees1">Monthly
-												Fees</label> <select name="formmonthlyfees1" id="form-monthly-fees1"
-												class="form-control required" onfocus='this.size=5;'
-												onblur='this.size=1;' onchange='this.size=1; this.blur();'
-												required>
-												<option value="">MonthlyFees-1</option>
-												<option value="600/-">600/-</option>
-												<option value="800/-">800/-</option>
-												<option value="1000/-">1000/-</option>
-												<option value="1200/-">1200/-</option>
-												<option value="1400/-">1400/-</option>
-												<option value="1600/-">1600/-</option>
-
-												<option value="1800/-">1800/-</option>
-												<option value="2000/-">2000/-</option>
-												<option value="2200/-">2200/-</option>
-												<option value="2400/-">2400/-</option>
-												<option value="2600/-">2600/-</option>
-
-												<option value="2800/-">2800/-</option>
-												<option value="3000/-">3000/-</option>
-												<option value="3200/-">3200/-</option>
-												<option value="3400/-">3400/-</option>
-												<option value="3600/-">3600/-</option>
-
-												<option value="3800/-">3800/-</option>
-												<option value="4000/-">4000/-</option>
-												<option value="4200/-">4200/-</option>
-												<option value="4400/-">4400/-</option>
-												<option value="4600/-">4600/-</option>
-												<option value="4800/-">4800/-</option>
-												<option value="5000/-">5000/-</option>
-											</select>
-											
-										</div>
-										<input type="time" name="formfrom1" class="form-from1"
-											id="form-from1" required> <input type="time"
-											name="formto1" class="form-to1" id="form-to1" required>
-										<button type="button" id="addbutton1">Add More</button>
-
-									</div>
-									<div id="addsch2" class="form-group">
-										<div class="form-group">
-											<label class="sr-only" for="form-expertise2">Expertise-2</label>
-											<select name="formexpertise2" id="form-expertise2"
-												class="form-control required" onfocus='this.size=5;'
-												onblur='this.size=1;' onchange='this.size=1; this.blur();'
-												required>
-												<option value="">Expertise-2</option>
-												<option value="Yoga for health">Yoga for health</option>
-												<option value="Weight Loss">Weight Loss</option>
-												<option value="Kids Yoga">Kids Yoga</option>
-												<option value="Pregnancy Yoga">Pregnancy Yoga</option>
-												<option value="Meditation">Meditation</option>
-											</select>
-											
-										</div>
-										<div class="form-group">
-											<label class="sr-only" for="form-classlevel2">Classlevel-2</label>
-											<select name="formclasslevel2" id="form-classlevel2"
-												class="form-control required" onfocus='this.size=3;'
-												onblur='this.size=1;' onchange='this.size=1; this.blur();'
-												required>
-												<option value="">Classlevel-2</option>
-												<option value="Level 1 - Beginner Class">Level 1 -
-													Beginner Class</option>
-												<option value="Level 2 - Intermediate Class">Level
-													2 - Intermediate Class</option>
-												<option value="Level 3 - Advance Class">Level 3 -
-													Advance Class</option>
-											</select>
-											
-										</div>
-										<div class="form-group">
-											<label class="sr-only" for="form-monthly-fees2">Monthly
-												Fees2</label> <select name="formmonthlyfees2"
-												id="form-monthly-fees2" class="form-control required"
-												onfocus='this.size=5;' onblur='this.size=1;'
-												onchange='this.size=1; this.blur();' required>
-												<option value="">MonthlyFees-2</option>
-												<option value="600/-">600/-</option>
-												<option value="800/-">800/-</option>
-												<option value="1000/-">1000/-</option>
-												<option value="1200/-">1200/-</option>
-												<option value="1400/-">1400/-</option>
-												<option value="1600/-">1600/-</option>
-
-												<option value="1800/-">1800/-</option>
-												<option value="2000/-">2000/-</option>
-												<option value="2200/-">2200/-</option>
-												<option value="2400/-">2400/-</option>
-												<option value="2600/-">2600/-</option>
-
-												<option value="2800/-">2800/-</option>
-												<option value="3000/-">3000/-</option>
-												<option value="3200/-">3200/-</option>
-												<option value="3400/-">3400/-</option>
-												<option value="3600/-">3600/-</option>
-
-												<option value="3800/-">3800/-</option>
-												<option value="4000/-">4000/-</option>
-												<option value="4200/-">4200/-</option>
-												<option value="4400/-">4400/-</option>
-												<option value="4600/-">4600/-</option>
-												<option value="4800/-">4800/-</option>
-												<option value="5000/-">5000/-</option>
-											</select>
-											
-										</div>
-										<input type="time" name="form-from2" class="form-from2"
-											id="form-from2"> <input type="time" name="form-to2"
-											class="form-to2" id="form-to2">
-										<button type="button" id="addbutton2">Add More</button>
-									</div>
-									<div id="addsch3" class="form-group">
-										<div class="form-group">
-											<label class="sr-only" for="form-expertise3">Expertise-3</label>
-											<select name="formexpertise3" id="form-expertise3"
-												class="form-control required" onfocus='this.size=5;'
-												onblur='this.size=1;' onchange='this.size=1; this.blur();'
-												required>
-												<option value="">Expertise-3</option>
-												<option value="Yoga for health">Yoga for health</option>
-												<option value="Weight Loss">Weight Loss</option>
-												<option value="Kids Yoga">Kids Yoga</option>
-												<option value="Pregnancy Yoga">Pregnancy Yoga</option>
-												<option value="Meditation">Meditation</option>
-											</select>
-											
-										</div>
-										<div class="form-group">
-											<label class="sr-only" for="form-classlevel3">Classlevel-3</label>
-											<select name="formclasslevel3" id="form-classlevel3"
-												class="form-control required" onfocus='this.size=3;'
-												onblur='this.size=1;' onchange='this.size=1; this.blur();'
-												required>
-												<option value="">Classlevel-3</option>
-												<option value="Level 1 - Beginner Class">Level 1 -
-													Beginner Class</option>
-												<option value="Level 2 - Intermediate Class">Level
-													2 - Intermediate Class</option>
-												<option value="Level 3 - Advance Class">Level 3 -
-													Advance Class</option>
-											</select>
-											
-										</div>
-										<div class="form-group">
-											<label class="sr-only" for="form-monthly-fees3">Monthly
-												Fees3</label> <select name="formmonthlyfees3"
-												id="form-monthly-fees3" class="form-control required"
-												onfocus='this.size=5;' onblur='this.size=1;'
-												onchange='this.size=1; this.blur();' required>
-												<option value="">MonthlyFees-3</option>
-												<option value="600/-">600/-</option>
-												<option value="800/-">800/-</option>
-												<option value="1000/-">1000/-</option>
-												<option value="1200/-">1200/-</option>
-												<option value="1400/-">1400/-</option>
-												<option value="1600/-">1600/-</option>
-
-												<option value="1800/-">1800/-</option>
-												<option value="2000/-">2000/-</option>
-												<option value="2200/-">2200/-</option>
-												<option value="2400/-">2400/-</option>
-												<option value="2600/-">2600/-</option>
-
-												<option value="2800/-">2800/-</option>
-												<option value="3000/-">3000/-</option>
-												<option value="3200/-">3200/-</option>
-												<option value="3400/-">3400/-</option>
-												<option value="3600/-">3600/-</option>
-
-												<option value="3800/-">3800/-</option>
-												<option value="4000/-">4000/-</option>
-												<option value="4200/-">4200/-</option>
-												<option value="4400/-">4400/-</option>
-												<option value="4600/-">4600/-</option>
-												<option value="4800/-">4800/-</option>
-												<option value="5000/-">5000/-</option>
-											</select>
-											
-										</div>
-										<input type="time" name="form-from3" class="form-from3"
-											id="form-from3"> <input type="time" name="form-to3"
-											class="form-to3" id="form-to3">
-										     	<button type="button" id="addbutton3">Add More</button> 
-										</div>
-
-
-								</div>   -->
-										<!--         <div class="form-group">
-			                        	<label class="" for="form-schedule"><strong>Schedule Prefererence</strong></label><br>
-			                        	<input type="checkbox" value="9:00 AM to 11:00 AM" id="flexCheckDefaultschms9to11" name="flexCheckDefaultschms9to11" class="form-schedule " >
-			                        		<label class="form-check-label" for="flexCheckDefaultschms9to11">
-    										Morning Session: 9:00 AM to 11:00 AM
-  											</label><br>
-  											<input type="checkbox" value="11:00 AM to 1:00 PM" id="flexCheckDefaultschms11to1" name="flexCheckDefaultschms11to1" class="form-schedule " >
-			                        		<label class="form-check-label" for="flexCheckDefaultschms11to1">
-    										Morning Session: 11:00 AM to 1:00 PM
-  											</label><br>
-  											<input type="checkbox" value="5:00 PM to 7:00 PM" id="flexCheckDefaultschaf5to7" name="flexCheckDefaultschaf5to7" class="form-schedule " >
-			                        		<label class="form-check-label" for="flexCheckDefaultschaf5to7">
-    										Evening Session: 5:00 PM to 7:00 PM
-  											</label><br>
-  											<input type="checkbox" value="7:00 PM to 9:00 PM" id="flexCheckDefaultschev7to9" name="flexCheckDefaultschev7to9" class="form-schedule " >
-			                        		<label class="form-check-label" for="flexCheckDefaultschev7to9">    										
-			                        		Evening Session: 7:00 PM to 9:00 PM
-  											</label><br>
-			                        </div>    
-			                        <div class="form-group">
-			                        	<label class="labelwhite" for="form-classlevel"><strong>Class Level</strong></label><br>
-			                        	<input type="checkbox"  value="Beginner Class" id="flexCheckDefaultbegining" name="flexCheckDefaultbegining" class="form-begining roles" >
-			                        		<label class="form-check-label labelwhite" for="flexCheckDefaultbegining">
-    										Level 1 - Beginner Class
-  											</label><br>
-  											<input type="checkbox" value="Intermediate Class" id="flexCheckDefaultintermediate" name="flexCheckDefaultintermediate" class="form-intermediate roles" >
-			                        		<label class="form-check-label labelwhite" for="flexCheckDefaultintermediate">
-    										Level 2 - Intermediate Class
-  											</label><br>
-  											<input type="checkbox" value="Advance Class" id="flexCheckDefaultadvance" name="flexCheckDefaultadvance" class="form-advance roles" >
-			                        		<label class="form-check-label labelwhite" for="flexCheckDefaultadvance">
-    										Level 3 - Advance Class
-  											</label><br>  										
-			                        </div>    -->
+										
 
 										<div class="form-group">
 											<label class="sr-only" for="form-password">Password</label>
@@ -740,6 +508,7 @@ label {
 	<script type="text/javascript">
 	$(document).ready(function() {
 
+<<<<<<< Updated upstream
 	    $('#form-certificate2').hide();
 	    $('#form-certificate3').hide();
 	    $('#addcertificate2').hide();
@@ -750,6 +519,23 @@ label {
 	    });
 	    $("#addcertificate2").click(function() {
 		$('#form-certificate3').show();
+=======
+			$('#form-certificate2').hide();
+			$('#form-certificate3').hide();
+			$('#addcertificate2').hide();
+			$('.forgotusername').hide();
+			$('.forgotbutton').hide();
+			$(".forgotpasswordshow").click(function() {
+				$('.forgotusername').toggle();
+				$('.forgotbutton').toggle();
+			});
+			$("#addcertificate1").click(function() {
+				$('#form-certificate2').show();
+				$('#addcertificate2').show();
+			});
+			$("#addcertificate2").click(function() {
+				$('#form-certificate3').show();
+>>>>>>> Stashed changes
 
 	    });
 
