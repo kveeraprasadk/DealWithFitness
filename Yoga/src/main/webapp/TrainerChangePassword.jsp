@@ -176,21 +176,15 @@ $("#changepasswordform").validate({
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-7 text">
-
-
-						<h1>
-							<strong>DealWithFitness</strong> Change Password Form
-						</h1>
+						
 						<div class="description">
-						<p><strong>
-						Secure password tips:
-						</strong></p>
-							<ol class="tips">
-								<li>Use at least 8 characters, a combination of numbers and letters is best.</li>
-								<li>Do not use the same password you have used with us previously.</li>
-								<li>Do not use dictionary words, your name, e-mail address, mobile phone number or other personal information that can be easily obtained.</li>
-								<li>Do not use the same password for multiple online accounts.</li>
-							</ol>
+						<h4 style="text-align: left" >Secure password tips:	</h4>
+							<ul style="color: red">
+								<li style="text-align: left">Use at least 6 characters, a combination of numbers and letters is best.</li>
+								<li style="text-align: left">Do not use the same password you have used with us previously.</li>
+								<li style="text-align: left">Do not use dictionary words, your name, e-mail address, mobile phone number or other personal information that can be easily obtained.</li>
+								<li style="text-align: left">Do not use the same password for multiple online accounts.</li>
+							</ul>
 
 						</div>
 						<!--       <div class="top-big-link">

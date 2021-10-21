@@ -43,7 +43,7 @@ public class TrainerDetailsVO {
 	private String demo1;
 	private String demo2;
 	private String demo3;
-
+	
 	private List<SeriesSchedulesVO> series = new ArrayList<>();
 	
 
@@ -350,4 +350,6 @@ public class TrainerDetailsVO {
 	public void setDemo3(String demo3) {
 		this.demo3 = demo3;
 	}
+
+	
 }

@@ -48,16 +48,7 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 
 <script src="./dist/whoami.js"></script>
-<script>
-$(document).ready(function(){
-    $('[data-toggle="popover"]').popover({
-        placement : 'top',
-		trigger : 'hover',
-        html : true,
-        content : '<div class="media"><img src="img/editpic.jpg" class="mr-3" alt="Sample Image"><div class="media-body"><h5 class="media-heading">Dear</h5><p>Click on Profile Picture to change the Image.</p></div></div>'
-    });
-});
-</script>
+
 <style>
 .toggle.ios, .toggle-on.ios, .toggle-off.ios {
 	border-radius: 20px;
@@ -223,7 +214,7 @@ hr {
 				<div class="col-12">
 					<h2>Trainer's Zone</h2>
 				</div>
-				<div class="col-12">
+				<div class="col-12"> 
 					<a href="javascript: switchView('calendar')">My Training
 						Calendar</a>
 					<a href="javascript: switchView('profile')">My Profile</a>
@@ -381,7 +372,21 @@ hr {
     </div>
   </form>
 </div>
-
+<script src="jquery.js"></script>
+<script src="jquery.form.js"></script>
+<script>
+    $(function() {
+        $('#trainerprofilepictureupdate').ajaxForm({
+            success: function(msg) {
+                alert("File has been uploaded successfully");
+            },
+            error: function(msg) {
+            	 alert("File has been uploaded failed");
+                $("#upload-error").text("Couldn't upload file");
+            }
+        });
+    });
+</script>
 <script type='text/javascript'>
 		function preview_image(event) {
 			var reader = new FileReader();

@@ -1,5 +1,6 @@
 <%@page import="java.util.*" %>
 <%@page import="main.model.TrainerDetailsVO" %>
+<%@page import="main.model.TraineeStory" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -109,12 +110,12 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h2>Admin</h2>
+                        <h2>Admin Home</h2>
                     </div>
-                    <div class="col-12">
+           <!--          <div class="col-12">
                         <a href="index.jsp">Home</a>
                         <a href="./AdminPageView">Admin</a>
-                    </div>
+                    </div>   -->
                 </div>
             </div>
                     
@@ -257,7 +258,118 @@ if(trainersreq != null && trainersreq.size() >0)  // Null check for the object
 					%> 
           
         </div>
+        
+        <div class="container">
+          <div class="section-heading">
+            <h2>Trainee Story Requests</h2>
+            <div class="line-dec"></div>
+            <span>
+            The following are all Trainee Story Requests list. Please check the details and <b>CONFIRM</b> it. Once you are confirm it the Confirmation mail will be sent to trainees registered email.<br>
+            
+            
+             </span>
+    <div class="alert alert-success" id="storysuccess-alert">
+  <button type="button" class="close" data-dismiss="alert">x</button>
+  <h4><strong> <div id="requestsuccess"> </div></strong></h4>
+</div>
+<div class="alert alert-danger" id="storydanger-alert">
+  <button type="button" class="close" data-dismiss="alert">x</button>
+  <h4><strong> <div id="requestfail"> </div></strong></h4>
+</div>
+          </div>
+          <script type="text/javascript">
+          $(document).ready(function(){
+	$('#storysuccess-alert').hide();
+	 $('#storydanger-alert').hide();
+          });
+	 </script>
+   
+<div class="row">
+   <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+              <div class="service-item">
+          <!--       <div class="first-service-icon service-icon"></div>   -->
+                <h4>All the Requests </h4>
+                <div style="overflow-x:auto;">
+  <table class="table table-bordered">
+    <tr>
+      <th>TraineeId</th>
+      <th>TrainerId</th>
+      <th>Story</th>
+      <th>Photo1</th>
+      <th>Photo2</th>     
+      <th>CreationTime</th>
+      <th></th>
+      
+    </tr>
+     <% ArrayList<TraineeStory> traineestoryrequest = (ArrayList<TraineeStory>) request.getAttribute("TraineeStoryRequest"); %>
+
+
+<%
+// Iterating through subjectList
+if(traineestoryrequest != null && traineestoryrequest.size() >0)  // Null check for the object
+{
+	Iterator<TraineeStory> iterator = traineestoryrequest.iterator();  // Iterator interface
+	int inv=0;
+	for (TraineeStory tList: traineestoryrequest)  // iterate through all the data until the last record
+	{
+		//InvestorExpertNamemodel myinvestordetails = iterator.next(); //assign individual employee record to the employee class object
+	inv++;
+//	System.out.println("My Investor: "+ trainerdetails.getName());
+	
+	%>
+    <tr>
+      <td><%=tList.getTraineeId() %></td>
+      <td><%=tList.getTrainerId() %></td>
+      <td><%=tList.getStory() %></td>
+      <td><a class="downloadReport" target="_blank" href="http://localhost:8080/Yoga/TraineeStoryPhoto1DownloadServlet?user=<%=tList.getTraineeId() %>,<%=tList.getTrainerId() %>,<%=tList.getFilename1() %>"><%=tList.getFilename1() %></a>
+      <td><a class="downloadReport" target="_blank" href="http://localhost:8080/Yoga/TraineeStoryPhoto2DownloadServlet?user=<%=tList.getTraineeId() %>,<%=tList.getTrainerId() %>,<%=tList.getFilename2() %>"><%=tList.getFilename2() %></a>     
+      <td><%=tList.getTrainerName() %></td>
+    
+      <td> 
+      
+       <button type="button" class="white-button traineestoryconfirmbutton" id="traineestoryupdate<%=inv %>t" value="<%=tList.getTraineeId() %>,<%=tList.getTrainerId() %>">Approve</button> 
+      
+      </td>
+    </tr>
+     <%
+							}
+						}
+					%> 
+  </table>
+</div>
+        </div>
+            </div>    
+            
+            
+          </div>
+          
+        </div>
       </section>
+      <script>
+            $(document).on("click", ".traineestoryconfirmbutton", function() { // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
+            	
+            
+            var temail = $(this).val();
+      	 
+                $.post("TraineeStoryConfirmServlet",{traineetrainer:temail}, function(responseText) {   // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
+                	
+               console.log(responseText);
+                if(responseText=="Trainee Story Confirmed Successfully"){
+                	$(".traineestoryconfirmbutton").prop('disabled', true);
+                	document.location.href='./AdminPageView';
+              
+                	$('#successmsg').text(responseText);             	
+                         	
+                }
+                else
+                	{
+                	
+                  	$('#failmsg').text(responseText);
+                  	
+                	}
+                });
+            });
+ </script>
 <script>
             $(document).on("click", ".confirmbutton", function() { // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
             	
@@ -388,17 +500,6 @@ if(trainerslist != null && trainerslist.size() >0)  // Null check for the object
   </table>
 </div>
         </div>
-        <!--     </div>   -->
-     <!--        <div class="col-md-6">
-              <div class="service-item">
-                <div class="second-service-icon service-icon"></div>
-                <h4>Creative Ideas</h4>
-                <p>
-                  Proin lacus massa, eleifend sed fermentum in, dignissim vel
-                  metus. Nunc accumsan leo nec felis porttitor, ultricies
-                  faucibus purus mollis.
-                </p>
-              </div>  -->
             </div>    
             
             
