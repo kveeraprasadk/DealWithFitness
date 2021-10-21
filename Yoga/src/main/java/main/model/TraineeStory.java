@@ -1,5 +1,7 @@
 package main.model;
 
+import java.sql.Timestamp;
+
 public class TraineeStory {
 	private String traineeId;
 	private String trainerName;
@@ -8,6 +10,10 @@ public class TraineeStory {
 	private boolean adminapprove;
 	private long creationTime;
 	private boolean hasPhotos;
+	private String trainerId;
+	private String filename1;
+	private String filename2;
+	private Timestamp createtime;
 
 	public boolean isHasPhotos() {
 		return hasPhotos;
@@ -63,5 +69,39 @@ public class TraineeStory {
 
 	public void setAdminapprove(boolean adminapprove) {
 		this.adminapprove = adminapprove;
+	}
+
+	public String getTrainerId() {
+		return trainerId;
+	}
+
+	public void setTrainerId(String trainerId) {
+		this.trainerId = trainerId;
+	}
+
+	public String getFilename1() {
+		return filename1;
+	}
+
+	public void setFilename1(String filename1) {
+		this.filename1 = filename1;
+	}
+
+	public String getFilename2() {
+		return filename2;
+	}
+
+
+
+	public void setFilename2(String filename2) {
+		this.filename2 = filename2;
+	}
+
+	public Timestamp getCreatetime() {
+		return createtime;
+	}
+
+	public void setCreatetime(Timestamp createtime) {
+		this.createtime = createtime;
 	}
 }

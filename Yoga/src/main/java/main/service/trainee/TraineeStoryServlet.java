@@ -34,7 +34,8 @@ public class TraineeStoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = LogManager.getLogger("TraineeStoryServlet");
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");
 
@@ -46,9 +47,10 @@ public class TraineeStoryServlet extends HttpServlet {
 				try (Statement query = con.createStatement()) {
 					// if story id is passed mean only photos are required
 					if (photosOfStoryId == null) {
-						String sql = String.format("select ts.traineeId, tr.trainername, ts.storyId, ts.story, ts.adminapprove, ts.creationTime,"
-								+ " !isNull(ts.photo1) as isPhoto1, !isNull(ts.photo2) isPhoto2"
-								+ " from traineeStories ts, trainerregister tr where ts.trainerId = tr.traineremail and ts.traineeId='%s' order by creationTime desc limit 0,10",
+						String sql = String.format(
+								"select ts.traineeId, tr.trainername, ts.storyId, ts.story, ts.adminapprove, ts.creationTime,"
+										+ " !isNull(ts.photo1) as isPhoto1, !isNull(ts.photo2) isPhoto2"
+										+ " from traineeStories ts, trainerregister tr where ts.trainerId = tr.traineremail and ts.traineeId='%s' order by creationTime desc limit 0,10",
 								traineeId);
 						try (ResultSet rs = query.executeQuery(sql)) {
 							List<TraineeStory> data = new ArrayList<TraineeStory>();
@@ -66,7 +68,9 @@ public class TraineeStoryServlet extends HttpServlet {
 							response.getWriter().write(Json.stringify(data));
 						}
 					} else {
-						String sql = String.format("select photo1, photo2 from traineeStories where traineeId = '%s' and storyId = '%s'", traineeId, photosOfStoryId);
+						String sql = String.format(
+								"select photo1, photo2 from traineeStories where traineeId = '%s' and storyId = '%s'",
+								traineeId, photosOfStoryId);
 						try (ResultSet rs = query.executeQuery(sql)) {
 							if (rs.next()) {
 								Map<String, String> photosMap = new HashMap<>();
@@ -92,7 +96,8 @@ public class TraineeStoryServlet extends HttpServlet {
 		}
 	}
 
-	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String storyId = request.getParameter("storyId");
 		if (storyId != null) {
 			log.info("About to delete story: {}", storyId);
@@ -109,7 +114,8 @@ public class TraineeStoryServlet extends HttpServlet {
 		}
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String trainerId = request.getParameter("trainerId");
 		String traineeId = request.getParameter("traineeId");
 		String story = request.getParameter("story");
@@ -117,9 +123,10 @@ public class TraineeStoryServlet extends HttpServlet {
 		Part secondPhoto = request.getPart("secondPhoto");
 		String storyId = UUID.randomUUID().toString();
 
-		log.info("Trainee: {} story submitted for trainer: {} and assigned story id is: {}", traineeId, trainerId, storyId);
+		log.info("Trainee: {} story submitted for trainer: {} and assigned story id is: {}", traineeId, trainerId,
+				storyId);
 
-		String update = "insert into traineeStories (traineeId, trainerId, storyId, story, adminapprove, photo1, photo2, creationTime) values(?, ?, ?, ?, ?, ?, ?, ?)";
+		String update = "insert into traineeStories (traineeId, trainerId, storyId, story, adminapprove, photo1, filename1, photo2, filename2, creationTime) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		try (Connection con = DBConnection.createConnection()) {
 			try (PreparedStatement statement = con.prepareStatement(update)) {
 				statement.setString(1, traineeId);
@@ -130,17 +137,26 @@ public class TraineeStoryServlet extends HttpServlet {
 
 				if (firstPhoto != null && firstPhoto.getSize() > 0) {
 					statement.setBlob(6, firstPhoto.getInputStream());
+					
+					String fileName1 = AppUtils.getFileNameFromFormPart(firstPhoto);
+					statement.setString(7, fileName1);
 				} else {
 					statement.setBinaryStream(6, null);
+					statement.setString(7, "");
 				}
 				if (secondPhoto != null && secondPhoto.getSize() > 0) {
-					statement.setBlob(7, secondPhoto.getInputStream());
+					statement.setBlob(8, secondPhoto.getInputStream());
+					
+					String fileName2 = AppUtils.getFileNameFromFormPart(secondPhoto);
+					statement.setString(9, fileName2);
 				} else {
-					statement.setBinaryStream(7, null);
+					statement.setBinaryStream(8, null);
+					statement.setString(9, "");
 				}
-				statement.setLong(8, System.currentTimeMillis());
+				statement.setLong(10, System.currentTimeMillis());
 				int count = statement.executeUpdate();
-				log.info("Story of trainee: {} on trainer: {} stored with update count: {}", trainerId, traineeId, count);
+				log.info("Story of trainee: {} on trainer: {} stored with update count: {}", trainerId, traineeId,
+						count);
 			}
 			response.sendRedirect("viewtestimonials.jsp");
 		} catch (Exception ex) {

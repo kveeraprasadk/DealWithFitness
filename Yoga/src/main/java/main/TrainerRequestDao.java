@@ -4,10 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import main.common.DBConnection;
+import main.model.TraineeStory;
 import main.model.TrainerDetailsVO;
 
 
@@ -18,18 +22,12 @@ public class TrainerRequestDao {
 List<TrainerDetailsVO> TrainersReq = new ArrayList<TrainerDetailsVO>();
 		
 		//   System.out.println("traineremail2::"+traineremail);
-		Connection connection=null;
-		 PreparedStatement statement=null;
-		try{
-
-		connection = DBConnection.createConnection();
+		
+		try(Connection 	connection = DBConnection.createConnection()){
 String sql ="select * from trainerregister where adminapprove=? order by creationtime desc"; 
-
-statement = connection.prepareStatement(sql);
+try(PreparedStatement statement = connection.prepareStatement(sql)){
 statement.setBoolean(1, false);
-ResultSet rs = statement.executeQuery();
-
-
+try(ResultSet rs = statement.executeQuery()){
 
 while (rs.next()) {
 
@@ -93,7 +91,8 @@ rs.close();
 statement.close();
 connection.close();
 
-
+}
+}
 } catch (SQLException e) {
 
 System.out.println(e.getMessage());
@@ -106,16 +105,13 @@ return TrainersReq;
 List<TrainerDetailsVO> TrainersList = new ArrayList<TrainerDetailsVO>();
 		
 		//   System.out.println("traineremail2::"+traineremail);
-		Connection connection=null;
-		 PreparedStatement statement=null;
-		try{
-
-		connection = DBConnection.createConnection();
+		
+		 try(Connection connection = DBConnection.createConnection()){
 String sql ="select * from trainerregister where adminapprove=? order by creationtime desc"; 
 
-statement = connection.prepareStatement(sql);
+try(PreparedStatement statement = connection.prepareStatement(sql)){
 statement.setBoolean(1, true);
-ResultSet rs = statement.executeQuery();
+try(ResultSet rs = statement.executeQuery()){
 
 
 
@@ -179,8 +175,8 @@ while (rs.next()) {
 rs.close();
 statement.close();
 connection.close();
-
-
+}
+}
 } catch (SQLException e) {
 
 System.out.println(e.getMessage());
@@ -193,16 +189,12 @@ return TrainersList;
 List<TrainerDetailsVO> TraineesList = new ArrayList<TrainerDetailsVO>();
 		
 		//   System.out.println("traineremail2::"+traineremail);
-		Connection connection=null;
-		 PreparedStatement statement=null;
-		try{
-
-		connection = DBConnection.createConnection();
+try(Connection 	connection = DBConnection.createConnection()){
 String sql ="select * from traineeregister order by createtime desc"; 
 
-statement = connection.prepareStatement(sql);
+try(PreparedStatement statement = connection.prepareStatement(sql)){
 
-ResultSet rs = statement.executeQuery();
+try(ResultSet rs = statement.executeQuery()){
 
 
 
@@ -218,7 +210,11 @@ while (rs.next()) {
 		}else{
 		details.setName(" ");	
 		}
-//			details.setDob(rs.getString("dob"));
+	if(rs.getString("dob") != null){
+			details.setDob(rs.getString("dob"));
+	}else{
+		details.setDob(" ");
+	}
 		if(rs.getString("target") != null){
 		details.setTarget(rs.getString("target"));
 		}else{
@@ -245,27 +241,6 @@ while (rs.next()) {
 			details.setPhone(" ");
 		}
 	details.setCreatetime(rs.getTimestamp("createtime"));
-/*	Blob blob = rs.getBlob("photo");
-	
-	InputStream inputStream = blob.getBinaryStream();
-   ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-   byte[] buffer = new byte[4096];
-   int bytesRead = -1;
-    
-   while ((bytesRead = inputStream.read(buffer)) != -1) {
-       outputStream.write(buffer, 0, bytesRead);                  
-   }
-    
-   byte[] imageBytes = outputStream.toByteArray();
-   String base64Image = Base64.getEncoder().encodeToString(imageBytes);
-   
-  details.setBase64Image(base64Image);
-    
-    
-   inputStream.close();
-   outputStream.close();
-	
-*/
 
 	System.out.println("list::"+details);
 	// Adding the Student Object to List
@@ -278,13 +253,80 @@ while (rs.next()) {
 rs.close();
 statement.close();
 connection.close();
-
-
+}
+}
 } catch (SQLException e) {
 
 System.out.println(e.getMessage());
 e.printStackTrace();
 } 
 return TraineesList;
+}
+	
+	public List<TraineeStory> TraineeStoryRequest() throws SQLException,
+    ClassNotFoundException {
+List<TraineeStory> tstoryrequest = new ArrayList<TraineeStory>();
+		
+		
+try(Connection 	connection = DBConnection.createConnection()){
+String sql ="select * from traineeStories where adminapprove=? order by creationTime desc"; 
+
+try(PreparedStatement statement = connection.prepareStatement(sql)){
+statement.setString(1, "false");
+try(ResultSet rs = statement.executeQuery()){
+
+
+
+while (rs.next()) {
+
+	// Defining Student Object
+	TraineeStory details = new TraineeStory();
+
+	details.setTraineeId(rs.getString("traineeid"));
+	details.setTrainerId(rs.getString("trainerid"));	
+	details.setStory(rs.getString("story"));		
+	if(rs.getString("filename1") != null){
+	details.setFilename1(rs.getString("filename1"));
+	}else{
+		details.setFilename1("");
+	}
+	if(rs.getString("filename2") != null){
+	details.setFilename2(rs.getString("filename2"));
+	}else{
+		details.setFilename2("");
+	}
+	// details.setCreationTime(rs.getLong("creationTime"));
+	Long vv=rs.getLong("creationTime");
+	String convertedExpireTime = Long.toString(vv);
+	//Create a calendar instance
+	Calendar calendar = Calendar.getInstance();
+	calendar.setTimeInMillis(Long.parseLong(convertedExpireTime));
+	int mYear = calendar.get(Calendar.YEAR);
+	int mMonth = calendar.get(Calendar.MONTH);
+	int mDay = calendar.get(Calendar.DAY_OF_MONTH);
+	int mHour = calendar.get(Calendar.HOUR_OF_DAY);
+	int mMin = calendar.get(Calendar.MINUTE);
+	int mSec = calendar.get(Calendar.SECOND);
+	String readableFormat = mYear + "-" + mMonth + "-" + mDay + " " + mHour + ":"+ mMin + ":"+ mSec; // The value is now converted to 2019-6-27 0:59:59
+	details.setTrainerName(readableFormat);
+	
+	// Adding the Student Object to List
+	tstoryrequest.add(details);
+//	fos.close();	
+}
+
+//Closing the Resources
+
+rs.close();
+statement.close();
+connection.close();
+}
+}
+} catch (SQLException e) {
+
+System.out.println(e.getMessage());
+e.printStackTrace();
+} 
+return tstoryrequest;
 }
 }

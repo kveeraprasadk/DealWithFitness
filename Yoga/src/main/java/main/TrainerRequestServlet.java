@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import main.model.TraineeStory;
 import main.model.TrainerDetailsVO;
 
 
@@ -42,6 +43,7 @@ public class TrainerRequestServlet extends HttpServlet {
 		 List<TrainerDetailsVO> TrainerRequests;
 		   List<TrainerDetailsVO> TrainersList;
 		   List<TrainerDetailsVO> TraineesList;
+		   List<TraineeStory> TraineeStoryRequests;
 		   try {
 			   TrainerRequests = trd.TrainersRequests();
 				request.setAttribute("TrainerRequests", TrainerRequests);
@@ -51,6 +53,9 @@ public class TrainerRequestServlet extends HttpServlet {
 				
 				TraineesList = trd.TraineesList();			
 				request.setAttribute("TraineesList", TraineesList);
+				
+				TraineeStoryRequests = trd.TraineeStoryRequest();			
+				request.setAttribute("TraineeStoryRequest", TraineeStoryRequests);
 				
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/AdminPage.jsp");	
 				dispatcher.forward(request, response);
