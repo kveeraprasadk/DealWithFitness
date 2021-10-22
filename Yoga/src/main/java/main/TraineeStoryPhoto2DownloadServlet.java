@@ -18,50 +18,48 @@ import javax.servlet.http.HttpServletResponse;
 import main.common.DBConnection;
 
 /**
- * Servlet implementation class AdminCertificate1DownloadServlet
+ * Servlet implementation class TraineeStoryPhoto2DownloadServlet
  */
-public class AdminCertificate1DownloadServlet extends HttpServlet {
+public class TraineeStoryPhoto2DownloadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final int BUFFER_SIZE = 40965;
-
-
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String tid = (String) request.getParameter("user");
 
-		String traineremail = null, fname = null;
+		String traineeid=null,trainerid = null, fname = null;
 		String[] res = tid.split("[,]", 0);
 		int ins = 0;
 		for (String myStr : res) {
 			if (ins == 0) {
-				traineremail = myStr;
+				traineeid = myStr;
 				ins++;
-			} else {
-				fname = myStr;
+			} else if (ins == 1) {
+				trainerid = myStr;
+				ins++;
+			}else{
+				fname = myStr; 
 			}
 			System.out.println(myStr);
-		}
-
-		System.out.println("entid::" + traineremail);
+		}		
 
 		try (Connection conn = DBConnection.createConnection()) {
 			// connects to the database
 
 			// queries the database
-			String sql = "SELECT * FROM trainerregister WHERE traineremail = ? and certificate1filename=?";
+			String sql = "SELECT * FROM traineeStories WHERE traineeId = ? and trainerId = ? and filename2 = ?";
 			PreparedStatement statement = conn.prepareStatement(sql);
-			statement.setString(1, traineremail);
-			statement.setString(2, fname);
+			statement.setString(1, traineeid);
+			statement.setString(2, trainerid);
+			statement.setString(3, fname);
 
 			ResultSet result = statement.executeQuery();
 			if (result.next()) {
 				// gets file name and file blob data
-				String fileName = result.getString("certificate1filename");
-				Blob blob = result.getBlob("certificate1");
+				String fileName = result.getString("filename2");
+				Blob blob = result.getBlob("photo2");
 				InputStream inputStream = blob.getBinaryStream();
 				int fileLength = inputStream.available();
 
@@ -98,7 +96,7 @@ public class AdminCertificate1DownloadServlet extends HttpServlet {
 
 			} else {
 				// no file found
-				response.getWriter().print("File not found for the id: " + traineremail);
+				response.getWriter().print("File not found for the id: " + traineeid);
 			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();

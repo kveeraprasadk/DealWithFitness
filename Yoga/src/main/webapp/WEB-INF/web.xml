@@ -214,6 +214,42 @@
 		<description></description>
 		<servlet-class>main.service.trainer.TrainerProfilePicUpdateServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>TrainerChangePasswordServlet</servlet-name>
+		<display-name>TrainerChangePasswordServlet</display-name>
+		<description></description>
+		<servlet-class>main.service.trainer.TrainerChangePasswordServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>TraineeStoryConfirmServlet</servlet-name>
+		<display-name>TraineeStoryConfirmServlet</display-name>
+		<description></description>
+		<servlet-class>main.TraineeStoryConfirmServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>TraineeStoryPhoto1DownloadSerlvet</servlet-name>
+		<display-name>TraineeStoryPhoto1DownloadSerlvet</display-name>
+		<description></description>
+		<servlet-class>main.TraineeStoryPhoto1DownloadSerlvet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>TraineeStoryPhoto2DownloadSerlvet</servlet-name>
+		<display-name>TraineeStoryPhoto2DownloadSerlvet</display-name>
+		<description></description>
+		<servlet-class>main.TraineeStoryPhoto2DownloadSerlvet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>TraineeStoryPhoto2DownloadServlet</servlet-name>
+		<display-name>TraineeStoryPhoto2DownloadServlet</display-name>
+		<description></description>
+		<servlet-class>main.TraineeStoryPhoto2DownloadServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>TraineeStoryPhoto1DownloadServlet</servlet-name>
+		<display-name>TraineeStoryPhoto1DownloadServlet</display-name>
+		<description></description>
+		<servlet-class>main.TraineeStoryPhoto1DownloadServlet</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>TrainerRegisterServlet</servlet-name>
@@ -354,6 +390,30 @@
 	<servlet-mapping>
 		<servlet-name>TrainerProfilePicUpdateServlet</servlet-name>
 		<url-pattern>/TrainerProfilePicUpdateServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>TrainerChangePasswordServlet</servlet-name>
+		<url-pattern>/TrainerChangePasswordServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>TraineeStoryConfirmServlet</servlet-name>
+		<url-pattern>/TraineeStoryConfirmServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>TraineeStoryPhoto1DownloadSerlvet</servlet-name>
+		<url-pattern>/TraineeStoryPhoto1DownloadSerlvet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>TraineeStoryPhoto2DownloadSerlvet</servlet-name>
+		<url-pattern>/TraineeStoryPhoto2DownloadSerlvet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>TraineeStoryPhoto2DownloadServlet</servlet-name>
+		<url-pattern>/TraineeStoryPhoto2DownloadServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>TraineeStoryPhoto1DownloadServlet</servlet-name>
+		<url-pattern>/TraineeStoryPhoto1DownloadServlet</url-pattern>
 	</servlet-mapping>
 	<listener>
 		<listener-class>main.common.MysqlDatasource</listener-class>

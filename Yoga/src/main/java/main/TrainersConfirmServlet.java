@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import main.common.DBConnection;
 import main.common.EncodeDecodeSHA256;
+import main.common.SMTPCredentials;
 
 /**
  * Servlet implementation class TrainersConfirmServlet
@@ -31,12 +32,12 @@ import main.common.EncodeDecodeSHA256;
 public class TrainersConfirmServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	// AWS SMTP Credentials
-	public static final String SMTP_USERNAME = "dealwithfitness64@gmail.com";
-	public static final String SMTP_PASSWORD = "password";
+	public static final String SMTP_USERNAME = SMTPCredentials.SMTP_USERNAME;
+	public static final String SMTP_PASSWORD = SMTPCredentials.SMTP_PASSWORD;
 
 	// Amazon SES SMTP host name.
-	public static final String HOST = "smtp.gmail.com";
-	public static final int PORT = 465;
+	public static final String HOST = SMTPCredentials.HOST;
+	public static final int PORT = SMTPCredentials.PORT;
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -51,9 +52,9 @@ public class TrainersConfirmServlet extends HttpServlet {
 		String traineremail = (String) request.getParameter("traineremail");
 
 		String pass = String.valueOf(UniqueIdCreate());
-	//	Base64.Encoder enc = Base64.getEncoder();
-	//	String password = enc.encodeToString(pass.getBytes());
-		String password=null;
+		// Base64.Encoder enc = Base64.getEncoder();
+		// String password = enc.encodeToString(pass.getBytes());
+		String password = null;
 		try {
 			password = EncodeDecodeSHA256.toHexString(EncodeDecodeSHA256.getSHA(pass));
 		} catch (NoSuchAlgorithmException e2) {
@@ -62,45 +63,56 @@ public class TrainersConfirmServlet extends HttpServlet {
 		}
 		System.out.println("encoded value is \t" + password);
 
-		Connection con = null;
+		try (Connection con = DBConnection.createConnection()) {
 
-		try {
-			con = DBConnection.createConnection();
-
-	//		String query1 = "insert into trainerregister select * from trainertemptable where traineremail=?";
-	//		PreparedStatement statement1 = con.prepareStatement(query1); // Making use of prepared statements here to
-																			// insert bunch of data
-	//		statement1.setString(1, traineremail);
-	///		i = statement1.executeUpdate();
-	//		if (i != 0) {
-				String query2 = "update trainerregister set password=?,adminapprove=? where traineremail=?";
-				PreparedStatement statement2 = con.prepareStatement(query2); // Making use of prepared statements here
-																				// to insert bunch of data
+			// String query1 = "insert into trainerregister select * from
+			// trainertemptable where traineremail=?";
+			// PreparedStatement statement1 = con.prepareStatement(query1); //
+			// Making use of prepared statements here to
+			// insert bunch of data
+			// statement1.setString(1, traineremail);
+			/// i = statement1.executeUpdate();
+			// if (i != 0) {
+			String query2 = "update trainerregister set password=?,adminapprove=? where traineremail=?";
+			try (PreparedStatement statement2 = con.prepareStatement(query2)) { // Making
+																				// use
+																				// of
+																				// prepared
+																				// statements
+																				// here
+																				// to
+																				// insert
+																				// bunch
+																				// of
+																				// data
 				statement2.setString(1, password);
-				statement2.setBoolean(2, true);				
+				statement2.setBoolean(2, true);
 				statement2.setString(3, traineremail);
 
 				j = statement2.executeUpdate();
-	//		}
-		/*	if (i != 0 && j != 0) {
+				// }
+				/*
+				 * if (i != 0 && j != 0) {
+				 * 
+				 * String query3 =
+				 * "delete from trainertemptable where traineremail=?";
+				 * PreparedStatement statement3 = con.prepareStatement(query3);
+				 * // Making use of prepared statements here // to insert bunch
+				 * of data statement3.setString(1, traineremail);
+				 * 
+				 * k = statement3.executeUpdate(); } if (i != 0 && j != 0 && k
+				 * != 0) {
+				 */
+				if (j != 0) {
+					out.write("Trainer Confirmed Successfully");
 
-				String query3 = "delete from trainertemptable where traineremail=?";
-				PreparedStatement statement3 = con.prepareStatement(query3); // Making use of prepared statements here
-																				// to insert bunch of data
-				statement3.setString(1, traineremail);
+					System.out.println("success");
+					SendEmail(traineremail, pass);
 
-				k = statement3.executeUpdate();
-			}         
-			if (i != 0 && j != 0 && k != 0) {      */
-				if (j != 0 ) {
-				out.write("Trainer Confirmed Successfully");
-
-				System.out.println("success");
-				SendEmail(traineremail, pass);
-
-			} else {
-				out.write("Trainer Confirm Failed");
-				System.out.println("fail");
+				} else {
+					out.write("Trainer Confirm Failed");
+					System.out.println("fail");
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -147,7 +159,8 @@ public class TrainersConfirmServlet extends HttpServlet {
 
 		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(SMTP_USERNAME, SMTP_PASSWORD);// change accordingly
+				return new PasswordAuthentication(SMTP_USERNAME, SMTP_PASSWORD);// change
+																				// accordingly
 			}
 		});
 
@@ -155,7 +168,8 @@ public class TrainersConfirmServlet extends HttpServlet {
 		try {
 			MimeMessage message = new MimeMessage(session);
 			// String toid=request.getParameter("forgotmail");
-			message.setFrom(new InternetAddress("dealwithfitness64@gmail.com"));// change accordingly
+			message.setFrom(new InternetAddress("dealwithfitness64@gmail.com"));// change
+																				// accordingly
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(emailid));
 			message.setSubject("DealWithFitness Registration Confirmation");
 			message.setContent("Hi  " + emailid

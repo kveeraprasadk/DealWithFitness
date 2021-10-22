@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import main.common.DBConnection;
+import main.common.SMTPCredentials;
 
 /**
  * Servlet implementation class TrainerRequestDeleteServlet
@@ -27,13 +28,12 @@ import main.common.DBConnection;
 public class TrainerRequestDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	//AWS SMTP Credentials
-		public static final String SMTP_USERNAME = "dealwithfitness64@gmail.com";
-		public static final String SMTP_PASSWORD = "password";
+	public static final String SMTP_USERNAME = SMTPCredentials.SMTP_USERNAME;
+	public static final String SMTP_PASSWORD = SMTPCredentials.SMTP_PASSWORD;
 
-		// Amazon SES SMTP host name. 
-		public static final String HOST = "smtp.gmail.com";    
-
-		public static final int PORT = 465;
+	// Amazon SES SMTP host name.
+	public static final String HOST = SMTPCredentials.HOST;
+	public static final int PORT = SMTPCredentials.PORT;
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
