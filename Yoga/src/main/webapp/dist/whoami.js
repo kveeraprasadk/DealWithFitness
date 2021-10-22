@@ -103,7 +103,6 @@ function Whoami() {
 	// Nav bar related changes below
 	// Initialize the addtional user options for navbar which are common for all screens
 	self.initNavBar = function() {
-		console.log($("#sm-more-options-trigger"))
 		$("#logged-in-user-options-trigger").popover({
 			html: true,
 			content: function() {

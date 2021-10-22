@@ -153,8 +153,8 @@ function Stories() {
 			} else {
 				storyDetails._story = storyDetails.story;
 			}
-			storyDetails.approvalStatus = storyDetails.adminApprove == "true" ? "Approved" : "Approval In progress";
-			storyDetails.approvalColor = storyDetails.adminApprove == "true" ? "green" : "red";
+			storyDetails.approvalStatus = storyDetails.adminapprove == true ? "Approved" : "Approval In progress";
+			storyDetails.approvalColor = storyDetails.adminapprove == true ? "green" : "red";
 			storyDetails.time = moment(new Date(storyDetails.creationTime)).format("MMMM DD,YYYY hh:mm");
 			storyDetails.showPhotosClass = storyDetails.hasPhotos == true ? "show" : "hide";
 			const childHtmlNode = Utils.fillTemplate(htmlTemplate, [storyDetails]);
