@@ -231,7 +231,8 @@ function TrainerCalender() {
 					expertise: scheduleSeries.expertise
 				}
 				// pass seriesId as transistion id so that system delete the existing series and add new series
-				self.addNewSeriesSchedules(scheduleRequest);
+				// Pass true so that if validation error comes a dialog is used instead of validation message.
+				self.addNewSeriesSchedules(scheduleRequest, true);
 			}
 		} else {
 			// store which series is going be in edit mode
@@ -363,7 +364,7 @@ function TrainerCalender() {
 		const endTime = Utils.combineDateTime("startdate-datepicker-input", "endtime-timepicker-input");
 		const expertise = $("#schedule-expertise").val();
 		const demoClass = $("#schedule-demo-class-checkbox").is(":checked");
-		
+
 		// End by date is always end of day hence set the hours+mins+secs towards end of date
 		let endByDate = null;
 		let dayNamesSelected = [];
@@ -523,8 +524,15 @@ function TrainerCalender() {
 				// In edit mode of series same schedule would be present in self.state.seriesRecurringSchedules
 				// hence better to not validate if both ids are same
 				if (scheduleRange.seriesId != newSchedule.seriesId) {
-					if ((newSchedule.start >= scheduleRange.start && newSchedule.start <= scheduleRange.end) ||
-						(newSchedule.end >= scheduleRange.start && newSchedule.end <= scheduleRange.end)) {
+					// we are not comparing >= or <= with start and end bcoz same minute trainer can stop and start new class hence the exclusion of equal to
+					if ((newSchedule.start > scheduleRange.start && newSchedule.start < scheduleRange.end) ||
+						(newSchedule.end > scheduleRange.start && newSchedule.end < scheduleRange.end)) {
+						return scheduleRange;
+					}
+					// if the iterating scheduler is within the new schedule range. it means new schedule is 5 AM to 8 AM and iterating
+					// schedule is 6 AM to 6:30 AM then iterating schedule is within new schedule but not otherway around.
+					if ((scheduleRange.start > newSchedule.start && scheduleRange.start < newSchedule.end) ||
+						(scheduleRange.end > newSchedule.start && scheduleRange.end < newSchedule.end)) {
 						return scheduleRange;
 					}
 				}
@@ -532,8 +540,11 @@ function TrainerCalender() {
 		}
 	}
 
-	//	seriesTransitionFromId comes into picture when a series is edited then old series will be deleted and new series will be added
-	self.addNewSeriesSchedules = function(request) {
+	// request: contains all the schedule details required to create a schedule
+	// 			seriesTransitionFromId comes into picture when a series is edited then old series will be deleted and new series will be added
+	// updateThruCalendar: true means user dragged the end time in the calendar ui and stretched it to a different time but not suign schedule dialog
+	//			if this is true value then any overlap conflicts will be shown in alert box rather than a validation message 
+	self.addNewSeriesSchedules = function(request, updateThruCalendar) {
 		const { title, location, startTime, endTime, endByDate, dayNamesSelected, seriesTransitionFromId, fee, demoClass, expertise,
 			classLevel, trainerPreference } = request;
 		// if the request has id value then use the same otherwise generate new one
@@ -571,7 +582,7 @@ function TrainerCalender() {
 			// Add recurrence rule to each ui schedule and the same being show when user
 			// click on the ui schedule event in calendar ui
 			const recurrenceRuleForUI = self.getRecurrenceRule(seriesMetadata);
-
+		
 			for (let lpDate = new Date(startTime.getTime()); lpDate.getTime() < targetDate.getTime(); lpDate.setDate(lpDate.getDate() + 1)) {
 				const lpDayName = DAY_NAMES[lpDate.getDay()];
 				if (dayNamesSelected.includes(lpDayName)) {
@@ -632,10 +643,15 @@ function TrainerCalender() {
 		// Check if there no conflicts with other series schedules
 		const conflictSchedule = self.validateIfScheduleOverlap(seriesMetadata.schedules);
 		if (conflictSchedule) {
-			const message = "Schedule title: <b>" + conflictSchedule.title + "</b><br>Timings: " + moment(new Date(conflictSchedule.start)).format("MMMM DD,YYYY hh:mm") + " - " +
-				moment(new Date(conflictSchedule.end)).format("MMMM DD,YYYY hh:mm");
-			self.showValidationMessage("The new schedule has conflict timing with existing schedule. <br>" + message);
-			return false;
+			if (updateThruCalendar) {
+				alertDialog.show("Validation Error", "You have a trainig timing conflict with an existing scheduled training: "+conflictSchedule.title);
+				return false;
+			} else {
+				const message = "Schedule title: <b>" + conflictSchedule.title + "</b><br>Timings: " + moment(new Date(conflictSchedule.start)).format("MMMM DD,YYYY hh:mm") + " - " +
+					moment(new Date(conflictSchedule.end)).format("MMMM DD,YYYY hh:mm");
+				self.showValidationMessage("The new schedule has conflict timing with an existing schedule. <br>" + message);
+				return false;
+			}
 		} else {
 			// Store the series and its schedules then update the UI calendar and internal cache
 			self.storeSchedules(seriesMetadata, uiSchedules, () => {
@@ -658,7 +674,7 @@ function TrainerCalender() {
 	}
 
 	self.getRecurrenceRule = function(seriesDetails) {
-		if (seriesDetails.schedules && seriesDetails.schedules.length > 1) {
+		if (seriesDetails.endByDate) {
 			const start = moment(seriesDetails.startTime).format("MMMM DD, YYYY");
 			const sTimeOnly = moment(seriesDetails.startTime).format("hh:mm A");
 			const eTimeOnly = moment(seriesDetails.endTime).format("hh:mm A");
