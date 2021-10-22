@@ -719,6 +719,8 @@ function TrainerCalender() {
 		$("#calendar-trainer-preference").val(trainerPreference ? trainerPreference : "All");
 		$("#schedule-expertise").val(expertise);
 		$("#schedule-demo-class-checkbox").prop("checked", demoClass);
+		// If endby date is present then check it otherwise do not check it
+		$("#schedule-recurring-checkbox").prop("checked", currentSchedule.endByDate ? true : false);
 
 		// Set the values to the date and time components
 		$("#startdate-datepicker-input").val(Utils.formatDate(start));

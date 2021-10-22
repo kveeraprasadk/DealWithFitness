@@ -169,7 +169,6 @@ function Stories() {
 				const data = res.stories;
 				$("#view-stories-container").html("");
 				if (data && data.length > 0) {
-					console.log(data)
 					self.lst = data;
 					self.fill();
 				} else {
