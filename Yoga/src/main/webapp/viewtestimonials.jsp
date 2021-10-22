@@ -83,7 +83,7 @@
 				</li>
 			</ul>			
 			<div class="flex pt">
-				<button class="btn btn-primary {showPhotosClass}" storyId="{storyId}" onclick="stories.showPhotosEvent(event)">
+				<button class="btn btn-primary {showPhotosClass}" traineeId="{traineeId}" storyId="{storyId}" onclick="stories.showPhotosEvent(event)">
 					Show Photos
 				</button>
 				<button class="btn btn-primary ml" storyId="{storyId}" onclick="stories.deleteStoryEvent(event)">

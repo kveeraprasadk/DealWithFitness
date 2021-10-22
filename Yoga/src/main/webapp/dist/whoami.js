@@ -2,7 +2,7 @@ function Whoami() {
 	const self = this;
 	self.userDetails = "";
 	// Pages which does not required authentication
-	self.whitelistedPages = ["index.jsp", "About.jsp", "trainerdetails.jsp", "Trainer.jsp"];
+	self.whitelistedPages = ["index.jsp", "About.jsp", "trainerdetails.jsp", "Trainer.jsp", "viewstories.jsp"];
 
 	self.detect = function(callback) {
 		console.log("Login detection started");

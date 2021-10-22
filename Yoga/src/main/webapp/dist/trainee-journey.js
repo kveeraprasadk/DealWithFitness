@@ -26,7 +26,7 @@ function Journey() {
 				},
 				error: function(error) {
 					console.error(error);
-					alertDialog.show("Service Failure", "Failed to get schedules for trainer " + whoami.getUser());
+					alertDialog.show("Service Failure", "Failed to get trainers " + whoami.getUser());
 				},
 				complete: () => progressBar.end()
 			});
@@ -53,11 +53,11 @@ function Journey() {
 		for (const inp of inputs) {
 			self.clearFileSelection(inp);
 		}
-		
+
 		$(inputs).on('change', (event) => {
 			const input = event.target;
 			const fileName = input.files[0].name;
-			
+
 			if (!self.isSupportedFiles(fileName)) {
 				alertDialog.show("Validation Error", "Please choose supported image formats " + SUPPORTED_IMAGE_FORMATES_STRING);
 				self.clearFileSelection();
@@ -101,16 +101,21 @@ function Stories() {
 	const self = this;
 	self.lst;
 
-	self.init = function() {
+	self.init = function(allTrainees, onlyApproved) {
 		progressBar.start();
 		whoami.detect(() => {
+			console.log("All trainee stories: ", allTrainees, " only approved stories: ", onlyApproved);
+			const data = allTrainees == true ? {} : {
+				traineeId: whoami.getUser()
+			};
+			if(onlyApproved == true) {
+				data.onlyApproved = true;
+			}
 			progressBar.start();
 			$.ajax({
 				url: "TraineeStoryServlet",
 				type: "GET",
-				data: {
-					traineeId: whoami.getUser()
-				},
+				data: data,
 				cache: false,
 				success: function(data) {
 					if (data && data.length > 0) {
@@ -123,7 +128,7 @@ function Stories() {
 				},
 				error: function(error) {
 					console.error(error);
-					alertDialog.show("Service Failure", "Failed to get schedules for trainer " + whoami.getUser());
+					alertDialog.show("Service Failure", "Failed to get stories of trainee " + whoami.getUser());
 				},
 				complete: () => progressBar.end()
 			});
@@ -185,11 +190,12 @@ function Stories() {
 	self.showPhotosEvent = function(event) {
 		progressBar.start();
 		const storyId = event.target.getAttribute("storyId");
+		const traineeId = event.target.getAttribute("traineeId");
 		$.ajax({
 			url: "TraineeStoryServlet",
 			type: "GET",
 			data: {
-				traineeId: whoami.getUser(),
+				traineeId: traineeId,
 				photosOfStoryId: storyId
 			},
 			cache: false,

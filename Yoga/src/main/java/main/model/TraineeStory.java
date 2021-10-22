@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 
 public class TraineeStory {
 	private String traineeId;
+	private String traineeName;
 	private String trainerName;
 	private String storyId;
 	private String story;
@@ -14,6 +15,14 @@ public class TraineeStory {
 	private String filename1;
 	private String filename2;
 	private Timestamp createtime;
+
+	public String getTraineeName() {
+		return traineeName;
+	}
+
+	public void setTraineeName(String traineeName) {
+		this.traineeName = traineeName;
+	}
 
 	public boolean isHasPhotos() {
 		return hasPhotos;
@@ -90,8 +99,6 @@ public class TraineeStory {
 	public String getFilename2() {
 		return filename2;
 	}
-
-
 
 	public void setFilename2(String filename2) {
 		this.filename2 = filename2;
