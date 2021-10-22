@@ -40,12 +40,15 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+
+<script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.js"></script>
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"
 	defer></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 
 <script src="./dist/whoami.js"></script>
 
@@ -67,86 +70,60 @@
 <style>
 /* Float cancel and delete buttons and add an equal width */
 .cancelbtn, .deletebtn {
-  float: left;
-  width: 50%;
+	float: left;
+	width: 50%;
 }
 
 /* Add a color to the cancel button */
 .cancelbtn {
-  background-color: #ccc;
-  color: black;
+	background-color: #ccc;
+	color: black;
 }
 
 /* Add a color to the delete button */
 .deletebtn {
-  background-color: #f44336;
-}
-
-
-
-/* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 395px;
-  top: 90px;
-  width: 40%; /* Full width */
-  height: 80%; /* Full height */
-
-  padding-top: 50px;
-}
-
-/* Modal Content/Box */
-.modal-content {
-  background-color: #828282;
-  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-  border: 1px solid #888; 
-  width: 80%; /* Full width */
-  height: 100%; /* Full height */
+	background-color: #f44336;
 }
 
 /* Style the horizontal ruler */
 hr {
-  border: 1px solid #f1f1f1;
-  margin-bottom: 25px;
-}
- 
-/* The Modal Close Button (x) */
-.close {
-  position: absolute;
-  right: 35px;
-  top: 15px;
-  font-size: 40px;
-  font-weight: bold;
-  color: red;
+	border: 1px solid #f1f1f1;
+	margin-bottom: 25px;
 }
 
-.close:hover,
-.close:focus {
-  color: red;
-  cursor: pointer;
+/* The Modal Close Button (x) */
+.close {
+	position: absolute;
+	right: 35px;
+	top: 15px;
+	font-size: 40px;
+	font-weight: bold;
+	color: red;
+}
+
+.close:hover, .close:focus {
+	color: red;
+	cursor: pointer;
 }
 
 /* Clear floats */
 .clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
+	content: "";
+	clear: both;
+	display: table;
 }
+
 .unstyled-button {
-  border: none;
-  padding: 0;
-  background: none;
+	border: none;
+	padding: 0;
+	background: none;
 }
 /* Change styles for cancel button and delete button on extra small screens */
 @media screen and (max-width: 300px) {
-  .cancelbtn, .deletebtn {
-     width: 100%;
-  }
+	.cancelbtn, .deletebtn {
+		width: 100%;
+	}
 }
-
-
 </style>
 
 <script src="./dist/external/tui-code-snippet.min.js"></script>
@@ -214,10 +191,10 @@ hr {
 				<div class="col-12">
 					<h2>Trainer's Zone</h2>
 				</div>
-				<div class="col-12"> 
+				<div class="col-12">
 					<a href="javascript: switchView('calendar')">My Training
 						Calendar</a>
-					<a href="javascript: switchView('profile')">My Profile</a>
+					<a href="javascript: switchView('profile')">Profile</a>
 				</div>
 			</div>
 		</div>
@@ -261,7 +238,7 @@ hr {
 						</div>
 
 					</div>
-					
+
 
 					<div class="fx-ro">
 						<div class="dat">
@@ -333,47 +310,61 @@ hr {
 					</ul>
 
 				</div>
-				
+
 				<div
 					class="col-lg-4 col-md-5 leftgh flex-column flex-halign-center flex-valign-center">
-					
-					<a onclick="document.getElementById('id01').style.display='block'" href="#" title="Profile Picture Update" data-toggle="popover" data-placement="bottom" >
-					<div class="bh-img">
-					        
-						<img id="profile-image-element" alt="">
-					<!-- 	<span class="glyphicon glyphicon-camera"></span>  -->   			
-        				
-					</div>
+
+					<a onclick="document.getElementById('id01').style.display='block'"
+						href="#" title="Profile Picture Update" data-toggle="popover"
+						data-placement="bottom">
+						<div class="bh-img">
+
+							<img id="profile-image-element" alt="">
+							<!-- 	<span class="glyphicon glyphicon-camera"></span>  -->
+
+						</div>
 					</a>
-					
-					
-				
-					
-				
 
-<div id="id01" class="modal">
-  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
-  
-  <form class="modal-content" role="form" enctype="multipart/form-data" action="TrainerProfilePicUpdateServlet" id="trainerprofilepictureupdate" name="trainerprofilepictureupdate" method="post">
-    <div class="container">
-      <h3>Update Profile Picture</h3>
-      <p>Please Select Update Picture !</p>
-    	<p class="text-center"><input type="file" name="formimage" class="form-image form-control"
-												id="form-image" accept="image/*"
-												onchange="preview_image(event)"> 
-												<div class="bh-img text-center">
-												<img id="output_image" />
-												</div>
-												</p><br>
-      <div class="clearfix">
-        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-        <button type="submit" onclick="document.getElementById('id01').style.display='none'" class="deletebtn">Save</button>
-      </div>
-    </div>
-  </form>
-</div>
 
-<script type='text/javascript'>
+
+
+
+
+					<div id="id01" class="modal">
+						<span
+							onclick="document.getElementById('id01').style.display='none'"
+							class="close" title="Close Modal">×</span>
+
+						<form class="modal-content" role="form"
+							enctype="multipart/form-data"
+							action="TrainerProfilePicUpdateServlet"
+							id="trainerprofilepictureupdate"
+							name="trainerprofilepictureupdate" method="post">
+							<div class="container">
+								<h3>Update Profile Picture</h3>
+								<p>Please Select Update Picture !</p>
+								<p class="text-center">
+									<input type="file" name="formimage"
+										class="form-image form-control" id="form-image"
+										accept="image/*" onchange="preview_image(event)">
+								<div class="bh-img text-center">
+									<img id="output_image" />
+								</div>
+								</p>
+								<br>
+								<div class="clearfix">
+									<button type="button"
+										onclick="document.getElementById('id01').style.display='none'"
+										class="cancelbtn">Cancel</button>
+									<button type="submit"
+										onclick="document.getElementById('id01').style.display='none'"
+										class="deletebtn">Save</button>
+								</div>
+							</div>
+						</form>
+					</div>
+
+					<script type='text/javascript'>
 		function preview_image(event) {
 			var reader = new FileReader();
 			reader.onload = function() {
@@ -383,7 +374,7 @@ hr {
 			reader.readAsDataURL(event.target.files[0]);
 		}
 	</script>
-<script>
+					<script>
 // Get the modal
 var modal = document.getElementById('id01');
 
@@ -394,7 +385,7 @@ window.onclick = function(event) {
   }
 }
 </script>
-						
+
 					<div class="name-det">
 						<h2><%=trainerdetails.getName()%></h2>
 						<h3>Contact</h3>
@@ -456,9 +447,9 @@ window.onclick = function(event) {
 									name="form-aboutself" placeholder="About Yourself.." required><%=trainerdetails.getAboutyourself()%></textarea>
 							</p>
 							<p>
-							<button type="button" class="btn btn-primary" name="updatebutton"
-								id="updatebutton">Update</button>
-								</p>
+								<button type="button" class="btn btn-primary"
+									name="updatebutton" id="updatebutton">Update</button>
+							</p>
 						</div>
 						<div id="updatesuccess"></div>
 						<%
@@ -750,7 +741,7 @@ window.onclick = function(event) {
 											});
 						});
 	</script>
-	
+
 	<!-- About End -->
 
 	<!-- Footer Start -->
@@ -828,7 +819,6 @@ window.onclick = function(event) {
 	<!-- Template Javascript -->
 	<script src="js/main.js"></script>
 	<script src="profile/js/popper.min.js"></script>
-	<script src="profile/js/bootstrap.min.js"></script>
 	<script src="profile/js/script.js"></script>
 </body>
 </html>

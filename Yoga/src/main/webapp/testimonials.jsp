@@ -96,7 +96,7 @@
 	<div class="class">
 		<div class="container">
 			<div class="section-header text-center" style="max-width: none">
-				<h3 class="mb" style="text-align: left">My Story</h3>
+				<h3 class="mb" style="text-align: left">Add New Story</h3>
 				<form role="form" enctype="multipart/form-data"
 					action="TraineeStoryServlet" method="post" id="trainerregform"
 					name="trainerregform" class="registration-form"
