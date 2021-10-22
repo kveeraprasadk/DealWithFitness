@@ -5,6 +5,7 @@ import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,40 +36,28 @@ public class TraineeStoryServlet extends HttpServlet {
 	private static final Logger log = LogManager.getLogger("TraineeStoryServlet");
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("application/json");
-
+		// trainer id and traineeId are mutually exclusive
+		String trainerId = request.getParameter("trainerId");
 		String traineeId = request.getParameter("traineeId");
 		String photosOfStoryId = request.getParameter("photosOfStoryId");
 		String onlyApproved = request.getParameter("onlyApproved");
+		String includeUniqueTrainers = request.getParameter("includeUniqueTrainers");
 
+		// Validate the parameters
+		if (trainerId != null && traineeId != null) {
+			response.setStatus(400);
+			response.getWriter().write("trainerId and traineeId are mutually exclusive");
+			return;
+		}
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json");
+
+		log.info("Stories Request Details: traineeId: {}, trainer: {}, photoStoryId: {}, onlyApproved: {}, includeUniqueTrainers: {}", traineeId, trainerId, photosOfStoryId, onlyApproved, includeUniqueTrainers);
 		try (Connection con = DBConnection.createConnection()) {
 			try (Statement query = con.createStatement()) {
-				// if story id is passed mean only photos are required
-				if (photosOfStoryId == null) {
-					String traineeWhereClause = traineeId == null ? "" : String.format(" and ts.traineeId='%s' ", traineeId);
-					String onlyApprovedClause = onlyApproved == null ? "" : String.format(" and ts.adminapprove = true ", traineeId);
-					String sql = String
-							.format("select ts.traineeId, ti.traineename, tr.trainername, ts.storyId, ts.story, ts.adminapprove, ts.creationTime, !isNull(ts.photo1) as isPhoto1,"
-									+ " !isNull(ts.photo2) isPhoto2 from traineeStories ts, trainerregister tr, traineeregister ti where ts.trainerId = tr.traineremail"
-									+ " and ts.traineeId = ti.username  %s %s order by creationTime desc limit 0,50", traineeWhereClause, onlyApprovedClause);
-					try (ResultSet rs = query.executeQuery(sql)) {
-						List<TraineeStory> data = new ArrayList<TraineeStory>();
-						while (rs.next()) {
-							TraineeStory story = new TraineeStory();
-							story.setTraineeId(rs.getString("traineeId"));
-							story.setTraineeName(rs.getString("traineename"));
-							story.setTrainerName(rs.getString("trainername"));
-							story.setStoryId(rs.getString("storyId"));
-							story.setStory(rs.getString("story"));
-							story.setAdminapprove(rs.getBoolean("adminapprove"));
-							story.setCreationTime(rs.getLong("creationTime"));
-							story.setHasPhotos(rs.getBoolean("isPhoto1") || rs.getBoolean("isPhoto2"));
-							data.add(story);
-						}
-						response.getWriter().write(Json.stringify(data));
-					}
-				} else if (traineeId != null) {
+				// Send unique trainer found in trainee stories table
+				if (traineeId != null && photosOfStoryId != null) {
+					// Request is to get photos of a story
 					String sql = String.format("select photo1, photo2 from traineeStories where traineeId = '%s' and storyId = '%s'", traineeId, photosOfStoryId);
 					try (ResultSet rs = query.executeQuery(sql)) {
 						if (rs.next()) {
@@ -86,6 +75,23 @@ public class TraineeStoryServlet extends HttpServlet {
 							response.getWriter().write(Json.stringify(photosMap));
 						}
 					}
+				} else if (traineeId != null || trainerId != null || onlyApproved != null) {
+					// Request is to get stories of a trainee or stories of a trainer
+					String sql = getSQL(trainerId, traineeId, onlyApproved);
+					try (ResultSet rs = query.executeQuery(sql)) {
+						Map<String, Object> responseMap = new HashMap<String, Object>();
+						List<TraineeStory> data = new ArrayList<TraineeStory>();
+						while (rs.next()) {
+							data.add(asStory(rs));
+						}
+						if (includeUniqueTrainers != null) {
+							Map<String, String> trainersDetails = getUniqueTrainers(query);
+							responseMap.put("trainers", trainersDetails);
+						}
+						responseMap.put("stories", data);
+						response.getWriter().write(Json.stringify(responseMap));
+					}
+
 				} else {
 					response.setStatus(400);
 					response.getWriter().write("Trainee Id is mandatory to get photos");
@@ -95,6 +101,40 @@ public class TraineeStoryServlet extends HttpServlet {
 			response.setStatus(500);
 			log.error("Exception", e);
 		}
+	}
+
+	private Map<String, String> getUniqueTrainers(Statement query) throws SQLException {
+		String sql = "select distinct ts.trainerId, tr.trainername from traineeStories ts, trainerregister tr where ts.trainerId = tr.traineremail and ts.adminapprove = true";
+		Map<String, String> data = new HashMap<String, String>();
+		try (ResultSet rs = query.executeQuery(sql)) {
+			while (rs.next()) {
+				data.put(rs.getString("trainerId"), rs.getString("trainername"));
+			}
+		}
+		return data;
+	}
+
+	private String getSQL(String trainerId, String traineeId, String onlyApproved) {
+		// Note: trainer where clause and trainee where clause are mutually exclusive
+		String trainerWhereClause = trainerId == null ? "" : String.format(" and ts.trainerId = '%s' ", trainerId);
+		String traineeWhereClause = traineeId == null ? "" : String.format(" and ts.traineeId = '%s' ", traineeId);
+		String onlyApprovedClause = onlyApproved == null ? "" : String.format(" and ts.adminapprove = true ", traineeId);
+		return String.format("select ts.traineeId, ti.traineename, tr.trainername, ts.storyId, ts.story, ts.adminapprove, ts.creationTime, !isNull(ts.photo1) as isPhoto1,"
+				+ " !isNull(ts.photo2) isPhoto2 from traineeStories ts, trainerregister tr, traineeregister ti where ts.trainerId = tr.traineremail"
+				+ " and ts.traineeId = ti.username  %s %s %s order by creationTime desc limit 0,50", trainerWhereClause, traineeWhereClause, onlyApprovedClause);
+	}
+
+	private TraineeStory asStory(ResultSet rs) throws SQLException {
+		TraineeStory story = new TraineeStory();
+		story.setTraineeId(rs.getString("traineeId"));
+		story.setTraineeName(rs.getString("traineename"));
+		story.setTrainerName(rs.getString("trainername"));
+		story.setStoryId(rs.getString("storyId"));
+		story.setStory(rs.getString("story"));
+		story.setAdminapprove(rs.getBoolean("adminapprove"));
+		story.setCreationTime(rs.getLong("creationTime"));
+		story.setHasPhotos(rs.getBoolean("isPhoto1") || rs.getBoolean("isPhoto2"));
+		return story;
 	}
 
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

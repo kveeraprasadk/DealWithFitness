@@ -105,10 +105,13 @@ function Stories() {
 		progressBar.start();
 		whoami.detect(() => {
 			console.log("All trainee stories: ", allTrainees, " only approved stories: ", onlyApproved);
-			const data = allTrainees == true ? {} : {
-				traineeId: whoami.getUser()
-			};
-			if(onlyApproved == true) {
+			// All trainees are meant for view stories page otherwise trainee specific stories page
+			const data = allTrainees == true ? {
+				includeUniqueTrainers: true
+			} : {
+					traineeId: whoami.getUser()
+				};
+			if (onlyApproved == true) {
 				data.onlyApproved = true;
 			}
 			progressBar.start();
@@ -117,13 +120,25 @@ function Stories() {
 				type: "GET",
 				data: data,
 				cache: false,
-				success: function(data) {
-					if (data && data.length > 0) {
-						self.lst = data;
-						self.fill();
-					} else {
-						console.log("no stories")
-						$("#no-stories-message").show();
+				success: function(res) {
+					if (res) {
+						const stories = res.stories;
+						if (stories && stories.length > 0) {
+							self.lst = stories;
+							self.fill();
+						} else {
+							console.log("no stories")
+							$("#no-stories-message").show();
+						}
+
+						// This is for stories page
+						if (res.trainers) {
+							const select = $("#unique-trainers");
+							for (const key in res.trainers) {
+								const trainerName = res.trainers[key];
+								select.append("<option value='" + key + "'>" + trainerName + "</option>");
+							}
+						}
 					}
 				},
 				error: function(error) {
@@ -133,6 +148,40 @@ function Stories() {
 				complete: () => progressBar.end()
 			});
 		})
+	}
+
+	self.filterByTrainer = function(event) {
+		const trainerId = event.target.value;
+		const request = {
+			onlyApproved: true
+		}
+		if (trainerId != null && trainerId.trim().length > 0) {
+			request.trainerId = trainerId;
+		}
+		console.log("filter: ", request);
+		progressBar.start();
+		$.ajax({
+			url: "TraineeStoryServlet",
+			type: "GET",
+			data: request,
+			cache: false,
+			success: function(res) {
+				const data = res.stories;
+				$("#view-stories-container").html("");
+				if (data && data.length > 0) {
+					console.log(data)
+					self.lst = data;
+					self.fill();
+				} else {
+					$("#no-stories-message").show();
+				}
+			},
+			error: function(error) {
+				console.error(error);
+				alertDialog.show("Service Failure", "Failed to get stories of trainee " + whoami.getUser());
+			},
+			complete: () => progressBar.end()
+		});
 	}
 
 	self.showMore = function(event) {
