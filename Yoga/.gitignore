@@ -1,7 +1,9 @@
 **/.settings/
-DealWithFitness/Yoga/target/*
+*/target/*
 *.zip
 *.log
+*.war
+*.class
 .classpath
 .metadata/**
 **/.metadata/
