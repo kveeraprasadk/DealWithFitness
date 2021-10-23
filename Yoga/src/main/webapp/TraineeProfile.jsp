@@ -644,41 +644,7 @@ label {
 
 
 	<!-- Footer Start -->
-	<div class="footer wow fadeIn" data-wow-delay="0.3s">
-		<div class="container-fluid">
-			<div class="container">
-				<div class="footer-info">
-					<a href="index.jsp" class="footer-logo">DealWithFitness<span></span></a>
-
-					<div class="footer-menu">
-
-						<p>dealwithfitness64@gmail.com</p>
-					</div>
-					<div class="footer-social">
-						<a href=""><i class="fab fa-twitter"></i></a> <a href=""><i
-							class="fab fa-facebook-f"></i></a> <a href=""><i
-							class="fab fa-youtube"></i></a> <a href=""><i
-							class="fab fa-instagram"></i></a> <a href=""><i
-							class="fab fa-linkedin-in"></i></a>
-					</div>
-				</div>
-			</div>
-			<div class="container copyright">
-				<div class="row">
-					<div class="col-md-6">
-						<p>
-							&copy; <a href="#">dealwithfitness</a>, All Right Reserved.
-						</p>
-					</div>
-					<div class="col-md-6">
-						<p>
-							Designed By <Strong>Bluehorse Creative Team</Strong>
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	<%@include file="./html/footer.html"%>
 	<!-- Footer End -->
 
 	<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>

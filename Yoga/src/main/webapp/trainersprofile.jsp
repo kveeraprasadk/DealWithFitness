@@ -47,9 +47,32 @@
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"
 	defer></script>
+<<<<<<< Updated upstream
 <script
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+=======
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<!-- JavaScript Libraries -->
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+	<script src="lib/easing/easing.min.js"></script>
+	<script src="lib/wow/wow.min.js"></script>
+	<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+	<script src="lib/isotope/isotope.pkgd.min.js"></script>
+	<script src="lib/lightbox/js/lightbox.min.js"></script>
+>>>>>>> Stashed changes
 
+	<!-- Contact Javascript File -->
+	<script src="mail/jqBootstrapValidation.min.js"></script>
+	<script src="mail/contact.js"></script>
+
+	<!-- Template Javascript -->
+	<script src="js/main.js"></script>
+	<script src="profile/js/popper.min.js"></script>
+	<script src="profile/js/bootstrap.min.js"></script>
+	<script src="profile/js/script.js"></script>
 <script src="./dist/whoami.js"></script>
 
 <style>
@@ -82,8 +105,19 @@
 
 /* Add a color to the delete button */
 .deletebtn {
+<<<<<<< Updated upstream
 	background-color: #f44336;
 }
+=======
+  background-color: #f44336;
+}
+
+
+
+
+
+
+>>>>>>> Stashed changes
 
 /* Style the horizontal ruler */
 hr {
@@ -182,6 +216,7 @@ hr {
 
 	<!-- Nav Bar Start -->
 	<%@include file="./html/navbar.html"%>
+	<%@include file="./html/dialogs.html"%>
 	<!-- Nav Bar End -->
 
 	<!-- Page Header Start -->
@@ -745,63 +780,14 @@ window.onclick = function(event) {
 	<!-- About End -->
 
 	<!-- Footer Start -->
-	<div class="footer wow fadeIn" data-wow-delay="0.3s">
-		<div class="container-fluid">
-			<div class="container">
-				<div class="footer-info">
-					<a href="index.jsp" class="footer-logo">
-						DealWithFitness
-						<span></span>
-					</a>
-
-					<div class="footer-menu">
-
-						<p>dealwithfitness64@gmail.com</p>
-					</div>
-					<div class="footer-social">
-						<a href="">
-							<i class="fab fa-twitter"></i>
-						</a>
-						<a href="">
-							<i class="fab fa-facebook-f"></i>
-						</a>
-						<a href="">
-							<i class="fab fa-youtube"></i>
-						</a>
-						<a href="">
-							<i class="fab fa-instagram"></i>
-						</a>
-						<a href="">
-							<i class="fab fa-linkedin-in"></i>
-						</a>
-					</div>
-				</div>
-			</div>
-			<div class="container copyright">
-				<div class="row">
-					<div class="col-md-6">
-						<p>
-							&copy;
-							<a href="#">dealwithfitness</a>
-							, All Right Reserved.
-						</p>
-					</div>
-					<div class="col-md-6">
-						<p>
-							Designed By
-							<Strong>Bluehorse Creative Team</Strong>
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	<%@include file="./html/footer.html"%>
 	<!-- Footer End -->
 
 	<a href="#" class="back-to-top">
 		<i class="fa fa-chevron-up"></i>
 	</a>
 
+<<<<<<< Updated upstream
 	<!-- JavaScript Libraries -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script
@@ -820,5 +806,8 @@ window.onclick = function(event) {
 	<script src="js/main.js"></script>
 	<script src="profile/js/popper.min.js"></script>
 	<script src="profile/js/script.js"></script>
+=======
+	
+>>>>>>> Stashed changes
 </body>
 </html>

@@ -610,7 +610,7 @@ label {
 														class="form-certificate3" id="form-certificate3">
 												</div>
 											</div>
-										</div>
+										</div>										
 										<button type="submit"
 											class="btn trainerregisterbutton btn-primary"
 											id="trainerregisterbutton">
@@ -639,7 +639,11 @@ label {
 								third party. We will soon reach out to you for your consent that
 								will be used by us solely for the purpose of communicating
 								information that supports you with the yogic practices learned
+<<<<<<< Updated upstream
 								from us, any upcoming events in Yoga and special offersâif
+=======
+								from us, any upcoming events in Yoga and special offers—if
+>>>>>>> Stashed changes
 								any, on our programs. You will have the right to have your
 								details removed from our database at any point"</p>
 						</div>

@@ -63,6 +63,22 @@
 <script src="./dist/dialogs.js"></script>
 <script src="./dist/whoami.js"></script>
 <script src="./dist/home-trainers.js"></script>
+<!-- JavaScript Libraries -->
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+	<script src="lib/easing/easing.min.js"></script>
+	<script src="lib/wow/wow.min.js"></script>
+	<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+	<script src="lib/isotope/isotope.pkgd.min.js"></script>
+	<script src="lib/lightbox/js/lightbox.min.js"></script>
+
+	<!-- Contact Javascript File -->
+	<script src="mail/jqBootstrapValidation.min.js"></script>
+	<script src="mail/contact.js"></script>
+
+	<!-- Template Javascript -->
+	<script src="js/main.js"></script>
 <link rel="icon" href="img/yoga-icon1.jpg">
 
 <style type="text/css">
@@ -349,78 +365,13 @@ label {
 	<!-- Service End -->
 
 	<!-- Footer Start -->
-	<div class="footer wow fadeIn" data-wow-delay="0.3s">
-		<div class="container-fluid">
-			<div class="container">
-				<div class="footer-info">
-					<a class="footer-logo">
-						DealWithFitness
-						<span></span>
-					</a>
-
-					<div class="footer-menu">
-
-						<p>dealwithfitness64@gmail.com</p>
-					</div>
-					<div class="footer-social">
-						<a href="">
-							<i class="fab fa-twitter"></i>
-						</a>
-						<a href="">
-							<i class="fab fa-facebook-f"></i>
-						</a>
-						<a href="">
-							<i class="fab fa-youtube"></i>
-						</a>
-						<a href="">
-							<i class="fab fa-instagram"></i>
-						</a>
-						<a href="">
-							<i class="fab fa-linkedin-in"></i>
-						</a>
-					</div>
-				</div>
-			</div>
-			<div class="container copyright">
-				<div class="row">
-					<div class="col-md-6">
-						<p>
-							&copy;
-							<a href="#">dealwithfitness</a>
-							, All Right Reserved.
-						</p>
-					</div>
-					<div class="col-md-6">
-						<p>
-							Designed By
-							<Strong>Bluehorse Creative Team</Strong>
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	<%@include file="./html/footer.html"%>
 	<!-- Footer End -->
 
 	<a href="#" class="back-to-top">
 		<i class="fa fa-chevron-up"></i>
 	</a>
 
-	<!-- JavaScript Libraries -->
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-	<script src="lib/easing/easing.min.js"></script>
-	<script src="lib/wow/wow.min.js"></script>
-	<script src="lib/owlcarousel/owl.carousel.min.js"></script>
-	<script src="lib/isotope/isotope.pkgd.min.js"></script>
-	<script src="lib/lightbox/js/lightbox.min.js"></script>
-
-	<!-- Contact Javascript File -->
-	<script src="mail/jqBootstrapValidation.min.js"></script>
-	<script src="mail/contact.js"></script>
-
-	<!-- Template Javascript -->
-	<script src="js/main.js"></script>
+	
 </body>
 </html>
