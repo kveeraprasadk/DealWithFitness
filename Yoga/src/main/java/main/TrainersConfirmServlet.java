@@ -120,7 +120,7 @@ public class TrainersConfirmServlet extends HttpServlet {
 		}
 	}
 
-	static char[] UniqueIdCreate() {
+	public static char[] UniqueIdCreate() {
 		int len = 10;
 		System.out.println("Generating password using random() : ");
 		System.out.print("Your new password is : ");

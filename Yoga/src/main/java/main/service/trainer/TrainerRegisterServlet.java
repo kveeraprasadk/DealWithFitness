@@ -153,11 +153,9 @@ public class TrainerRegisterServlet extends HttpServlet {
 			certificatefileName3 = "";
 		}
 
-		Connection con = null;
 		String Countrow = null;
 		boolean isapprove=false;
-		try {
-			con = DBConnection.createConnection();
+		try (Connection con = DBConnection.createConnection()){
 			String cnt = "select count(*) from trainerregister where traineremail=?";
 			PreparedStatement statement1 = con.prepareStatement(cnt);
 			statement1.setString(1, email);

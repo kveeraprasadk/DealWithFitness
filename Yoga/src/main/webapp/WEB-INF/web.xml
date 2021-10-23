@@ -250,6 +250,12 @@
 		<description></description>
 		<servlet-class>main.TraineeStoryPhoto1DownloadServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>TrainerForgotPasswordServlet</servlet-name>
+		<display-name>TrainerForgotPasswordServlet</display-name>
+		<description></description>
+		<servlet-class>main.service.trainer.TrainerForgotPasswordServlet</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>TrainerRegisterServlet</servlet-name>
@@ -414,6 +420,10 @@
 	<servlet-mapping>
 		<servlet-name>TraineeStoryPhoto1DownloadServlet</servlet-name>
 		<url-pattern>/TraineeStoryPhoto1DownloadServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>TrainerForgotPasswordServlet</servlet-name>
+		<url-pattern>/TrainerForgotPasswordServlet</url-pattern>
 	</servlet-mapping>
 	<listener>
 		<listener-class>main.common.MysqlDatasource</listener-class>

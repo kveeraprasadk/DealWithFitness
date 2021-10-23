@@ -79,6 +79,34 @@
 <!-- Popper JS -->
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<!-- JavaScript Libraries -->
+
+
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+	<script src="lib/easing/easing.min.js"></script>
+	<script src="lib/wow/wow.min.js"></script>
+	<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+	<script src="lib/isotope/isotope.pkgd.min.js"></script>
+	<script src="lib/lightbox/js/lightbox.min.js"></script>
+
+	<!-- Contact Javascript File -->
+	<script src="mail/jqBootstrapValidation.min.js"></script>
+	<script src="mail/contact.js"></script>
+
+	<!-- Template Javascript -->
+	<script src="js/main.js"></script>
+	<!-- Javascript -->
+	<script src="assets/js/jquery-1.11.1.min.js"></script>
+	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+	<script src="assets/js/jquery.backstretch.min.js"></script>
+	<script src="assets/js/retina-1.1.0.min.js"></script>
+	<script src="assets/js/scripts.js"></script>
+
+	<!--[if lt IE 10]>
+            <script src="assets/js/placeholder.js"></script>
+        <![endif]-->
 
 </head>
 
@@ -306,72 +334,11 @@
 
 
 	<!-- Footer Start -->
-	<div class="footer wow fadeIn" data-wow-delay="0.3s">
-		<div class="container-fluid">
-			<div class="container">
-				<div class="footer-info">
-					<a href="index.jsp" class="footer-logo">DealWithFitness<span></span></a>
-
-					<div class="footer-menu">
-
-						<p>dealwithfitness64@gmail.com</p>
-					</div>
-					<div class="footer-social">
-						<a href=""><i class="fab fa-twitter"></i></a> <a href=""><i
-							class="fab fa-facebook-f"></i></a> <a href=""><i
-							class="fab fa-youtube"></i></a> <a href=""><i
-							class="fab fa-instagram"></i></a> <a href=""><i
-							class="fab fa-linkedin-in"></i></a>
-					</div>
-				</div>
-			</div>
-			<div class="container copyright">
-				<div class="row">
-					<div class="col-md-6">
-						<p>
-							&copy; <a href="#">dealwithfitness</a>, All Right Reserved.
-						</p>
-					</div>
-					<div class="col-md-6">
-						<p>
-							Designed By <Strong>Bluehorse Creative Team</Strong>
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	<%@include file="./html/footer.html"%>
 	<!-- Footer End -->
 
 	<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 
-	<!-- JavaScript Libraries -->
-
-
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-	<script src="lib/easing/easing.min.js"></script>
-	<script src="lib/wow/wow.min.js"></script>
-	<script src="lib/owlcarousel/owl.carousel.min.js"></script>
-	<script src="lib/isotope/isotope.pkgd.min.js"></script>
-	<script src="lib/lightbox/js/lightbox.min.js"></script>
-
-	<!-- Contact Javascript File -->
-	<script src="mail/jqBootstrapValidation.min.js"></script>
-	<script src="mail/contact.js"></script>
-
-	<!-- Template Javascript -->
-	<script src="js/main.js"></script>
-	<!-- Javascript -->
-	<script src="assets/js/jquery-1.11.1.min.js"></script>
-	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
-	<script src="assets/js/jquery.backstretch.min.js"></script>
-	<script src="assets/js/retina-1.1.0.min.js"></script>
-	<script src="assets/js/scripts.js"></script>
-
-	<!--[if lt IE 10]>
-            <script src="assets/js/placeholder.js"></script>
-        <![endif]-->
+	
 </body>
 </html>

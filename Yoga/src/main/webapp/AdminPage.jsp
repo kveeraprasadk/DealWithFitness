@@ -37,10 +37,82 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" defer></script>
-	
+	<!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="lib/easing/easing.min.js"></script>
+        <script src="lib/wow/wow.min.js"></script>
+        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="lib/isotope/isotope.pkgd.min.js"></script>
+        <script src="lib/lightbox/js/lightbox.min.js"></script>
+        <script src="./dist/dialogs.js"></script> 
+        
+        <!-- Contact Javascript File -->
+        <script src="mail/jqBootstrapValidation.min.js"></script>
+        <script src="mail/contact.js"></script>
+
+        <!-- Template Javascript -->
+        <script src="js/main.js"></script>
+        <script src="assets/js/isotope.min.js"></script>
+    <script src="assets/js/owl-carousel.js"></script>
+    <script src="assets/js/lightbox.js"></script>
+    <script src="assets/js/custom.js"></script>
+    <script>
+      //according to loftblog tut
+      $(".main-menu li:first").addClass("active");
+
+      var showSection = function showSection(section, isAnimate) {
+        var direction = section.replace(/#/, ""),
+          reqSection = $(".section").filter(
+            '[data-section="' + direction + '"]'
+          ),
+          reqSectionPos = reqSection.offset().top - 0;
+
+        if (isAnimate) {
+          $("body, html").animate(
+            {
+              scrollTop: reqSectionPos
+            },
+            800
+          );
+        } else {
+          $("body, html").scrollTop(reqSectionPos);
+        }
+      };
+
+      var checkSection = function checkSection() {
+        $(".section").each(function() {
+          var $this = $(this),
+            topEdge = $this.offset().top - 80,
+            bottomEdge = topEdge + $this.height(),
+            wScroll = $(window).scrollTop();
+          if (topEdge < wScroll && bottomEdge > wScroll) {
+            var currentId = $this.data("section"),
+              reqLink = $("a").filter("[href*=\\#" + currentId + "]");
+            reqLink
+              .closest("li")
+              .addClass("active")
+              .siblings()
+              .removeClass("active");
+          }
+        });
+      };
+
+      $(".main-menu").on("click", "a", function(e) {
+        e.preventDefault();
+        showSection($(this).attr("href"), true);
+      });
+
+      $(window).scroll(function() {
+        checkSection();
+      });
+    </script>
         <style type="text/css">
         .bg-gradient-default {
   background: linear-gradient(87deg, #172b4d 0, #1a174d 100%) !important;
+}
+.navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link {
+    color: #14e3bd !important;
 }
         </style>
     </head>
@@ -76,6 +148,7 @@
         <!-- Top Bar End -->
 
         <!-- Nav Bar Start -->
+        
         <div class="navbar navbar-expand-lg bg-dark navbar-dark">
             <div class="container-fluid">
                   <a  class="navbar-brand">dealwithfitness <span> </span></a> 
@@ -96,7 +169,7 @@
               </ul>  
                         
                         
-                        <a href="./AdminPageView" class="nav-item nav-link active" >Admin</a>
+                        <a href="./AdminPageView" class="nav-item nav-link" >Admin</a>
                         <a href="./AdminLogoutServlet" class="nav-item nav-link ">Logout</a>
                     </div>
                 </div>
@@ -943,114 +1016,15 @@ $("#adminchangepassword").validate({
         			
         		});
           });
-	 </script>
-
-       
+	 </script>       
 
 
-        <!-- Footer Start -->
-        <div class="footer wow fadeIn" data-wow-delay="0.3s">
-            <div class="container-fluid">
-                <div class="container">
-                    <div class="footer-info">
-                        <a href="index.jsp" class="footer-logo">DealWithFitness<span></span></a>
-                        
-                        <div class="footer-menu">
-                           
-                            <p>dealwithfitness64@gmail.com</p>
-                        </div>
-                        <div class="footer-social">
-                            <a href=""><i class="fab fa-twitter"></i></a>
-                            <a href=""><i class="fab fa-facebook-f"></i></a>
-                            <a href=""><i class="fab fa-youtube"></i></a>
-                            <a href=""><i class="fab fa-instagram"></i></a>
-                            <a href=""><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="container copyright">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <p>&copy; <a href="#">dealwithfitness</a>, All Right Reserved.</p>
-                        </div>
-                        <div class="col-md-6">
-                            <p>Designed By <Strong>Bluehorse Creative Team</Strong></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Footer End -->
+       <!-- Footer Start -->
+	<%@include file="./html/footer.html"%>
+	<!-- Footer End -->
+	
         <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 
-        <!-- JavaScript Libraries -->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-        <script src="lib/easing/easing.min.js"></script>
-        <script src="lib/wow/wow.min.js"></script>
-        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-        <script src="lib/isotope/isotope.pkgd.min.js"></script>
-        <script src="lib/lightbox/js/lightbox.min.js"></script>
         
-        <!-- Contact Javascript File -->
-        <script src="mail/jqBootstrapValidation.min.js"></script>
-        <script src="mail/contact.js"></script>
-
-        <!-- Template Javascript -->
-        <script src="js/main.js"></script>
-        <script src="assets/js/isotope.min.js"></script>
-    <script src="assets/js/owl-carousel.js"></script>
-    <script src="assets/js/lightbox.js"></script>
-    <script src="assets/js/custom.js"></script>
-    <script>
-      //according to loftblog tut
-      $(".main-menu li:first").addClass("active");
-
-      var showSection = function showSection(section, isAnimate) {
-        var direction = section.replace(/#/, ""),
-          reqSection = $(".section").filter(
-            '[data-section="' + direction + '"]'
-          ),
-          reqSectionPos = reqSection.offset().top - 0;
-
-        if (isAnimate) {
-          $("body, html").animate(
-            {
-              scrollTop: reqSectionPos
-            },
-            800
-          );
-        } else {
-          $("body, html").scrollTop(reqSectionPos);
-        }
-      };
-
-      var checkSection = function checkSection() {
-        $(".section").each(function() {
-          var $this = $(this),
-            topEdge = $this.offset().top - 80,
-            bottomEdge = topEdge + $this.height(),
-            wScroll = $(window).scrollTop();
-          if (topEdge < wScroll && bottomEdge > wScroll) {
-            var currentId = $this.data("section"),
-              reqLink = $("a").filter("[href*=\\#" + currentId + "]");
-            reqLink
-              .closest("li")
-              .addClass("active")
-              .siblings()
-              .removeClass("active");
-          }
-        });
-      };
-
-      $(".main-menu").on("click", "a", function(e) {
-        e.preventDefault();
-        showSection($(this).attr("href"), true);
-      });
-
-      $(window).scroll(function() {
-        checkSection();
-      });
-    </script>
     </body>
 </html>
