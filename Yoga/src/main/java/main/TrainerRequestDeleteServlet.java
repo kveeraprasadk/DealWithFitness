@@ -49,27 +49,28 @@ public class TrainerRequestDeleteServlet extends HttpServlet {
         try
         {
             con = DBConnection.createConnection();
-            String query1 = "insert into trainerrejectlist select * from trainertemptable where traineremail=?";
+            String query1 = "insert into trainerrejectlist select * from trainerregister where traineremail=? and adminapprove=?";
             PreparedStatement statement1 = con.prepareStatement(query1); //Making use of prepared statements here to insert bunch of data
             statement1.setString(1, traineremail);
+            statement1.setBoolean(2, false);
             i= statement1.executeUpdate();
             if (i!=0) { 
                 
-           	 String query3 = "delete from trainertemptable where traineremail=?";
+           	 String query3 = "delete from trainerregister where traineremail=? and adminapprove=?";
                 PreparedStatement statement3 = con.prepareStatement(query3); //Making use of prepared statements here to insert bunch of data
                 statement3.setString(1, traineremail);
-                
+                statement3.setBoolean(2, false);
                  j= statement3.executeUpdate();
            } 
             if(i!=0 && j!=0){
             	
-                out.write("Trainer Confirmed Successfully");
+                out.write("Request Deleted Successfully");
                 
                 System.out.println("success");
                 SendEmail(traineremail);
             
                  }else{
-                 	out.write("Trainer Confirm Failed");
+                 	out.write("Request Deleting Failed");
                  	System.out.println("fail");
                    }
              }

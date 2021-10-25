@@ -50,6 +50,28 @@
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"
 	defer></script>
+	
+	<!-- JavaScript Libraries -->
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+	<script src="lib/easing/easing.min.js"></script>
+	<script src="lib/wow/wow.min.js"></script>
+	<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+	<script src="lib/isotope/isotope.pkgd.min.js"></script>
+	<script src="lib/lightbox/js/lightbox.min.js"></script>
+
+	<!-- Contact Javascript File -->
+	<script src="mail/jqBootstrapValidation.min.js"></script>
+	<script src="mail/contact.js"></script>
+
+	<!-- Template Javascript -->
+	<script src="js/main.js"></script>
+
+	<script src="profile/js/jquery-3.2.1.min.js"></script>
+	<script src="profile/js/popper.min.js"></script>
+	<script src="profile/js/bootstrap.min.js"></script>
+	<script src="profile/js/script.js"></script>
 
 <link href="css/style.css" rel="stylesheet">
 <script src="./dist/whoami.js"></script>
@@ -60,6 +82,7 @@
 	padding: 0;
 	background: none;
 }
+
 label {
 	color: #FF0000 !important;
 }
@@ -107,21 +130,22 @@ label {
 				<!--           <img src="profile/images/bloogs-6.jpg" alt="">  -->
 			</div>
 			<%
-			ArrayList<TrainerDetailsVO> trainees = (ArrayList<TrainerDetailsVO>) request.getAttribute("traineeProfileData");
+				ArrayList<TrainerDetailsVO> trainees = (ArrayList<TrainerDetailsVO>) request
+						.getAttribute("traineeProfileData");
 			%>
 
 
 			<%
-			// Iterating through subjectList
-			if (trainees != null && trainees.size() > 0) // Null check for the object
-			{
-				Iterator<TrainerDetailsVO> iterator = trainees.iterator(); // Iterator interface
-				int inv = 0;
-				for (TrainerDetailsVO traineedetails : trainees) // iterate through all the data until the last record
+				// Iterating through subjectList
+				if (trainees != null && trainees.size() > 0) // Null check for the object
 				{
-					//InvestorExpertNamemodel myinvestordetails = iterator.next(); //assign individual employee record to the employee class object
-					inv++;
-					//	System.out.println("My Investor: "+ traineedetails.getName());
+					Iterator<TrainerDetailsVO> iterator = trainees.iterator(); // Iterator interface
+					int inv = 0;
+					for (TrainerDetailsVO traineedetails : trainees) // iterate through all the data until the last record
+					{
+						//InvestorExpertNamemodel myinvestordetails = iterator.next(); //assign individual employee record to the employee class object
+						inv++;
+						//	System.out.println("My Investor: "+ traineedetails.getName());
 			%>
 			<div class="row">
 				<div class="col-lg-8 col-md-7 detail-px no-padding">
@@ -192,7 +216,8 @@ label {
 						<div class="fx-ro">
 							<div class="dat col-lg-4">State</div>
 							<div class="dat col-lg-8">
-								<select id="form-state" name="form-state" class="form-control" required>
+								<select id="form-state" name="form-state" class="form-control"
+									required>
 									<option value="<%=traineedetails.getState()%>"><%=traineedetails.getState()%></option>
 									<option value="Andaman & Nicobar">Andaman & Nicobar</option>
 									<option value="Andhra Pradesh">Andhra Pradesh</option>
@@ -201,7 +226,8 @@ label {
 									<option value="Bihar">Bihar</option>
 									<option value="Chandigarh">Chandigarh</option>
 									<option value="Chhattisgarh">Chhattisgarh</option>
-									<option value="Dadra & Nagar Haveli">Dadra & Nagar Haveli</option>
+									<option value="Dadra & Nagar Haveli">Dadra & Nagar
+										Haveli</option>
 									<option value="Daman & Diu">Daman & Diu</option>
 									<option value="Delhi">Delhi</option>
 									<option value="Goa">Goa</option>
@@ -230,8 +256,8 @@ label {
 									<option value="Uttar Pradesh">Uttar Pradesh</option>
 									<option value="Uttaranchal">Uttaranchal</option>
 									<option value="West Bengal">West Bengal</option>
-									
-									
+
+
 								</select>
 							</div>
 						</div>
@@ -240,9 +266,9 @@ label {
 							<div class="dat col-lg-8">
 								<input type="text" name="form-city"
 									class="form-city form-control" id="form-city"
-									value="<%=traineedetails.getCity()%>" required>							
+									value="<%=traineedetails.getCity()%>" required>
 
-								
+
 							</div>
 						</div>
 						<div class="fx-ro">
@@ -280,8 +306,8 @@ label {
 							<br>
 						</p>
 						<%
-						}
-						}
+							}
+							}
 						%>
 
 						<form id="traineeppchangepassword" name="traineeppchangepassword">
@@ -332,61 +358,78 @@ label {
 		</div>
 	</div>
 	<script type="text/javascript">
+		$(document)
+				.ready(
+						function() {
+							$("#traineeupdateform")
+									.validate(
+											{
+												rules : {
+													formdob : {
+														required : true,
+														minAge : 5,
+														maxAge : 70
+													}
+												},
+												messages : {
+													formdob : {
+														required : "Please enter you date of birth.",
+														minAge : "You must be at least 5 years old!",
+														maxAge : "You must be below 70 years old!"
+													}
+												}
+											});
+							$.validator
+									.addMethod(
+											"minAge",
+											function(value, element, min) {
+												var today = new Date();
+												var birthDate = new Date(value);
+												var age = today.getFullYear()
+														- birthDate
+																.getFullYear();
 
-		$(document).ready(function() {
-			$("#traineeupdateform").validate({
-				rules: {
-					formdob: {
-			            required: true,
-			            minAge: 5,
-			            maxAge: 70
-			        }
-			    },
-			    messages: {
-			    	formdob: {
-			            required: "Please enter you date of birth.",
-			            minAge: "You must be at least 5 years old!",
-			            maxAge: "You must be below 70 years old!"
-			        } 
-			    }
-			});
-			$.validator.addMethod("minAge", function(value, element, min) {
-			    var today = new Date();
-			    var birthDate = new Date(value);
-			    var age = today.getFullYear() - birthDate.getFullYear();
-			 	
-			    if (age > min+1) {
-			        return true;
-			    }
-			 
-			    var m = today.getMonth() - birthDate.getMonth();
-			 
-			    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-			        age--;
-			    }
-			 
-			    return age >= min;
-			}, "You are not old enough!");
-			
-			$.validator.addMethod("maxAge", function(value, element, max) {
-			    var today1 = new Date();
-			    var birthDate1 = new Date(value);
-			    var age1 = today1.getFullYear() - birthDate1.getFullYear()  ;
-			   
-			    if (age1 < max+1) {
-			        return true;
-			    }
-			 
-			    var m =  today1.getMonth() - birthDate1.getMonth();
-			 
-			    if (m < 0 || (m === 0 && birthDate1.getDate() < today1.getDate())) {
-			        age1--;
-			    }
-			 
-			    return age1 <= max;
-			}, "You are too old enough!");
-		});
+												if (age > min + 1) {
+													return true;
+												}
 
+												var m = today.getMonth()
+														- birthDate.getMonth();
+
+												if (m < 0
+														|| (m === 0 && today
+																.getDate() < birthDate
+																.getDate())) {
+													age--;
+												}
+
+												return age >= min;
+											}, "You are not old enough!");
+
+							$.validator.addMethod("maxAge",
+									function(value, element, max) {
+										var today1 = new Date();
+										var birthDate1 = new Date(value);
+										var age1 = today1.getFullYear()
+												- birthDate1.getFullYear();
+
+										if (age1 < max + 1) {
+											return true;
+										}
+
+										var m = today1.getMonth()
+												- birthDate1.getMonth();
+
+										if (m < 0
+												|| (m === 0 && birthDate1
+														.getDate() < today1
+														.getDate())) {
+											age1--;
+										}
+
+										return age1 <= max;
+									}, "You are too old enough!");
+						});
 	</script>
 	<script language="javascript" type="text/javascript">
 		function limitText(limitField, limitCount, limitNum) {
@@ -470,9 +513,11 @@ label {
 														.val();
 												var phone = $("#form-phone")
 														.val();
-												var state = $("#form-state").val();
-												var city = $("#form-city").val();
-												
+												var state = $("#form-state")
+														.val();
+												var city = $("#form-city")
+														.val();
+
 												$
 														.ajax({
 															url : "TraineeProfileDetailsUpdateServlet",
@@ -480,7 +525,7 @@ label {
 															data : {
 																name : name,
 																email : email,
-														   		dob : dob,
+																dob : dob,
 																target : target,
 																ailment : ailment,
 																phone : phone,
@@ -517,6 +562,7 @@ label {
 																		'#editprofilehide')
 																		.hide();
 																document.location.href = './TraineeProfile';
+
 															},
 															error : function() {
 																$(
@@ -649,26 +695,6 @@ label {
 
 	<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 
-	<!-- JavaScript Libraries -->
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-	<script src="lib/easing/easing.min.js"></script>
-	<script src="lib/wow/wow.min.js"></script>
-	<script src="lib/owlcarousel/owl.carousel.min.js"></script>
-	<script src="lib/isotope/isotope.pkgd.min.js"></script>
-	<script src="lib/lightbox/js/lightbox.min.js"></script>
-
-	<!-- Contact Javascript File -->
-	<script src="mail/jqBootstrapValidation.min.js"></script>
-	<script src="mail/contact.js"></script>
-
-	<!-- Template Javascript -->
-	<script src="js/main.js"></script>
-
-	<script src="profile/js/jquery-3.2.1.min.js"></script>
-	<script src="profile/js/popper.min.js"></script>
-	<script src="profile/js/bootstrap.min.js"></script>
-	<script src="profile/js/script.js"></script>
+	
 </body>
 </html>

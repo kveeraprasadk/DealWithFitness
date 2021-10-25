@@ -115,4 +115,6 @@ function Trainers() {
 	}
 }
 
+
+
 window.trainers = new Trainers();

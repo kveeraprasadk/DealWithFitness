@@ -94,6 +94,8 @@
 
 <!-- Template Javascript -->
 <script src="js/main.js"></script>
+<script src="./dist/trainers.js"></script>
+<script src="./dist/dialogs.js"></script>
 <!-- Javascript -->
 <script src="assets/js/scripts.js"></script>
 
@@ -121,8 +123,9 @@ label {
 <body onload="init()">
 	<!-- Nav Bar Start -->
 	<%@include file="./html/navbar.html"%>
-
+<%@include file="./html/dialogs.html"%>
 	<!-- Nav Bar End -->
+	
 	<script type="text/javascript">
 		$(document)
 				.ready(
@@ -130,7 +133,6 @@ label {
 							$('#trainerloginform')
 									.validate(
 											{
-
 												rules : {
 													username : {
 														required : true,
@@ -159,7 +161,7 @@ label {
 															'#username').val();
 													var password = $(
 															'#password').val();
-
+													progressBar.start();
 													$
 															.ajax({
 																url : "TrainerLoginServlet",
@@ -227,8 +229,9 @@ label {
 																					'</div>');
 
 																}
-
+																complete: () => progressBar.end()
 															});
+													
 													return false;
 												}
 											});
