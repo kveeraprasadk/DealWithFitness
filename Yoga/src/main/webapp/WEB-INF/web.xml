@@ -256,6 +256,18 @@
 		<description></description>
 		<servlet-class>main.service.trainer.TrainerForgotPasswordServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>TrainersAdminApprovedListServlet</servlet-name>
+		<display-name>TrainersAdminApprovedListServlet</display-name>
+		<description></description>
+		<servlet-class>main.TrainersAdminApprovedListServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>TraineeAdminApprovedListServlet</servlet-name>
+		<display-name>TraineeAdminApprovedListServlet</display-name>
+		<description></description>
+		<servlet-class>main.TraineeAdminApprovedListServlet</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>TrainerRegisterServlet</servlet-name>
@@ -424,6 +436,14 @@
 	<servlet-mapping>
 		<servlet-name>TrainerForgotPasswordServlet</servlet-name>
 		<url-pattern>/TrainerForgotPasswordServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>TrainersAdminApprovedListServlet</servlet-name>
+		<url-pattern>/TrainersAdminApprovedListServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>TraineeAdminApprovedListServlet</servlet-name>
+		<url-pattern>/TraineeAdminApprovedListServlet</url-pattern>
 	</servlet-mapping>
 	<listener>
 		<listener-class>main.common.MysqlDatasource</listener-class>

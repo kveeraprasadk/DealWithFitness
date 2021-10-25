@@ -47,16 +47,17 @@
         <script src="lib/lightbox/js/lightbox.min.js"></script>
         <script src="./dist/dialogs.js"></script> 
         
+                
         <!-- Contact Javascript File -->
         <script src="mail/jqBootstrapValidation.min.js"></script>
         <script src="mail/contact.js"></script>
 
         <!-- Template Javascript -->
-        <script src="js/main.js"></script>
+        <script src="js/main.js"></script>       
         <script src="assets/js/isotope.min.js"></script>
-    <script src="assets/js/owl-carousel.js"></script>
-    <script src="assets/js/lightbox.js"></script>
-    <script src="assets/js/custom.js"></script>
+    	<script src="assets/js/owl-carousel.js"></script>
+    	<script src="assets/js/lightbox.js"></script>
+    	<script src="assets/js/custom.js"></script>
     <script>
       //according to loftblog tut
       $(".main-menu li:first").addClass("active");
@@ -126,11 +127,8 @@
     		 type: 'GET',
     		 url: "${pageContext.request.contextPath}/TrainerRequestServlet",
     		 
-    	 });
-    	 
-     }
-    
-    
+    	 }); 
+     }    
 </script>
         <!-- Top Bar Start -->
         <div class="top-bar d-none d-md-block">
@@ -161,15 +159,11 @@
                     <div class="navbar-nav ml-auto">           
                       
                           <ul class="main-menu">
-                <li><a href="#section1" class="nav-item nav-link ">Requests</a></li>
-                <li><a href="#section2" class="nav-item nav-link ">Trainers</a></li>
-                <li><a href="#section3" class="nav-item nav-link ">Trainees</a></li>
-                <li><a href="#section4" class="nav-item nav-link ">Modifications</a></li>
-                
-              </ul>  
-                        
-                        
-                        <a href="./AdminPageView" class="nav-item nav-link" >Admin</a>
+                <li><a href="./AdminPageView" class="nav-item nav-link active">Requests</a></li>
+                <li><a href="./AdminTrainersList" class="nav-item nav-link ">Trainers</a></li>
+                <li><a href="./AdminTraineesList" class="nav-item nav-link ">Trainees</a></li>
+    <!--        <li><a href="#section4" class="nav-item nav-link ">Modifications</a></li>   -->
+                       </ul>  
                         <a href="./AdminLogoutServlet" class="nav-item nav-link ">Logout</a>
                     </div>
                 </div>
@@ -185,16 +179,13 @@
                     <div class="col-12">
                         <h2>Admin Home</h2>
                     </div>
-           <!--          <div class="col-12">
-                        <a href="index.jsp">Home</a>
-                        <a href="./AdminPageView">Admin</a>
-                    </div>   -->
+                     <div class="col-12">
+                        <a href="./AdminPageView">Home</a>
+                        <a href="./AdminPageView">Requests</a>
+                    </div>   
                 </div>
-            </div>
-                    
-            
-        </div>
-       
+            </div>            
+        </div>       
         <!-- Page Header End -->
 
 
@@ -202,55 +193,7 @@
         <div id="page-wraper">
          <!-- Mask -->
       <span class="mask bg-gradient-default opacity-8"></span>
-      <!-- Sidebar Menu 
-      <div class="responsive-nav">
-        <i class="fa fa-bars" id="menu-toggle"></i>
-        <div id="menu" class="menu">
-          <i class="fa fa-times" id="menu-close"></i>
-          <div class="container">
-              <div class="image">
-              <a href="#"><img src="assets/images/author-image.jpg" alt="" /></a>
-            </div>   
-            <div class="author-content">
-              <h4>DealWithFitness</h4>
-              <span>Administrator</span>
-            </div>
-            <nav class="main-nav" role="navigation">
-              <ul class="main-menu">
-                <li><a href="#section1">About Me</a></li>
-                <li><a href="#section2">What I’m good at</a></li>
-                <li><a href="#section3">My Work</a></li>
-                <li><a href="#section4">Contact Me</a></li>
-              </ul>
-            </nav>
-            <div class="social-network">
-              <ul class="soial-icons">
-                <li>
-                  <a href="https://fb.com/templatemo"
-                    ><i class="fa fa-facebook"></i
-                  ></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-twitter"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-linkedin"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-dribbble"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-rss"></i></a>
-                </li>
-              </ul>
-            </div>
-            <div class="copyright-text">
-              <p>Copyright 2019 Reflux Design</p>
-            </div>
-          </div>
-        </div>
-      </div>
--->
+      
       <section class="section trainer-requests" data-section="section1">
         <div class="container">
           <div class="section-heading">
@@ -406,8 +349,14 @@ if(traineestoryrequest != null && traineestoryrequest.size() >0)  // Null check 
     </tr>
      <%
 							}
-						}
-					%> 
+						}else{  %>
+						<tr>
+						<td colspan="7">No Requests.</td>
+						</tr>
+						<% 
+					}
+				%> 
+					
   </table>
 </div>
         </div>
@@ -477,7 +426,7 @@ if(traineestoryrequest != null && traineestoryrequest.size() >0)  // Null check 
                 $.post("TrainerRequestDeleteServlet",{traineremail:temail}, function(responseText) {   // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
                 	
                console.log(responseText);
-                if(responseText=="Trainer Confirmed Successfully"){
+                if(responseText=="Request Deleted Successfully"){
                 	$(".confirmbutton").prop('disabled', true);
                 	document.location.href='./AdminPageView';
               
@@ -492,327 +441,7 @@ if(traineestoryrequest != null && traineestoryrequest.size() >0)  // Null check 
                 	}
                 });
             });
-        </script>
-      <section class="section triners-list" data-section="section2">
-        <div class="container">
-          <div class="section-heading">
-            <h2>Trainers List</h2>
-            <div class="line-dec"></div>
-            <span>
-            Total Registered Trainers List
-              </span>
-          </div>
-          <div class="row">
-   <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-              <div class="service-item">
-          <!--       <div class="first-service-icon service-icon"></div>   -->
-                <h4>Active Trainers </h4>
-                <div style="overflow-x:auto;">
-  <table class="table table-bordered">
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Expertise</th>
-      <th>Experience</th>
-      <th>Qualification</th>
-     
-      <th>AboutTrainer</th>
-      <th>Profile</th>
-      <th>Certificates</th>
-      <th>CreationTime</th>
-      <th></th>
-      
-    </tr>
-     <% ArrayList<TrainerDetailsVO> trainerslist = (ArrayList<TrainerDetailsVO>) request.getAttribute("TrainersList"); %>
-
-
-<%
-// Iterating through subjectList
-if(trainerslist != null && trainerslist.size() >0)  // Null check for the object
-{
-	Iterator<TrainerDetailsVO> iterator = trainerslist.iterator();  // Iterator interface
-	int inv=0;
-	for (TrainerDetailsVO tList: trainerslist)  // iterate through all the data until the last record
-	{
-		//InvestorExpertNamemodel myinvestordetails = iterator.next(); //assign individual employee record to the employee class object
-	inv++;
-//	System.out.println("My Investor: "+ trainerdetails.getName());
-	
-	%>
-    <tr>
-      <td><%=tList.getName() %></td>
-      <td><%=tList.getEmail() %></td>
-      <td><%=tList.getExpertise() %></td>
-      <td><%=tList.getExperience() %></td>
-      <td><%=tList.getQualification() %></td>
-      
-      <td><%=tList.getAboutyourself() %></td>
-      <td><a class="downloadReport" target="_blank" href="http://localhost:8080/Yoga/AdminCertificateDownloadServlet?user=<%=tList.getEmail() %>,<%=tList.getFilename() %>"><%=tList.getFilename() %></a></td>
-      <td><a class="downloadReport" target="_blank" href="http://localhost:8080/Yoga/AdminCertificate1DownloadServlet?user=<%=tList.getEmail() %>,<%=tList.getCertificate1filename() %>"><%=tList.getCertificate1filename() %></a>
- 		<br>
-      	  <a class="downloadReport" target="_blank" href="http://localhost:8080/Yoga/AdminCertificate2DownloadServlet?user=<%=tList.getEmail() %>,<%=tList.getCertificate2filename() %>"><%=tList.getCertificate2filename() %></a><br>
-      	  <a class="downloadReport" target="_blank" href="http://localhost:8080/Yoga/AdminCertificate3DownloadServlet?user=<%=tList.getEmail() %>,<%=tList.getCertificate3filename() %>"><%=tList.getCertificate3filename() %></a>
-      	  </td>
-      <td><%=tList.getCreatetime() %></td>
-    
-      <td ><div id="trname<%=inv%>t" data-msg="<%=tList.getName() %>"></div>
-      <div id="tremail<%=inv%>t" data-msg="<%=tList.getEmail() %>"></div>
-      <div id="trexpertise<%=inv%>t" data-msg="<%=tList.getExpertise() %>"></div>
-    
-      <div id="traboutyourself<%=inv%>t" data-msg="<%=tList.getAboutyourself() %>"></div>
-    <!--   <button type="button" class="white-button trainersupdatebutton" id="trainersupdate<%=inv %>t" data-count="<%=inv %>t" value="<%=tList.getEmail() %>">Update</button>  -->
-      <ul class="main-menu">
-      <li><a href="#section4" class="white-button trainersupdatebutton" id="trainersupdate<%=inv %>t" data-count="<%=inv %>t" value="<%=tList.getEmail() %>">Update</a></li>
-      </ul>
-      </td>
-    </tr>
-     <%
-							}
-						}
-					%> 
-  </table>
-</div>
-        </div>
-            </div>    
-            
-            
-          </div>
-        </div>
-      </section>
-       <script type="text/javascript">
-          $(document).ready(function(){
-        	  $(".trainersupdatebutton").click(function(){
-        			
-        				var count=$(this).attr("data-count");
-        				$("#name").val($("#trname"+count).attr("data-msg"));
-        				$("#email").val($("#tremail"+count).attr("data-msg"));
-        				$("#expertise").val($("#trexpertise"+count).attr("data-msg"));
-        				$("#monthlyfees").val($("#trmonthlyfees"+count).attr("data-msg"));
-        				$("#schedule").val($("#trschedule"+count).attr("data-msg"));
-        				$("#classlevel").val($("#trclasslevel"+count).attr("data-msg"));
-        				$("#message").val($("#traboutyourself"+count).attr("data-msg"));
-        			
-        		});
-          });
-	 </script>
-	 <script>
-            $(document).on("click", ".downloadcertificate", function() { // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
-            	
-            	var tid=$(this).val();
-                $.get("AdminCertificateDownloadServlet",{user : tid}, function(responseText) {   // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
-                	
-                	if(responseText != "Success"){
-                		
-                  		
-                  		
-                	}else{
-                	$('#failmsg').text(responseText);
-                	}
-               
-                });
-            });
-        </script>
-        <script>
-            $(document).on("click", ".downloadcertificate1", function() { // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
-            	
-            	var tid=$(this).val();
-                $.get("AdminCertificate1DownloadServlet",{user : tid}, function(responseText) {   // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
-                	
-                	if(responseText != "Success"){
-                		
-                  		
-                  		
-                	}else{
-                	$('#failmsg').text(responseText);
-                	}
-               
-                });
-            });
-        </script>
-        <script>
-            $(document).on("click", ".downloadcertificate2", function() { // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
-            	
-            	var tid=$(this).val();
-                $.get("AdminCertificate2DownloadServlet",{user : tid}, function(responseText) {   // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
-                	
-                	if(responseText != "Success"){
-                		
-                  		
-                  		
-                	}else{
-                	$('#failmsg').text(responseText);
-                	}
-               
-                });
-            });
-        </script>
-        <script>
-            $(document).on("click", ".downloadcertificate3", function() { // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
-            	
-            	var tid=$(this).val();
-                $.get("AdminCertificate3DownloadServlet",{user : tid}, function(responseText) {   // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
-                	
-                	if(responseText != "Success"){
-                		
-                  		
-                  		
-                	}else{
-                	$('#failmsg').text(responseText);
-                	}
-               
-                });
-            });
-        </script>
-	<section class="section trinees-list" data-section="section3">
-        <div class="container">
-          <div class="section-heading">
-            <h2>Trainees List</h2>
-            <div class="line-dec"></div>
-            <span>
-            Total Registered Trainees List
-              </span>
-          </div>
-          <div class="row">
-    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-              <div class="service-item">
-          <!--       <div class="first-service-icon service-icon"></div>   -->
-                <h4>Active Trainees </h4>
-                <div style="overflow-x:auto;">
-  <table class="table table-bordered">
-    <tr>
-      <th>Name</th>
-      <th>Email</th>      
-      <th>Target</th>
-      <th>Ailment</th>
-      <th>city</th>
-      <th>Phone</th>
-      <th>Password</th>
-      <th>CreationTime</th>
-      <th></th>
-      
-    </tr>
-     <% ArrayList<TrainerDetailsVO> traineeslist = (ArrayList<TrainerDetailsVO>) request.getAttribute("TraineesList"); %>
-
-
-<%
-// Iterating through subjectList
-if(traineeslist != null && traineeslist.size() >0)  // Null check for the object
-{
-	Iterator<TrainerDetailsVO> iterator = traineeslist.iterator();  // Iterator interface
-	int inv=0;
-	for (TrainerDetailsVO tList: traineeslist)  // iterate through all the data until the last record
-	{
-		//InvestorExpertNamemodel myinvestordetails = iterator.next(); //assign individual employee record to the employee class object
-	inv++;
-//	System.out.println("My Investor: "+ trainerdetails.getName());
-	
-	%>
-    <tr>
-    	<td><%=tList.getName() %></td>
-      <td><%=tList.getEmail() %></td>      
-      <td><%=tList.getTarget() %></td>
-      <td><%=tList.getAnyailment() %></td>
-      <td><%=tList.getCity() %></td>
-       <td><%=tList.getPhone() %></td>
-      <td><%=tList.getPassword() %></td>     
-      <td><%=tList.getCreatetime() %></td>
-      <td ><button class="white-button">Update</button></td>
-    </tr>
-     <%
-							}
-						}
-					%> 
-  </table>
-</div>
-        </div>
-        </div>
-          </div>
-        </div>
-      </section>
-      
-
-      <section class="section Modify-details" data-section="section4">
-        <div class="container">
-          <div class="section-heading">
-            <h2>Modify Details</h2>
-            <div class="line-dec"></div>
-            <span>
-            Please modify the values whatever you want to change in Trainers and Trainees profiles.<br>
-            <b>! important :</b>Email id can't be modify.
-              </span>
-          </div>
-          <div class="row">
-            <div class="right-content">
-              <div class="container">
-                <form id="contact" action="" method="">
-                  <div class="row">
-                    <div class="col-md-6">
-                    
-                      <fieldset>
-                        <input
-                          name="name"
-                          type="text"
-                          class="form-control"
-                          id="name"
-                          placeholder="Your name..."
-                          required=""
-                        />
-                      </fieldset>
-                    </div>
-                    <div class="col-md-6">
-                      <fieldset>
-                        <input
-                          name="email"
-                          type="text"
-                          class="form-control"
-                          id="email"
-                          placeholder="Your email..."
-                          disabled="disabled"
-                        />
-                      </fieldset>
-                    </div>
-                    <div class="col-md-12">
-                      <fieldset>
-                        <input
-                          name="expertise"
-                          type="text"
-                          class="form-control"
-                          id="expertise"
-                          placeholder="Your expertise..."
-                          required=""
-                        />
-                      </fieldset>
-                    </div>
-                   
-                   
-                    
-                    <div class="col-md-12">
-                      <fieldset>
-                        <textarea
-                          name="message"
-                          rows="6"
-                          class="form-control"
-                          id="message"
-                          placeholder="About yourself..."
-                          required=""
-                        ></textarea>
-                      </fieldset>
-                    </div>
-                    <div class="col-md-12">
-                      <fieldset>
-                        <button type="submit" id="form-submit" class="button">
-                          Update
-                        </button>
-                      </fieldset>
-                    </div>
-                    <div id="success"></div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+        </script>      
       
        <section class="section Change-password" data-section="section5">
         <div class="container">
@@ -964,61 +593,7 @@ $("#adminchangepassword").validate({
         		});
           });
 	 </script>  
- <script type="text/javascript">
-          $(document).ready(function(){
-        	  $("#form-submit").click(function(){
-        			
-        		  event.preventDefault();
-                  var name = $("#name").val();
-                  var email = $("#email").val();
-                  var exp = $("#expertise").val();
-                  var mfees = $("#monthlyfees").val();
-                  var schedule = $("#schedule").val();
-                  var classlevel = $("#classlevel").val();
-                  var message = $("#message").val();
-                  
-                 
-                
-                  $.ajax({
-                      url: "TrainerDetailsUpdateServlet",
-                      type: "POST",
-                      data: {
-                          name: name,
-                          email: email,
-                          expertise: exp,
-                          monthlyfees: mfees,
-                          schedule: schedule,
-                          classlevel: classlevel,
-                          aboutyourself: message
-                      },
-                      cache: false,
-                      success: function () {
-                      	
-                          $('#success').html("<div class='alert alert-success'>");
-                          $('#success > .alert-success').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-                                  .append("</button>");
-                          $('#success > .alert-success')
-                                  .append("<strong>Updated Successfully. </strong>");
-                          $('#success > .alert-success')
-                                  .append('</div>');
-                          $('#contactForm').trigger("reset");
-                      },
-                      error: function () {
-                          $('#success').html("<div class='alert alert-danger'>");
-                          $('#success > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-                                  .append("</button>");
-                          $('#success > .alert-danger').append($("<strong>").text("Sorry " + name + ", update failed. Please try again later!"));
-                          $('#success > .alert-danger').append('</div>');
-                          $('#contactForm').trigger("reset");
-                      }
-                      
-                  });
-        			
-        		});
-          });
-	 </script>       
-
-
+ 
        <!-- Footer Start -->
 	<%@include file="./html/footer.html"%>
 	<!-- Footer End -->

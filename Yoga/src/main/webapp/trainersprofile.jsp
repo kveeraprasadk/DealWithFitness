@@ -47,22 +47,17 @@
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"
 	defer></script>
-<<<<<<< Updated upstream
-<script
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-=======
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <!-- JavaScript Libraries -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+	
 	<script src="lib/easing/easing.min.js"></script>
 	<script src="lib/wow/wow.min.js"></script>
 	<script src="lib/owlcarousel/owl.carousel.min.js"></script>
 	<script src="lib/isotope/isotope.pkgd.min.js"></script>
 	<script src="lib/lightbox/js/lightbox.min.js"></script>
->>>>>>> Stashed changes
+
 
 	<!-- Contact Javascript File -->
 	<script src="mail/jqBootstrapValidation.min.js"></script>
@@ -89,8 +84,30 @@
 	padding: 0;
 	background: none;
 }
+
 </style>
 <style>
+/* The Modal (background) */
+.modal-new {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 395px;
+  top: 90px;
+  width: 40%; /* Full width */
+  height: 80%; /* Full height */
+
+  padding-top: 50px;
+}
+/* Modal Content/Box */
+.content-new {
+ /* background-color: #828282;  */
+    background-color: #d9edf7;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888; 
+  width: 80%; /* Full width */
+  height: 100%; /* Full height */
+}
 /* Float cancel and delete buttons and add an equal width */
 .cancelbtn, .deletebtn {
 	float: left;
@@ -105,19 +122,11 @@
 
 /* Add a color to the delete button */
 .deletebtn {
-<<<<<<< Updated upstream
-	background-color: #f44336;
-}
-=======
-  background-color: #f44336;
+/*	background-color: #f44336; */
+	background-color: 	#4169E1;
 }
 
 
-
-
-
-
->>>>>>> Stashed changes
 
 /* Style the horizontal ruler */
 hr {
@@ -271,10 +280,7 @@ hr {
 							Name :
 							<b><%=trainerdetails.getName()%></b>
 						</div>
-
 					</div>
-
-
 					<div class="fx-ro">
 						<div class="dat">
 							Email :
@@ -365,24 +371,24 @@ hr {
 
 
 
-					<div id="id01" class="modal">
+					<div id="id01" class="modal modal-new">
 						<span
 							onclick="document.getElementById('id01').style.display='none'"
 							class="close" title="Close Modal">×</span>
 
-						<form class="modal-content" role="form"
+						<form class="modal-content content-new" role="form"
 							enctype="multipart/form-data"
 							action="TrainerProfilePicUpdateServlet"
 							id="trainerprofilepictureupdate"
 							name="trainerprofilepictureupdate" method="post">
 							<div class="container">
-								<h3>Update Profile Picture</h3>
-								<p>Please Select Update Picture !</p>
+								<h3 class="text-center">Update Profile Picture</h3>
+								<h6>Please Select Update Picture !</h6>
 								<p class="text-center">
 									<input type="file" name="formimage"
 										class="form-image form-control" id="form-image"
 										accept="image/*" onchange="preview_image(event)">
-								<div class="bh-img text-center">
+								<div class="bh-img" >
 									<img id="output_image" />
 								</div>
 								</p>
@@ -787,27 +793,7 @@ window.onclick = function(event) {
 		<i class="fa fa-chevron-up"></i>
 	</a>
 
-<<<<<<< Updated upstream
-	<!-- JavaScript Libraries -->
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-	<script src="lib/easing/easing.min.js"></script>
-	<script src="lib/wow/wow.min.js"></script>
-	<script src="lib/owlcarousel/owl.carousel.min.js"></script>
-	<script src="lib/isotope/isotope.pkgd.min.js"></script>
-	<script src="lib/lightbox/js/lightbox.min.js"></script>
 
-	<!-- Contact Javascript File -->
-	<script src="mail/jqBootstrapValidation.min.js"></script>
-	<script src="mail/contact.js"></script>
-
-	<!-- Template Javascript -->
-	<script src="js/main.js"></script>
-	<script src="profile/js/popper.min.js"></script>
-	<script src="profile/js/script.js"></script>
-=======
 	
->>>>>>> Stashed changes
 </body>
 </html>

@@ -146,7 +146,7 @@ function Trainers() {
 	// Triggered when register button is clicked	
 	self.storeNewTraineeEvent = function() {
 		// If sign in button is visible then hide it and then validate it, if email already exists
-		// then we anyway show this button agian
+		// then we anyway show this button again
 		$("#redirect-signin-button").hide();
 
 		if (self.validateRegistration()) {
