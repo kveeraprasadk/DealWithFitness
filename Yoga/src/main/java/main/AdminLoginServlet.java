@@ -67,7 +67,8 @@ public class AdminLoginServlet extends HttpServlet {
    			System.out.println("count is::"+Countrow);
          
    			if(Countrow.equals("1")){	
-            	
+   				HttpSession session = request.getSession(false);
+   				session.setAttribute("adminemail",username);
               	   System.out.println("Login successfull");            	   
 	               response.getWriter().write("Login Success");   
                }else{

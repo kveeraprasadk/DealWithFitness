@@ -36,17 +36,15 @@
 <link rel="shortcut icon" href="profile/images/fav.jpg">
 <link rel="stylesheet" href="profile/css/fontawsom-all.min.css">
 <link rel="stylesheet" type="text/css" href="profile/css/style.css" />
-
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.js"></script>
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"
 	defer></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <!-- JavaScript Libraries -->
@@ -236,9 +234,9 @@ hr {
 					<h2>Trainer's Zone</h2>
 				</div>
 				<div class="col-12">
-					<a href="javascript: switchView('calendar')">My Training
+					<a href="javascript: switchView('calendar')" class="btn btn-info">My Training
 						Calendar</a>
-					<a href="javascript: switchView('profile')">Profile</a>
+					<a href="javascript: switchView('profile')" class="btn btn-info">Profile</a>
 				</div>
 			</div>
 		</div>
@@ -275,45 +273,93 @@ hr {
 					<h3 class="mth3">Profile</h3>
 					<input type="hidden" id="trainer-profile-base64-encoded-element"
 						value="<%=trainerdetails.getBase64Image()%>" />
+					<form id="trainerprofileupdateform" name="trainerprofileupdateform">
 					<div class="fx-ro">
-						<div class="dat">
-							Name :
-							<b><%=trainerdetails.getName()%></b>
-						</div>
-					</div>
-					<div class="fx-ro">
-						<div class="dat">
-							Email :
+						<div class="dat col-lg-4">Trainer Email</div>
+						<div class="dat col-lg-8">
 							<b id="trainer-id"><%=trainerdetails.getEmail()%></b>
 						</div>
 					</div>
 					<div class="fx-ro">
-						<div class="dat">
-							Experience :
-							<b><%=trainerdetails.getExperience()%></b>
+						<div class="dat col-lg-4">Trainer Name</div>
+						<div class="dat col-lg-8">
+						<input type="text" name="formname"
+									class="form-name form-control" id="form-name"
+									value="<%=trainerdetails.getName()%>" required>
 						</div>
 					</div>
 					<div class="fx-ro">
-						<div class="dat">
-							Qualification :
-							<b><%=trainerdetails.getQualification()%></b>
+						<div class="dat col-lg-4">Experience</div>
+						<div class="dat col-lg-8">
+							<select name="formexperience" id="form-experience"
+									class="form-control required" onfocus='this.size=5;'
+									onblur='this.size=1;' onchange='this.size=1; this.blur();'
+									required>
+									<option value="<%=trainerdetails.getExperience()%>"><%=trainerdetails.getExperience()%></option>
+									<option value="upto 2Yr">upto 2Yr</option>
+									<option value="2 to 5Yrs">2 to 5Yrs</option>
+									<option value="5 to 10Yrs">5 to 10Yrs</option>
+									<option value="10 to 20Yrs">10 to 20Yrs</option>
+									<option value="Above 20Yrs">Above 20Yrs</option>
+								</select>						
 						</div>
 					</div>
 					<div class="fx-ro">
-						<div class="dat">
-							Phoneno :
-							<b><%=trainerdetails.getPhoneno()%></b>
+						<div class="dat col-lg-4">Qualification</div>
+						<div class="dat col-lg-8">
+							<input type="text" name="formqualification"
+									class="form-qualification form-control" id="form-qualification"
+									value="<%=trainerdetails.getQualification()%>" required>							
 						</div>
 					</div>
 					<div class="fx-ro">
-						<div class="dat">
-							Expertise :
-							<b><%=trainerdetails.getExpertise()%></b>
+						<div class="dat col-lg-4">Phone Number</div>
+						<div class="dat col-lg-8">
+							<input type="text" name="formphone"
+									class="form-phone form-control" id="form-phone"
+									value="<%=trainerdetails.getPhoneno()%>" required>							
 						</div>
 					</div>
-					<h3>About Trainer</h3>
-					<p><%=trainerdetails.getAboutyourself()%></p>
-
+					<div class="fx-ro">
+						<div class="dat col-lg-4">Expertise</div>
+						<div class="dat col-lg-8">
+							<select name="formexpertise" id="form-expertise"
+									class="form-control required" 
+									required>
+												<option value="<%=trainerdetails.getExpertise()%>"><%=trainerdetails.getExpertise()%></option>
+												<optgroup label="Yoga">
+													<option value="Yoga for health">Yoga for health</option>
+													<option value="Weight Loss">Weight Loss</option>
+													<option value="Kids Yoga">Kids Yoga</option>
+													<option value="Pregnancy Yoga">Pregnancy Yoga</option>
+													<option value="Meditation">Meditation</option>
+												</optgroup>
+												<optgroup label="Dance Group">
+													<option value="Tomcat v7.0 Server at localhost">Dance</option>
+													<option value="Zumba">Zumba</option>
+												</optgroup>
+												<option value="Weight / Body weight Workout">Weight
+													/ Body weight Workout</option>
+												<option value="Nutrition">Nutrition</option>
+								</select>						
+						</div>
+					</div>	
+					<div class="fx-ro">
+						<div class="dat col-lg-4">About Trainer</div>
+						<div class="dat col-lg-8">
+							<textarea class="form-control" id="form-aboutself"
+									name="formaboutself" placeholder="About Yourself.." required><%=trainerdetails.getAboutyourself()%></textarea>							
+						</div>
+					</div>
+					<div class="fx-ro">
+						<div class="dat col-lg-4"></div>
+						<div class="dat col-lg-8">
+							<button type="submit" class="btn btn-primary"
+									name="updatebutton" id="updatebutton">Update</button>
+						</div>
+					</div>
+					</form>
+					<div id="updatesuccess"></div>
 					<h3 class="mth3">Certificates</h3>
 
 					<ul class="exrts">
@@ -322,7 +368,8 @@ hr {
 							<%
 							if (trainerdetails.getCertificate1filename().length() > 3) {
 							%>
-							<button class="btn">Download</button>
+							
+							<a class="downloadReport btn btn-info" target="_blank" href="http://localhost:8080/Yoga/AdminCertificate1DownloadServlet?user=<%=trainerdetails.getEmail() %>,<%=trainerdetails.getCertificate1filename() %>">Download</a>
 							<%
 							}
 							%>
@@ -332,7 +379,7 @@ hr {
 							<%
 							if (trainerdetails.getCertificate2filename().length() > 3) {
 							%>
-							<button class="btn">Download</button>
+							<a class="downloadReport btn btn-info" target="_blank" href="http://localhost:8080/Yoga/AdminCertificate2DownloadServlet?user=<%=trainerdetails.getEmail() %>,<%=trainerdetails.getCertificate2filename() %>">Download</a>
 							<%
 							System.out.println("tt::" + trainerdetails.getCertificate2filename().length());
 							}
@@ -343,7 +390,7 @@ hr {
 							<%
 							if (trainerdetails.getCertificate3filename().length() > 3) {
 							%>
-							<button class="btn">Download</button>
+							<a class="downloadReport btn btn-info" target="_blank" href="http://localhost:8080/Yoga/AdminCertificate3DownloadServlet?user=<%=trainerdetails.getEmail() %>,<%=trainerdetails.getCertificate3filename() %>">Download</a>
 							<%
 							}
 							%>
@@ -436,63 +483,6 @@ window.onclick = function(event) {
 						<p><%=trainerdetails.getEmail()%>
 							<br>
 						</p>
-						<p>
-							<button class="btn btn-info trainereditprofile">Edit
-								Profile</button>
-						</p>
-						<div id="editprofilehide">
-
-							<p>
-								<input type="text" name="form-name"
-									class="form-name form-control" id="form-name"
-									value="<%=trainerdetails.getName()%>" required>
-							</p>
-							<p>
-								<input type="text" name="form-qualification"
-									class="form-qualification form-control" id="form-qualification"
-									value="<%=trainerdetails.getQualification()%>" required>
-							</p>
-							<p>
-								<select name="form-experience" id="form-experience"
-									class="form-control required" onfocus='this.size=5;'
-									onblur='this.size=1;' onchange='this.size=1; this.blur();'
-									required>
-									<option value="<%=trainerdetails.getExperience()%>"><%=trainerdetails.getExperience()%></option>
-									<option value="upto 2Yr">upto 2Yr</option>
-									<option value="2 to 5Yrs">2 to 5Yrs</option>
-									<option value="5 to 10Yrs">5 to 10Yrs</option>
-									<option value="10 to 20Yrs">10 to 20Yrs</option>
-									<option value="Above 20Yrs">Above 20Yrs</option>
-								</select>
-							</p>
-							<p>
-								<input type="text" name="form-phone"
-									class="form-phone form-control" id="form-phone"
-									value="<%=trainerdetails.getPhoneno()%>" required>
-							</p>
-							<p>
-								<select name="form-expertise" id="form-expertise"
-									class="form-control required" onfocus='this.size=5;'
-									onblur='this.size=1;' onchange='this.size=1; this.blur();'
-									required>
-									<option value="<%=trainerdetails.getExpertise()%>"><%=trainerdetails.getExpertise()%></option>
-									<option value="Yoga for health">Yoga for health</option>
-									<option value="Weight Loss">Weight Loss</option>
-									<option value="Kids Yoga">Kids Yoga</option>
-									<option value="Pregnancy Yoga">Pregnancy Yoga</option>
-									<option value="Meditation">Meditation</option>
-								</select>
-							</p>
-							<p>
-								<textarea class="form-control" id="form-aboutself"
-									name="form-aboutself" placeholder="About Yourself.." required><%=trainerdetails.getAboutyourself()%></textarea>
-							</p>
-							<p>
-								<button type="button" class="btn btn-primary"
-									name="updatebutton" id="updatebutton">Update</button>
-							</p>
-						</div>
-						<div id="updatesuccess"></div>
 						<%
 						}
 						}
@@ -793,7 +783,93 @@ window.onclick = function(event) {
 		<i class="fa fa-chevron-up"></i>
 	</a>
 
+<script type="text/javascript">	
+			$(document).ready(function() {
+								$('#trainerprofileupdateform').validate(
+												{
+													rules : {
+														formname : {
+															required : true,
+															minlength : 3,
+															alphaNum : true
 
+														},
+														formemail : {
+															required : true,
+															email : true
+														},
+														formexpertise1 : {
+															required : true
+														},
+														formexperience : {
+															required : true
+														},
+														formqualification : {
+															required : true,
+															minlength : 2,
+															alphaNum : true
+														},
+														formphone : {
+															required : true,
+															minlength : 10,
+															maxlength : 10,
+															onlyNum : true
+														},													
+														formaboutself : {
+															required : true,
+															minlength : 50
+														}
+													},
+													messages : {
+														formfirstname : {
+															required : "Please Enter name",
+															minlength : "Name should be at least 3 characters"
+														},
+														formemail : {
+															required : "Please Enter Email",
+															email : "The email should be in the format: abc@domain.tld"
+														},
+														formexpertise1 : {
+															required : "Please select Expertise"
+														},
+														formexperience : {
+															required : "Please select Experience"
+														},													
+														formqualification : {
+															required : "Please enter Qualification",
+															minlength : "Qualification should be at least 2 characters"
+														},
+														formphone : {
+															required : "Please enter phone number",
+															minlength : "Phone Number must be 10 numbers",
+															maxlength : "Phone Number must be 10 numbers"
+														},													
+														'roles' : {
+															required : "Plz Select Atleast One Option"
+														},													
+														formaboutself : {
+															required : "please enter about yourself",
+															minlength : "Please enter atleast 50 chars"
+														}
+													}
+												});
+								
+								$.validator.addMethod("alphaNum", function(value,element) {
+									return this.optional(element)
+											|| value == value
+													.match(/^[a-zA-Z\s]*$/);
+								}, "please enter a valid name");
+								$.validator.addMethod("onlyNum", function(value,
+										element) {
+									return this.optional(element)
+											|| value == value
+													.match(/^[1-9]{1}[0-9]{9}$/);
+								}, "Phone number must be 10 numbers");
+
+							});
+		
+
+	</script>
 	
 </body>
 </html>

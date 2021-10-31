@@ -129,10 +129,10 @@
                     <div class="col-12">
                         <h2>Trainers Profile</h2>
                     </div>
-                    <div class="col-12">
+<!--                     <div class="col-12"> -->
                        
-                        <a href="">Trainers Profile</a>
-                    </div>
+<!--                         <a href="">Trainers Profile</a> -->
+<!--                     </div> -->
                 </div>
             </div>
         </div>

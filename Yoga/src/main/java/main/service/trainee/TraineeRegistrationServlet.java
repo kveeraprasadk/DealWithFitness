@@ -47,9 +47,12 @@ public class TraineeRegistrationServlet extends HttpServlet {
 			}
 
 			try (Connection con = DBConnection.createConnection()) {
-				String cntQuery = "SELECT count(*) FROM traineeregister where (username='" + userEmail + "')";
+		//		String cntQuery = "SELECT count(*) FROM traineeregister where (username='" + userEmail + "')";
+				String cntQuery = "select count(*) from trainerregister tr,traineeregister te where tr.traineremail=? or te.username=?";
 				String Countrow = null;
 				try (PreparedStatement stat = con.prepareStatement(cntQuery)) {
+					stat.setString(1, userEmail);
+					stat.setString(2, userEmail);
 					ResultSet rs = stat.executeQuery();
 					rs.next();
 					Countrow = rs.getString(1);

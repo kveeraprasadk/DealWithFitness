@@ -52,6 +52,7 @@ public class TraineeStoryConfirmServlet extends HttpServlet {
 		int j = 0;
 		String story = null;
 		String storyid = null;
+	
 		String ttmail = (String) request.getParameter("traineetrainer");
 		String traineeid = null, trainerid = null;
 		String[] res = ttmail.split("[,]", 0);
@@ -60,14 +61,17 @@ public class TraineeStoryConfirmServlet extends HttpServlet {
 			if (ins == 0) {
 				traineeid = myStr;
 				ins++;
-			} else {
+			} else if(ins==1) {
 				trainerid = myStr;
+				ins++;
+			}else{
+				storyid=myStr;
 			}
 			System.out.println(myStr);
 		}
 
 		try (Connection con = DBConnection.createConnection()) {
-			String query2 = "update traineeStories set adminapprove=? where trainerId=? and traineeId=?";
+			String query2 = "update traineeStories set adminapprove=? where trainerId=? and traineeId=? and storyId=?";
 			try (PreparedStatement statement2 = con.prepareStatement(query2)) { // Making
 																				// use
 																				// of
@@ -82,13 +86,15 @@ public class TraineeStoryConfirmServlet extends HttpServlet {
 				statement2.setBoolean(1, true);
 				statement2.setString(2, trainerid);
 				statement2.setString(3, traineeid);
+				statement2.setString(4, storyid);
 
 				j = statement2.executeUpdate();
 
-				String sql = "select * from traineeStories where traineeId=? and trainerId=?";
+				String sql = "select * from traineeStories where traineeId=? and trainerId=? and storyId=?";
 				try (PreparedStatement statement = con.prepareStatement(sql)) {
 					statement.setString(1, traineeid);
 					statement.setString(2, trainerid);
+					statement.setString(3, storyid);
 					try (ResultSet rs = statement.executeQuery()) {
 						while (rs.next()) {
 

@@ -3,6 +3,7 @@ package main.service.trainer;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,11 +21,13 @@ import javax.servlet.http.Part;
 
 import main.common.AppUtils;
 import main.common.DBConnection;
+import main.common.EncodeDecodeSHA256;
 
 /**
  * Servlet implementation class TrainerRegisterServlet
  */
-@MultipartConfig(maxFileSize = 16177215) // upload file's size up to 16MB
+@MultipartConfig(maxFileSize = 209716) // upload file's size up to 200Kb(209716 bytes binary)
+							
 public class TrainerRegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -46,7 +49,15 @@ public class TrainerRegisterServlet extends HttpServlet {
 		String qualification = request.getParameter("formqualification");
 		String phoneno = request.getParameter("formphone");
 		String expertise = request.getParameter("formexpertise1");
-		String password = request.getParameter("formpassword");
+		String pass = request.getParameter("formpassword");
+		
+		String password=null;
+		try {
+			password = EncodeDecodeSHA256.toHexString(EncodeDecodeSHA256.getSHA(pass));
+		} catch (NoSuchAlgorithmException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		/*
 		 * String monthlyfees=request.getParameter("formmonthlyfees1"); String
 		 * classlevel=request.getParameter("formclasslevel1"); String
@@ -156,12 +167,15 @@ public class TrainerRegisterServlet extends HttpServlet {
 		String Countrow = null;
 		boolean isapprove=false;
 		try (Connection con = DBConnection.createConnection()){
-			String cnt = "select count(*) from trainerregister where traineremail=?";
+			String cnt = "select count(*) from trainerregister tr,traineeregister te where tr.traineremail=? or te.username=?";
+	//		String cnt = "select count(*) from trainerregister where traineremail=?";
 			PreparedStatement statement1 = con.prepareStatement(cnt);
 			statement1.setString(1, email);
+			statement1.setString(2, email);
 			ResultSet rs = statement1.executeQuery();
 			rs.next();
-			Countrow = rs.getString(1);
+			Countrow = rs.getString(1);		
+	
 			if (Countrow.equals("0")) {
 
 				// String query11 = "insert into

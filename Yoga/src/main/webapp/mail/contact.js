@@ -13,10 +13,10 @@ $(function() {
 							var subject = $("input#subject").val();
 
 							var message = $("textarea#message").val();
-
+							$('.forgot-progressbar').show();
 							$this = $("#sendMessageButton");
 							$this.prop("disabled", true);
-
+							
 							$
 									.ajax({
 										url : "ContactServlet",
@@ -29,7 +29,7 @@ $(function() {
 										},
 										cache : false,
 										success : function() {
-											alert("success");
+											$('.forgot-progressbar').hide();
 											$('#success')
 													.html(
 															"<div class='alert alert-success'>");
@@ -39,7 +39,7 @@ $(function() {
 													.append("</button>");
 											$('#success > .alert-success')
 													.append(
-															"<strong>Feedback Sent </strong>");
+															"<strong>Feedback Sent</strong>");
 											$('#success > .alert-success')
 													.append('</div>');
 											$('#contactForm').trigger("reset");
@@ -47,7 +47,7 @@ $(function() {
 										error : function() {
 											$('#success')
 													.html(
-															"<div class='alert alert-danger'>");
+												"<div class='alert alert-danger'>");
 											$('#success > .alert-danger')
 													.html(
 															"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
@@ -56,7 +56,7 @@ $(function() {
 													.append(
 															$("<strong>")
 																	.text(
-																			"Sorry "
+																		"Sorry "
 																					+ name
 																					+ ", Feedback Sent failed. Please try again later!"));
 											$('#success > .alert-danger')
@@ -85,7 +85,9 @@ $('#name').focus(function() {
 	$('#success').html('');
 });
 
-$(document).on("click", "#sendMessage", function() { // When HTML DOM "click"
+
+
+$(document).on("click", "#sendMessage99999999", function() { // When HTML DOM "click"
 														// event is invoked on
 														// element with ID
 														// "somebutton", execute
@@ -96,7 +98,7 @@ $(document).on("click", "#sendMessage", function() { // When HTML DOM "click"
 	var email = $('#email').val();
 	var sub = $('#subject').val();
 	var msg = $('#message').val();
-
+alert("second");
 	$.post("ContactServlet", {
 		name : name,
 		email : email,

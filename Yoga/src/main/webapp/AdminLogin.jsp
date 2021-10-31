@@ -97,6 +97,9 @@
 
 	<!-- Template Javascript -->
 	<script src="js/main.js"></script>
+	<script src="js/adminlogin.js"></script>
+	<script src="./dist/utils.js"></script> 
+	<script src="./dist/dialogs.js"></script>
 	<!-- Javascript -->
 	<script src="assets/js/jquery-1.11.1.min.js"></script>
 	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
@@ -111,40 +114,9 @@
 </head>
 
 <body>
-	<!-- Top Bar Start -->
-	<div class="top-bar d-none d-md-block">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-md-8">
-					<div class="top-bar-left">
-						<div class="text">
-							<i class="far fa-clock"></i>
-							<h2>8:00 - 9:00</h2>
-							<p>Mon - Fri</p>
-						</div>
-						<div class="text">
-							<i class="fa fa-phone-alt"></i>
-							<h2>+123 456 7890</h2>
-							<p>For Appointment</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="top-bar-right">
-						<div class="social">
-							<a href=""><i class="fab fa-twitter"></i></a> <a href=""><i
-								class="fab fa-facebook-f"></i></a> <a href=""><i
-								class="fab fa-linkedin-in"></i></a> <a href=""><i
-								class="fab fa-instagram"></i></a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Top Bar End -->
-
+	
 	<!-- Nav Bar Start -->
+	 <%@include file="./html/dialogs.html"%>
 	<div class="navbar navbar-expand-lg bg-dark navbar-dark">
 		<div class="container-fluid">
 			<a href="index.jsp" class="navbar-brand">Dealwithfitness<span></span></a>
@@ -247,89 +219,47 @@
 		</div>
 
 	</div>
-	<script type="text/javascript">
-		$(document)
-				.ready(
-						function() {
-							$("#adminloginbutton")
-									.click(
-											function() {
-
-												event.preventDefault();
-												var username = $(
-														'#form-username').val();
-												var password = $(
-														'#form-password').val();
-
-												$
-														.ajax({
-															url : "AdminLoginServlet",
-															type : "GET",
-															data : {
-																username : username,
-																password : password
-															},
-															cache : false,
-															success : function(
-																	data) {
-																if (data == "Login Success") {
-																	document.location.href = './AdminPageView';
-																} else {
-																	$(
-																			'#success')
-																			.html(
-																					"<div class='alert alert-danger'>");
-																	$(
-																			'#success > .alert-danger')
-																			.html(
-																					"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-																			.append(
-																					"</button>");
-																	$(
-																			'#success > .alert-danger')
-																			.append(
-																					$(
-																							"<strong>")
-																							.text(
-																									data));
-																	$(
-																			'#success > .alert-danger')
-																			.append(
-																					'</div>');
-																}
-															},
-															error : function(
-																	data) {
-																$('#success')
-																		.html(
-																				"<div class='alert alert-danger'>");
-																$(
-																		'#success > .alert-danger')
-																		.html(
-																				"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-																		.append(
-																				"</button>");
-																$(
-																		'#success > .alert-danger')
-																		.append(
-																				$(
-																						"<strong>")
-																						.text(
-																								data));
-																$(
-																		'#success > .alert-danger')
-																		.append(
-																				'</div>');
-
-															}
-
-														});
-
-											});
-						});
-	</script>
+	
 <!-- LOGIN PAGE END -->
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#adminloginbutton").click(function() {
+								event.preventDefault();
+								var username = $('#form-username').val();
+								var password = $('#form-password').val();
+								
+								$.ajax({
+											url : "AdminLoginServlet",
+											type : "GET",
+											data : {
+												username : username,
+												password : password
+											},
+											cache : false,
+											success : function(data) {
+												if (data == "Login Success") {
+													document.location.href = './AdminPageView';
+												} else {
+													$('#success').html("<div class='alert alert-danger'>");
+													$('#success > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+															.append("</button>");
+													$('#success > .alert-danger').append($("<strong>").text(data));
+													$('#success > .alert-danger').append('</div>');
+												}
+											},
+											error : function(data) {
+												$('#success').html("<div class='alert alert-danger'>");
+												$('#success > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+														.append("</button>");
+												$('#success > .alert-danger').append($("<strong>").text(data));
+												$('#success > .alert-danger').append('</div>');
+											}
 
+										});
+
+							});
+		});
+</script>
 
 
 

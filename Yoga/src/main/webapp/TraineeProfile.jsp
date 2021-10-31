@@ -336,9 +336,10 @@ label {
 										class="form-confirmpassword form-control"
 										id="formconfirmpassword" required>
 								</p>
+								<p>
 								<button type="button" class="btn btn-primary"
 									name="changepasswordbutton" id="changepasswordbutton">Change</button>
-
+								</p>
 
 							</div>
 							<div id="success"></div>

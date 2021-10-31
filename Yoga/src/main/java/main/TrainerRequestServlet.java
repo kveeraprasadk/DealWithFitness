@@ -38,7 +38,7 @@ public class TrainerRequestServlet extends HttpServlet {
 			throws ServletException, IOException {
 		response.setContentType("text/html");
 		response.setCharacterEncoding("UTF-8");
-
+	
 		TrainerRequestDao trd = new TrainerRequestDao();
 		List<TrainerDetailsVO> TrainerRequests;
 		// List<TrainerDetailsVO> TrainersList;
