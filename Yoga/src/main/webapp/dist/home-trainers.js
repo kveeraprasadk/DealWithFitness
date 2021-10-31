@@ -470,6 +470,38 @@ function Trainers() {
 		$("#reg-validation-error").hide();
 		return true;
 	}
+	
+	self.showForgotPasswordDialogFromLoginEvent = function() {
+		$("#trainee-login-dialog").modal("hide");
+		setTimeout(() => {
+			self.showForgotPasswordDialogEvent();
+		}, 500);
+	}
+	
+	self.showForgotPasswordDialogEvent = function() {		
+		$("#register-traineeemailid").val("");		
+		// Hide the error message
+		$("#reg-validation-error").hide();
+		$("#trainee-forgot-password-dialog").modal("show");
+		setTimeout(() => {
+			$("#register-traineeemailid").focus()
+		}, 500);
+	}
+	
+	self.validateForgotPassword = function() {		
+		const email = $("#register-traineeemailid").val();		
+		if (email == null || email.trim().length == 0) {
+			self.validationError(REG_ERROR_MSG_ID, "Trainee Email id is mandatory");
+			$("#register-traineeemailid").focus();
+			return false;
+		} else if (!Utils.validateEmail(email)) {
+			self.validationError(REG_ERROR_MSG_ID, "Trainee Email id is invalid");
+			$("#register-traineeemailid").focus();
+			return false;
+		}		
+		$("#reg-validation-error").hide();
+		return true;
+	}
 
 	self.validationError = function(messageElementId, message) {
 		$("#" + messageElementId).text(message);

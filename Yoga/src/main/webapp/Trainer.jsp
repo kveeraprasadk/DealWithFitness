@@ -94,8 +94,7 @@
 
 <!-- Template Javascript -->
 <script src="js/main.js"></script>
-<script src="./dist/trainers.js"></script>
-<script src="./dist/dialogs.js"></script>
+
 <!-- Javascript -->
 <script src="assets/js/scripts.js"></script>
 
@@ -123,7 +122,7 @@ label {
 <body onload="init()">
 	<!-- Nav Bar Start -->
 	<%@include file="./html/navbar.html"%>
-<%@include file="./html/dialogs.html"%>
+
 	<!-- Nav Bar End -->
 	
 	<script type="text/javascript">
@@ -161,7 +160,7 @@ label {
 															'#username').val();
 													var password = $(
 															'#password').val();
-													progressBar.start();
+													
 													$
 															.ajax({
 																url : "TrainerLoginServlet",
@@ -229,7 +228,7 @@ label {
 																					'</div>');
 
 																}
-																complete: () => progressBar.end()
+																
 															});
 													
 													return false;
@@ -241,6 +240,7 @@ label {
 		$(document)
 				.ready(
 						function() {
+							$('.forgot-progressbar').hide();
 							$('#trainerforgotform')
 									.validate(
 											{
@@ -264,7 +264,7 @@ label {
 
 													var username = $(
 															'#formforgotusername').val();
-													
+													$('.forgot-progressbar').show();
 													$
 															.ajax({
 																url : "TrainerForgotPasswordServlet",
@@ -278,6 +278,7 @@ label {
 																		data) {
 																	console
 																			.log(data);
+																	$('.forgot-progressbar').hide();
 																	if (data == "NewPassword Sent") {
 																		
 																		$(
@@ -442,11 +443,22 @@ label {
 									<form role="form" id="trainerforgotform"
 										name="trainerforgotform" class="forgot-form">
 										<div class="form-group forgotusername">
+										<div class="form-top-left">
+
+										<h3>Forgot Password</h3>
+
+									</div>
 											<label class="sr-only" for="form-forgotusername">User
 												Name</label> <input type="email" name="formforgotusername"
 												placeholder="User Name..."
 												class="form-forgotusername form-control"
 												id="formforgotusername" required>
+										</div>
+										<div class="form-group">
+											 <div class="progress forgot-progressbar">
+    											<div class="progress-bar  progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+    											Sending</div>
+  											</div>
 										</div>
 										<div class="form-group">
 											<div id="forgotsuccess"></div>
@@ -642,11 +654,9 @@ label {
 								third party. We will soon reach out to you for your consent that
 								will be used by us solely for the purpose of communicating
 								information that supports you with the yogic practices learned
-<<<<<<< Updated upstream
-								from us, any upcoming events in Yoga and special offersâif
-=======
-								from us, any upcoming events in Yoga and special offers—if
->>>>>>> Stashed changes
+
+								from us, any upcoming events in Yoga and special offers ��if
+
 								any, on our programs. You will have the right to have your
 								details removed from our database at any point"</p>
 						</div>
@@ -752,7 +762,9 @@ label {
 														required : true
 													},
 													formqualification : {
-														required : true
+														required : true,
+														minlength : 2,
+														alphaNum : true
 													},
 													formphone : {
 														required : true,
@@ -813,16 +825,17 @@ label {
 														email : "The email should be in the format: abc@domain.tld"
 													},
 													formexpertise1 : {
-														required : "Please enter Expertise"
+														required : "Please select Expertise"
 													},
 													formexperience : {
-														required : "Please enter Experience"
+														required : "Please select Experience"
 													},
 													formclasslevel1 : {
 														required : "Please enter Classlevel"
 													},
 													formqualification : {
-														required : "Please enter Qualification"
+														required : "Please enter Qualification",
+														minlength : "Qualification should be at least 2 characters"
 													},
 													formphone : {
 														required : "Please enter phone number",
@@ -856,7 +869,9 @@ label {
 														minlength : "Please enter atleast 50 chars"
 													},
 													formimage : {
-														required : "File must be JPEG or PNG, less than 200Kb"
+														required : "Please select JPEG or PNG file",
+														filesize: " file size must be less than 200 KB.",
+														extension: "Please upload .jpg or .png files"
 													},
 												//			formcertificate1 : {
 												//				required : "Please Upload your certificate"
@@ -864,13 +879,20 @@ label {
 
 												}
 											});
-							$.validator.addMethod('filesize', function(value,
-									element, param) {
-								return this.optional(element)
-										|| (element.files[0].size <= param)
-							});
-							$.validator.addMethod("alphaNum", function(value,
-									element) {
+							$.validator.addMethod('filesize11', function(value,element, param) {
+								// param = size (en bytes) 
+							    // element = element to validate (<input>)
+							    // value = value of the element (file name)
+								return this.optional(element) || (element.files[0].size <= param)
+							},"file must be below 200kb");
+							$.validator.addMethod('filesize', function (value, element, arg) {
+						        if(element.files[0].size<=arg){
+						            return true;
+						        }else{
+						            return false;
+						        }
+						    });
+							$.validator.addMethod("alphaNum", function(value,element) {
 								return this.optional(element)
 										|| value == value
 												.match(/^[a-zA-Z\s]*$/);

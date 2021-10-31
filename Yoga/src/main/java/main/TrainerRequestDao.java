@@ -284,7 +284,8 @@ while (rs.next()) {
 
 	details.setTraineeId(rs.getString("traineeid"));
 	details.setTrainerId(rs.getString("trainerid"));	
-	details.setStory(rs.getString("story"));		
+	details.setStory(rs.getString("story"));	
+	details.setStoryId(rs.getString("storyId"));	
 	if(rs.getString("filename1") != null){
 	details.setFilename1(rs.getString("filename1"));
 	}else{

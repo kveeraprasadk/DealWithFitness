@@ -23,19 +23,20 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import main.common.DBConnection;
+import main.common.SMTPCredentials;
 
 /**
  * Servlet implementation class ContactServlet
  */
 public class ContactServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	static final String SMTP_USER = "dealwithbusiness64@gmail.com";
-	static final String SMTP_PASS = "password";
+	static final String SMTP_USER = SMTPCredentials.SMTP_USERNAME;
+	static final String SMTP_PASS = SMTPCredentials.SMTP_PASSWORD;
 
 	// Amazon SES SMTP host name. 
-	static final String SMTP_HOST = "smtp.gmail.com";    
+	static final String SMTP_HOST = SMTPCredentials.HOST;    
 
-	static final int SMTP_PORT = 465;
+	static final int SMTP_PORT = SMTPCredentials.PORT;
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -96,7 +97,7 @@ public class ContactServlet extends HttpServlet {
 
 			message.setFrom(new InternetAddress("dealwithbusiness64@gmail.com"));// change
 															// accordingly
-			message.addRecipient(Message.RecipientType.TO, new InternetAddress("kveeraprasadk@gmail.com"));
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
 			message.setSubject(subject);
 			message.setContent(
 			"Hi<p> DealWithFitness Creative Team,"

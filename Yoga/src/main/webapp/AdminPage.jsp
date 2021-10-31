@@ -38,6 +38,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" defer></script>
 	<!-- JavaScript Libraries -->
+		 <script src="https://rawgit.com/abdennour/bootstrap-waitingfor/master/build/bootstrap-waitingfor.js"></script>
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
         <script src="lib/easing/easing.min.js"></script>
@@ -45,15 +46,16 @@
         <script src="lib/owlcarousel/owl.carousel.min.js"></script>
         <script src="lib/isotope/isotope.pkgd.min.js"></script>
         <script src="lib/lightbox/js/lightbox.min.js"></script>
-        <script src="./dist/dialogs.js"></script> 
-        
-                
+        <script src="./dist/utils.js"></script>
+		<script src="./dist/dialogs.js"></script> 
+                 
         <!-- Contact Javascript File -->
         <script src="mail/jqBootstrapValidation.min.js"></script>
         <script src="mail/contact.js"></script>
 
         <!-- Template Javascript -->
-        <script src="js/main.js"></script>       
+        <script src="js/main.js"></script>   
+        <script src="js/adminlogin.js"></script>    
         <script src="assets/js/isotope.min.js"></script>
     	<script src="assets/js/owl-carousel.js"></script>
     	<script src="assets/js/lightbox.js"></script>
@@ -115,6 +117,9 @@
 .navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link {
     color: #14e3bd !important;
 }
+label {
+	color: #FF0000 !important;
+}
         </style>
     </head>
 
@@ -130,23 +135,17 @@
     	 }); 
      }    
 </script>
+
+
         <!-- Top Bar Start -->
-        <div class="top-bar d-none d-md-block">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-8">
-           
-                    </div>
-                    <div class="col-md-4">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
+        
+        
+        
         <!-- Top Bar End -->
 
         <!-- Nav Bar Start -->
-        
+ 	
+ 	
         <div class="navbar navbar-expand-lg bg-dark navbar-dark">
             <div class="container-fluid">
                   <a  class="navbar-brand">dealwithfitness <span> </span></a> 
@@ -190,9 +189,11 @@
 
 
         <!-- About Start -->
+        
         <div id="page-wraper">
          <!-- Mask -->
       <span class="mask bg-gradient-default opacity-8"></span>
+      <div id="successmsg"></div>
       
       <section class="section trainer-requests" data-section="section1">
         <div class="container">
@@ -204,21 +205,9 @@
             
             <b>! Important :</b> There is any details you need to modify, the update option is available in the Trainers List table.<br>
              </span>
-    <div class="alert alert-success" id="msgsuccess-alert">
-  <button type="button" class="close" data-dismiss="alert">x</button>
-  <h4><strong> <div id="requestsuccess"> </div></strong></h4>
-</div>
-<div class="alert alert-danger" id="msgdanger-alert">
-  <button type="button" class="close" data-dismiss="alert">x</button>
-  <h4><strong> <div id="requestfail"> </div></strong></h4>
-</div>
+   
           </div>
-          <script type="text/javascript">
-          $(document).ready(function(){
-	$('#msgsuccess-alert').hide();
-	 $('#msgdanger-alert').hide();
-          });
-	 </script>
+         
    
           <% ArrayList<TrainerDetailsVO> trainersreq = (ArrayList<TrainerDetailsVO>) request.getAttribute("TrainerRequests"); %>
 
@@ -284,21 +273,9 @@ if(trainersreq != null && trainersreq.size() >0)  // Null check for the object
             
             
              </span>
-    <div class="alert alert-success" id="storysuccess-alert">
-  <button type="button" class="close" data-dismiss="alert">x</button>
-  <h4><strong> <div id="requestsuccess"> </div></strong></h4>
-</div>
-<div class="alert alert-danger" id="storydanger-alert">
-  <button type="button" class="close" data-dismiss="alert">x</button>
-  <h4><strong> <div id="requestfail"> </div></strong></h4>
-</div>
+    
           </div>
-          <script type="text/javascript">
-          $(document).ready(function(){
-	$('#storysuccess-alert').hide();
-	 $('#storydanger-alert').hide();
-          });
-	 </script>
+         
    
 <div class="row">
    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
@@ -310,6 +287,7 @@ if(trainersreq != null && trainersreq.size() >0)  // Null check for the object
     <tr>
       <th>TraineeId</th>
       <th>TrainerId</th>
+      <th>StoryId</th>
       <th>Story</th>
       <th>Photo1</th>
       <th>Photo2</th>     
@@ -336,17 +314,16 @@ if(traineestoryrequest != null && traineestoryrequest.size() >0)  // Null check 
     <tr>
       <td><%=tList.getTraineeId() %></td>
       <td><%=tList.getTrainerId() %></td>
+      <td><%=tList.getStoryId() %></td>
       <td><%=tList.getStory() %></td>
       <td><a class="downloadReport" target="_blank" href="http://localhost:8080/Yoga/TraineeStoryPhoto1DownloadServlet?user=<%=tList.getTraineeId() %>,<%=tList.getTrainerId() %>,<%=tList.getFilename1() %>"><%=tList.getFilename1() %></a>
       <td><a class="downloadReport" target="_blank" href="http://localhost:8080/Yoga/TraineeStoryPhoto2DownloadServlet?user=<%=tList.getTraineeId() %>,<%=tList.getTrainerId() %>,<%=tList.getFilename2() %>"><%=tList.getFilename2() %></a>     
-      <td><%=tList.getTrainerName() %></td>
-    
-      <td> 
-      
-       <button type="button" class="white-button traineestoryconfirmbutton" id="traineestoryupdate<%=inv %>t" value="<%=tList.getTraineeId() %>,<%=tList.getTrainerId() %>">Approve</button> 
-      
-      </td>
+      <td><%=tList.getTrainerName() %></td>    
+      <td>       
+       <button type="button" class="white-button traineestoryconfirmbutton" id="traineestoryupdate<%=inv %>t" value="<%=tList.getTraineeId() %>,<%=tList.getTrainerId() %>,<%=tList.getStoryId() %>">Approve</button> 
+       </td>
     </tr>
+    
      <%
 							}
 						}else{  %>
@@ -358,6 +335,7 @@ if(traineestoryrequest != null && traineestoryrequest.size() >0)  // Null check 
 				%> 
 					
   </table>
+  
 </div>
         </div>
             </div>    
@@ -367,81 +345,8 @@ if(traineestoryrequest != null && traineestoryrequest.size() >0)  // Null check 
           
         </div>
       </section>
-      <script>
-            $(document).on("click", ".traineestoryconfirmbutton", function() { // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
-            	
-            
-            var temail = $(this).val();
-      	 
-                $.post("TraineeStoryConfirmServlet",{traineetrainer:temail}, function(responseText) {   // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
-                	
-               console.log(responseText);
-                if(responseText=="Trainee Story Confirmed Successfully"){
-                	$(".traineestoryconfirmbutton").prop('disabled', true);
-                	document.location.href='./AdminPageView';
-              
-                	$('#successmsg').text(responseText);             	
-                         	
-                }
-                else
-                	{
-                	
-                  	$('#failmsg').text(responseText);
-                  	
-                	}
-                });
-            });
- </script>
-<script>
-            $(document).on("click", ".confirmbutton", function() { // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
-            	
-            
-            var temail = $(this).val();
-      	 
-                $.post("TrainersConfirmServlet",{traineremail:temail}, function(responseText) {   // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
-                	
-               console.log(responseText);
-                if(responseText=="Trainer Confirmed Successfully"){
-                	$(".confirmbutton").prop('disabled', true);
-                	document.location.href='./AdminPageView';
-              
-                	$('#successmsg').text(responseText);             	
-                         	
-                }
-                else
-                	{
-                	
-                  	$('#failmsg').text(responseText);
-                  	
-                	}
-                });
-            });
- </script>
- <script>
-            $(document).on("click", ".deletebutton", function() { // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
-            	
-            
-            var temail = $(this).val();
-      	 
-                $.post("TrainerRequestDeleteServlet",{traineremail:temail}, function(responseText) {   // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
-                	
-               console.log(responseText);
-                if(responseText=="Request Deleted Successfully"){
-                	$(".confirmbutton").prop('disabled', true);
-                	document.location.href='./AdminPageView';
-              
-                	$('#successmsg').text(responseText);             	
-                         	
-                }
-                else
-                	{
-                	
-                  	$('#failmsg').text(responseText);
-                  	
-                	}
-                });
-            });
-        </script>      
+      
+
       
        <section class="section Change-password" data-section="section5">
         <div class="container">
@@ -463,7 +368,7 @@ if(traineestoryrequest != null && traineestoryrequest.size() >0)  // Null check 
                       <fieldset>
                         <input
                           name="currentpassword"
-                          type="text"
+                          type="password"
                           class="form-control"
                           id="currentpassword"
                           placeholder="currentpassword..."
@@ -475,7 +380,7 @@ if(traineestoryrequest != null && traineestoryrequest.size() >0)  // Null check 
                       <fieldset>
                         <input
                           name="newpassword"
-                          type="text"
+                          type="password"
                           class="form-control"
                           id="newpassword"
                           placeholder="newpassword..."
@@ -487,7 +392,7 @@ if(traineestoryrequest != null && traineestoryrequest.size() >0)  // Null check 
                       <fieldset>
                         <input
                           name="confirmpassword"
-                          type="text"
+                          type="password"
                           class="form-control"
                           id="confirmpassword"
                           placeholder="confirmpassword..."
@@ -512,8 +417,124 @@ if(traineestoryrequest != null && traineestoryrequest.size() >0)  // Null check 
       </section>
     </div>
         <!-- About End -->
-        <script type="text/javascript">
-$(document).ready(function(){
+      <script type="text/javascript">
+        $(document).on("click", ".confirmbutton", function() { // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
+	
+    var temail = $(this).val();
+    
+        $.post("TrainersConfirmServlet",{traineremail:temail}, function(responseText) {   // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
+        	
+       console.log(responseText);
+        if(responseText=="Trainer Confirmed Successfully"){
+        	$(".confirmbutton").prop('disabled', true);
+        	document.location.href='./AdminPageView';      
+        	$('#successmsg').text(responseText);                      	
+        }
+        else
+        	{        	
+          	$('#failmsg').text(responseText);          	
+        	}
+        
+        });
+    });
+        </script> 
+
+ <script type="text/javascript">
+ $(document).on("click", ".traineestoryconfirmbutton", function() { // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
+
+	 var temail = $(this).val();
+
+	     $.post("TraineeStoryConfirmServlet",{traineetrainer:temail}, function(responseText) {   // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
+	     	
+	    console.log(responseText);
+	     if(responseText=="Trainee Story Confirmed Successfully"){
+	     	$(".traineestoryconfirmbutton").prop('disabled', true);
+	 	     	
+	     	document.location.href='./AdminPageView'; 
+	     	
+	     	 $('#successmsg').html("<div class='alert alert-success'>");
+             $('#successmsg > .alert-success').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+                     .append("</button>");
+             $('#successmsg > .alert-success')
+                     .append("<strong>"+responseText+". </strong>");
+             $('#successmsg > .alert-success')
+                     .append('</div>');
+	     	            	      	
+	     }
+	     else
+	     	{    	
+	    	 $('#successmsg').html("<div class='alert alert-danger'>");
+             $('#successmsg > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+                     .append("</button>");
+             $('#successmsg > .alert-danger').append("<strong>"+responseText+". </strong>");
+             $('#successmsg > .alert-danger').append('</div>');   	
+	     	}
+	     });
+	 });
+ </script>  
+ <script type="text/javascript">
+ $(document).on("click", ".deletebutton", function() { // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
+		
+	 var temail = $(this).val();
+
+	     $.post("TrainerRequestDeleteServlet",{traineremail:temail}, function(responseText) {   // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
+	     	
+	    console.log(responseText);
+	     if(responseText=="Request Deleted Successfully"){
+	     	$(".confirmbutton").prop('disabled', true);
+	     	document.location.href='./AdminPageView';
+	     	$('#successmsg').text(responseText);   
+	     }
+	     else
+	     	{    	
+	       	$('#failmsg').text(responseText);      	
+	     	}
+	     });
+	 });
+ </script>    
+ <script type="text/javascript">
+ $(document).ready(function(){
+	  $("#changepasswordbutton").click(function(){
+			
+		  event.preventDefault();
+		  var currentpass=$('#currentpassword').val();
+         var newpass=$('#newpassword').val();
+         var confirmpass=$('#confirmpassword').val();
+        
+       $.ajax({
+             url: "AdminChangePasswordServlet",
+             type: "POST",
+             data: {
+           	  currentpassword : currentpass,
+           	  newpassword : newpass,
+           	  confirmpassword : confirmpass
+             },
+             cache: false,
+             success: function (data) {
+                   	
+                     $('#passwordsuccess').html("<div class='alert alert-success'>");
+                     $('#passwordsuccess > .alert-success').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+                             .append("</button>");
+                     $('#passwordsuccess > .alert-success')
+                             .append("<strong>"+data+". </strong>");
+                     $('#passwordsuccess > .alert-success')
+                             .append('</div>');
+                     $('#adminchangepassword').clear();
+                 },
+                 error: function () {
+                     $('#passwordsuccess').html("<div class='alert alert-danger'>");
+                     $('#passwordsuccess > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+                             .append("</button>");
+                     $('#passwordsuccess > .alert-danger').append($("<strong>").text("Sorry " + name + ", update failed. Please try again later!"));
+                     $('#passwordsuccess > .alert-danger').append('</div>');
+                    
+                 }
+            });		
+		});
+ });
+ </script>
+<script type="text/javascript">     
+ $(document).ready(function(){
 $("#adminchangepassword").validate({
  rules: {
 	currentpassword: {
@@ -545,55 +566,8 @@ $("#adminchangepassword").validate({
 	  }
     }
   });
- 
-  
-});
-</script>  
-<script type="text/javascript">
-          $(document).ready(function(){
-        	  $("#changepasswordbutton").click(function(){
-        			
-        		  event.preventDefault();
-        		  var currentpass=$('#currentpassword').val();
-                  var newpass=$('#newpassword').val();
-                  var confirmpass=$('#confirmpassword').val();
-                 
-                $.ajax({
-                      url: "AdminChangePasswordServlet",
-                      type: "POST",
-                      data: {
-                    	  currentpassword : currentpass,
-                    	  newpassword : newpass,
-                    	  confirmpassword : confirmpass
-                      },
-                      cache: false,
-                     
-                    	  success: function (data) {
-                            	
-                              $('#passwordsuccess').html("<div class='alert alert-success'>");
-                              $('#passwordsuccess > .alert-success').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-                                      .append("</button>");
-                              $('#passwordsuccess > .alert-success')
-                                      .append("<strong>"+data+". </strong>");
-                              $('#passwordsuccess > .alert-success')
-                                      .append('</div>');
-                              $('#adminchangepassword').clear();
-                          },
-                          error: function () {
-                              $('#passwordsuccess').html("<div class='alert alert-danger'>");
-                              $('#passwordsuccess > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-                                      .append("</button>");
-                              $('#passwordsuccess > .alert-danger').append($("<strong>").text("Sorry " + name + ", update failed. Please try again later!"));
-                              $('#passwordsuccess > .alert-danger').append('</div>');
-                             
-                          }
-                      
-                  });
-        			
-        		});
-          });
-	 </script>  
- 
+ });
+</script>
        <!-- Footer Start -->
 	<%@include file="./html/footer.html"%>
 	<!-- Footer End -->

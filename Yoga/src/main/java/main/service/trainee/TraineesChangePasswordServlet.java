@@ -81,7 +81,7 @@ public class TraineesChangePasswordServlet extends HttpServlet {
          // getServletContext().getRequestDispatcher("/trainersprofile.jsp").forward(request, response);
       
            }else{
-           	out.println("Updated Failed");
+           	out.println("Updation Failed");
            	System.out.println("fail");
            //	 request.setAttribute("fail", "register fail");
                 
