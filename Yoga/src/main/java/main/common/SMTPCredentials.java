@@ -4,7 +4,7 @@ public final class SMTPCredentials {
 	private static final long serialVersionUID = 1L;
 	// AWS SMTP Credentials
 	public static final String SMTP_USERNAME = "dealwithfitness64@gmail.com";
-	public static final String SMTP_PASSWORD = "Harsha.2019";
+	public static final String SMTP_PASSWORD = "password";
 
 	// Amazon SES SMTP host name.
 	public static final String HOST = "smtp.gmail.com";
