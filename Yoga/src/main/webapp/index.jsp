@@ -179,6 +179,7 @@ label {
 	<%@include file="./html/dialogs.html"%>
 	<%@include file="./html/trainee-login-dialog.html"%>
 	<%@include file="./html/register-trainee-dialog.html"%>
+	<%@include file="./html/trainee-forgot-password-dialog.html"%>
 	<!-- Hero Start -->
 	<div class="hero" style="background-color: #dae2e642">
 		<center></center>

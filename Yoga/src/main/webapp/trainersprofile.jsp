@@ -32,10 +32,11 @@
 <link href="lib/owlcarousel/assets/owl.carousel.min.css"
 	rel="stylesheet">
 <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
-
+<link rel="stylesheet" href="profile/css/bootstrap.min.css">
 <link rel="shortcut icon" href="profile/images/fav.jpg">
 <link rel="stylesheet" href="profile/css/fontawsom-all.min.css">
 <link rel="stylesheet" type="text/css" href="profile/css/style.css" />
+<link rel="stylesheet" type="text/css" href="./css/common.css" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script
@@ -46,10 +47,13 @@
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <!-- JavaScript Libraries -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+		
 	<script src="lib/easing/easing.min.js"></script>
 	<script src="lib/wow/wow.min.js"></script>
 	<script src="lib/owlcarousel/owl.carousel.min.js"></script>
@@ -63,6 +67,8 @@
 
 	<!-- Template Javascript -->
 	<script src="js/main.js"></script>
+	<script src="js/TrainerProfile.js"></script>
+	<script src="profile/js/jquery-3.2.1.min.js"></script>
 	<script src="profile/js/popper.min.js"></script>
 	<script src="profile/js/bootstrap.min.js"></script>
 	<script src="profile/js/script.js"></script>
@@ -82,7 +88,9 @@
 	padding: 0;
 	background: none;
 }
-
+.error {
+	color: #FF0000 !important;
+}
 </style>
 <style>
 /* The Modal (background) */
@@ -93,7 +101,7 @@
   left: 395px;
   top: 90px;
   width: 40%; /* Full width */
-  height: 80%; /* Full height */
+  height: 90%; /* Full height */
 
   padding-top: 50px;
 }
@@ -271,9 +279,15 @@ hr {
 			<div class="row">
 				<div class="col-lg-8 col-md-7 detail-px no-padding">
 					<h3 class="mth3">Profile</h3>
+					<div class="right">
+						<button class="btn btn-info editprofileicon">
+							<i class="fa fa-edit blue-color " ></i>
+							<span style="font-size: 14px">Edit Profile</span>
+						</button>
+					</div>
 					<input type="hidden" id="trainer-profile-base64-encoded-element"
 						value="<%=trainerdetails.getBase64Image()%>" />
-					<form id="trainerprofileupdateform" name="trainerprofileupdateform">
+					<form role="form" id="trainerprofileupdateform" name="trainerprofileupdateform" class="trainerprofileupdateform">
 					<div class="fx-ro">
 						<div class="dat col-lg-4">Trainer Email</div>
 						<div class="dat col-lg-8">
@@ -284,14 +298,14 @@ hr {
 						<div class="dat col-lg-4">Trainer Name</div>
 						<div class="dat col-lg-8">
 						<input type="text" name="formname"
-									class="form-name form-control" id="form-name"
+									class="form-name form-control" id="formname"
 									value="<%=trainerdetails.getName()%>" required>
 						</div>
 					</div>
 					<div class="fx-ro">
 						<div class="dat col-lg-4">Experience</div>
 						<div class="dat col-lg-8">
-							<select name="formexperience" id="form-experience"
+							<select name="formexperience" id="formexperience"
 									class="form-control required" onfocus='this.size=5;'
 									onblur='this.size=1;' onchange='this.size=1; this.blur();'
 									required>
@@ -308,7 +322,7 @@ hr {
 						<div class="dat col-lg-4">Qualification</div>
 						<div class="dat col-lg-8">
 							<input type="text" name="formqualification"
-									class="form-qualification form-control" id="form-qualification"
+									class="form-qualification form-control" id="formqualification"
 									value="<%=trainerdetails.getQualification()%>" required>							
 						</div>
 					</div>
@@ -316,14 +330,14 @@ hr {
 						<div class="dat col-lg-4">Phone Number</div>
 						<div class="dat col-lg-8">
 							<input type="text" name="formphone"
-									class="form-phone form-control" id="form-phone"
+									class="form-phone form-control" id="formphone"
 									value="<%=trainerdetails.getPhoneno()%>" required>							
 						</div>
 					</div>
 					<div class="fx-ro">
 						<div class="dat col-lg-4">Expertise</div>
 						<div class="dat col-lg-8">
-							<select name="formexpertise" id="form-expertise"
+							<select name="formexpertise" id="formexpertise"
 									class="form-control required" 
 									required>
 												<option value="<%=trainerdetails.getExpertise()%>"><%=trainerdetails.getExpertise()%></option>
@@ -347,7 +361,7 @@ hr {
 					<div class="fx-ro">
 						<div class="dat col-lg-4">About Trainer</div>
 						<div class="dat col-lg-8">
-							<textarea class="form-control" id="form-aboutself"
+							<textarea class="form-control" id="formaboutself"
 									name="formaboutself" placeholder="About Yourself.." required><%=trainerdetails.getAboutyourself()%></textarea>							
 						</div>
 					</div>
@@ -355,7 +369,7 @@ hr {
 						<div class="dat col-lg-4"></div>
 						<div class="dat col-lg-8">
 							<button type="submit" class="btn btn-primary"
-									name="updatebutton" id="updatebutton">Update</button>
+									name="updatebutton" id="updatebutton"><i class="fa fa-edit blue-color " ></i>&nbsp Update</button>
 						</div>
 					</div>
 					</form>
@@ -369,7 +383,7 @@ hr {
 							if (trainerdetails.getCertificate1filename().length() > 3) {
 							%>
 							
-							<a class="downloadReport btn btn-info" target="_blank" href="http://localhost:8080/Yoga/AdminCertificate1DownloadServlet?user=<%=trainerdetails.getEmail() %>,<%=trainerdetails.getCertificate1filename() %>">Download</a>
+							<a class="downloadReport btn btn-info" target="_blank" href="http://localhost:8080/Yoga/AdminCertificate1DownloadServlet?user=<%=trainerdetails.getEmail() %>,<%=trainerdetails.getCertificate1filename() %>"><i class="fa fa-download blue-color " ></i>&nbspDownload</a>
 							<%
 							}
 							%>
@@ -379,7 +393,7 @@ hr {
 							<%
 							if (trainerdetails.getCertificate2filename().length() > 3) {
 							%>
-							<a class="downloadReport btn btn-info" target="_blank" href="http://localhost:8080/Yoga/AdminCertificate2DownloadServlet?user=<%=trainerdetails.getEmail() %>,<%=trainerdetails.getCertificate2filename() %>">Download</a>
+							<a class="downloadReport btn btn-info" target="_blank" href="http://localhost:8080/Yoga/AdminCertificate2DownloadServlet?user=<%=trainerdetails.getEmail() %>,<%=trainerdetails.getCertificate2filename() %>"><i class="fa fa-download blue-color " ></i>&nbspDownload</a>
 							<%
 							System.out.println("tt::" + trainerdetails.getCertificate2filename().length());
 							}
@@ -390,7 +404,7 @@ hr {
 							<%
 							if (trainerdetails.getCertificate3filename().length() > 3) {
 							%>
-							<a class="downloadReport btn btn-info" target="_blank" href="http://localhost:8080/Yoga/AdminCertificate3DownloadServlet?user=<%=trainerdetails.getEmail() %>,<%=trainerdetails.getCertificate3filename() %>">Download</a>
+							<a class="downloadReport btn btn-info" target="_blank" href="http://localhost:8080/Yoga/AdminCertificate3DownloadServlet?user=<%=trainerdetails.getEmail() %>,<%=trainerdetails.getCertificate3filename() %>"><i class="fa fa-download blue-color " ></i>&nbspDownload</a>
 							<%
 							}
 							%>
@@ -399,21 +413,16 @@ hr {
 
 				</div>
 
-				<div
-					class="col-lg-4 col-md-5 leftgh flex-column flex-halign-center flex-valign-center">
+				<div class="col-lg-4 col-md-5 leftgh flex-column flex-halign-center flex-valign-center">
 
 					<a onclick="document.getElementById('id01').style.display='block'"
 						href="#" title="Profile Picture Update" data-toggle="popover"
 						data-placement="bottom">
 						<div class="bh-img">
-
 							<img id="profile-image-element" alt="">
 							<!-- 	<span class="glyphicon glyphicon-camera"></span>  -->
-
 						</div>
 					</a>
-
-
 
 
 
@@ -462,7 +471,7 @@ hr {
 			reader.readAsDataURL(event.target.files[0]);
 		}
 	</script>
-					<script>
+<script>
 // Get the modal
 var modal = document.getElementById('id01');
 
@@ -489,7 +498,7 @@ window.onclick = function(event) {
 						%>
 						<form id="trainerppchangepassword" name="trainerppchangepassword">
 							<p>
-								<button class="btn btn-info trainerchangepassword">Change
+								<button class="btn btn-info trainerchangepassword"><i class="fa fa-key" aria-hidden="true"></i>&nbspChange
 									Password</button>
 							</p>
 							<div id="changepasswordhide">
@@ -564,8 +573,7 @@ window.onclick = function(event) {
 		$(document).ready(function() {
 			$('#editprofilehide').hide();
 			$('#changepasswordhide').hide();
-			$('#addmoreclass2').hide();
-			$('#addmoreclass3').hide();
+			$('#updatebutton').hide();
 
 			$(".trainereditprofile").click(function() {
 				$('#editprofilehide').toggle();
@@ -573,118 +581,12 @@ window.onclick = function(event) {
 			$(".trainerchangepassword").click(function() {
 				$('#changepasswordhide').toggle();
 			});
-			$("#addclass2").click(function() {
-				$('#addmoreclass2').show();
-				$('#addclass2').hide();
-				$('#addclass3').show();
-			});
-			$("#addclass3").click(function() {
-				$('#addmoreclass3').show();
-				$('#addclass3').hide();
+			$(".editprofileicon").click(function() {
+				$('#updatebutton').toggle();
 			});
 		});
 	</script>
-	<script type="text/javascript">
-		$(document)
-				.ready(
-						function() {
-							$("#updatebutton")
-									.click(
-											function() {
-
-												event.preventDefault();
-												var name = $("#form-name")
-														.val();
-												var exper = $(
-														"#form-experience")
-														.val();
-												var qua = $(
-														"#form-qualification")
-														.val();
-												var phone = $("#form-phone")
-														.val();
-
-												var exp = $("#form-expertise")
-														.val();
-
-												var message = $(
-														"#form-aboutself")
-														.val();
-
-												$
-														.ajax({
-															url : "TrainerProfileDetailsUpdateServlet",
-															type : "POST",
-															data : {
-																name : name,
-																experience : exper,
-																qualification : qua,
-																phone : phone,
-																expertise : exp,
-																aboutyourself : message
-															},
-															cache : false,
-
-															success : function(
-																	data) {
-
-																$(
-																		'#updatesuccess')
-																		.html(
-																				"<div class='alert alert-success'>");
-																$(
-																		'#updatesuccess > .alert-success')
-																		.html(
-																				"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-																		.append(
-																				"</button>");
-																$(
-																		'#updatesuccess > .alert-success')
-																		.append(
-																				"<strong>"
-																						+ data
-																						+ ". </strong>");
-																$(
-																		'#updatesuccess > .alert-success')
-																		.append(
-																				'</div>');
-																$(
-																		'#editprofilehide')
-																		.hide();
-																document.location.href = './TrainerProfile';
-															},
-															error : function() {
-																$(
-																		'#updatesuccess')
-																		.html(
-																				"<div class='alert alert-danger'>");
-																$(
-																		'#updatesuccess > .alert-danger')
-																		.html(
-																				"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-																		.append(
-																				"</button>");
-																$(
-																		'#updatesuccess > .alert-danger')
-																		.append(
-																				$(
-																						"<strong>")
-																						.text(
-																								"Sorry "
-																										+ name
-																										+ ", update failed. Please try again later!"));
-																$(
-																		'#updatesuccess > .alert-danger')
-																		.append(
-																				'</div>');
-
-															}
-
-														});
-
-											});
-						});
-	</script>
+	
 	<script type="text/javascript">
 		$(document)
 				.ready(
@@ -783,93 +685,7 @@ window.onclick = function(event) {
 		<i class="fa fa-chevron-up"></i>
 	</a>
 
-<script type="text/javascript">	
-			$(document).ready(function() {
-								$('#trainerprofileupdateform').validate(
-												{
-													rules : {
-														formname : {
-															required : true,
-															minlength : 3,
-															alphaNum : true
 
-														},
-														formemail : {
-															required : true,
-															email : true
-														},
-														formexpertise1 : {
-															required : true
-														},
-														formexperience : {
-															required : true
-														},
-														formqualification : {
-															required : true,
-															minlength : 2,
-															alphaNum : true
-														},
-														formphone : {
-															required : true,
-															minlength : 10,
-															maxlength : 10,
-															onlyNum : true
-														},													
-														formaboutself : {
-															required : true,
-															minlength : 50
-														}
-													},
-													messages : {
-														formfirstname : {
-															required : "Please Enter name",
-															minlength : "Name should be at least 3 characters"
-														},
-														formemail : {
-															required : "Please Enter Email",
-															email : "The email should be in the format: abc@domain.tld"
-														},
-														formexpertise1 : {
-															required : "Please select Expertise"
-														},
-														formexperience : {
-															required : "Please select Experience"
-														},													
-														formqualification : {
-															required : "Please enter Qualification",
-															minlength : "Qualification should be at least 2 characters"
-														},
-														formphone : {
-															required : "Please enter phone number",
-															minlength : "Phone Number must be 10 numbers",
-															maxlength : "Phone Number must be 10 numbers"
-														},													
-														'roles' : {
-															required : "Plz Select Atleast One Option"
-														},													
-														formaboutself : {
-															required : "please enter about yourself",
-															minlength : "Please enter atleast 50 chars"
-														}
-													}
-												});
-								
-								$.validator.addMethod("alphaNum", function(value,element) {
-									return this.optional(element)
-											|| value == value
-													.match(/^[a-zA-Z\s]*$/);
-								}, "please enter a valid name");
-								$.validator.addMethod("onlyNum", function(value,
-										element) {
-									return this.optional(element)
-											|| value == value
-													.match(/^[1-9]{1}[0-9]{9}$/);
-								}, "Phone number must be 10 numbers");
-
-							});
-		
-
-	</script>
 	
 </body>
 </html>

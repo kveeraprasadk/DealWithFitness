@@ -83,7 +83,7 @@
 	background: none;
 }
 
-label {
+.error {
 	color: #FF0000 !important;
 }
 </style>
@@ -149,26 +149,25 @@ label {
 			%>
 			<div class="row">
 				<div class="col-lg-8 col-md-7 detail-px no-padding">
-					<form name=traineeupdateform " id="traineeupdateform">
-						<h3 class="mth3">Please Update your profile with following
-							fields for better services</h3>
+					<form role="form" name=traineeupdateform " id="traineeupdateform">
+						<h3 class="mth3">Profile</h3>
+							<p><span style="background-color: #FFFF00"><strong>! Important :</strong> Please Update your profile with following
+							fields for better services.</span></p>
+						<div class="fx-ro">
+							<div class="dat col-lg-4">Trainee Email</div>
+							<div class="dat col-lg-8">
+							<b><%=traineedetails.getEmail()%></b>								
+							</div>
+						</div>
 						<div class="fx-ro">
 							<div class="dat col-lg-4">Trainee Name</div>
 							<div class="dat col-lg-8">
-								<input type="text" name="form-name"
+								<input type="text" name="formname"
 									class="form-name form-control" id="form-name"
 									value="<%=traineedetails.getName()%>" required>
 							</div>
 						</div>
-						<div class="fx-ro">
-							<div class="dat col-lg-4">Trainee Email</div>
-							<div class="dat col-lg-8">
-								<input type="text" name="form-email"
-									class="form-email form-control" id="form-email"
-									value="<%=traineedetails.getEmail()%>" required
-									disabled="disabled">
-							</div>
-						</div>
+						
 
 						<div class="fx-ro">
 							<div class="dat col-lg-4">DoB</div>
@@ -200,7 +199,7 @@ label {
 						<div class="fx-ro">
 							<div class="dat col-lg-4">Any Ailment</div>
 							<div class="dat col-lg-8">
-								<input type="text" name="form-ailment"
+								<input type="text" name="formailment"
 									class="form-ailment form-control" id="form-ailment"
 									value="<%=traineedetails.getAnyailment()%>" required>
 							</div>
@@ -208,7 +207,7 @@ label {
 						<div class="fx-ro">
 							<div class="dat col-lg-4">Phone</div>
 							<div class="dat col-lg-8">
-								<input type="text" name="form-phone"
+								<input type="text" name="formphone"
 									class="form-phone form-control" id="form-phone"
 									value="<%=traineedetails.getPhone()%>" required>
 							</div>
@@ -216,7 +215,7 @@ label {
 						<div class="fx-ro">
 							<div class="dat col-lg-4">State</div>
 							<div class="dat col-lg-8">
-								<select id="form-state" name="form-state" class="form-control"
+								<select id="form-state" name="formstate" class="form-control"
 									required>
 									<option value="<%=traineedetails.getState()%>"><%=traineedetails.getState()%></option>
 									<option value="Andaman & Nicobar">Andaman & Nicobar</option>
@@ -264,7 +263,7 @@ label {
 						<div class="fx-ro">
 							<div class="dat col-lg-4">City</div>
 							<div class="dat col-lg-8">
-								<input type="text" name="form-city"
+								<input type="text" name="formcity"
 									class="form-city form-control" id="form-city"
 									value="<%=traineedetails.getCity()%>" required>
 
@@ -275,7 +274,7 @@ label {
 							<div class="dat col-lg-4"></div>
 							<div class="dat col-lg-8">
 								<button type="submit" class="btn btn-primary"
-									id="traineeprofileupdate">Update</button>
+									id="traineeprofileupdate" name="traineeprofileupdate">Update</button>
 							</div>
 						</div>
 						<div id="updatesuccess"></div>
@@ -287,10 +286,13 @@ label {
 
 
 				</div>
-				<div class="col-lg-4 col-md-5 leftgh">
+				<div class="col-lg-4 col-md-5 leftgh flex-column flex-halign-center flex-valign-center">
 					<div class="img-box">
-						<img src="profile/images/gallery/gallery_12.jpg" alt="">
+					<i class="fa fa-user user-container"></i>
+<!-- 						<img src="profile/images/gallery/gallery_12.jpg" alt=""> -->
 					</div>
+					
+					
 					<div class="name-det">
 
 
@@ -312,7 +314,7 @@ label {
 
 						<form id="traineeppchangepassword" name="traineeppchangepassword">
 							<p>
-								<button class="btn btn-info trainerchangepassword">Change
+								<button class="btn btn-info trainerchangepassword"><i class="fa fa-key" aria-hidden="true"></i>&nbspChange
 									Password</button>
 							</p>
 							<div id="changepasswordhide">
@@ -365,23 +367,161 @@ label {
 							$("#traineeupdateform")
 									.validate(
 											{
-												rules : {
+												rules : {													
+													formname : {
+														required : true,
+														minlength : 3,
+														alphaNum : true
+													},	
 													formdob : {
 														required : true,
 														minAge : 5,
 														maxAge : 70
+													},
+													formtarget : {
+														required : true
+													},
+													formailment : {
+														required : true
+													},													
+													formphone : {
+														required : true,
+														minlength : 10,
+														maxlength : 10,
+														onlyNum : true
+													},	
+													formstate : {
+														required : true
+													},
+													formstate : {
+														required : true
 													}
 												},
-												messages : {
+												messages : {													
+													formname : {
+														required : "Please Enter name",
+														minlength : "Name should be at least 3 characters"
+													},	
 													formdob : {
 														required : "Please enter you date of birth.",
 														minAge : "You must be at least 5 years old!",
 														maxAge : "You must be below 70 years old!"
+													},
+													formtarget : {
+														required : "Please Enter your target"														
+													},
+													formailment : {
+														required : "Please Enter you have any ailment"														
+													},
+													formphone : {
+														required : "Please enter phone number",
+														minlength : "Phone Numbera must be 10 numbers",
+														maxlength : "Phone Number must be 10 numbers"
+													},	
+													formstate : {
+														required : "Please select your state"														
+													},
+													formcity : {
+														required : "Please enter your city"														
 													}
+												},
+												submitHandler : function(form) {
+													
+													event.preventDefault();
+													var name = $("#form-name")
+															.val();
+// 													var email = $("#form-email")
+// 															.val();
+													var dob = $("#form-dob").val();
+													var target = $("#form-target")
+															.val();
+													var ailment = $("#form-ailment")
+															.val();
+													var phone = $("#form-phone")
+															.val();
+													var state = $("#form-state")
+															.val();
+													var city = $("#form-city")
+															.val();
+
+													$
+															.ajax({
+																url : "TraineeProfileDetailsUpdateServlet",
+																type : "POST",
+																data : {
+																	name : name,
+															//		email : email,
+																	dob : dob,
+																	target : target,
+																	ailment : ailment,
+																	phone : phone,
+																	state : state,
+																	city : city
+
+																},
+																cache : false,
+
+																success : function(
+																		data) {
+
+																	$(
+																			'#updatesuccess')
+																			.html(
+																					"<div class='alert alert-success'>");
+																	$(
+																			'#updatesuccess > .alert-success')
+																			.html(
+																					"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+																			.append(
+																					"</button>");
+																	$(
+																			'#updatesuccess > .alert-success')
+																			.append(
+																					"<strong>"
+																							+ data
+																							+ ". </strong>");
+																	$(
+																			'#updatesuccess > .alert-success')
+																			.append(
+																					'</div>');
+																	$(
+																			'#editprofilehide')
+																			.hide();
+																	document.location.href = './TraineeProfile';
+
+																},
+																error : function() {
+																	$(
+																			'#updatesuccess')
+																			.html(
+																					"<div class='alert alert-danger'>");
+																	$(
+																			'#updatesuccess > .alert-danger')
+																			.html(
+																					"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+																			.append(
+																					"</button>");
+																	$(
+																			'#updatesuccess > .alert-danger')
+																			.append(
+																					$(
+																							"<strong>")
+																							.text(
+																									"Sorry "
+																											+ name
+																											+ ", update failed. Please try again later!"));
+																	$(
+																			'#updatesuccess > .alert-danger')
+																			.append(
+																					'</div>');
+
+																}
+
+															});
+													return false;
 												}
 											});
-							$.validator
-									.addMethod(
+							$.validator.addMethod(
 											"minAge",
 											function(value, element, min) {
 												var today = new Date();
@@ -430,6 +570,18 @@ label {
 
 										return age1 <= max;
 									}, "You are too old enough!");
+							
+							$.validator.addMethod("onlyNum", function(value,
+									element) {
+								return this.optional(element)
+										|| value == value
+												.match(/^[1-9]{1}[0-9]{9}$/);
+							}, "Phone number only numbers");
+							$.validator.addMethod("alphaNum", function(value,element) {
+								return this.optional(element)
+										|| value == value
+												.match(/^[a-zA-Z\s]*$/);
+							}, "please enter a valid name");
 						});
 	</script>
 	<script language="javascript" type="text/javascript">
@@ -502,97 +654,7 @@ label {
 									.click(
 											function() {
 
-												event.preventDefault();
-												var name = $("#form-name")
-														.val();
-												var email = $("#form-email")
-														.val();
-												var dob = $("#form-dob").val();
-												var target = $("#form-target")
-														.val();
-												var ailment = $("#form-ailment")
-														.val();
-												var phone = $("#form-phone")
-														.val();
-												var state = $("#form-state")
-														.val();
-												var city = $("#form-city")
-														.val();
-
-												$
-														.ajax({
-															url : "TraineeProfileDetailsUpdateServlet",
-															type : "POST",
-															data : {
-																name : name,
-																email : email,
-																dob : dob,
-																target : target,
-																ailment : ailment,
-																phone : phone,
-																state : state,
-																city : city
-
-															},
-															cache : false,
-
-															success : function(
-																	data) {
-
-																$(
-																		'#updatesuccess')
-																		.html(
-																				"<div class='alert alert-success'>");
-																$(
-																		'#updatesuccess > .alert-success')
-																		.html(
-																				"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-																		.append(
-																				"</button>");
-																$(
-																		'#updatesuccess > .alert-success')
-																		.append(
-																				"<strong>"
-																						+ data
-																						+ ". </strong>");
-																$(
-																		'#updatesuccess > .alert-success')
-																		.append(
-																				'</div>');
-																$(
-																		'#editprofilehide')
-																		.hide();
-																document.location.href = './TraineeProfile';
-
-															},
-															error : function() {
-																$(
-																		'#updatesuccess')
-																		.html(
-																				"<div class='alert alert-danger'>");
-																$(
-																		'#updatesuccess > .alert-danger')
-																		.html(
-																				"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-																		.append(
-																				"</button>");
-																$(
-																		'#updatesuccess > .alert-danger')
-																		.append(
-																				$(
-																						"<strong>")
-																						.text(
-																								"Sorry "
-																										+ name
-																										+ ", update failed. Please try again later!"));
-																$(
-																		'#updatesuccess > .alert-danger')
-																		.append(
-																				'</div>');
-
-															}
-
-														});
+												
 
 											});
 						});
