@@ -268,6 +268,12 @@
 		<description></description>
 		<servlet-class>main.TraineeAdminApprovedListServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>TraineeForgotPasswordServlet</servlet-name>
+		<display-name>TraineeForgotPasswordServlet</display-name>
+		<description></description>
+		<servlet-class>main.service.trainee.TraineeForgotPasswordServlet</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>TrainerRegisterServlet</servlet-name>
@@ -444,6 +450,10 @@
 	<servlet-mapping>
 		<servlet-name>TraineeAdminApprovedListServlet</servlet-name>
 		<url-pattern>/TraineeAdminApprovedListServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>TraineeForgotPasswordServlet</servlet-name>
+		<url-pattern>/TraineeForgotPasswordServlet</url-pattern>
 	</servlet-mapping>
 	<listener>
 		<listener-class>main.common.MysqlDatasource</listener-class>

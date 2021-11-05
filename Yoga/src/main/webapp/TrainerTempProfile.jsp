@@ -94,6 +94,11 @@
 		})
 	}
 </script>
+<style type="text/css">
+.error {
+	color: #FF0000 !important;
+}
+</style>
     </head>
 
     <body >
@@ -151,43 +156,102 @@
                    
                    <p><span style="background-color: #FFFF00"><strong>! Important :</strong> This is one time profile login. Just now you register to DealWithFitness, Admin will provide your Access ID's as soon as possible.</span></p>
                     <h3 class="mth3">Profile</h3>
-                    <div class="fx-ro">        
-                        
-                            Name : <b>${trainername}</b>
-                            	                 
-                    </div>
-                    <div class="fx-ro">
-                        
-                            Email	:	<b>${traineremail}</b>
-                                              
-                    </div>
-                    <div class="fx-ro">
-                        
-                            Experience	:	<b>${trainerexperience}</b>
-                                              
-                    </div>
-                    <div class="fx-ro">
-                        
-                            Qualification	:	<b>${trainerqualification}</b>
-                       
-                       
-                    </div>
-                    <div class="fx-ro">
-                        
-                            Expertise	:	<b>${trainerexpertise}</b>
-                       
-                       
-                    </div>
-                    <div class="fx-ro">
-						
-							Phoneno : <b>${trainerphone}</b>
-						
+                    <div class="right">
+						<button class="btn btn-info editprofileicon">
+							<i class="fa fa-edit blue-color " ></i>
+							<span style="font-size: 14px">Edit Profile</span>
+						</button>
 					</div>
-                     
-                    
-                    
-                     <h3>About Trainer</h3>
-                    <p><b>${traineraboutme}</b></p>
+					<input type="hidden" id="trainer-profile-base64-encoded-element"
+						value="${trainerprofilephoto }" />
+					<form role="form" id="trainerprofileupdateform" name="trainerprofileupdateform" class="trainerprofileupdateform">
+					<div class="fx-ro">
+						<div class="dat col-lg-4">Trainer Email</div>
+						<div class="dat col-lg-8">
+							<b>${traineremail}</b>
+						</div>
+					</div>
+                    <div class="fx-ro">
+						<div class="dat col-lg-4">Trainer Name</div>
+						<div class="dat col-lg-8">
+						<input type="text" name="formname"
+									class="form-name form-control" id="formname"
+									value="${trainername}" required>
+						</div>
+					</div>
+                    <div class="fx-ro">
+						<div class="dat col-lg-4">Experience</div>
+						<div class="dat col-lg-8">
+							<select name="formexperience" id="formexperience"
+									class="form-control required" onfocus='this.size=5;'
+									onblur='this.size=1;' onchange='this.size=1; this.blur();'
+									required>
+									<option value="${trainerexperience}">${trainerexperience}</option>
+									<option value="upto 2Yr">upto 2Yr</option>
+									<option value="2 to 5Yrs">2 to 5Yrs</option>
+									<option value="5 to 10Yrs">5 to 10Yrs</option>
+									<option value="10 to 20Yrs">10 to 20Yrs</option>
+									<option value="Above 20Yrs">Above 20Yrs</option>
+								</select>						
+						</div>
+					</div>
+                   <div class="fx-ro">
+						<div class="dat col-lg-4">Qualification</div>
+						<div class="dat col-lg-8">
+							<input type="text" name="formqualification"
+									class="form-qualification form-control" id="formqualification"
+									value="${trainerqualification}" required>							
+						</div>
+					</div>
+                    <div class="fx-ro">
+						<div class="dat col-lg-4">Phone Number</div>
+						<div class="dat col-lg-8">
+							<input type="text" name="formphone"
+									class="form-phone form-control" id="formphone"
+									value="${trainerphone}" required>							
+						</div>
+					</div>
+					<div class="fx-ro">
+						<div class="dat col-lg-4">Expertise</div>
+						<div class="dat col-lg-8">
+							<select name="formexpertise" id="formexpertise"
+									class="form-control required" 
+									required>
+												<option value="${trainerexpertise}">${trainerexpertise}</option>
+												<optgroup label="Yoga">
+													<option value="Yoga for health">Yoga for health</option>
+													<option value="Weight Loss">Weight Loss</option>
+													<option value="Kids Yoga">Kids Yoga</option>
+													<option value="Pregnancy Yoga">Pregnancy Yoga</option>
+													<option value="Meditation">Meditation</option>
+												</optgroup>
+												<optgroup label="Dance Group">
+													<option value="Tomcat v7.0 Server at localhost">Dance</option>
+													<option value="Zumba">Zumba</option>
+												</optgroup>
+												<option value="Weight / Body weight Workout">Weight
+													/ Body weight Workout</option>
+												<option value="Nutrition">Nutrition</option>
+								</select>						
+						</div>
+					</div>	
+                    <div class="fx-ro">
+						<div class="dat col-lg-4">About Trainer</div>
+						<div class="dat col-lg-8">
+							<textarea class="form-control" id="formaboutself"
+									name="formaboutself" placeholder="About Yourself.." required>${traineraboutme}</textarea>							
+						</div>
+					</div>
+					<div class="fx-ro">
+						<div class="dat col-lg-4"></div>
+						<div class="dat col-lg-8">
+							<button type="submit" class="btn btn-primary"
+									name="updatebutton" id="updatebutton"><i class="fa fa-edit blue-color " ></i>&nbsp Update</button>
+						</div>
+					</div>
+					</form>
+					<div id="updatesuccess"></div>
+                   
                     
                     <h3 class="mth3">Certificates</h3>
                     
@@ -201,10 +265,15 @@
                     </ul>
                     
                 </div>
-                <div class="col-lg-4 col-md-5 leftgh">
+               <div
+					class="col-lg-4 col-md-5 leftgh flex-column flex-halign-center flex-valign-center">
+
                     <div class="img-box">
                          <img src="profile/images/gallery/gallery_12.jpg" alt="">   
                     </div>
+<!--                     <div class="bh-img"> -->
+<!-- 							<img id="profile-image-element" alt=""> -->
+<!-- 					</div> -->
                     <div class="name-det">                        
                    
                      <h2><div class="tname"></div></h2>
@@ -215,66 +284,10 @@
                      <b>${traineremail}</b>
                      </p>
                      
-                    <p>
-							<button class="btn btn-info trainereditprofile">Edit Profile</button>
-						</p>
-						<div id="editprofilehide">
-
-							<p>
-								<input type="text" name="form-name"
-									class="form-name form-control" id="form-name"
-									value="${trainername}" required>
-							</p>
-							<p>
-								<input type="text" name="form-qualification"
-									class="form-qualification form-control" id="form-qualification"
-									value="${trainerqualification}" required>
-							</p>
-							<p>
-								<select name="form-experience" id="form-experience"
-									class="form-control required" onfocus='this.size=5;'
-									onblur='this.size=1;' onchange='this.size=1; this.blur();'
-									required>
-									<option value="${trainerexperience}">${trainerexperience}</option>
-									<option value="upto 2Yr">upto 2Yr</option>
-									<option value="2 to 5Yrs">2 to 5Yrs</option>
-									<option value="5 to 10Yrs">5 to 10Yrs</option>
-									<option value="10 to 20Yrs">10 to 20Yrs</option>
-									<option value="Above 20Yrs">Above 20Yrs</option>
-								</select>
-							</p>
-							<p>
-								<input type="text" name="form-phone"
-									class="form-phone form-control" id="form-phone"
-									value="${trainerphone}" required>
-							</p>
-							<p>
-								<select name="form-expertise" id="form-expertise"
-									class="form-control required" onfocus='this.size=5;'
-									onblur='this.size=1;' onchange='this.size=1; this.blur();'
-									required>
-									<option value="${trainerexpertise}">${trainerexpertise}</option>
-									<option value="Yoga for health">Yoga for health</option>
-									<option value="Weight Loss">Weight Loss</option>
-									<option value="Kids Yoga">Kids Yoga</option>
-									<option value="Pregnancy Yoga">Pregnancy Yoga</option>
-									<option value="Meditation">Meditation</option>
-								</select>
-							</p>
-							<p>
-								<textarea class="form-control" id="form-aboutself"
-									name="form-aboutself" placeholder="About Yourself.." required>${traineraboutme}</textarea>
-							</p>
-							<p>
-							<button type="button" class="btn btn-primary" name="updatebutton"
-								id="updatebutton">Update</button>
-								</p>
-						</div>
-						<div id="updatesuccess"></div>
-						
+                   
 						<form id="trainerppchangepassword" name="trainerppchangepassword">
 							<p>
-								<button class="btn btn-info trainerchangepassword">Change Password</button>
+								<button class="btn btn-info trainerchangepassword"><i class="fa fa-key" aria-hidden="true"></i>&nbspChange Password</button>
 							</p>
 							<div id="changepasswordhide">
 								<p>
@@ -348,8 +361,7 @@
 		$(document).ready(function() {
 			$('#editprofilehide').hide();
 			$('#changepasswordhide').hide();
-			$('#addmoreclass2').hide();
-			$('#addmoreclass3').hide();
+			$('#updatebutton').hide();
 
 			$(".trainereditprofile").click(function() {
 				$('#editprofilehide').toggle();
@@ -357,118 +369,180 @@
 			$(".trainerchangepassword").click(function() {
 				$('#changepasswordhide').toggle();
 			});
-			$("#addclass2").click(function() {
-				$('#addmoreclass2').show();
-				$('#addclass2').hide();
-				$('#addclass3').show();
-			});
-			$("#addclass3").click(function() {
-				$('#addmoreclass3').show();
-				$('#addclass3').hide();
+			$(".editprofileicon").click(function() {
+				$('#updatebutton').toggle();
 			});
 		});
 	</script>
 	<script type="text/javascript">
-		$(document)
-				.ready(
-						function() {
-							$("#updatebutton")
-									.click(
-											function() {
+	$(document).ready(function() {
+		
+		$('#trainerprofileupdateform').validate(
+						{
+							rules : {
+								formname : {
+									required : true,
+									minlength : 3,
+									alphaNum : true
+								},														
+								formexpertise1 : {
+									required : true
+								},
+								formexperience : {
+									required : true
+								},
+								formqualification : {
+									required : true,
+									minlength : 2,
+									alphaNum : true
+								},
+								formphone : {
+									required : true,
+									minlength : 10,
+									maxlength : 10,
+									onlyNum : true
+								},													
+								formaboutself : {
+									required : true,
+									minlength : 50
+								}
+							},
+							messages : {
+								formfirstname : {
+									required : "Please Enter name",
+									minlength : "Name should be at least 3 characters"
+								},														
+								formexpertise1 : {
+									required : "Please select Expertise"
+								},
+								formexperience : {
+									required : "Please select Experience"
+								},													
+								formqualification : {
+									required : "Please enter Qualification",
+									minlength : "Qualification should be at least 2 characters"
+								},
+								formphone : {
+									required : "Please enter phone number",
+									minlength : "Phone Numbera must be 10 numbers",
+									maxlength : "Phone Number must be 10 numbers"
+								},													
+								'roles' : {
+									required : "Plz Select Atleast One Option"
+								},													
+								formaboutself : {
+									required : "please enter about yourself",
+									minlength : "Please enter atleast 50 chars"
+								}
+							},
+							
+							submitHandler : function(form) {
+								var name = $("#formname")
+								.val();
+						var exper = $(
+								"#formexperience")
+								.val();
+						var qua = $(
+								"#formqualification")
+								.val();
+						var phone = $("#formphone")
+								.val();
 
-												event.preventDefault();
-												var name = $("#form-name")
-														.val();
-												var exper = $(
-														"#form-experience")
-														.val();
-												var qua = $(
-														"#form-qualification")
-														.val();
-												var phone = $(
-												"#form-phone")
-												.val();
+						var exp = $("#formexpertise")
+								.val();
 
-												var exp = $("#form-expertise")
-														.val();
+						var message = $(
+								"#formaboutself")
+								.val();
+						$
+						.ajax({
+							url : "TrainerProfileDetailsUpdateServlet",
+							type : "POST",
+							data : {
+								name : name,
+								experience : exper,
+								qualification : qua,
+								phone : phone,
+								expertise : exp,
+								aboutyourself : message
+							},
+							cache : false,
 
-												var message = $(
-														"#form-aboutself")
-														.val();
+							success : function(
+									data) {
 
-												$
-														.ajax({
-															url : "TrainerTempProfileUpdateServlet",
-															type : "POST",
-															data : {
-																name : name,
-																experience : exper,
-																qualification : qua,
-																phone : phone,
-																expertise : exp,
-																aboutyourself : message
-															},
-															cache : false,
+								$(
+										'#updatesuccess')
+										.html(
+												"<div class='alert alert-success'>");
+								$(
+										'#updatesuccess > .alert-success')
+										.html(
+												"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+										.append(
+												"</button>");
+								$(
+										'#updatesuccess > .alert-success')
+										.append(
+												"<strong>"
+														+ data
+														+ ". </strong>");
+								$(
+										'#updatesuccess > .alert-success')
+										.append(
+												'</div>');
+								$(
+										'#editprofilehide')
+										.hide();
+								document.location.href = './TrainerTempProfileshowing';
+							},
+							error : function() {
+								$(
+										'#updatesuccess')
+										.html(
+												"<div class='alert alert-danger'>");
+								$(
+										'#updatesuccess > .alert-danger')
+										.html(
+												"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+										.append(
+												"</button>");
+								$(
+										'#updatesuccess > .alert-danger')
+										.append(
+												$(
+														"<strong>")
+														.text(
+																"Sorry "
+																		+ name
+																		+ ", update failed. Please try again later!"));
+								$(
+										'#updatesuccess > .alert-danger')
+										.append(
+												'</div>');
 
-															success : function(
-																	data) {
+							}
 
-																$(
-																		'#updatesuccess')
-																		.html(
-																				"<div class='alert alert-success'>");
-																$(
-																		'#updatesuccess > .alert-success')
-																		.html(
-																				"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-																		.append(
-																				"</button>");
-																$(
-																		'#updatesuccess > .alert-success')
-																		.append(
-																				"<strong>"
-																						+ data
-																						+ ". </strong>");
-																$(
-																		'#updatesuccess > .alert-success')
-																		.append(
-																				'</div>');
-																$(
-																		'#editprofilehide')
-																		.hide();
-																document.location.href = './TrainerTempProfileshowing';
-															},
-															error : function() {
-																$(
-																		'#updatesuccess')
-																		.html(
-																				"<div class='alert alert-danger'>");
-																$(
-																		'#updatesuccess > .alert-danger')
-																		.html(
-																				"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-																		.append(
-																				"</button>");
-																$(
-																		'#updatesuccess > .alert-danger')
-																		.append(
-																				$(
-																						"<strong>")
-																						.text(
-																								"Sorry "
-																										+ name
-																										+ ", update failed. Please try again later!"));
-																$(
-																		'#updatesuccess > .alert-danger')
-																		.append(
-																				'</div>');
-
-															}
-
-														});
-
-											});
 						});
+						return false;
+							}		
+							
+							
+						});
+		
+		$.validator.addMethod("alphaNum", function(value,element) {
+			return this.optional(element)
+					|| value == value
+							.match(/^[a-zA-Z\s]*$/);
+		}, "please enter a valid name");
+		$.validator.addMethod("onlyNum", function(value,
+				element) {
+			return this.optional(element)
+					|| value == value
+							.match(/^[1-9]{1}[0-9]{9}$/);
+		}, "Phone number must be 10 numbers");
+
+	});
 	</script>
 	<script type="text/javascript">
 		$(document)

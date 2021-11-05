@@ -228,10 +228,12 @@ public class TrainerRegisterServlet extends HttpServlet {
 					 * session.setAttribute("trainerschedule3", schedule3);
 					 * session.setAttribute("trainerclasslevel3", classlevel3);
 					 * session.setAttribute("trainermonthlyfees3", monthlyfees3);
-					 */ session.setAttribute("traineraboutme", abuotme);
+					 */ 
+					session.setAttribute("traineraboutme", abuotme);
 					session.setAttribute("trainercertificatefileName1", certificatefileName1);
 					session.setAttribute("trainercertificatefileName2", certificatefileName2);
 					session.setAttribute("trainercertificatefileName3", certificatefileName3);
+					session.setAttribute("trainerprofilephoto",inputStream);
 
 					// out.write("Request Sent Successfully");
 					System.out.println("success");

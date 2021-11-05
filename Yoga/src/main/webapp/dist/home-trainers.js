@@ -2,6 +2,7 @@
 
 const REG_ERROR_MSG_ID = "reg-validation-error";
 const LOGIN_ERROR_MSG_ID = "login-validation-error";
+const FORGOT_ERROR_MSG_ID="forgot-validation-error";
 
 function Trainers() {
 	self = this;
@@ -86,21 +87,47 @@ function Trainers() {
 				self.loginEvent()
 			}
 		});
+		$("#trainee-forgotpassword-dialog-parent").keydown((e) => {
+			if (e.keyCode == 13) {
+				e.preventDefault();
+				self.forgotpasswordEvent()
+			}
+		});
 		$('#login-trainee-action').click(self.loginEvent);
 	}
 
 	self.validateLogin = function(emailId, pass) {
 		if (emailId == null || emailId.trim().length == 0) {
 			self.validationError(LOGIN_ERROR_MSG_ID, "Email id is mandatory");
+			$("#login-traineeemailid").focus();
 			return false;
 		} else if (!Utils.validateEmail(emailId)) {
 			self.validationError(LOGIN_ERROR_MSG_ID, "Email id is invalid");
+			$("#login-traineeemailid").focus();
 			return false;
 		}
 		if (pass == null || pass.trim().length == 0) {
 			self.validationError(LOGIN_ERROR_MSG_ID, "Password is mandatory");
+			$("#login-traineepassword").focus();
+			return false;
+		}else if (pass.trim().length < 6) {
+			self.validationError(LOGIN_ERROR_MSG_ID, "Password should be minmum of 6 digits");
+			$("#login-traineepassword").focus();
 			return false;
 		}
+		return true;
+	}
+	
+	self.validateForgotPassword = function(emailId) {
+		if (emailId == null || emailId.trim().length == 0) {
+			self.validationError(FORGOT_ERROR_MSG_ID, "Email id is mandatory");
+			$("#forgot-traineeemailid").focus();
+			return false;
+		} else if (!Utils.validateEmail(emailId)) {
+			self.validationError(FORGOT_ERROR_MSG_ID, "Email id is invalid");
+			$("#forgot-traineeemailid").focus();
+			return false;
+		}		
 		return true;
 	}
 
@@ -127,6 +154,47 @@ function Trainers() {
 				},
 				error: function(data) {
 					alertDialog.show("Service Failure", data.statusText);
+				},
+				complete: () => progressBar.end()
+			});
+		}
+	}
+	
+	self.forgotpasswordEvent = function() {
+		var ttemailId = $('#forgot-traineeemailid').val();
+		
+		if (self.validateForgotPassword(ttemailId)) {
+			progressBar.start();
+			// Validations are done push the payload to backend
+			$.ajax({
+				url: "TraineeForgotPasswordServlet",
+				type: "POST",
+				data: {
+					username: ttemailId					
+				},
+				cache: false,
+				success: function(data) {
+				
+					if (data == "NewPassword Sent") {						
+						$('#forgotsuccess').html("<div class='alert alert-success'>");
+						$('#forgotsuccess > .alert-success').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+								.append("</button>");
+						$('#forgotsuccess > .alert-success').append($("<strong>").text(data));
+						$('#forgotsuccess > .alert-success').append('</div>');
+					}else if(data == "New Password Creation Failed" || "Plz enter Registered EmailId"){
+						$('#forgotsuccess').html("<div class='alert alert-danger'>");
+						$('#forgotsuccess > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+								.append("</button>");
+						$('#forgotsuccess > .alert-danger').append($("<strong>").text(data));
+						$('#forgotsuccess > .alert-danger').append('</div>');
+					}
+				},
+				error: function(data) {
+					$('#forgotsuccess').html("<div class='alert alert-danger'>");
+					$('#forgotsuccess > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+							.append("</button>");
+					$('#forgotsuccess > .alert-danger').append($("<strong>").text(data));
+					$('#forgotsuccess > .alert-danger').append('</div>');
 				},
 				complete: () => progressBar.end()
 			});
@@ -433,6 +501,10 @@ function Trainers() {
 			self.validationError(REG_ERROR_MSG_ID, "Trainee name is mandatory");
 			$("#register-traineeFullname").focus();
 			return false;
+		}else if (name.trim().length < 3) {
+			self.validationError(REG_ERROR_MSG_ID, "Trainee name minimum 3 characters");
+			$("#register-traineeFullname").focus();
+			return false;
 		}
 		if (email == null || email.trim().length == 0) {
 			self.validationError(REG_ERROR_MSG_ID, "Trainee Email id is mandatory");
@@ -442,8 +514,12 @@ function Trainers() {
 			self.validationError(REG_ERROR_MSG_ID, "Trainee Email id is invalid");
 			$("#register-traineeemailid").focus();
 			return false;
-		}
-		if (phone && phone.trim().length < 10) {
+		} 
+		if (phone == null || phone.trim().length == 0) {
+			self.validationError(REG_ERROR_MSG_ID, "Mobile number is mandatory");
+			$("#register-traineephone").focus();
+			return false;
+		}else if (phone && phone.trim().length < 10 || phone.trim().length > 10) {
 			self.validationError(REG_ERROR_MSG_ID, "Mobile number should be atleast 10 digits");
 			$("#register-traineephone").focus();
 			return false;
@@ -464,7 +540,7 @@ function Trainers() {
 		}
 		if (pass != cpass) {
 			self.validationError(REG_ERROR_MSG_ID, "Password and Confirm password not matching.");
-			$("#register-traineepassword").focus();
+			$("#register-traineeconfirmpassword").focus();
 			return false;
 		}
 		$("#reg-validation-error").hide();
@@ -479,27 +555,27 @@ function Trainers() {
 	}
 	
 	self.showForgotPasswordDialogEvent = function() {		
-		$("#register-traineeemailid").val("");		
+		$("#forgot-traineeemailid").val("");		
 		// Hide the error message
-		$("#reg-validation-error").hide();
+		$("#forgot-validation-error").hide();
 		$("#trainee-forgot-password-dialog").modal("show");
 		setTimeout(() => {
-			$("#register-traineeemailid").focus()
+			$("#forgot-traineeemailid").focus()
 		}, 500);
 	}
 	
 	self.validateForgotPassword = function() {		
-		const email = $("#register-traineeemailid").val();		
+		const email = $("#forgot-traineeemailid").val();		
 		if (email == null || email.trim().length == 0) {
 			self.validationError(REG_ERROR_MSG_ID, "Trainee Email id is mandatory");
-			$("#register-traineeemailid").focus();
+			$("#forgot-traineeemailid").focus();
 			return false;
 		} else if (!Utils.validateEmail(email)) {
-			self.validationError(REG_ERROR_MSG_ID, "Trainee Email id is invalid");
-			$("#register-traineeemailid").focus();
+			self.validationError(FORGOT_ERROR_MSG_ID, "Trainee Email id is invalid");
+			$("#forgot-traineeemailid").focus();
 			return false;
 		}		
-		$("#reg-validation-error").hide();
+		$("#forgot-validation-error").hide();
 		return true;
 	}
 

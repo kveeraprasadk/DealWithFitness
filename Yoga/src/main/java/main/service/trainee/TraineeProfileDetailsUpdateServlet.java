@@ -34,7 +34,7 @@ public class TraineeProfileDetailsUpdateServlet extends HttpServlet {
 		String traineeemail=(String)session.getAttribute("traineeemail");
 		
 		String name=(String)request.getParameter("name");			
-		String email=(String)request.getParameter("email");
+	//	String email=(String)request.getParameter("email");
 		String dob=(String)request.getParameter("dob");		
 		String target=(String)request.getParameter("target");
 		String ailment=(String)request.getParameter("ailment");
@@ -42,7 +42,7 @@ public class TraineeProfileDetailsUpdateServlet extends HttpServlet {
 		String city=(String)request.getParameter("city");
 		String phone=(String)request.getParameter("phone");
 		
-		System.out.println("name::"+traineeemail+email);
+		System.out.println("name::"+traineeemail);
 		Connection con = null;
       
       try
@@ -58,7 +58,7 @@ public class TraineeProfileDetailsUpdateServlet extends HttpServlet {
           statement.setString(5, state);
           statement.setString(6, city);
           statement.setString(7, phone);
-          statement.setString(8, email);
+          statement.setString(8, traineeemail);
                                
           int i= statement.executeUpdate();
           

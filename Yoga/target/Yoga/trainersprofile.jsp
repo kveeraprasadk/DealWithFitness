@@ -32,26 +32,28 @@
 <link href="lib/owlcarousel/assets/owl.carousel.min.css"
 	rel="stylesheet">
 <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
-
+<link rel="stylesheet" href="profile/css/bootstrap.min.css">
 <link rel="shortcut icon" href="profile/images/fav.jpg">
 <link rel="stylesheet" href="profile/css/fontawsom-all.min.css">
 <link rel="stylesheet" type="text/css" href="profile/css/style.css" />
-
+<link rel="stylesheet" type="text/css" href="./css/common.css" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.js"></script>
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"
 	defer></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <!-- JavaScript Libraries -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+		
 	<script src="lib/easing/easing.min.js"></script>
 	<script src="lib/wow/wow.min.js"></script>
 	<script src="lib/owlcarousel/owl.carousel.min.js"></script>
@@ -66,6 +68,7 @@
 	<!-- Template Javascript -->
 	<script src="js/main.js"></script>
 	<script src="js/TrainerProfile.js"></script>
+	<script src="profile/js/jquery-3.2.1.min.js"></script>
 	<script src="profile/js/popper.min.js"></script>
 	<script src="profile/js/bootstrap.min.js"></script>
 	<script src="profile/js/script.js"></script>
@@ -85,7 +88,9 @@
 	padding: 0;
 	background: none;
 }
-
+.error {
+	color: #FF0000 !important;
+}
 </style>
 <style>
 /* The Modal (background) */
@@ -96,7 +101,7 @@
   left: 395px;
   top: 90px;
   width: 40%; /* Full width */
-  height: 80%; /* Full height */
+  height: 90%; /* Full height */
 
   padding-top: 50px;
 }
@@ -273,30 +278,34 @@ hr {
 			%>
 			<div class="row">
 				<div class="col-lg-8 col-md-7 detail-px no-padding">
-				<form action="" id="trainerprofileupdateform" name="trainerprofileupdateform">
 					<h3 class="mth3">Profile</h3>
+					<div class="right">
+						<button class="btn btn-info editprofileicon">
+							<i class="fa fa-edit blue-color " ></i>
+							<span style="font-size: 14px">Edit Profile</span>
+						</button>
+					</div>
 					<input type="hidden" id="trainer-profile-base64-encoded-element"
 						value="<%=trainerdetails.getBase64Image()%>" />
+					<form role="form" id="trainerprofileupdateform" name="trainerprofileupdateform" class="trainerprofileupdateform">
+					<div class="fx-ro">
+						<div class="dat col-lg-4">Trainer Email</div>
+						<div class="dat col-lg-8">
+							<b id="trainer-id"><%=trainerdetails.getEmail()%></b>
+						</div>
+					</div>
 					<div class="fx-ro">
 						<div class="dat col-lg-4">Trainer Name</div>
 						<div class="dat col-lg-8">
 						<input type="text" name="formname"
-									class="form-name form-control" id="form-name"
+									class="form-name form-control" id="formname"
 									value="<%=trainerdetails.getName()%>" required>
-						</div>
-					</div>
-					<div class="fx-ro">
-						<div class="dat col-lg-4">Trainer Email</div>
-						<div class="dat col-lg-8">
-							<input type="text" name="formemail"
-									class="form-email form-control" id="form-email"
-									value="<%=trainerdetails.getEmail()%>" disabled required>							
 						</div>
 					</div>
 					<div class="fx-ro">
 						<div class="dat col-lg-4">Experience</div>
 						<div class="dat col-lg-8">
-							<select name="formexperience" id="form-experience"
+							<select name="formexperience" id="formexperience"
 									class="form-control required" onfocus='this.size=5;'
 									onblur='this.size=1;' onchange='this.size=1; this.blur();'
 									required>
@@ -309,12 +318,11 @@ hr {
 								</select>						
 						</div>
 					</div>
-					
 					<div class="fx-ro">
 						<div class="dat col-lg-4">Qualification</div>
 						<div class="dat col-lg-8">
 							<input type="text" name="formqualification"
-									class="form-qualification form-control" id="form-qualification"
+									class="form-qualification form-control" id="formqualification"
 									value="<%=trainerdetails.getQualification()%>" required>							
 						</div>
 					</div>
@@ -322,30 +330,38 @@ hr {
 						<div class="dat col-lg-4">Phone Number</div>
 						<div class="dat col-lg-8">
 							<input type="text" name="formphone"
-									class="form-phone form-control" id="form-phone"
+									class="form-phone form-control" id="formphone"
 									value="<%=trainerdetails.getPhoneno()%>" required>							
 						</div>
 					</div>
 					<div class="fx-ro">
 						<div class="dat col-lg-4">Expertise</div>
 						<div class="dat col-lg-8">
-							<select name="formexpertise" id="form-expertise"
-									class="form-control required" onfocus='this.size=5;'
-									onblur='this.size=1;' onchange='this.size=1; this.blur();'
+							<select name="formexpertise" id="formexpertise"
+									class="form-control required" 
 									required>
-									<option value="<%=trainerdetails.getExpertise()%>"><%=trainerdetails.getExpertise()%></option>
-									<option value="Yoga for health">Yoga for health</option>
-									<option value="Weight Loss">Weight Loss</option>
-									<option value="Kids Yoga">Kids Yoga</option>
-									<option value="Pregnancy Yoga">Pregnancy Yoga</option>
-									<option value="Meditation">Meditation</option>
+												<option value="<%=trainerdetails.getExpertise()%>"><%=trainerdetails.getExpertise()%></option>
+												<optgroup label="Yoga">
+													<option value="Yoga for health">Yoga for health</option>
+													<option value="Weight Loss">Weight Loss</option>
+													<option value="Kids Yoga">Kids Yoga</option>
+													<option value="Pregnancy Yoga">Pregnancy Yoga</option>
+													<option value="Meditation">Meditation</option>
+												</optgroup>
+												<optgroup label="Dance Group">
+													<option value="Tomcat v7.0 Server at localhost">Dance</option>
+													<option value="Zumba">Zumba</option>
+												</optgroup>
+												<option value="Weight / Body weight Workout">Weight
+													/ Body weight Workout</option>
+												<option value="Nutrition">Nutrition</option>
 								</select>						
 						</div>
-					</div>					
+					</div>	
 					<div class="fx-ro">
 						<div class="dat col-lg-4">About Trainer</div>
 						<div class="dat col-lg-8">
-							<textarea class="form-control" id="form-aboutself"
+							<textarea class="form-control" id="formaboutself"
 									name="formaboutself" placeholder="About Yourself.." required><%=trainerdetails.getAboutyourself()%></textarea>							
 						</div>
 					</div>
@@ -353,7 +369,7 @@ hr {
 						<div class="dat col-lg-4"></div>
 						<div class="dat col-lg-8">
 							<button type="submit" class="btn btn-primary"
-									name="updatebutton" id="updatebutton">Update</button>
+									name="updatebutton" id="updatebutton"><i class="fa fa-edit blue-color " ></i>&nbsp Update</button>
 						</div>
 					</div>
 					</form>
@@ -367,7 +383,7 @@ hr {
 							if (trainerdetails.getCertificate1filename().length() > 3) {
 							%>
 							
-							<a class="downloadReport btn btn-info" target="_blank" href="http://localhost:8080/Yoga/AdminCertificate1DownloadServlet?user=<%=trainerdetails.getEmail() %>,<%=trainerdetails.getCertificate1filename() %>">Download</a>
+							<a class="downloadReport btn btn-info" target="_blank" href="http://localhost:8080/Yoga/AdminCertificate1DownloadServlet?user=<%=trainerdetails.getEmail() %>,<%=trainerdetails.getCertificate1filename() %>"><i class="fa fa-download blue-color " ></i>&nbspDownload</a>
 							<%
 							}
 							%>
@@ -377,7 +393,7 @@ hr {
 							<%
 							if (trainerdetails.getCertificate2filename().length() > 3) {
 							%>
-							<a class="downloadReport btn btn-info" target="_blank" href="http://localhost:8080/Yoga/AdminCertificate2DownloadServlet?user=<%=trainerdetails.getEmail() %>,<%=trainerdetails.getCertificate2filename() %>">Download</a>
+							<a class="downloadReport btn btn-info" target="_blank" href="http://localhost:8080/Yoga/AdminCertificate2DownloadServlet?user=<%=trainerdetails.getEmail() %>,<%=trainerdetails.getCertificate2filename() %>"><i class="fa fa-download blue-color " ></i>&nbspDownload</a>
 							<%
 							System.out.println("tt::" + trainerdetails.getCertificate2filename().length());
 							}
@@ -388,7 +404,7 @@ hr {
 							<%
 							if (trainerdetails.getCertificate3filename().length() > 3) {
 							%>
-							<a class="downloadReport btn btn-info" target="_blank" href="http://localhost:8080/Yoga/AdminCertificate3DownloadServlet?user=<%=trainerdetails.getEmail() %>,<%=trainerdetails.getCertificate3filename() %>">Download</a>
+							<a class="downloadReport btn btn-info" target="_blank" href="http://localhost:8080/Yoga/AdminCertificate3DownloadServlet?user=<%=trainerdetails.getEmail() %>,<%=trainerdetails.getCertificate3filename() %>"><i class="fa fa-download blue-color " ></i>&nbspDownload</a>
 							<%
 							}
 							%>
@@ -397,21 +413,16 @@ hr {
 
 				</div>
 
-				<div
-					class="col-lg-4 col-md-5 leftgh flex-column flex-halign-center flex-valign-center">
+				<div class="col-lg-4 col-md-5 leftgh flex-column flex-halign-center flex-valign-center">
 
 					<a onclick="document.getElementById('id01').style.display='block'"
 						href="#" title="Profile Picture Update" data-toggle="popover"
 						data-placement="bottom">
 						<div class="bh-img">
-
 							<img id="profile-image-element" alt="">
 							<!-- 	<span class="glyphicon glyphicon-camera"></span>  -->
-
 						</div>
 					</a>
-
-
 
 
 
@@ -460,7 +471,7 @@ hr {
 			reader.readAsDataURL(event.target.files[0]);
 		}
 	</script>
-					<script>
+<script>
 // Get the modal
 var modal = document.getElementById('id01');
 
@@ -481,70 +492,13 @@ window.onclick = function(event) {
 						<p><%=trainerdetails.getEmail()%>
 							<br>
 						</p>
-<!-- 						<p> -->
-<!-- 							<button class="btn btn-info trainereditprofile">Edit -->
-<!-- 								Profile</button> -->
-<!-- 						</p> -->
-<!-- 						<div id="editprofilehide"> -->
-
-<!-- 							<p> -->
-<!-- 								<input type="text" name="form-name" -->
-<!-- 									class="form-name form-control" id="form-name" -->
-<%-- 									value="<%=trainerdetails.getName()%>" required> --%>
-<!-- 							</p> -->
-<!-- 							<p> -->
-<!-- 								<input type="text" name="form-qualification" -->
-<!-- 									class="form-qualification form-control" id="form-qualification" -->
-<%-- 									value="<%=trainerdetails.getQualification()%>" required> --%>
-<!-- 							</p> -->
-<!-- 							<p> -->
-<!-- 								<select name="form-experience" id="form-experience" -->
-<!-- 									class="form-control required" onfocus='this.size=5;' -->
-<!-- 									onblur='this.size=1;' onchange='this.size=1; this.blur();' -->
-<!-- 									required> -->
-<%-- 									<option value="<%=trainerdetails.getExperience()%>"><%=trainerdetails.getExperience()%></option> --%>
-<!-- 									<option value="upto 2Yr">upto 2Yr</option> -->
-<!-- 									<option value="2 to 5Yrs">2 to 5Yrs</option> -->
-<!-- 									<option value="5 to 10Yrs">5 to 10Yrs</option> -->
-<!-- 									<option value="10 to 20Yrs">10 to 20Yrs</option> -->
-<!-- 									<option value="Above 20Yrs">Above 20Yrs</option> -->
-<!-- 								</select> -->
-<!-- 							</p> -->
-<!-- 							<p> -->
-<!-- 								<input type="text" name="form-phone" -->
-<!-- 									class="form-phone form-control" id="form-phone" -->
-<%-- 									value="<%=trainerdetails.getPhoneno()%>" required> --%>
-<!-- 							</p> -->
-<!-- 							<p> -->
-<!-- 								<select name="form-expertise" id="form-expertise" -->
-<!-- 									class="form-control required" onfocus='this.size=5;' -->
-<!-- 									onblur='this.size=1;' onchange='this.size=1; this.blur();' -->
-<!-- 									required> -->
-<%-- 									<option value="<%=trainerdetails.getExpertise()%>"><%=trainerdetails.getExpertise()%></option> --%>
-<!-- 									<option value="Yoga for health">Yoga for health</option> -->
-<!-- 									<option value="Weight Loss">Weight Loss</option> -->
-<!-- 									<option value="Kids Yoga">Kids Yoga</option> -->
-<!-- 									<option value="Pregnancy Yoga">Pregnancy Yoga</option> -->
-<!-- 									<option value="Meditation">Meditation</option> -->
-<!-- 								</select> -->
-<!-- 							</p> -->
-<!-- 							<p> -->
-<!-- 								<textarea class="form-control" id="form-aboutself" -->
-<%-- 									name="form-aboutself" placeholder="About Yourself.." required><%=trainerdetails.getAboutyourself()%></textarea> --%>
-<!-- 							</p> -->
-<!-- 							<p> -->
-<!-- 								<button type="button" class="btn btn-primary" -->
-<!-- 									name="updatebutton" id="updatebutton">Update</button> -->
-<!-- 							</p> -->
-<!-- 						</div> -->
-<!-- 						<div id="updatesuccess"></div> -->
 						<%
 						}
 						}
 						%>
 						<form id="trainerppchangepassword" name="trainerppchangepassword">
 							<p>
-								<button class="btn btn-info trainerchangepassword">Change
+								<button class="btn btn-info trainerchangepassword"><i class="fa fa-key" aria-hidden="true"></i>&nbspChange
 									Password</button>
 							</p>
 							<div id="changepasswordhide">
@@ -619,8 +573,7 @@ window.onclick = function(event) {
 		$(document).ready(function() {
 			$('#editprofilehide').hide();
 			$('#changepasswordhide').hide();
-			$('#addmoreclass2').hide();
-			$('#addmoreclass3').hide();
+			$('#updatebutton').hide();
 
 			$(".trainereditprofile").click(function() {
 				$('#editprofilehide').toggle();
@@ -628,118 +581,12 @@ window.onclick = function(event) {
 			$(".trainerchangepassword").click(function() {
 				$('#changepasswordhide').toggle();
 			});
-			$("#addclass2").click(function() {
-				$('#addmoreclass2').show();
-				$('#addclass2').hide();
-				$('#addclass3').show();
-			});
-			$("#addclass3").click(function() {
-				$('#addmoreclass3').show();
-				$('#addclass3').hide();
+			$(".editprofileicon").click(function() {
+				$('#updatebutton').toggle();
 			});
 		});
 	</script>
-	<script type="text/javascript">
-		$(document)
-				.ready(
-						function() {
-							$("#updatebutton")
-									.click(
-											function() {
-
-												event.preventDefault();
-												var name = $("#form-name")
-														.val();
-												var exper = $(
-														"#form-experience")
-														.val();
-												var qua = $(
-														"#form-qualification")
-														.val();
-												var phone = $("#form-phone")
-														.val();
-
-												var exp = $("#form-expertise")
-														.val();
-
-												var message = $(
-														"#form-aboutself")
-														.val();
-
-												$
-														.ajax({
-															url : "TrainerProfileDetailsUpdateServlet",
-															type : "POST",
-															data : {
-																name : name,
-																experience : exper,
-																qualification : qua,
-																phone : phone,
-																expertise : exp,
-																aboutyourself : message
-															},
-															cache : false,
-
-															success : function(
-																	data) {
-
-																$(
-																		'#updatesuccess')
-																		.html(
-																				"<div class='alert alert-success'>");
-																$(
-																		'#updatesuccess > .alert-success')
-																		.html(
-																				"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-																		.append(
-																				"</button>");
-																$(
-																		'#updatesuccess > .alert-success')
-																		.append(
-																				"<strong>"
-																						+ data
-																						+ ". </strong>");
-																$(
-																		'#updatesuccess > .alert-success')
-																		.append(
-																				'</div>');
-																$(
-																		'#editprofilehide')
-																		.hide();
-																document.location.href = './TrainerProfile';
-															},
-															error : function() {
-																$(
-																		'#updatesuccess')
-																		.html(
-																				"<div class='alert alert-danger'>");
-																$(
-																		'#updatesuccess > .alert-danger')
-																		.html(
-																				"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-																		.append(
-																				"</button>");
-																$(
-																		'#updatesuccess > .alert-danger')
-																		.append(
-																				$(
-																						"<strong>")
-																						.text(
-																								"Sorry "
-																										+ name
-																										+ ", update failed. Please try again later!"));
-																$(
-																		'#updatesuccess > .alert-danger')
-																		.append(
-																				'</div>');
-
-															}
-
-														});
-
-											});
-						});
-	</script>
+	
 	<script type="text/javascript">
 		$(document)
 				.ready(
