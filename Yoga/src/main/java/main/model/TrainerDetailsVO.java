@@ -43,7 +43,17 @@ public class TrainerDetailsVO {
 	private String demo1;
 	private String demo2;
 	private String demo3;
+	private String comment;
+	private String subject;
 	
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+
 	private List<SeriesSchedulesVO> series = new ArrayList<>();
 	
 
@@ -349,6 +359,14 @@ public class TrainerDetailsVO {
 
 	public void setDemo3(String demo3) {
 		this.demo3 = demo3;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 
 	

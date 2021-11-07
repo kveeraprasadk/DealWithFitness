@@ -274,6 +274,12 @@
 		<description></description>
 		<servlet-class>main.service.trainee.TraineeForgotPasswordServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>FeedbackCommentsViewServlet</servlet-name>
+		<display-name>FeedbackCommentsViewServlet</display-name>
+		<description></description>
+		<servlet-class>main.FeedbackCommentsViewServlet</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>TrainerRegisterServlet</servlet-name>
@@ -454,6 +460,10 @@
 	<servlet-mapping>
 		<servlet-name>TraineeForgotPasswordServlet</servlet-name>
 		<url-pattern>/TraineeForgotPasswordServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>FeedbackCommentsViewServlet</servlet-name>
+		<url-pattern>/FeedbackCommentsViewServlet</url-pattern>
 	</servlet-mapping>
 	<listener>
 		<listener-class>main.common.MysqlDatasource</listener-class>
