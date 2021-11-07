@@ -49,8 +49,8 @@ public class TrainerRegisterServlet extends HttpServlet {
 		String qualification = request.getParameter("formqualification");
 		String phoneno = request.getParameter("formphone");
 		String expertise = request.getParameter("formexpertise1");
-		String pass = request.getParameter("formpassword");
-		
+		String pass = request.getParameter("formpassword");	
+		System.out.println("pass:"+pass);
 		String password=null;
 		try {
 			password = EncodeDecodeSHA256.toHexString(EncodeDecodeSHA256.getSHA(pass));
@@ -94,7 +94,7 @@ public class TrainerRegisterServlet extends HttpServlet {
 		 */
 		Date date = new Date();
 		Timestamp ts = new Timestamp(date.getTime());
-		System.out.println("timestamp::" + ts);
+		System.out.println("timestamp::" + password);
 
 		InputStream inputStream = null; // input stream of the upload file
 		InputStream certificate1inputStream = null;
@@ -245,15 +245,15 @@ public class TrainerRegisterServlet extends HttpServlet {
 					// response);
 
 				} else {
-					out.print("Request Failed Plz Try Again ..!");
+//					out.write("Request Failed Plz Try Again ..!");
 					System.out.println("fail");
-					request.setAttribute("message", "Request Sent Successfully");
+					request.setAttribute("success", "Register Failed Plz Try Again ..!");
 					request.getRequestDispatcher("/Trainer.jsp").include(request, response);
 				}
 			} else {
 				System.out.println("Email ID is Already Registered");
-				out.write("<font color='red'><b>Email ID is Already Registered</b></font>");
-				request.setAttribute("message", "Request Sent Successfully");
+	//			out.write("Email ID is Already Registered");
+				request.setAttribute("success", "Email ID is Already Registered");
 				request.getRequestDispatcher("/Trainer.jsp").include(request, response);
 			}
 		} catch (SQLException e) {

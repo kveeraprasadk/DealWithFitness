@@ -399,7 +399,8 @@ label {
 										</button>
 									</form>
 								</div>
-								<div id="success"></div>
+								<div id="regsuccess"></div>
+<%-- 								${success} --%>
 							</div>
 						</div>
 					</div>
@@ -476,31 +477,6 @@ label {
 				$('#form-certificate3').toggle();
 			});
 
-		});
-	</script>
-	<script type="text/javascript">
-		$(document).ready(function() {
-
-			$('#addsch2').hide();
-			$('#addsch3').hide();
-			$('#addsch4').hide();
-			$('#addsch5').hide();
-			$('#addsch6').hide();
-			$("#addbutton1").click(function() {
-				$('#addsch2').show();
-			});
-			$("#addbutton2").click(function() {
-				$('#addsch3').show();
-			});
-			$("#addbutton3").click(function() {
-				$('#addsch4').show();
-			});
-			$("#addbutton4").click(function() {
-				$('#addsch5').show();
-			});
-			$("#addbutton5").click(function() {
-				$('#addsch6').show();
-			});
 		});
 	</script>
 	<script type="text/javascript">
@@ -672,106 +648,48 @@ label {
 
 						});
 	</script>
+ <script type="text/javascript">
+   $(document).ready(function() {	  
+    var frm = $('#trainerregform');
 
-	<!--       
-<script>
-       $(document).on("click", ".trainerregister", function() { // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
+    frm.submit(function (e) {
+
+        e.preventDefault();
+
+        $.ajax({
+            type: frm.attr('method'),
+            url: frm.attr('action'),
+            data: frm.serialize(),
+            success: function (data) {
             	
-            var fname=$('#form-first-name').val();
-       alert(fname);
-            var email=$('#form-email').val();
-            var exp=$('#form-expertise').val();
-            var image=$('#form-image').val();
-            var mfees=$('#form-monthly-fees').val();
-            var l1 = document.getElementById("flexCheckDefaultschms9to11");  
-            var l2 = document.getElementById("flexCheckDefaultschms11to1");  
-            var l3 = document.getElementById("flexCheckDefaultschaf5to7");  
-            var l4 = document.getElementById("flexCheckDefaultschev7to9");  
-                        
-            var res=" ";   
-            if (l1.checked == true){  
-              var pl1 = document.getElementById("flexCheckDefaultschms9to11").value;  
-              res = pl1 + ",";   
-            }   
-            else if (l2.checked == true){  
-              var pl2 = document.getElementById("flexCheckDefaultschms11to1").value;  
-              res = res + pl2 + ",";   
-            }  
-            else if (l3.checked == true){  
-            document.write(res);  
-              var pl3 = document.getElementById("flexCheckDefaultschaf5to7").value;  
-              res = res + pl3 + ",";   
-            }  
-            else if (l4.checked == true){  
-              var pl4 = document.getElementById("flexCheckDefaultschev7to9").value;  
-              res = res + pl4 + ",";   
-            }            
-           else {  
-            return document.getElementById("result").innerHTML = "You have not selected anything";  
-            }  
-            return document.getElementById("result").innerHTML = "You have selected " + res + " languages";  
-            
-       
-       var cl1 = document.getElementById("flexCheckDefaultbegining");  
-       var cl2 = document.getElementById("flexCheckDefaultintermediate");  
-       var cl3 = document.getElementById("flexCheckDefaultadvance");  
-       var cl4 = document.getElementById("flexCheckDefaultalllevel");  
-                   
-       var classres=" ";   
-       if (cl1.checked == true){  
-         var cpl1 = document.getElementById("flexCheckDefaultbegining").value;  
-         classres = cpl1 + ",";   
-       }   
-       else if (cl2.checked == true){  
-         var cpl2 = document.getElementById("flexCheckDefaultintermediate").value;  
-         classres = classres + cpl2 + ",";   
-       }  
-       else if (cl3.checked == true){  
-       document.write(classres);  
-         var cpl3 = document.getElementById("flexCheckDefaultadvance").value;  
-         classres = classres + cpl3 + ",";   
-       }  
-       else if (cl4.checked == true){  
-         var cpl4 = document.getElementById("flexCheckDefaultalllevel").value;  
-         classres = classres + cpl4 + ",";   
-       }            
-      else {  
-       return document.getElementById("classresult").innerHTML = "You have not selected anything";  
-       }  
-       return document.getElementById("classresult").innerHTML = "You have selected " + classres + " languages";  
-     
-  
-                $.post("TrainerRegisterServlet",
-                		{
-                	name : fname,
-                	email: email,
-                	expertise : exp,
-                	monthlyfees : mfees,
-                	schedule : res,
-                	image : image,
-                	classlevel : classres
-                	}, 
-                		function(responseText) {   // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
-                	if(responseText == "Register Success"){
-                		
-                		$('#reqsentsuccmsg').text(responseText);
-                	$("#success-alert").fadeTo(2000, 500).slideUp(500, function() {
-              	      $("#success-alert").slideUp(500);
-                	});
-              	    
+                console.log('Submission was successful.');
+                console.log(data);
+                if(data == "Email ID is Already Registered")
+                	{
+                	$('#regsuccess').html("<div class='alert alert-danger'>");
+					$('#regsuccess > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+									.append("</button>");
+					$('#regsuccess > .alert-danger').append($("<strong>").text(data));
+					$('#regsuccess > .alert-danger').append('</div>');
                 	}else{
-                		
-                		$('#reqsentfailmsg').text("Request Sent Failed");
-                		$("#danger-alert").fadeTo(2000, 500).slideUp(500, function() {
-                    	      $("#danger-alert").slideUp(500);
-                		});
-                	
+                		$('#regsuccess').html("<div class='alert alert-danger'>");
+    					$('#regsuccess > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+    									.append("</button>");
+    					$('#regsuccess > .alert-danger').append($("<strong>").text(data));
+    					$('#regsuccess > .alert-danger').append('</div>');
                 	}
-               
-                });
-            });
-        </script>    
-        -->
+                		
+                
+            },
+            error: function (data) {
+                console.log('An error occurred.');
+                console.log(data);
+            },
+        });
+    });    
+  });
+</script> 
+	
 	<!-- REGISTER PAGE END -->
 
 

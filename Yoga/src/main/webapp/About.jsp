@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@page import="java.util.*"%>
+<%@page import="main.model.TrainerDetailsVO"%>
+<%@ page isELIgnored="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html lang="en">
@@ -55,9 +58,13 @@
 <script>
 	function init() {
 		whoami.detect();
+		$
+		.ajax({
+			type : 'GET',
+			url : "${pageContext.request.contextPath}/FeedbackCommentsViewServlet",
+		});
 	}
-$(document).ready(function(){
-	
+$(document).ready(function(){	
 $('.forgot-progressbar').hide();
 		});
 </script>
@@ -180,12 +187,60 @@ $('.forgot-progressbar').hide();
 							</div>
 						</form>
 					</div>
-				</div>
+				</div>				
+			</div>			
+		</div>
+	</div>
+	<!-- Contact End -->
+	
+	<!-- Feedback view Start -->
+	<div class="about wow fadeInUp" data-wow-delay="0.1s"
+		style="background: white">
+		<div class="container">
+			<div class="row align-items-center">
+				<h4>Feedbacks</h4>
+				<table class="table table-bordered">
+				<tr>
+				<th>Name</th>
+				<th>Subject</th>
+				<th>Comment</th>
+				<th>Time</th>
+				</tr>
+				<%
+				ArrayList<TrainerDetailsVO> comments = (ArrayList<TrainerDetailsVO>) request
+						.getAttribute("CommentListData");
+			%>
+
+
+			<%
+				// Iterating through subjectList
+				if (comments != null && comments.size() > 0) // Null check for the object
+				{
+					Iterator<TrainerDetailsVO> iterator = comments.iterator(); // Iterator interface
+					int inv = 0;
+					for (TrainerDetailsVO commentdetails : comments) // iterate through all the data until the last record
+					{
+						//InvestorExpertNamemodel myinvestordetails = iterator.next(); //assign individual employee record to the employee class object
+						inv++;
+						//	System.out.println("My Investor: "+ traineedetails.getName());
+			%>
+						<tr>
+						<td><%=commentdetails.getName()%></td>
+						<td><%=commentdetails.getSubject()%></td>
+						<td><%=commentdetails.getComment()%></td>
+						<td><%=commentdetails.getCreatetime()%></td>
+						</tr>
+			
+			<%
+							}
+							}
+						%>
+				
+				</table>				
 			</div>
 		</div>
 	</div>
-
-	<!-- Contact End -->
+	<!-- About End -->
 
 
 	<!-- Footer Start -->
