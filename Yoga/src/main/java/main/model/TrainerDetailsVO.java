@@ -44,8 +44,20 @@ public class TrainerDetailsVO {
 	private String demo2;
 	private String demo3;
 	private String comment;
-	private String subject;
+	private String subject;	
+	private String title;
+	private String starttime;
+	private String endtime;
+	private String selecteddays;
 	
+	public String getSelecteddays() {
+		return selecteddays;
+	}
+
+	public void setSelecteddays(String selecteddays) {
+		this.selecteddays = selecteddays;
+	}
+
 	public String getSubject() {
 		return subject;
 	}
@@ -367,6 +379,30 @@ public class TrainerDetailsVO {
 
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getStarttime() {
+		return starttime;
+	}
+
+	public void setStarttime(String starttime) {
+		this.starttime = starttime;
+	}
+
+	public String getEndtime() {
+		return endtime;
+	}
+
+	public void setEndtime(String endtime) {
+		this.endtime = endtime;
 	}
 
 	

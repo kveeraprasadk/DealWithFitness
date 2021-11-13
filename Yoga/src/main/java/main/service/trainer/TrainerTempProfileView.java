@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import main.common.AppUtils;
 import main.common.DBConnection;
 import main.model.TrainerDetailsVO;
 
@@ -63,12 +64,11 @@ public class TrainerTempProfileView extends HttpServlet {
 						details.setCertificate2filename(rs.getString("certificate2filename"));
 						details.setCertificate3filename(rs.getString("certificate3filename"));
 
-						details.setBase64Image(asBlobEncoded(rs.getBlob("photo")));
+						details.setBase64Image(AppUtils.asBlobEncoded(rs.getBlob("photo")));
 
 						System.out.println("list::" + details);
 						// Adding the Student Object to List
-						TrainersList.add(details);
-						
+						TrainersList.add(details);						
 						
 						session.setAttribute("trainername", rs.getString("trainername"));
 						session.setAttribute("trainerexperience", rs.getString("experience"));
@@ -80,7 +80,7 @@ public class TrainerTempProfileView extends HttpServlet {
 						session.setAttribute("trainercertificatefileName1", rs.getString("certificate1filename"));
 						session.setAttribute("trainercertificatefileName2", rs.getString("certificate2filename"));
 						session.setAttribute("trainercertificatefileName3", rs.getString("certificate3filename"));
-						session.setAttribute("trainerprofilepic", asBlobEncoded(rs.getBlob("photo")));
+						session.setAttribute("trainerprofilepic", AppUtils.asBlobEncoded(rs.getBlob("photo")));
 					
 					}
 				//	request.setAttribute("TrainerProfileData", TrainersList);
