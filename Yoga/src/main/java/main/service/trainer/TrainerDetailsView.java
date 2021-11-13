@@ -11,7 +11,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,7 +25,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import main.common.DBConnection;
+import main.model.SeriesSchedulesVO;
 import main.model.TrainerDetailsVO;
+
 
 /**
  * Servlet implementation class TrainerDetailsView
@@ -43,13 +48,16 @@ public class TrainerDetailsView extends HttpServlet {
 		PrintWriter out = response.getWriter();
 
 		List<TrainerDetailsVO> TrainersList = new ArrayList<TrainerDetailsVO>();
+		
+	
 		String traineremail = (String) request.getParameter("trainersemail");
-
+		String userJsonString=null;
 		System.out.println("traineremail2::" + traineremail);
-
+		
 		try (Connection connection = DBConnection.createConnection()) {
-			try (PreparedStatement statement = connection
-					.prepareStatement("select * from trainerregister where traineremail=?")) {
+		try (PreparedStatement statement = connection.prepareStatement("select * from trainerregister where traineremail=?")) 
+	//		try (PreparedStatement statement = connection.prepareStatement("select tr.trainername,tr.traineremail,tr.experience,tr.qualification,tr.aboutyourself,tr.photoname,tr.photo,tr.certificate1filename,tr.certificate2filename,tr.certificate3filename,ss.title,ss.starttime,ss.endtime,ss.endByDate,ss.selectedDayNames,ss.trainerpreference,ss.fee,ss.classlevel,ss.expertise,ss.democlass from trainerregister tr,schedulesseries ss where tr.traineremail=ss.traineremail and tr.traineremail=?")) 
+			{
 				statement.setString(1, traineremail);
 				try (ResultSet rs = statement.executeQuery()) {
 
@@ -66,7 +74,14 @@ public class TrainerDetailsView extends HttpServlet {
 						details.setCertificate1filename(rs.getString("certificate1filename"));
 						details.setCertificate2filename(rs.getString("certificate2filename"));
 						details.setCertificate3filename(rs.getString("certificate3filename"));
-
+						
+//						details.setTitle(rs.getString("title"));
+//						details.setStarttime(rs.getString("starttime"));
+//						details.setEndtime(rs.getString("endtime"));
+//						details.setSelecteddays(rs.getString("selectedDayNames"));
+//						details.setMonthlyfees(rs.getString("fee"));
+//						details.setClasslevel(rs.getString("classlevel"));
+	
 						Blob blob = rs.getBlob("photo");
 
 						InputStream inputStream = blob.getBinaryStream();
@@ -87,16 +102,21 @@ public class TrainerDetailsView extends HttpServlet {
 						outputStream.close();
 
 						TrainersList.add(details);
-
-						String userJsonString = this.gson.toJson(TrainersList);
+					
+//						System.out.println(rs.getString("title"));
+						userJsonString = this.gson.toJson(TrainersList);
 						out.write(userJsonString);
 					}
 				}
-			}
-		} catch (SQLException e) {
+				
+			 }	
+		  }
+		
+		catch(SQLException e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 			throw new IllegalArgumentException(e);
 		}
 	}
 }
+

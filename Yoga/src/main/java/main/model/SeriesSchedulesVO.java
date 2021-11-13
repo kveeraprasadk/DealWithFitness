@@ -23,6 +23,8 @@ public class SeriesSchedulesVO {
 	private List<String> selectedDayNames;
 	private TrainerDetailsVO trainer;
 	private String expertise;
+	private String ssexpertise;
+	private String ssclassLevel;
 	private boolean demoClass;
 	
 	public String getExpertise() {
@@ -217,5 +219,21 @@ public class SeriesSchedulesVO {
 		public void setEnd(long end) {
 			this.end = end;
 		}
+	}
+
+	public String getSsexpertise() {
+		return ssexpertise;
+	}
+
+	public void setSsexpertise(String ssexpertise) {
+		this.ssexpertise = ssexpertise;
+	}
+
+	public String getSsclassLevel() {
+		return ssclassLevel;
+	}
+
+	public void setSsclassLevel(String ssclassLevel) {
+		this.ssclassLevel = ssclassLevel;
 	}
 }

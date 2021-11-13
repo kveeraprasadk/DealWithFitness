@@ -60,28 +60,34 @@
 <script src="profile/js/popper.min.js"></script>
 <script src="profile/js/bootstrap.min.js"></script>
 <script src="profile/js/script.js"></script> 
+  <script src="./dist/whoami.js"></script>     
         <!-- Template Stylesheet -->
-        <link href="css/style.css" rel="stylesheet">
+<script src="./dist/external/tui-code-snippet.min.js"></script>
+<script src="./dist/external/moment.min.js"></script>
+<script src="./dist/external/tui-calendar.min.js"></script>
+<script src="./dist/utils.js"></script>
+<script src="./dist/dialogs.js"></script>
+<script src="./dist/trainer-booking.js"></script>
+
+<link rel="stylesheet" type="text/css"
+	href="./css/external/tui-date-picker.css">
+<link rel="stylesheet" type="text/css"
+	href="./css/external/tui-time-picker.css">
+<link rel="stylesheet" type="text/css"
+	href="./css/external/tui-calendar.min.css">
+<link href="css/style.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="./css/bookings.css">
+<link rel="stylesheet" type="text/css" href="./css/icons.css">
+<link rel="stylesheet" type="text/css" href="./css/common.css">
+<link href="css/common.css" rel="stylesheet">
+
         <script type="text/javascript">
 	var calendarInitialized = false;
 
-	function switchView(viewName) {
-		$("#profile-container").css("display",
-				viewName === "profile" ? "block" : "none");
-		if (viewName === "calendar") {
-			$("#calendar-container").css("display", "block");
-			// Very first time do a lazy init
-			if (!calendarInitialized) {
-				trainerCalendar.init();
-				calendarInitialized = true;
-			}
-		} else {
-			$("#calendar-container").css("display", "none");
-		}
-	}
+	
 
 	function renderTrainerProfile() {
-		switchView("calendar");
+		
 		whoami.detect(()=> {
 			const image = $("#trainer-profile-base64-encoded-element").val();
 			if (image) {
@@ -94,6 +100,7 @@
 		})
 	}
 </script>
+
 <style type="text/css">
 .error {
 	color: #FF0000 !important;
@@ -101,7 +108,7 @@
 </style>
     </head>
 
-    <body >
+    <body onLoad="renderTrainerProfile()">
    
         <!-- Nav Bar Start -->
         <div class="navbar navbar-expand-lg bg-dark navbar-dark">
@@ -163,7 +170,7 @@
 						</button>
 					</div>
 					<input type="hidden" id="trainer-profile-base64-encoded-element"
-						value="${trainerprofilephoto }" />
+						value="${trainerprofilepic }" />
 					<form role="form" id="trainerprofileupdateform" name="trainerprofileupdateform" class="trainerprofileupdateform">
 					<div class="fx-ro">
 						<div class="dat col-lg-4">Trainer Email</div>
@@ -268,12 +275,12 @@
                <div
 					class="col-lg-4 col-md-5 leftgh flex-column flex-halign-center flex-valign-center">
 
-                    <div class="img-box">
-                         <img src="profile/images/gallery/gallery_12.jpg" alt="">   
-                    </div>
-<!--                     <div class="bh-img"> -->
-<!-- 							<img id="profile-image-element" alt=""> -->
-<!-- 					</div> -->
+<!--                     <div class="img-box"> -->
+<!--                          <img src="profile/images/gallery/gallery_12.jpg" alt="">    -->
+<!--                     </div> -->
+                    <div class="bh-img">
+							<img id="profile-image-element" alt="">
+					</div>
                     <div class="name-det">                        
                    
                      <h2><div class="tname"></div></h2>

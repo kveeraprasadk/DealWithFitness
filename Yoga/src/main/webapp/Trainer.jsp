@@ -363,6 +363,7 @@ label {
 												onchange="preview_image(event)" required> <img
 												id="output_image" />
 										</div>
+										
 										<div class="form-group">
 											<strong>Upload Certificates</strong>
 											<div class="row">
@@ -420,7 +421,7 @@ label {
 								very important to us. Your data will not be shared with any
 								third party. We will soon reach out to you for your consent that
 								will be used by us solely for the purpose of communicating
-								information that supports you with the yogic practices learned
+								information that supports you with the yoga practices learned
 
 								from us, any upcoming events in Yoga and special offers €”if
 

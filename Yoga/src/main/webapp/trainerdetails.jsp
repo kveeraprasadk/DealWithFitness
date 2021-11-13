@@ -101,9 +101,9 @@
 	<script type="text/javascript">
 		$(document).ready(
 				function() {
-					$("#book1").hide();
-					$("#book2").hide();
-					$("#book3").hide();
+// 					$("#book1").hide();
+// 					$("#book2").hide();
+// 					$("#book3").hide();
 					var globalarray = [];
 					var arrLinks = [];
 					arrLinks = JSON.parse(window.localStorage
@@ -111,24 +111,26 @@
 					/* console.log(arrLinks); */
 					var i = 1;
 					console.log("Start");
-					console.log(arrLinks[0]);
+					console.log(arrLinks.length);
+					console.log("0:"+arrLinks[0]);
 					let details = JSON.parse(arrLinks[0]);
-					console.log(details[0].name);
+// 					console.log("1:"+details[1]);
+// 					console.log("2:"+details[2]);
 					$(".tname").html(details[0].name);
 					$(".texperience").html(details[0].experience);
 					$(".tqualification").html(details[0].qualification);
 					$(".texpertise").html(details[0].expertise);
 					$(".tmonthlyfees").html(details[0].monthlyfees);
-					$(".tschedules").html(details[0].schedule);
+// 					$(".tschedules").html(details[0].schedule);
 					$(".tclasslevel").html(details[0].classlevel);
-					$(".texpertise2").html(details[0].expertise2);
-					$(".tmonthlyfees2").html(details[0].monthlyfees2);
-					$(".tschedules2").html(details[0].schedule2);
-					$(".tclasslevel2").html(details[0].classlevel2);
-					$(".texpertise3").html(details[0].expertise3);
-					$(".tmonthlyfees3").html(details[0].monthlyfees3);
-					$(".tschedules3").html(details[0].schedule3);
-					$(".tclasslevel3").html(details[0].classlevel3);
+// 					$(".texpertise2").html(details[0].expertise2);
+// 					$(".tmonthlyfees2").html(details[0].monthlyfees2);
+// 					$(".tschedules2").html(details[0].schedule2);
+// 					$(".tclasslevel2").html(details[0].classlevel2);
+// 					$(".texpertise3").html(details[0].expertise3);
+// 					$(".tmonthlyfees3").html(details[0].monthlyfees3);
+// 					$(".tschedules3").html(details[0].schedule3);
+// 					$(".tclasslevel3").html(details[0].classlevel3);
 					$(".taboutyourself").html(details[0].aboutyourself);
 					$(".tcertificate1filename").html(
 							details[0].certificate1filename);
@@ -153,16 +155,15 @@
 						console.log("No profile picture");
 						$("#profile-image-element").show();
 					}
-
-					if (details[0].expertise.length > 5) {
-						$("#book1").show();
-					}
-					if (details[0].expertise2.length > 5) {
-						$("#book2").show();
-					}
-					if (details[0].expertise3.length > 5) {
-						$("#book3").show();
-					}
+// 					if (details[0].expertise.length > 5) {
+// 						$("#book1").show();
+// 					}
+// 					if (details[0].expertise2.length > 5) {
+// 						$("#book2").show();
+// 					}
+// 					if (details[0].expertise3.length > 5) {
+// 						$("#book3").show();
+// 					}
 					/*    $.each(arrLinks, function(index, value){
 					 $(".profile"+i).html(value);
 					 console.log(".profile"+index);
@@ -199,22 +200,39 @@
 					<div class="fx-ro">
 						Expertise : <b><div class="texpertise"></div></b>
 					</div>
-
 					<h3>About Trainer</h3>
 					<p>
 						<b><div class="taboutyourself"></div></b>
 					</p>
 
-					<h3 class="mth3">Certificates</h3>
+					<h3 class="mth3">Schedules</h3>
 
-					<ul class="exrts">
-						<li><div class="tcertificate1filename"></div></li>
-						<li></li>
-						<li><div class="tcertificate2filename"></div></li>
-						<li></li>
-						<li><div class="tcertificate3filename"></div></li>
-						<li></li>
-					</ul>
+					<table class="table table-bordered">
+				<tr>
+				<th>Title</th>
+				<th>Expertise</th>
+				<th>classlevel</th>				
+				<th>StartTime</th>
+				<th>EndTime</th>
+				<th>Fees</th>
+				<th></th>
+				</tr>
+				<tr>
+				<td>title1</td>
+				<td>title1</td>
+				<td>title1</td>
+				<td>title1</td>
+				<td>title1</td>
+				<td>title1</td>
+				<td>
+				<button class="btn btn-primary bookbutton" trainerId="{email}" seriesId="{id}" 
+								data-toggle="modal" title="{title}" attendee="{attendeeClass}" 
+								onclick="trainers.bookScheduleEvent(event)">
+								Book
+							</button>
+				</td>
+				</tr>
+				</table>
 
 				</div>
 				<div

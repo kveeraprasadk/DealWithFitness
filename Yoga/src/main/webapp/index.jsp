@@ -104,7 +104,7 @@ label {
 </head>
 
 <body onload="trainers.init()">
-	<!-- These are trainer detail tmplates used by trainer.js to render the trainer related details -->
+	<!-- These are trainer detail templates used by trainer.js to render the trainer related details -->
 	<%
 	int i = 0;
 	%>
