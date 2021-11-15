@@ -377,88 +377,88 @@ if(trainerslist != null && trainerslist.size() >0)  // Null check for the object
 	
       
 
-      <section class="section Modify-details" data-section="section4">
-        <div class="container">
-          <div class="section-heading">
-            <h2>Modify Details</h2>
-            <div class="line-dec"></div>
-            <span>
-            Please modify the values whatever you want to change in Trainers and Trainees profiles.<br>
-            <b>! important :</b>Email id can't be modify.
-              </span>
-          </div>
-          <div class="row">
-            <div class="right-content">
-              <div class="container">
-                <form id="contact" action="" method="">
-                  <div class="row">
-                    <div class="col-md-6">
+<!--       <section class="section Modify-details" data-section="section4"> -->
+<!--         <div class="container"> -->
+<!--           <div class="section-heading"> -->
+<!--             <h2>Modify Details</h2> -->
+<!--             <div class="line-dec"></div> -->
+<!--             <span> -->
+<!--             Please modify the values whatever you want to change in Trainers and Trainees profiles.<br> -->
+<!--             <b>! important :</b>Email id can't be modify. -->
+<!--               </span> -->
+<!--           </div> -->
+<!--           <div class="row"> -->
+<!--             <div class="right-content"> -->
+<!--               <div class="container"> -->
+<!--                 <form id="contact" action="" method=""> -->
+<!--                   <div class="row"> -->
+<!--                     <div class="col-md-6"> -->
                     
-                      <fieldset>
-                        <input
-                          name="name"
-                          type="text"
-                          class="form-control"
-                          id="name"
-                          placeholder="Your name..."
-                          required=""
-                        />
-                      </fieldset>
-                    </div>
-                    <div class="col-md-6">
-                      <fieldset>
-                        <input
-                          name="email"
-                          type="text"
-                          class="form-control"
-                          id="email"
-                          placeholder="Your email..."
-                          disabled="disabled"
-                        />
-                      </fieldset>
-                    </div>
-                    <div class="col-md-12">
-                      <fieldset>
-                        <input
-                          name="expertise"
-                          type="text"
-                          class="form-control"
-                          id="expertise"
-                          placeholder="Your expertise..."
-                          required=""
-                        />
-                      </fieldset>
-                    </div>
+<!--                       <fieldset> -->
+<!--                         <input -->
+<!--                           name="name" -->
+<!--                           type="text" -->
+<!--                           class="form-control" -->
+<!--                           id="name" -->
+<!--                           placeholder="Your name..." -->
+<!--                           required="" -->
+<!--                         /> -->
+<!--                       </fieldset> -->
+<!--                     </div> -->
+<!--                     <div class="col-md-6"> -->
+<!--                       <fieldset> -->
+<!--                         <input -->
+<!--                           name="email" -->
+<!--                           type="text" -->
+<!--                           class="form-control" -->
+<!--                           id="email" -->
+<!--                           placeholder="Your email..." -->
+<!--                           disabled="disabled" -->
+<!--                         /> -->
+<!--                       </fieldset> -->
+<!--                     </div> -->
+<!--                     <div class="col-md-12"> -->
+<!--                       <fieldset> -->
+<!--                         <input -->
+<!--                           name="expertise" -->
+<!--                           type="text" -->
+<!--                           class="form-control" -->
+<!--                           id="expertise" -->
+<!--                           placeholder="Your expertise..." -->
+<!--                           required="" -->
+<!--                         /> -->
+<!--                       </fieldset> -->
+<!--                     </div> -->
                    
                    
                     
-                    <div class="col-md-12">
-                      <fieldset>
-                        <textarea
-                          name="message"
-                          rows="6"
-                          class="form-control"
-                          id="message"
-                          placeholder="About yourself..."
-                          required=""
-                        ></textarea>
-                      </fieldset>
-                    </div>
-                    <div class="col-md-12">
-                      <fieldset>
-                        <button type="submit" id="form-submit" class="button">
-                          Update
-                        </button>
-                      </fieldset>
-                    </div>
-                    <div id="success"></div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+<!--                     <div class="col-md-12"> -->
+<!--                       <fieldset> -->
+<!--                         <textarea -->
+<!--                           name="message" -->
+<!--                           rows="6" -->
+<!--                           class="form-control" -->
+<!--                           id="message" -->
+<!--                           placeholder="About yourself..." -->
+<!--                           required="" -->
+<!--                         ></textarea> -->
+<!--                       </fieldset> -->
+<!--                     </div> -->
+<!--                     <div class="col-md-12"> -->
+<!--                       <fieldset> -->
+<!--                         <button type="submit" id="form-submit" class="button"> -->
+<!--                           Update -->
+<!--                         </button> -->
+<!--                       </fieldset> -->
+<!--                     </div> -->
+<!--                     <div id="success"></div> -->
+<!--                   </div> -->
+<!--                 </form> -->
+<!--               </div> -->
+<!--             </div> -->
+<!--           </div> -->
+<!--         </div> -->
+<!--       </section> -->
     </div>
         <!-- About End -->
        

@@ -32,6 +32,32 @@ function Journey() {
 			});
 		})
 	}
+	
+	self.trainerinit = function() {
+		var inputs = document.getElementsByClassName('photo-trigger-button');
+		for (const inp of inputs) {
+			self.clearFileSelection(inp);
+		}
+
+		$(inputs).on('change', (event) => {
+			const input = event.target;
+			const fileName = input.files[0].name;
+
+//			if (!self.isSupportedFiles(fileName)) {
+//				alertDialog.show("Validation Error", "Please choose supported image formats " + SUPPORTED_IMAGE_FORMATES_STRING);
+//				self.clearFileSelection();
+//			} else {
+				if (input.files && input.files[0]) {
+					document.getElementById(input.id + "-lbl").innerText = fileName;
+					var reader = new FileReader();
+					reader.onload = function(e) {
+						$("#" + input.id + "-img").attr('src', e.target.result);
+					};
+					reader.readAsDataURL(input.files[0]);
+//				}
+			}
+		});
+	}
 
 	self.isSupportedFiles = function(fileName) {
 		for (const ext of SUPPORTED_IMAGE_FORMATES) {
@@ -48,7 +74,7 @@ function Journey() {
 		inputType.type = "file";
 	}
 
-	self.associateEvents = function() {
+self.associateEvents = function() {
 		var inputs = document.getElementsByClassName('photo-trigger-button');
 		for (const inp of inputs) {
 			self.clearFileSelection(inp);

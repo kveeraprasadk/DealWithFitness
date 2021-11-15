@@ -51,6 +51,9 @@
 
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+	<script
+	src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js"></script>
+	
 <script src="./dist/whoami.js"></script>
 <!-- jQuery library -->
 
@@ -95,6 +98,7 @@
 <!-- Template Javascript -->
 <script src="js/main.js"></script>
 <script src="js/TrainerLoginReg.js"></script>
+<script src="./dist/trainee-journey.js"></script>
 
 <!-- Javascript -->
 <script src="assets/js/scripts.js"></script>
@@ -117,10 +121,22 @@ label {
 	padding: 0;
 	background: none;
 }
+.photo-trigger-button {
+	opacity: 0;
+	position: absolute;
+	left: -100px;
+}
+
+.photo-trigger-button-label {
+	position: absolute;
+	top: 50%;
+	left: 1rem;
+	transform: translateY(-50%);
+}
 </style>
 </head>
 
-<body onload="init()">
+<body onload="journey.trainerinit()">
 	<!-- Nav Bar Start -->
 	<%@include file="./html/navbar.html"%>
 
@@ -356,40 +372,112 @@ label {
 											</font>
 										</div>
 
+<!-- 										<div class="form-group"> -->
+<!-- 											<strong>Profile Picture</strong> <br><input type="file" -->
+<!-- 												name="formimage" class="form-image " -->
+<!-- 												id="form-image" accept="image/*" -->
+<!-- 												onchange="preview_image(event)" required>  -->
+<!-- 												<div class="input-group shadow"> -->
+<!-- 												<img -->
+<!-- 												id="output_image" /> -->
+<!-- 												</div> -->
+<!-- 										</div> -->
+										
 										<div class="form-group">
-											<strong>Profile Picture</strong> <input type="file"
-												name="formimage" class="form-image form-control"
-												id="form-image" accept="image/*"
-												onchange="preview_image(event)" required> <img
-												id="output_image" />
+							<div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm"	style="">
+								<input name="formimage" id="formimage" type="file" 
+									class="form-control border-0 photo-trigger-button"
+									accept=".jpg, .png, .jpeg, .gif, .tif, .tiff" onchange="preview_image(event)">
+								<label id="formimage-lbl" for="formimage"
+									class="font-weight-light text-muted photo-trigger-button-label">Choose
+									file</label>
+								<div class="input-group-append">
+									<label for="formimage"
+										class="btn btn-light m-0 rounded-pill px-4">
+<!-- 										<i class="fa fa-cloud-upload mr-2 text-muted"></i> -->
+										<i class="fas fa-image fa-lg mr-2 text-muted"></i>
+										<small class="text-uppercase font-weight-bold text-muted">Browse</small>
+									</label>
+								</div>
+							</div>
+							<img id="output_image" />
 										</div>
 										
+																				
 										<div class="form-group">
 											<strong>Upload Certificates</strong>
 											<div class="row">
-												<div class="col-8">
-													<input type="file" name="formcertificate1"
-														class="form-certificate1" id="form-certificate1">
+												<div class="col-9">
+<!-- 													<input type="file" name="formcertificate1" -->
+<!-- 														class="form-certificate1" id="form-certificate1"> -->
+								<div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm"	style="">
+								<input name="formcertificate1" id="formcertificate1" type="file" 
+									class="form-control border-0 photo-trigger-button">
+								<label id="formcertificate1-lbl" for="formcertificate1"
+									class="font-weight-light text-muted photo-trigger-button-label">Choose
+									file</label>
+								<div class="input-group-append">
+									<label for="formcertificate1"
+										class="btn btn-light m-0 rounded-pill px-4">
+<!-- 										<i class="fa fa-cloud-upload mr-2 text-muted"></i> -->
+										<i class="fas fa-image fa-lg mr-2 text-muted"></i>
+										<small class="text-uppercase font-weight-bold text-muted">Browse</small>
+									</label>
+								</div>
+							</div>
 												</div>
-												<div class="col-4">
-													<button type="button" id="addcertificate1">Add
+												<div class="col-3">
+													<button type="button" id="addcertificate1" class="unstyled-button"  style="background-color:grey;color:white;width:90px;
+														height:40px;">Add
+														More</button>												
+														
+												</div>
+											</div>
+											<div class="row form-certificate2-field">
+												<div class="col-9">
+<!-- 													<input type="file" name="form-certificate2" -->
+<!-- 														class="form-certificate2" id="form-certificate2"> -->
+								<div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm"	style="">
+								<input name="form-certificate2" id="form-certificate2" type="file" 
+									class="form-control border-0 photo-trigger-button">
+								<label id="form-certificate2-lbl" for="form-certificate2"
+									class="font-weight-light text-muted photo-trigger-button-label">Choose
+									file</label>
+								<div class="input-group-append">
+									<label for="form-certificate2"
+										class="btn btn-light m-0 rounded-pill px-4">
+<!-- 										<i class="fa fa-cloud-upload mr-2 text-muted"></i> -->
+										<i class="fas fa-image fa-lg mr-2 text-muted"></i>
+										<small class="text-uppercase font-weight-bold text-muted">Browse</small>
+									</label>
+								</div>
+							</div>
+												</div>
+												<div class="col-3">
+													<button type="button" id="addcertificate2" class="unstyled-button" style="background-color:Grey;color:white;width:90px;
+														height:40px;">Add
 														More</button>
 												</div>
 											</div>
-											<div class="row">
-												<div class="col-8">
-													<input type="file" name="form-certificate2"
-														class="form-certificate2" id="form-certificate2">
-												</div>
-												<div class="col-4">
-													<button type="button" id="addcertificate2">Add
-														More</button>
-												</div>
-											</div>
-											<div class="row">
-												<div class="col-8">
-													<input type="file" name="form-certificate3"
-														class="form-certificate3" id="form-certificate3">
+											<div class="row form-certificate3-field">
+												<div class="col-9">
+<!-- 													<input type="file" name="form-certificate3" -->
+<!-- 														class="form-certificate3" id="form-certificate3"> -->
+														<div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm"	style="">
+								<input name="form-certificate3" id="form-certificate3" type="file" 
+									class="form-control border-0 photo-trigger-button">
+								<label id="form-certificate3-lbl" for="form-certificate3"
+									class="font-weight-light text-muted photo-trigger-button-label">Choose
+									file</label>
+								<div class="input-group-append">
+									<label for="form-certificate3"
+										class="btn btn-light m-0 rounded-pill px-4">
+<!-- 										<i class="fa fa-cloud-upload mr-2 text-muted"></i> -->
+										<i class="fas fa-image fa-lg mr-2 text-muted"></i>
+										<small class="text-uppercase font-weight-bold text-muted">Browse</small>
+									</label>
+								</div>
+							</div>
 												</div>
 											</div>
 										</div>										
@@ -401,7 +489,7 @@ label {
 									</form>
 								</div>
 								<div id="regsuccess"></div>
-<%-- 								${success} --%>
+								${success}
 							</div>
 						</div>
 					</div>
@@ -461,8 +549,8 @@ label {
 		$(document).ready(function() {
 			$('.forgotusername').hide();
 			$('.forgotbutton').hide();
-			$('#form-certificate2').hide();
-			$('#form-certificate3').hide();
+			$('.form-certificate2-field').hide();
+			$('.form-certificate3-field').hide();
 			$('#addcertificate2').hide();
 
 			$(".forgotpasswordshow").click(function() {
@@ -471,11 +559,11 @@ label {
 			});
 
 			$("#addcertificate1").click(function() {
-				$('#form-certificate2').toggle();
+				$('.form-certificate2-field').toggle();
 				$('#addcertificate2').toggle();
 			});
 			$("#addcertificate2").click(function() {
-				$('#form-certificate3').toggle();
+				$('.form-certificate3-field').toggle();
 			});
 
 		});
