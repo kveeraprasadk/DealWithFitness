@@ -181,6 +181,7 @@ hr {
 <script src="./dist/utils.js"></script>
 <script src="./dist/dialogs.js"></script>
 <script src="./dist/trainer-booking.js"></script>
+<script src="./dist/trainee-journey.js"></script>
 
 <link rel="stylesheet" type="text/css"
 	href="./css/external/tui-date-picker.css">
@@ -213,6 +214,7 @@ hr {
 
 	function renderTrainerProfile() {
 		switchView("calendar");
+		journey.trainerinit();
 		whoami.detect(()=> {
 			const image = $("#trainer-profile-base64-encoded-element").val();
 			if (image) {
@@ -441,9 +443,25 @@ hr {
 								<h3 class="text-center">Update Profile Picture</h3>
 								<h6>Please Select Update Picture !</h6>
 								<p class="text-center">
-									<input type="file" name="formimage"
-										class="form-image form-control" id="form-image"
-										accept="image/*" onchange="preview_image(event)">
+<!-- 									<input type="file" name="formimage" -->
+<!-- 										class="form-image form-control" id="form-image" -->
+<!-- 										accept="image/*" onchange="preview_image(event)"> -->
+										<div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm"	style="">
+								<input name="formimage" id="formimage" type="file" 
+									class="form-control border-0 photo-trigger-button"
+									accept=".jpg, .png, .jpeg, .gif, .tif, .tiff" onchange="preview_image(event)">
+								<label id="formimage-lbl" for="formimage"
+									class="font-weight-light text-muted photo-trigger-button-label">Choose
+									file</label>
+								<div class="input-group-append">
+									<label for="formimage"
+										class="btn btn-light m-0 rounded-pill px-4">
+<!-- 										<i class="fa fa-cloud-upload mr-2 text-muted"></i> -->
+										<i class="fas fa-image fa-lg mr-2 text-muted"></i>
+										<small class="text-uppercase font-weight-bold text-muted">Browse</small>
+									</label>
+								</div>
+							</div>
 								<div class="bh-img" >
 									<img id="output_image" />
 								</div>
@@ -574,6 +592,7 @@ window.onclick = function(event) {
 			$('#editprofilehide').hide();
 			$('#changepasswordhide').hide();
 			$('#updatebutton').hide();
+			$('#formimage').hide();
 
 			$(".trainereditprofile").click(function() {
 				$('#editprofilehide').toggle();
