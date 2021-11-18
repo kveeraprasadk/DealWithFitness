@@ -183,8 +183,8 @@
 					<div class="right">
 						<a href="index.jsp"
 							class="nav-item nav-link flex flex-valign-center flex-halign-end">
-							<i class="fa fa-arrow-circle-left pr-sm" style="font-size: 18px"></i>
-							<span style="font-size: 14px">BACK</span>
+							<i class="fa fa-arrow-circle-left pr-sm" style="font-size: 22px"></i>
+							<span style="font-size: 16px">BACK</span>
 						</a>
 					</div>
 					<h3 class="mth3">Profile</h3>

@@ -130,7 +130,7 @@ $(document)
 										},
 										messages : {
 											formforgotusername : {
-												required : "Please Enter Username11",
+												required : "Please Enter Username",
 												email : "Please Enter Valid email"
 											}
 										},

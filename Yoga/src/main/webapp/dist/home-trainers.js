@@ -127,7 +127,8 @@ function Trainers() {
 			self.validationError(FORGOT_ERROR_MSG_ID, "Email id is invalid");
 			$("#forgot-traineeemailid").focus();
 			return false;
-		}		
+		}	
+		$("#forgot-validation-error").hide();
 		return true;
 	}
 
@@ -163,7 +164,7 @@ function Trainers() {
 	self.forgotpasswordEvent = function() {
 		var ttemailId = $('#forgot-traineeemailid').val();
 		
-		if (self.validateForgotPassword(ttemailId)) {
+		if (self.validateForgotPassword(ttemailId)) {			
 			progressBar.start();
 			// Validations are done push the payload to backend
 			$.ajax({
@@ -564,20 +565,6 @@ function Trainers() {
 		}, 500);
 	}
 	
-	self.validateForgotPassword = function() {		
-		const email = $("#forgot-traineeemailid").val();		
-		if (email == null || email.trim().length == 0) {
-			self.validationError(REG_ERROR_MSG_ID, "Trainee Email id is mandatory");
-			$("#forgot-traineeemailid").focus();
-			return false;
-		} else if (!Utils.validateEmail(email)) {
-			self.validationError(FORGOT_ERROR_MSG_ID, "Trainee Email id is invalid");
-			$("#forgot-traineeemailid").focus();
-			return false;
-		}		
-		$("#forgot-validation-error").hide();
-		return true;
-	}
 
 	self.validationError = function(messageElementId, message) {
 		$("#" + messageElementId).text(message);

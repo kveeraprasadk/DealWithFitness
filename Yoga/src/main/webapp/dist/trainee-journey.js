@@ -128,6 +128,7 @@ function Stories() {
 	self.lst;
 
 	self.init = function(allTrainees, onlyApproved) {
+		
 		progressBar.start();
 		whoami.detect(() => {
 			console.log("All trainee stories: ", allTrainees, " only approved stories: ", onlyApproved);
@@ -152,6 +153,7 @@ function Stories() {
 						if (stories && stories.length > 0) {
 							self.lst = stories;
 							self.fill();
+							$('.hidebutton').hide();
 						} else {
 							console.log("no stories")
 							$("#no-stories-message").show();
@@ -195,6 +197,7 @@ function Stories() {
 				const data = res.stories;
 				$("#view-stories-container").html("");
 				if (data && data.length > 0) {
+					$('.hidebutton').hide();
 					self.lst = data;
 					self.fill();
 				} else {
@@ -264,7 +267,7 @@ function Stories() {
 	self.showPhotosEvent = function(event) {
 		progressBar.start();
 		const storyId = event.target.getAttribute("storyId");
-		const traineeId = event.target.getAttribute("traineeId");
+		const traineeId = event.target.getAttribute("traineeId");		
 		$.ajax({
 			url: "TraineeStoryServlet",
 			type: "GET",
@@ -274,11 +277,14 @@ function Stories() {
 			},
 			cache: false,
 			success: function(data) {
-				const container = $("#img-container-" + storyId);
-				container.html("");
+				const container = $("#img-container-" + storyId);			
+				container.html("");			
 				for (const imgKey in data) {
 					if (data[imgKey]) {
 						container.append("<div class='col-12 col-md-6 image-area mt-4'><img src='" + data[imgKey] + "' class='img-fluid rounded shadow-sm mx-auto d-block'/></div>");
+						$("#hidebutton-"+storyId).show();
+						$("#showbutton-"+storyId).hide();
+						$("#img-container-" + storyId).show();
 					}
 				}
 			},
@@ -289,6 +295,16 @@ function Stories() {
 			complete: () => progressBar.end()
 		});
 	}
+	
+	self.hidePhotosEvent = function(event) {		
+		const storyId = event.target.getAttribute("storyId");
+		const traineeId = event.target.getAttribute("traineeId");		
+		$("#img-container-" + storyId).hide();		
+		$("#hidebutton-"+storyId).hide();
+		$("#showbutton-"+storyId).show();
+	
+	}
+	
 }
 
 window.journey = new Journey();
