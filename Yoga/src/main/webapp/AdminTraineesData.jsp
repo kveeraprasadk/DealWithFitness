@@ -218,14 +218,15 @@
   <table class="table table-bordered">
     <tr>
       <th>Name</th>
-      <th>Email</th>      
+      <th>Email</th>  
+      <th>DataOfBirth</th>          
       <th>Target</th>
       <th>Ailment</th>
       <th>State</th>
       <th>city</th>
       <th>Phone</th>      
       <th>CreationTime</th>
-      <th></th>
+<!--       <th></th> -->
       
     </tr>
      <% ArrayList<TrainerDetailsVO> traineeslist = (ArrayList<TrainerDetailsVO>) request.getAttribute("TraineesList"); %>
@@ -247,13 +248,14 @@ if(traineeslist != null && traineeslist.size() >0)  // Null check for the object
     <tr>
     	<td><%=tList.getName() %></td>
       <td><%=tList.getEmail() %></td>      
+       <td><%=tList.getDob() %></td>
       <td><%=tList.getTarget() %></td>
       <td><%=tList.getAnyailment() %></td>
       <td><%=tList.getState() %></td>
       <td><%=tList.getCity() %></td>
        <td><%=tList.getPhone() %></td>       
       <td><%=tList.getCreatetime() %></td>
-      <td ><button class="white-button">Update</button></td>
+<!--       <td ><button class="white-button">Update</button></td> -->
     </tr>
      <%
 							}

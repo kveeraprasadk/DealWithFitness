@@ -86,7 +86,10 @@
 				</li>
 			</ul>			
 			<div class="flex pt">
-				<button class="btn btn-primary {showPhotosClass}" traineeId="{traineeId}" storyId="{storyId}" onclick="stories.showPhotosEvent(event)">
+				<button class="btn btn-primary hidebutton {showPhotosClass}" id='hidebutton-{storyId}' traineeId="{traineeId}" storyId="{storyId}" onclick="stories.hidePhotosEvent(event)">
+					Hide Photos
+				</button>
+				<button class="btn btn-primary showbutton {showPhotosClass}" id='showbutton-{storyId}' traineeId="{traineeId}" storyId="{storyId}" onclick="stories.showPhotosEvent(event)">
 					Show Photos
 				</button>
 			</div>

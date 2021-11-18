@@ -231,7 +231,7 @@
       <th>Profile</th>
       <th>Certificates</th>
       <th>CreationTime</th>
-      <th></th>
+<!--       <th></th> -->
       
     </tr>
      <% ArrayList<TrainerDetailsVO> trainerslist = (ArrayList<TrainerDetailsVO>) request.getAttribute("TrainersList"); %>
@@ -266,16 +266,15 @@ if(trainerslist != null && trainerslist.size() >0)  // Null check for the object
       	  </td>
       <td><%=tList.getCreatetime() %></td>
     
-      <td ><div id="trname<%=inv%>t" data-msg="<%=tList.getName() %>"></div>
-      <div id="tremail<%=inv%>t" data-msg="<%=tList.getEmail() %>"></div>
-      <div id="trexpertise<%=inv%>t" data-msg="<%=tList.getExpertise() %>"></div>
+<%--       <td ><div id="trname<%=inv%>t" data-msg="<%=tList.getName() %>"></div> --%>
+<%--       <div id="tremail<%=inv%>t" data-msg="<%=tList.getEmail() %>"></div> --%>
+<%--       <div id="trexpertise<%=inv%>t" data-msg="<%=tList.getExpertise() %>"></div> --%>
     
-      <div id="traboutyourself<%=inv%>t" data-msg="<%=tList.getAboutyourself() %>"></div>
-    <!--   <button type="button" class="white-button trainersupdatebutton" id="trainersupdate<%=inv %>t" data-count="<%=inv %>t" value="<%=tList.getEmail() %>">Update</button>  -->
-      <ul class="main-menu">
-      <li><a href="#section4" class="white-button trainersupdatebutton" id="trainersupdate<%=inv %>t" data-count="<%=inv %>t" value="<%=tList.getEmail() %>">Update</a></li>
-      </ul>
-      </td>
+<%--       <div id="traboutyourself<%=inv%>t" data-msg="<%=tList.getAboutyourself() %>"></div> --%>
+<!--       <ul class="main-menu"> -->
+<%--       <li><a href="#section4" class="white-button trainersupdatebutton" id="trainersupdate<%=inv %>t" data-count="<%=inv %>t" value="<%=tList.getEmail() %>">Update</a></li> --%>
+<!--       </ul> -->
+<!--       </td> -->
     </tr>
      <%
 							}

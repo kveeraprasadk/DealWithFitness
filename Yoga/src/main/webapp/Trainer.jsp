@@ -384,6 +384,7 @@ label {
 <!-- 										</div> -->
 										
 										<div class="form-group">
+										<strong>Profile Picture</strong>
 							<div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm"	style="">
 								<input name="formimage" id="formimage" type="file" 
 									class="form-control border-0 photo-trigger-button"
@@ -401,8 +402,7 @@ label {
 								</div>
 							</div>
 							<img id="output_image" />
-										</div>
-										
+										</div>										
 																				
 										<div class="form-group">
 											<strong>Upload Certificates</strong>
@@ -428,7 +428,7 @@ label {
 												</div>
 												<div class="col-3">
 													<button type="button" id="addcertificate1" class="unstyled-button"  style="background-color:grey;color:white;width:90px;
-														height:40px;">Add
+														height:50px;">Add
 														More</button>												
 														
 												</div>
@@ -455,7 +455,7 @@ label {
 												</div>
 												<div class="col-3">
 													<button type="button" id="addcertificate2" class="unstyled-button" style="background-color:Grey;color:white;width:90px;
-														height:40px;">Add
+														height:50px;">Add
 														More</button>
 												</div>
 											</div>
@@ -488,8 +488,8 @@ label {
 										</button>
 									</form>
 								</div>
-								<div id="regsuccess"></div>
-								${success}
+								<div id="regerror"></div>
+<%-- 								${success} --%>
 							</div>
 						</div>
 					</div>
@@ -709,6 +709,8 @@ label {
 												//			}
 
 												}
+																							
+												
 											});
 							$.validator.addMethod('filesize11', function(value,element, param) {
 								// param = size (en bytes) 
@@ -743,8 +745,8 @@ label {
 
     frm.submit(function (e) {
 
-        e.preventDefault();
-
+    	e.preventDefault();
+		alert("enter");
         $.ajax({
             type: frm.attr('method'),
             url: frm.attr('action'),
@@ -753,19 +755,23 @@ label {
             	
                 console.log('Submission was successful.');
                 console.log(data);
-                if(data == "Email ID is Already Registered")
+                alert(data);
+                if(data == "Temporary Profile Created Successfully")
+            	{
+                	document.location.href = './TrainerTempProfile.jsp';
+            	}else if(data == "Email ID is Already Registered")
                 	{
-                	$('#regsuccess').html("<div class='alert alert-danger'>");
-					$('#regsuccess > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+                	$('#regerror').html("<div class='alert alert-danger'>");
+					$('#regerror > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
 									.append("</button>");
-					$('#regsuccess > .alert-danger').append($("<strong>").text(data));
-					$('#regsuccess > .alert-danger').append('</div>');
+					$('#regerror > .alert-danger').append($("<strong>").text(data));
+					$('#regerror > .alert-danger').append('</div>');
                 	}else{
-                		$('#regsuccess').html("<div class='alert alert-danger'>");
-    					$('#regsuccess > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+                		$('#regerror').html("<div class='alert alert-danger'>");
+    					$('#regerror > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
     									.append("</button>");
-    					$('#regsuccess > .alert-danger').append($("<strong>").text(data));
-    					$('#regsuccess > .alert-danger').append('</div>');
+    					$('#regerror > .alert-danger').append($("<strong>").text(data));
+    					$('#regerror > .alert-danger').append('</div>');
                 	}
                 		
                 
@@ -773,10 +779,13 @@ label {
             error: function (data) {
                 console.log('An error occurred.');
                 console.log(data);
+                alert(data);
             },
         });
-    });    
-  });
+        return false;
+	
+        });
+   });
 </script> 
 	
 	<!-- REGISTER PAGE END -->

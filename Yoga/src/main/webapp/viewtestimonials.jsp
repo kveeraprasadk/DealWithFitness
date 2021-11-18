@@ -51,6 +51,8 @@
 <script src="lib/lightbox/js/lightbox.min.js"></script>
 <script src="./dist/external/moment.min.js"></script>
 
+
+
 <!-- Added this for fixating the header otherwise not needed -->
 <script src="js/main.js"></script>
 <script src="assets/js/scripts.js"></script>
@@ -81,18 +83,23 @@
 				<li style="font-size: 14px; color: {approvalColor}">
 					{approvalStatus}
 				</li>
-			</ul>			
+			</ul>	
+			<div id="button-container-{storyId}">	</div>	
 			<div class="flex pt">
-				<button class="btn btn-primary {showPhotosClass}" traineeId="{traineeId}" storyId="{storyId}" onclick="stories.showPhotosEvent(event)">
+				<button class='btn btn-primary hidebutton {showPhotosClass}' id='hidebutton-{storyId}' traineeId='{traineeId}' storyId='{storyId}' onclick='stories.hidePhotosEvent(event)'>Hide Photos</button>
+				<button class="btn btn-primary showbutton {showPhotosClass}" id='showbutton-{storyId}' traineeId="{traineeId}" storyId="{storyId}" onclick="stories.showPhotosEvent(event)">
 					Show Photos
 				</button>
+				
 				<button class="btn btn-primary ml" storyId="{storyId}" onclick="stories.deleteStoryEvent(event)">
 					Delete Story
 				</button>
 			</div>
 		</div>
     </div>
+
 </script>
+
 </head>
 
 <body onload="stories.init()">

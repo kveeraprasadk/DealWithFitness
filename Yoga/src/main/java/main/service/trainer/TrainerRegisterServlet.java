@@ -235,24 +235,20 @@ public class TrainerRegisterServlet extends HttpServlet {
 					session.setAttribute("trainercertificatefileName3", certificatefileName3);
 					session.setAttribute("trainerprofilephoto",inputStream);
 
-					// out.write("Request Sent Successfully");
-					System.out.println("success");
-					// request.setAttribute("message", "Request Sent Successfully");
+					// out.write("Temporary Profile Created Successfully");
+					System.out.println("Temporary Profile Created Successfully");					
 					request.getRequestDispatcher("TrainerTempProfile.jsp").forward(request, response);
 
-					// forwards to the message page
-					// getServletContext().getRequestDispatcher("/trainersprofile.jsp").forward(request,
-					// response);
-
+					
 				} else {
-//					out.write("Request Failed Plz Try Again ..!");
-					System.out.println("fail");
+			//		out.write("Registration Failed Plz Try Again ..!");
+					System.out.println("Registration Failed Plz Try Again ..!");
 					request.setAttribute("success", "Register Failed Plz Try Again ..!");
 					request.getRequestDispatcher("/Trainer.jsp").include(request, response);
 				}
 			} else {
 				System.out.println("Email ID is Already Registered");
-	//			out.write("Email ID is Already Registered");
+		//		out.write("Email ID is Already Registered");
 				request.setAttribute("success", "Email ID is Already Registered");
 				request.getRequestDispatcher("/Trainer.jsp").include(request, response);
 			}
