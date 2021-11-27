@@ -427,9 +427,8 @@ label {
 							</div>
 												</div>
 												<div class="col-3">
-													<button type="button" id="addcertificate1" class="unstyled-button"  style="background-color:grey;color:white;width:90px;
-														height:50px;">Add
-														More</button>												
+													<button type="button" id="addcertificate1" class="unstyled-button"  style="background-color:grey;color:white;width:40px;
+														height:40px;border-radius: 50%;"><i class="fa fa-plus" aria-hidden="true"></i></button>												
 														
 												</div>
 											</div>
@@ -454,9 +453,8 @@ label {
 							</div>
 												</div>
 												<div class="col-3">
-													<button type="button" id="addcertificate2" class="unstyled-button" style="background-color:Grey;color:white;width:90px;
-														height:50px;">Add
-														More</button>
+													<button type="button" id="addcertificate2" class="unstyled-button" style="background-color:Grey;color:white;width:40px;
+														height:40px;border-radius: 50%;"><i class="fa fa-plus" aria-hidden="true"></i></button>
 												</div>
 											</div>
 											<div class="row form-certificate3-field">
@@ -489,7 +487,12 @@ label {
 									</form>
 								</div>
 								<div id="regerror"></div>
-<%-- 								${success} --%>
+								
+								<h3 class="error-txt">
+								<% if(request.getAttribute("success") != null){ %>
+								<%= request.getAttribute("success") %>
+								<%} %>
+								</h3>
 							</div>
 						</div>
 					</div>

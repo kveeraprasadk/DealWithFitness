@@ -91,6 +91,18 @@
 .error {
 	color: #FF0000 !important;
 }
+.photo-trigger-button {
+	opacity: 0;
+	position: absolute;
+	left: -100px;
+}
+
+.photo-trigger-button-label {
+	position: absolute;
+	top: 50%;
+	left: 1rem;
+	transform: translateY(-50%);
+}
 </style>
 <style>
 /* The Modal (background) */
@@ -109,10 +121,10 @@
 .content-new {
  /* background-color: #828282;  */
     background-color: #d9edf7;
-  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  margin: 2% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
   border: 1px solid #888; 
   width: 80%; /* Full width */
-  height: 100%; /* Full height */
+  height: 90%; /* Full height */
 }
 /* Float cancel and delete buttons and add an equal width */
 .cancelbtn, .deletebtn {
@@ -227,6 +239,7 @@ hr {
 		})
 	}
 </script>
+
 </head>
 
 <body onLoad="renderTrainerProfile()">
@@ -430,9 +443,8 @@ hr {
 
 
 					<div id="id01" class="modal modal-new">
-						<span
-							onclick="document.getElementById('id01').style.display='none'"
-							class="close" title="Close Modal">×</span>
+<!-- 						<span onclick="document.getElementById('id01').style.display='none'" -->
+<!-- 							class="close" title="Close Modal">×</span> -->
 
 						<form class="modal-content content-new" role="form"
 							enctype="multipart/form-data"
@@ -442,7 +454,7 @@ hr {
 							<div class="container">
 								<h3 class="text-center">Update Profile Picture</h3>
 								<h6>Please Select Update Picture !</h6>
-								<p class="text-center">
+								
 <!-- 									<input type="file" name="formimage" -->
 <!-- 										class="form-image form-control" id="form-image" -->
 <!-- 										accept="image/*" onchange="preview_image(event)"> -->
@@ -455,17 +467,16 @@ hr {
 									file</label>
 								<div class="input-group-append">
 									<label for="formimage"
-										class="btn btn-light m-0 rounded-pill px-4">
-<!-- 										<i class="fa fa-cloud-upload mr-2 text-muted"></i> -->
+										class="btn btn-light m-0 rounded-pill px-4 ">
 										<i class="fas fa-image fa-lg mr-2 text-muted"></i>
 										<small class="text-uppercase font-weight-bold text-muted">Browse</small>
 									</label>
 								</div>
 							</div>
-								<div class="bh-img" >
-									<img id="output_image" />
+								<div class="bh-img " >
+									<img id="output_image" class="text-center"/>
 								</div>
-								</p>
+								
 								<br>
 								<div class="clearfix">
 									<button type="button"
@@ -477,8 +488,46 @@ hr {
 								</div>
 							</div>
 						</form>
+						
 					</div>
+<script type="text/javascript">
+$('#fileUploader').on('change', uploadFile);
 
+
+function uploadFile(event)
+    {
+        event.stopPropagation(); 
+        event.preventDefault(); 
+        var files = event.target.files; 
+        var data = new FormData();
+        $.each(files, function(key, value)
+        {
+            data.append(key, value);
+        });
+        postFilesData(data); 
+     }
+    
+function postFilesData(data)
+    {
+     $.ajax({
+        url: 'yourUrl',
+        type: 'POST',
+        data: data,
+        cache: false,
+        dataType: 'json',
+        processData: false, 
+        contentType: false, 
+        success: function(data, textStatus, jqXHR)
+        {
+            alert("success");
+        },
+        error: function(jqXHR, textStatus, errorThrown)
+        {
+            console.log('ERRORS: ' + textStatus);
+        }
+        });
+    }
+</script>
 					<script type='text/javascript'>
 		function preview_image(event) {
 			var reader = new FileReader();
@@ -552,6 +601,7 @@ window.onclick = function(event) {
 			</div>
 		</div>
 	</div>
+	
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("#trainerppchangepassword").validate({
@@ -693,7 +743,7 @@ window.onclick = function(event) {
 											});
 						});
 	</script>
-
+	
 	<!-- About End -->
 
 	<!-- Footer Start -->
