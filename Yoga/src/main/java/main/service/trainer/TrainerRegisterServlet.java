@@ -248,7 +248,7 @@ public class TrainerRegisterServlet extends HttpServlet {
 				}
 			} else {
 				System.out.println("Email ID is Already Registered");
-		//		out.write("Email ID is Already Registered");
+			//	out.write("Email ID is Already Registered");
 				request.setAttribute("success", "Email ID is Already Registered");
 				request.getRequestDispatcher("/Trainer.jsp").include(request, response);
 			}

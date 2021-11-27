@@ -120,7 +120,7 @@
 				style="max-width: none; margin-bottom: 15px">
 				<h3 style="text-align: left">View Stories</h3>
 			</div>
-			<div class="flex-column">
+			<div class="flex-column col-6">
 				<span style="font-size: 12px">Choose Trainer</span>
 				<div>
 					<select class="form-control" id="unique-trainers"

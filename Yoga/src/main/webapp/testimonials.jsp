@@ -103,7 +103,7 @@
 					onsubmit="return journey.validateInputsOnSubmitEvent()">
 
 					<input type="hidden" name="traineeId" id="traineeId" />
-					<div class="flex pt mt"
+					<div class="flex pt mt col-6"
 						style="min-width: 140px; box-sizing: border-box">
 						<select class="form-control" id="journey-trainers-list"
 							name="trainerId">

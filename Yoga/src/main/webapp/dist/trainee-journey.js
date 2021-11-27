@@ -154,6 +154,7 @@ function Stories() {
 							self.lst = stories;
 							self.fill();
 							$('.hidebutton').hide();
+							$("#no-stories-message").hide();
 						} else {
 							console.log("no stories")
 							$("#no-stories-message").show();
@@ -198,6 +199,7 @@ function Stories() {
 				$("#view-stories-container").html("");
 				if (data && data.length > 0) {
 					$('.hidebutton').hide();
+					$("#no-stories-message").hide();
 					self.lst = data;
 					self.fill();
 				} else {
