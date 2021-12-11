@@ -1,5 +1,9 @@
 package main.service.trainer;
 
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -7,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -22,7 +27,7 @@ import main.common.DBConnection;
  * Servlet implementation class TrainerProfilePicUpdateServlet
  */
 @WebServlet("/upload")
-@MultipartConfig(maxFileSize = 16177215) // upload file's size up to 16MB
+@MultipartConfig(maxFileSize = 1048576) // upload file's size up to 1MB(1048576 bytes binary)
 public class TrainerProfilePicUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -38,6 +43,9 @@ public class TrainerProfilePicUpdateServlet extends HttpServlet {
 		String traineremail = (String) session.getAttribute("traineremail");
 		
 		InputStream inputStream = null; // input stream of the upload file
+		InputStream is=null;
+		BufferedImage resizeImageJpg;
+		
 		Part filePart = request.getPart("formimage");
 		String fileName = extractFileName(filePart);
 		if (filePart != null) {
@@ -48,6 +56,24 @@ public class TrainerProfilePicUpdateServlet extends HttpServlet {
 
 			// obtains input stream of the upload file
 			inputStream = filePart.getInputStream();
+			try {
+                BufferedImage originalImage = ImageIO.read(inputStream);
+                int type = originalImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
+                System.out.println("type::"+type);
+                resizeImageJpg = resizeImage(originalImage, type);//call to resize the image
+ 
+               // BufferedImage to ByteArrayInputStream
+                ByteArrayOutputStream os = new ByteArrayOutputStream();
+                ImageIO.write(resizeImageJpg, "jpg", os);
+                is = new ByteArrayInputStream(os.toByteArray());
+                
+                System.out.println("resize name:"+is);
+//    			System.out.println("original size:"+filePart.getSize());
+//    			System.out.println("original type:"+filePart.getContentType());
+ 
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
 		}
 		Connection con = null;
 		 try
@@ -57,7 +83,7 @@ public class TrainerProfilePicUpdateServlet extends HttpServlet {
 	            String query = "update trainerregister set photoname=?,photo=? where traineremail=?";
 	            PreparedStatement statement = con.prepareStatement(query); //Making use of prepared statements here to insert bunch of data
 	            statement.setString(1, fileName);
-				statement.setBlob(2, inputStream);
+				statement.setBlob(2, is);
 	            statement.setString(3, traineremail);	           
 	                       
 	            int i= statement.executeUpdate();
@@ -70,7 +96,7 @@ public class TrainerProfilePicUpdateServlet extends HttpServlet {
 	        //   request.setAttribute("success", "register success");
 	           
 	           // forwards to the message page
-	           getServletContext().getRequestDispatcher("/trainersprofile.jsp").forward(request, response);
+	     //      getServletContext().getRequestDispatcher("/trainersprofile.jsp").forward(request, response);
 	           
 	       //    response.sendRedirect("/TrainerProfile");
 	            }else{
@@ -107,6 +133,14 @@ private String extractFileName(Part part) {
 		}
 	}
 	return null;
+}
+private static BufferedImage resizeImage(BufferedImage originalImage, int type) {
+    BufferedImage resizedImage = new BufferedImage(314, 210, type);//set width and height of image
+    Graphics2D g = resizedImage.createGraphics();
+    g.drawImage(originalImage, 0, 0, 314, 210, null);
+    g.dispose();
+
+    return resizedImage;
 }
 }
 

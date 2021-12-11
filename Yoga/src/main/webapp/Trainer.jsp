@@ -572,6 +572,43 @@ label {
 		});
 	</script>
 	<script type="text/javascript">
+$(document).ready(function() {
+	console.log("page ready..");
+	$("#trainerregform").on('submit',function(event){
+		event.preventDefault();
+	//	var f=$(this).serialize();
+	let f=new FormData(this);
+		console.log(f);
+		$.ajax({
+			url: "TrainerRegisterServlet",
+			data : f,
+			type : "POST",
+			success: function(data,textStatus,jqXHR){
+				console.log(data);
+				console.log("success");
+				if(data.trim() === 'Temporary Profile Created Successfully'){
+					document.location.href = './TrainerTempProfile.jsp';					
+				}else{
+					$('#regerror').html("<div class='alert alert-danger'>");
+					$('#regerror > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+													   .append("</button>");
+					$('#regerror > .alert-danger').append($("<strong>").text(data));
+					$('#regerror > .alert-danger').append('</div>');
+					
+
+				}
+			},
+			error: function(data,textStatus,errorThrown){
+				console.log(data);
+				console.log("error");				
+			},
+			processData : false,
+			contentType : false
+		});
+	});
+});
+</script>
+	<script type="text/javascript">
 		$(document)
 				.ready(
 						function() {

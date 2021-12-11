@@ -25,6 +25,7 @@ function Trainers() {
 			cache: false,
 			success: function(data) {
 				self.renderTrainers(data);
+alert("trainer");
 			},
 			error: function(error, more) {
 				console.error(error, more)

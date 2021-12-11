@@ -1,8 +1,15 @@
 package main.service.trainer;
 
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,6 +18,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Date;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
@@ -19,22 +27,26 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import main.common.AppConstants;
 import main.common.AppUtils;
 import main.common.DBConnection;
 import main.common.EncodeDecodeSHA256;
+import main.model.SessionUser;
+
 
 /**
  * Servlet implementation class TrainerRegisterServlet
  */
-@MultipartConfig(maxFileSize = 209716) // upload file's size up to 200Kb(209716 bytes binary)
+@MultipartConfig(maxFileSize = 1048576) // upload file's size up to 1MB(1048576 bytes binary)
 							
 public class TrainerRegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	  
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html");
@@ -58,48 +70,18 @@ public class TrainerRegisterServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
-		/*
-		 * String monthlyfees=request.getParameter("formmonthlyfees1"); String
-		 * classlevel=request.getParameter("formclasslevel1"); String
-		 * from1=request.getParameter("formfrom1"); String
-		 * to1=request.getParameter("formto1");
-		 * 
-		 * String expertise2=request.getParameter("formexpertise2"); String
-		 * monthlyfees2=request.getParameter("formmonthlyfees2"); String
-		 * classlevel2=request.getParameter("formclasslevel2"); String
-		 * from2=request.getParameter("form-from2"); String
-		 * to2=request.getParameter("form-to2");
-		 * 
-		 * String expertise3=request.getParameter("formexpertise3"); String
-		 * monthlyfees3=request.getParameter("formmonthlyfees3"); String
-		 * classlevel3=request.getParameter("formclasslevel3"); String
-		 * from3=request.getParameter("form-from3"); String
-		 * to3=request.getParameter("form-to3");
-		 * 
-		 * 
-		 * // String schedule9to11=request.getParameter("flexCheckDefaultschms9to11");
-		 * // String schedule11to1=request.getParameter("flexCheckDefaultschms11to1");
-		 * // String schedule5to7=request.getParameter("flexCheckDefaultschms5to7"); //
-		 * String schedule7to9=request.getParameter("flexCheckDefaultschms7to9");
-		 * 
-		 * 
-		 * String schedule,schedule2,schedule3; schedule=from1+" to "+to1;
-		 * if(from2.length()>0 && to2.length()>0) { schedule2=from2+" to "+to2; }else{
-		 * schedule2=" "; classlevel2=" "; monthlyfees2=" "; expertise2=" "; }
-		 * if(from3.length()>0 && to3.length()>0) {
-		 * 
-		 * schedule3=from3+" to "+to3; }else{ schedule3=" "; classlevel3=" ";
-		 * monthlyfees3=" "; expertise3=" "; System.out.println("sc3:"+schedule3); }
-		 * 
-		 */
+		
 		Date date = new Date();
 		Timestamp ts = new Timestamp(date.getTime());
-		System.out.println("timestamp::" + password);
+		System.out.println("password::" + password);
+		System.out.println("timestamp::" + ts);
 
 		InputStream inputStream = null; // input stream of the upload file
+		InputStream is=null; 
 		InputStream certificate1inputStream = null;
 		InputStream certificate2inputStream = null;
 		InputStream certificate3inputStream = null;
+		BufferedImage resizeImageJpg;
 
 		// obtains the upload file part in this multipart request
 		Part filePart = request.getPart("formimage");
@@ -114,12 +96,31 @@ public class TrainerRegisterServlet extends HttpServlet {
 		String fileName = AppUtils.getFileNameFromFormPart(filePart);
 		if (filePart != null) {
 			// prints out some information for debugging
-			System.out.println(filePart.getName());
-			System.out.println(filePart.getSize());
-			System.out.println(filePart.getContentType());
-
+			System.out.println("original name:"+filePart.getName());
+			System.out.println("original size:"+filePart.getSize());
+			System.out.println("original type:"+filePart.getContentType());
+			
 			// obtains input stream of the upload file
 			inputStream = filePart.getInputStream();
+			try {
+                BufferedImage originalImage = ImageIO.read(inputStream);
+                int type = originalImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
+                System.out.println("type::"+type);
+                resizeImageJpg = resizeImage(originalImage, type);//call to resize the image
+ 
+               // BufferedImage to ByteArrayInputStream
+                ByteArrayOutputStream os = new ByteArrayOutputStream();
+                ImageIO.write(resizeImageJpg, "jpg", os);
+                is = new ByteArrayInputStream(os.toByteArray());
+                
+                System.out.println("resize name:"+is);
+//    			System.out.println("original size:"+filePart.getSize());
+//    			System.out.println("original type:"+filePart.getContentType());
+ 
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+						
 		}
 		Part certificate1 = request.getPart("formcertificate1");
 		String certificatefileName1 = AppUtils.getFileNameFromFormPart(certificate1);
@@ -194,7 +195,7 @@ public class TrainerRegisterServlet extends HttpServlet {
 				statement.setString(6, expertise);
 				statement.setString(7, abuotme);
 				statement.setString(8, fileName);
-				statement.setBlob(9, inputStream);
+				statement.setBlob(9, is);
 				statement.setTimestamp(10, ts);
 				statement.setBlob(11, certificate1inputStream);
 				statement.setString(12, certificatefileName1);
@@ -211,46 +212,41 @@ public class TrainerRegisterServlet extends HttpServlet {
 					HttpSession session = request.getSession(true);
 					session.setAttribute("traineremail", email);
 					session.setAttribute("trainername", name);
+					
+					SessionUser sessionUser = new SessionUser();
+					sessionUser.setType("Trainer"+isapprove);
+					sessionUser.setEmail(email);
+					sessionUser.setName(name);
+					session.setAttribute(AppConstants.SESSION_USER_INFO, sessionUser);
+					System.out.println("Trainer :"+isapprove);
+					
 					session.setAttribute("trainerexperience", experience);
 					session.setAttribute("trainerqualification", qualification);
 					session.setAttribute("trainerexpertise", expertise);
 					session.setAttribute("trainerphone", phoneno);
-					session.setAttribute("trainerpassword", password);
-					/*
-					 * session.setAttribute("trainerschedule", schedule);
-					 * session.setAttribute("trainerclasslevel", classlevel);
-					 * session.setAttribute("trainermonthlyfees", monthlyfees);
-					 * session.setAttribute("trainerexpertise2", expertise2);
-					 * session.setAttribute("trainerschedule2", schedule2);
-					 * session.setAttribute("trainerclasslevel2", classlevel2);
-					 * session.setAttribute("trainer2", monthlyfees2);
-					 * session.setAttribute("trainerexpertise3", expertise3);
-					 * session.setAttribute("trainerschedule3", schedule3);
-					 * session.setAttribute("trainerclasslevel3", classlevel3);
-					 * session.setAttribute("trainermonthlyfees3", monthlyfees3);
-					 */ 
+					session.setAttribute("trainerpassword", password);					
 					session.setAttribute("traineraboutme", abuotme);
 					session.setAttribute("trainercertificatefileName1", certificatefileName1);
 					session.setAttribute("trainercertificatefileName2", certificatefileName2);
 					session.setAttribute("trainercertificatefileName3", certificatefileName3);
-					session.setAttribute("trainerprofilephoto",inputStream);
+					session.setAttribute("trainerprofilephoto",is);
 
-					// out.write("Temporary Profile Created Successfully");
+					out.write("Temporary Profile Created Successfully");
 					System.out.println("Temporary Profile Created Successfully");					
-					request.getRequestDispatcher("TrainerTempProfile.jsp").forward(request, response);
+				//	request.getRequestDispatcher("TrainerTempProfile.jsp").forward(request, response);
 
 					
 				} else {
-			//		out.write("Registration Failed Plz Try Again ..!");
+					out.write("Registration Failed Plz Try Again ..!");
 					System.out.println("Registration Failed Plz Try Again ..!");
-					request.setAttribute("success", "Register Failed Plz Try Again ..!");
-					request.getRequestDispatcher("/Trainer.jsp").include(request, response);
+//					request.setAttribute("success", "Register Failed Plz Try Again ..!");
+//					request.getRequestDispatcher("/Trainer.jsp").include(request, response);
 				}
 			} else {
 				System.out.println("Email ID is Already Registered");
-			//	out.write("Email ID is Already Registered");
-				request.setAttribute("success", "Email ID is Already Registered");
-				request.getRequestDispatcher("/Trainer.jsp").include(request, response);
+				out.write("Email ID is Already Registered");
+//				request.setAttribute("success", "Email ID is Already Registered");
+//				request.getRequestDispatcher("/Trainer.jsp").include(request, response);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -259,4 +255,12 @@ public class TrainerRegisterServlet extends HttpServlet {
 
 	}
 
+	private static BufferedImage resizeImage(BufferedImage originalImage, int type) {
+        BufferedImage resizedImage = new BufferedImage(314, 210, type);//set width and height of image
+        Graphics2D g = resizedImage.createGraphics();
+        g.drawImage(originalImage, 0, 0, 314, 210, null);
+        g.dispose();
+ 
+        return resizedImage;
+    }
 }

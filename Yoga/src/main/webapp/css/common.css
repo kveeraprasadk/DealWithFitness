@@ -301,12 +301,19 @@ input[type=time] {
 	border-radius: 10px;
 }
 
+/* .trainer-schedules .trainer-details-card-inner-container { */
+/* 	background: #f3f8ff; */
+/* } */
+
+/* .trainer-details-card-inner-container.demo-class { */
+/* 	background: #fffaf0; */
+/* } */
 .trainer-schedules .trainer-details-card-inner-container {
-	background: #f3f8ff;
+	background: white;
 }
 
 .trainer-details-card-inner-container.demo-class {
-	background: #fffaf0;
+	background: white;
 }
 
 .bh-img {

@@ -162,15 +162,20 @@ label {
     		 url: "${pageContext.request.contextPath}/TrainerRequestServlet",
     		 
     	 }); 
+    	 
+    	 const image = $("#trainer-profile-base64-encoded-element").val();
+			if (image) {
+				console.log("Profile picture present")
+				$("#profile-image-element").attr("src",
+						"data:image/*;base64," + image);
+			} else {
+				console.log("No profile picture");
+			}		
      }    
 </script>
 
 
-        <!-- Top Bar Start -->
-        
-        
-        
-        <!-- Top Bar End -->
+       
 
         <!-- Nav Bar Start -->
  	
@@ -257,7 +262,12 @@ if(trainersreq != null && trainersreq.size() >0)  // Null check for the object
           <div class="right-image-post service-item">
             <div class="row ">
               <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+              <input type="hidden" id="trainer-profile-base64-encoded-element" 
+						value="<%=trainerrequest.getBase64Image()%>" />
                 <div class="left-text">
+                <div class="bh-img">
+							<img id="profile-image-element<%=inv %>"  alt="">							
+						</div>
                   <h5>Name : <b><%=trainerrequest.getName() %></b><br></h5>
                   <h5>Email :<b><%=trainerrequest.getEmail() %></b><br></h5>
                   <h5>Expertise :<b><%=trainerrequest.getExpertise() %></b><br></h5>

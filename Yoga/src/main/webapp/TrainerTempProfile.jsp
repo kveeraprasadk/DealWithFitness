@@ -82,9 +82,7 @@
 <link href="css/common.css" rel="stylesheet">
 
         <script type="text/javascript">
-	var calendarInitialized = false;
-
-	
+	var calendarInitialized = false;	
 
 	function renderTrainerProfile() {
 		

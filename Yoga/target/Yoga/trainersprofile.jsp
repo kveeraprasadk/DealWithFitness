@@ -491,42 +491,37 @@ hr {
 						
 					</div>
 <script type="text/javascript">
-$('#fileUploader').on('change', uploadFile);
-
-
-function uploadFile(event)
-    {
-        event.stopPropagation(); 
-        event.preventDefault(); 
-        var files = event.target.files; 
-        var data = new FormData();
-        $.each(files, function(key, value)
-        {
-            data.append(key, value);
-        });
-        postFilesData(data); 
-     }
-    
-function postFilesData(data)
-    {
-     $.ajax({
-        url: 'yourUrl',
-        type: 'POST',
-        data: data,
-        cache: false,
-        dataType: 'json',
-        processData: false, 
-        contentType: false, 
-        success: function(data, textStatus, jqXHR)
-        {
-            alert("success");
-        },
-        error: function(jqXHR, textStatus, errorThrown)
-        {
-            console.log('ERRORS: ' + textStatus);
-        }
-        });
-    }
+$(document).ready(function() {
+	console.log("page ready..");
+	$("#trainerprofilepictureupdate").on('submit',function(event){
+		event.preventDefault();
+	//	var f=$(this).serialize();
+	let f=new FormData(this);
+		console.log(f);
+		$.ajax({
+			url: "TrainerProfilePicUpdateServlet",
+			data : f,
+			type : "POST",
+			success: function(data,textStatus,jqXHR){
+				console.log(data);
+				console.log("success");
+				if(data.trim() === 'Updated Successfully'){
+					document.location.href = './TrainerProfile';
+					
+				}else{
+					console.log(data); 
+					document.location.href = './TrainerProfile';
+				}
+			},
+			error: function(data,textStatus,errorThrown){
+				console.log(data);
+				console.log("error");				
+			},
+			processData : false,
+			contentType : false
+		});
+	});
+});
 </script>
 					<script type='text/javascript'>
 		function preview_image(event) {

@@ -14,13 +14,12 @@
 <meta content="Free Website Template" name="keywords">
 <meta content="Free Website Template" name="description">
 
-<!-- Favicon -->
-<link href="img/favicon.ico" rel="icon">
 
 <!-- Google Font -->
 <link
 	href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap"
 	rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="https://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" />
 
 <!-- CSS Libraries -->
 <link
@@ -80,7 +79,8 @@
 	<!-- Template Javascript -->
 	<script src="js/main.js"></script>
 	<script src="js/NewStyle.js"></script>
-<link rel="icon" href="img/yoga-icon1.jpg">
+<link rel="icon" href="img/yogapose.png">
+<link href='https://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
 
 <style type="text/css">
 label {
@@ -382,7 +382,7 @@ transition: 0 !important;
   transition: all 0.5s ease-in;
   pointer-events: none;
   width: 100%;
-  height: 200%;
+  height: 100%;
   overflow: hidden;
 }
 
@@ -416,19 +416,187 @@ background: linear-gradient(135deg, #4b384c 15%,#da5de2 100%);
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4b384c', endColorstr='#da5de2',GradientType=1 );
 }
 </style>
+<style type="text/css">
+<!-- Logo three d design -->
+@import "compass/css3";
+@import 'https://fonts.googleapis.com/css?family=Kreon:300,700';
+.renderbody {
+  margin: 0;
+  padding: 0;
+  background-color: #d0d0d0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  @include perspective(1000px);
+}
+.render {
+  align-self: left;
+  @include transition(all 0.3s ease);
+  @include transform3d(rotateX(50deg) rotateZ(1deg));
+  font-family: 'Kreon', serif;
+  font-weight: 500;
+  font-size: 28px;
+  color: blue;
+  text-shadow:
+    white 0.006em 0.006em 0.007em,
+    #9c9c9c 1px 1px 1px,
+    #9c9c9c 1px 2px 1px,
+    #9c9c9c 1px 3px 1px,
+    #9c9c9c 1px 4px 1px,
+    #9c9c9c 1px 5px 1px,
+    #9c9c9c 1px 6px 1px,
+    #9c9c9c 1px 7px 1px,
+    #9c9c9c 1px 8px 1px,
+    #9c9c9c 1px 9px 1px,
+    #9c9c9c 1px 10px 1px,
+    #9c9c9c 1px 11px 1px,
+    #9c9c9c 1px 12px 1px,
+    rgba(16, 16, 16, 0.4) 1px 18px 6px,
+    rgba(16, 16, 16, 0.2) 1px 22px 10px,
+    rgba(16, 16, 16, 0.2) 1px 26px 35px,
+    rgba(16, 16, 16, 0.4) 1px 30px 65px,
+    white -0.15em -0.1em 100px;  
+     &:hover {
+    margin-top: -20px;
+    text-shadow:
+    white 0.006em 0.006em 0.007em,
+    #9c9c9c 1px 1px 1px,
+    #9c9c9c 1px 2px 1px,
+    #9c9c9c 1px 3px 1px,
+    #9c9c9c 1px 4px 1px,
+    #9c9c9c 1px 5px 1px,
+    #9c9c9c 1px 6px 1px,
+    #9c9c9c 1px 7px 1px,
+    #9c9c9c 1px 8px 1px,
+    #9c9c9c 1px 9px 1px,
+    #9c9c9c 1px 10px 1px,
+    #9c9c9c 1px 11px 1px,
+    #9c9c9c 1px 12px 1px,
+    rgba(16, 16, 16, 0.4) 1px 38px 26px,
+    rgba(16, 16, 16, 0.2) 1px 42px 30px,
+    rgba(16, 16, 16, 0.2) 1px 46px 65px,
+    rgba(16, 16, 16, 0.4) 1px 50px 95px,
+    white -0.15em -0.1em 100px;
+  }
+}
+/* .class-item { */
+/*   background: white; */
+/*   margin: auto; */
+/*   max-width: 32%;  */
+/* } */
+
+.class-item:hover {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  animation-name: example;
+  animation-duration: 0.25s;
+  border-left: 8px solid blue;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+.classduration {
+    margin: 0px;
+    position: absolute;
+    bottom: 3.2rem;
+    right: -6.5rem;
+    background: rgba(255, 255, 255, 0.8);  
+    border-radius: 0.4rem;
+    font-weight: 500;
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+    color: rgb(54, 54, 54);
+    width: max-content;
+    padding: 0.2rem 0.5rem 0.3rem;
+}
+</style>
+<script type="text/javascript">
+	
+	function renderTrainerProfile() {
+		trainers.init();
+		
+			const image = $("#trainer-profile-base64-encoded-element").val();
+			if (image) {
+				console.log("Profile picture present")
+				$("#profile-image-element").attr("src",
+						"data:image/*;base64," + image);
+			} else {
+				console.log("No profile picture");
+			}		
+		
+	}
+</script>
 </head>
 
-<body onload="trainers.init()">
+<body onload="renderTrainerProfile()">
 	<!-- These are trainer detail templates used by trainer.js to render the trainer related details -->
 	<%
 	int i = 0;
 	%>
+	
+	<script type="text/html" id="Trainer-details-template"
+		targetId="trainers-list-container-image">
+	    <div class="col-lg-4 col-md-6 col-sm-12 class-item filter-1 wow fadeInUp " data-wow-delay="0.0s">
+		    <div class="class-wrap">				 
+		        	<div class="class-text flex-column flex-valign-center trainer-schedules" >
+						<input type="hidden" id="trainer-profile-base64-encoded-element"
+						value="{base64image }" />
+						<div class="class-img">
+							<img src="img/yoga-class.jpg" alt="Image">	
+										
+                 		</div>
+				<p class="classduration">{duration}</p>
+			        	<div class="class-teacher">
+						<span class="far fa-check-circle flex flex-valign-center {attendeeSubscribedClass} trainee-selected" style="margin-left:10px"></span>
+		            	<span class="flex-grow trainer-name" style="font-size:1.3rem;"><strong>{name}</strong></span>
+						
+						<button class="btn profiledata home-trainer-list-a fas fa-external-link-alt" value="{email}"
+								style="border-radius: 50%; background: #cce0fc;" title="View Trainer Profile">
+						</button>
+		        	</div>
+					<div style=" width:100%;" class="flex-column  flex-grow trainer-details-card-inner-container {demoClass}" >
+						<div class="flex-column flex-grow">	
+			            	<div class="class-meta flex" style="color: #050df6;">
+								<span class="pl" style="text-align:left; font-size: 1rem;color:gray;">
+									<i class="far fa-clock pr-sm" style="font-size: 16px;color:gray;"></i>
+									{schedule}                                                    
+								</span>
+								<span  style="font-size: 1rem;color:gray;flex: 1; text-align: right; white-space: nowrap;">
+								<Strong><span class="pr-sm">&#x20B9;</span>{fee}/M</Strong>
+								</span>
+			            	</div>
+										             	
+		            	</div>
+						</div>
+						<div style=" width:100%;" class="flex-column flex-valign-center flex-grow trainer-details-card-inner-container" >
+			             <div class="class-meta">
+							<button class="btn btn-primary bookbutton" trainerId="{email}" seriesId="{id}" 
+								data-toggle="modal" title="{title}" attendee="{attendeeClass}" 
+								onclick="trainers.bookScheduleEvent(event)">
+								Book
+							</button>
+			            </div>
+					</div>
+		        </div>
+		    </div>
+		</div>
+	</script>
 	<script type="text/html" id="Trainer-details-template"
 		targetId="trainers-list-container">
 	    <div class="col-lg-4 col-md-6 col-sm-12 class-item filter-1 wow fadeInUp" data-wow-delay="0.0s">
-		    <div class="class-wrap">
-		        <div class="class-text flex-column flex-valign-center trainer-schedules" >
-			        <div class="class-teacher">
+		    <div class="class-wrap">				 
+		        	<div class="class-text flex-column flex-valign-center trainer-schedules" >
+						<div class="class-img">
+					<img src="img/yoga-class.jpg" alt="Image">
+                 </div>
+			        	<div class="class-teacher">
 						<span class="far fa-check-circle flex flex-valign-center {attendeeSubscribedClass} trainee-selected" style="margin-left:10px"></span>
 		            	<span class="flex-grow trainer-name">{name}</span>
 						<span class="attendee-count-parent {zeroAttendeesClass} flex" title="Total {attendeeCount} Attendees">
@@ -470,10 +638,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4b384c', end
 	<!--If trainer is not providing any trainings then this template will be rendered -->
 	<script type="text/html" id="Trainer-details-template-empty"
 		targetId="trainers-list-container">
-	    <div class="col-lg-4 col-md-6 col-sm-12 class-item filter-1 wow fadeInUp" data-wow-delay="0.0s">
+	    <div class="col-lg-4 col-md-6 col-sm-12 class-item filter-1 wow fadeInUp box" data-wow-delay="0.0s">
 		    <div class="class-wrap class-text flex-column">
 	            <div class="class-teacher">
-		            <span class="flex-grow trainer-name">{name}</span>
+		            <span class="flex-grow trainer-name" style="font-size:1.2rem;"><strong>{name}</strong></span>
 					<a style="height: 32px;width: 32px" title="View Trainer Profile">
 						<button class="btn profiledata home-trainer-list-a fas fa-external-link-alt" value="{email}" style="font-size:18px">
 						</button>
@@ -496,6 +664,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4b384c', end
 	<%@include file="./html/register-trainee-dialog.html"%>
 	<%@include file="./html/trainee-forgot-password-dialog.html"%>
 	<!-- Hero Start -->
+	
 	<div class="hero" style="background-color: #8f00ff">
 		<center></center>
 		<div class="container-fluid">
@@ -541,7 +710,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4b384c', end
                 <ul class="wow fadeInDown" data-wow-delay="0.3s">
                             <li>
                     <a href="">
-                        <strong style="color:#862323;">Yoga for Health</strong>
+                        <strong style="color:#862323;">Yoga</strong>
                         <span class="purchase-description">Classes : 30</span> 
                         <span class="purchase-description">Trainers : 20</span> 
                         <span class="purchase-description">Trainees : 150</span>
@@ -555,7 +724,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4b384c', end
             
                             <li>
                     <a href="">
-                         <strong style="color:#862323;">Weight Loss</strong>
+                         <strong style="color:#862323;">Weight workout</strong>
                         <span class="purchase-description">Classes : 30</span> 
                         <span class="purchase-description">Trainers : 20</span> 
                         <span class="purchase-description">Trainees : 150</span>
@@ -565,27 +734,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4b384c', end
                         </div>
                         <span class="purchase-button">Book Now</span>
                     </a>
-                </li>
-            
-                            <li>
-                    <a href="">
-                         <strong style="color:#862323;">Kids Yoga</strong>
-                        <span class="purchase-description">Classes : 30</span> 
-                        <span class="purchase-description">Trainers : 20</span> 
-                        <span class="purchase-description">Trainees : 150</span>
-<!--                         <big class="purchase-price">$149</big> -->
-						<div class="class-img"> 
-                            <img src="img/yoga-icon123.png" alt="Image">  
-                        </div>
-                        <span class="purchase-button">Book Now</span>
-                    </a>
-                </li>
+                </li>           
+                            
                     </ul>
                     
-                    <ul class=" wow fadeInDown" data-wow-delay="0.5s">
-                            <li>
+                    <ul class=" wow fadeInDown" data-wow-delay="0.5s">  
+            			<li>
                     <a href="">
-                         <strong style="color:#862323;">Pregnancy Yoga</strong>
+                        <strong style="color:#862323;">Nutrition</strong>
                         <span class="purchase-description">Classes : 30</span> 
                         <span class="purchase-description">Trainers : 20</span> 
                         <span class="purchase-description">Trainees : 150</span>
@@ -595,21 +751,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4b384c', end
                         </div>
                         <span class="purchase-button">Book Now</span>
                     </a>
-                </li>
-            
-                            <li>
-                    <a href="">
-                         <strong style="color:#862323;">Meditation</strong>
-                        <span class="purchase-description">Classes : 30</span> 
-                        <span class="purchase-description">Trainers : 20</span> 
-                        <span class="purchase-description">Trainees : 150</span>
-<!--                         <big class="purchase-price">$149</big> -->
-						<div class="class-img"> 
-                            <img src="img/yoga-icon123.png" alt="Image">  
-                        </div>
-                        <span class="purchase-button">Book Now</span>
-                    </a>
-                </li>
+                </li>                           
             
                             <li>
                     <a href="">
@@ -626,49 +768,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4b384c', end
                 </li>
                     </ul>
                     
-                    <ul class="wow fadeInDown" data-wow-delay="0.7s">
-                            <li>
-                    <a href="">
-                         <strong style="color:#862323;">Zumba</strong>
-                        <span class="purchase-description">Classes : 30</span> 
-                        <span class="purchase-description">Trainers : 20</span> 
-                        <span class="purchase-description">Trainees : 150</span>
-<!--                         <big class="purchase-price">$149</big> -->
-						<div class="class-img"> 
-                            <img src="img/yoga-icon123.png" alt="Image">  
-                        </div>
-                        <span class="purchase-button">Book Now</span>
-                    </a>
-                </li>
-            
-                            <li>
-                    <a href="">
-                        <strong style="color:#862323;">Weight/Body Weight workout</strong>
-                        <span class="purchase-description">Classes : 30</span> 
-                        <span class="purchase-description">Trainers : 20</span> 
-                        <span class="purchase-description">Trainees : 150</span>
-<!--                         <big class="purchase-price">$149</big> -->
-						<div class="class-img"> 
-                            <img src="img/yoga-icon123.png" alt="Image">  
-                        </div>
-                        <span class="purchase-button">Book Now</span>
-                    </a>
-                </li>
-            
-                            <li>
-                    <a href="">
-                        <strong style="color:#862323;">Nutrition</strong>
-                        <span class="purchase-description">Classes : 30</span> 
-                        <span class="purchase-description">Trainers : 20</span> 
-                        <span class="purchase-description">Trainees : 150</span>
-<!--                         <big class="purchase-price">$149</big> -->
-						<div class="class-img"> 
-                            <img src="img/yoga-icon123.png" alt="Image">  
-                        </div>
-                        <span class="purchase-button">Book Now</span>
-                    </a>
-                </li>
-                    </ul>
+                    
     </div>
 </section>
 	<!-- Expertise New End -->
@@ -787,10 +887,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4b384c', end
 	</div>
 	<!-- Expertise End -->
 	
-	<div class="class" style="background: #000080">
+	<!-- Schedules image Start -->
+	<div class="class" style="background: white">
 		<div class="container">
 			<div class="section-header text-center" style="max-width: none">
-				<h3	style="color: white; font-size: 40px; letter-spacing: 1px; text-transform: uppercase;"><strong>Find
+				<h3	style="color:#0000a8; font-size: 40px; letter-spacing: 1px; text-transform: uppercase;"><strong>Find
 					Your Fitness Guru</strong></h3>
 				<div class="flex flex-wrap flex-valign-center flex-halign-center pb filter-container" style="background: #97d4f2">
 					<div class="flex-column mt mr ml  flex-grow">
@@ -845,11 +946,76 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4b384c', end
 					</div>
 					<div class="hero-btn"></div>
 				</div>
-				<div id="trainers-list-container" class="flex flex-wrap"></div>
+				 <div id="trainers-list-container-image" class="flex flex-wrap"></div>
 			</div>
 		</div>
-		<!-- Hero End -->
 	</div>
+	<!-- Schedules image End -->
+				
+<!-- 	<!-- Schedules Start --> 
+<!-- 	<div class="class" style="background: #000080"> -->
+<!-- 		<div class="container"> -->
+<!-- 			<div class="section-header text-center" style="max-width: none"> -->
+<!-- 				<h3	style="color: white; font-size: 40px; letter-spacing: 1px; text-transform: uppercase;"><strong>Find -->
+<!-- 					Your Fitness Guru</strong></h3> -->
+<!-- 				<div class="flex flex-wrap flex-valign-center flex-halign-center pb filter-container" style="background: #97d4f2"> -->
+<!-- 					<div class="flex-column mt mr ml  flex-grow"> -->
+<!-- 						<span style="font-size: 14px; text-align: left" class="pb-sm">Expertise -->
+<!-- 							of your choice</span> -->
+<!-- 						<select name="form-expertise" id="form-expertise" -->
+<!-- 							class="form-control required flex-grow" -->
+<!-- 							onchange='trainers.filterTrainers(event)' style="width: auto"> -->
+<!-- 							<option value="all">All Expertise</option> -->
+<!-- 							<optgroup label="Yoga"> -->
+<!-- 								<option value="Yoga for health">Yoga for health</option> -->
+<!-- 								<option value="Weight Loss">Weight Loss</option> -->
+<!-- 								<option value="Kids Yoga">Kids Yoga</option> -->
+<!-- 								<option value="Pregnancy Yoga">Pregnancy Yoga</option> -->
+<!-- 								<option value="Meditation">Meditation</option> -->
+<!-- 							</optgroup> -->
+<!-- 							<optgroup label="Dance"> -->
+<!-- 								<option value="Dance">Dance</option> -->
+<!-- 								<option value="Zumba">Zumba</option> -->
+<!-- 							</optgroup> -->
+<!-- 							<option value="Weight / Body weight Workout">Weight / -->
+<!-- 								Body weight Workout</option> -->
+<!-- 							<option value="Nutrition">Nutrition</option> -->
+<!-- 						</select> -->
+<!-- 					</div> -->
+<!-- 					<div class="flex-column mt mr ml  flex-grow"> -->
+<!-- 						<span style="font-size: 14px; text-align: left" class="pb-sm">Your -->
+<!-- 							preferred timings</span> -->
+<!-- 						<select name="form-sort" id="form-filter-misc" -->
+<!-- 							class="form-control required flex-grow" -->
+<!-- 							onchange='trainers.filterByMisc(event)' " style="width: auto"> -->
+<!-- 							<option value="all">All Timings</option> -->
+<!-- 							<option value="04:00:00 11:59">Morning 04:00 AM to 11:59 -->
+<!-- 								AM</option> -->
+<!-- 							<option value="12:00:00 16:59">Afternoon 12:00 PM to -->
+<!-- 								04:59 PM</option> -->
+<!-- 							<option value="17:00:00 23:59">Evening 05:00 PM to 11:59 -->
+<!-- 								PM</option> -->
+<!-- 							<option value="00:00:00 03:59">Night 12:00 AM to 03:59 -->
+<!-- 								AM</option> -->
+<!-- 						</select> -->
+<!-- 					</div> -->
+<!-- 					<div class="flex-column mt mr ml flex-grow"> -->
+<!-- 						<span style="font-size: 14px; text-align: left" class="pb-sm">Sort -->
+<!-- 							by</span> -->
+<!-- 						<select name="form-sort" id="form-sortby" -->
+<!-- 							onchange='trainers.sortTrainersList(event)' -->
+<!-- 							class="form-control required flex-grow" style="width: auto"> -->
+<!-- 							<option value="asc">Fee Lowest to Highest</option> -->
+<!-- 							<option value="desc" selected>Fee Highest to Lowest</option> -->
+<!-- 						</select> -->
+<!-- 					</div> -->
+<!-- 					<div class="hero-btn"></div> -->
+<!-- 				</div> -->
+<!-- 				<div id="trainers-list-container" class="flex flex-wrap"></div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+<!-- 	<!-- Schedules End --> 
 	
 	<!-- Service Start -->
 	<div class="service" style="background: white">
