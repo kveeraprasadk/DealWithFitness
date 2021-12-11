@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
 public class MysqlDatasource implements ServletContextListener {
 	private static Logger log = LogManager.getLogger("Datasource");
 	private static boolean isDev = true;
-	private static final String host = isDev ? "localhost" : "dwb-database.csvevuddwdoj.us-east-2.rds.amazonaws.com";
+	private static final String host = isDev ? "localhost" : "dwf.cvaqdbhcsxqy.ap-south-1.rds.amazonaws.com";
 	private static final int port = 3306;
 	private static final String user = isDev ? "root" : "root";
 	private static final String password = isDev ? "Prasad.89" : "Prasad.89";

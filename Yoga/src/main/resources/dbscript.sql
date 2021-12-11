@@ -144,8 +144,6 @@ create table schedulesSeries (
 	demoClass			boolean default false,
 	fee					float,
 	classLevel			varchar(20),
-	expertise			varchar(40),	
-	demoClass			tinyint(1),
 	PRIMARY KEY (traineremail, id)
 );
 
@@ -167,7 +165,7 @@ create table traineeBookings (
 	PRIMARY KEY (trainerId, traineeId, seriesId)
 );
 
-create table fitnessComments (
+create table fitnesscomments (
 	commentid	int	NOT NULL auto_increment,
 	commentorname	varchar(100),	
 	commentoremail	varchar(100),			

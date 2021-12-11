@@ -34,7 +34,7 @@ public class TrainersListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String TIMING_CONDITION = " CONVERT(DATE_FORMAT(CONVERT_TZ(FROM_UNIXTIME(ss.startTime/1000), '+00:00', '#o'), '%H%i'),  UNSIGNED INTEGER) >= #s and "
 			+ "    CONVERT(DATE_FORMAT(CONVERT_TZ(FROM_UNIXTIME(ss.startTime/1000), '+00:00', '#o'), '%H%i'),  UNSIGNED INTEGER) <= #e ";
-	private static final String SQL = " select tr.traineremail, tr.trainername, tr.experience, tr.qualification, tr.expertise, ss.id as seriesId, ss.startTime, ss.endTime, ss.endByDate, ss.selectedDayNames, "
+	private static final String SQL = " select tr.traineremail, tr.trainername, tr.experience, tr.qualification, tr.expertise, tr.photoname, tr.photo, ss.id as seriesId, ss.startTime, ss.endTime, ss.endByDate, ss.selectedDayNames, "
 			+ "	ss.fee, ss.classlevel, ss.title, ss.location, ss.expertise as ssExpertise, ss.demoClass, tb.traineeId  from (select * from trainerregister where adminapprove = true) tr "
 			+ " left join schedulesSeries ss on tr.traineremail =  ss.traineremail left join traineeBookings tb on "
 			+ "		ss.traineremail = tb.trainerId and ss.id = tb.seriesId %s order by ISNULL(fee), fee %s";
@@ -119,7 +119,14 @@ public class TrainersListServlet extends HttpServlet {
 									trainerDetails.setExperience(rs.getString("experience"));
 									trainerDetails.setQualification(rs.getString("qualification"));
 									trainerDetails.setExpertise(rs.getString("expertise"));
-
+									trainerDetails.setFilename(rs.getString("photoname"));
+									try {
+										trainerDetails.setBase64Image(AppUtils.asBlobEncoded(rs.getBlob("photo")));
+									} catch (IOException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
+									
 									seriesVo.setTrainer(trainerDetails);
 									return seriesVo;
 								} catch (SQLException e) {
@@ -137,6 +144,8 @@ public class TrainersListServlet extends HttpServlet {
 							trainerDetails.setExperience(rs.getString("experience"));
 							trainerDetails.setQualification(rs.getString("qualification"));
 							trainerDetails.setExpertise(rs.getString("expertise"));
+							trainerDetails.setFilename(rs.getString("photoname"));
+							trainerDetails.setBase64Image(AppUtils.asBlobEncoded(rs.getBlob("photo")));
 							seriesVo.setTrainer(trainerDetails);
 							// Just create dummy id so that we can add to map, this id has no significant.
 							schedulesSeriesByTrainer.put(UUID.randomUUID().toString(), seriesVo);

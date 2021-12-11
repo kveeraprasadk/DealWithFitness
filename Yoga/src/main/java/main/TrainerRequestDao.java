@@ -1,15 +1,18 @@
 package main;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import main.common.AppUtils;
 import main.common.DBConnection;
 import main.model.TraineeStory;
 import main.model.TrainerDetailsVO;
@@ -40,44 +43,22 @@ while (rs.next()) {
 	details.setQualification(rs.getString("qualification"));
 	details.setExpertise(rs.getString("expertise"));
 	details.setPhone(rs.getString("phoneno"));
-/*	details.setSchedule(rs.getString("schedules"));
-	details.setClasslevel(rs.getString("classlevel"));
-	details.setMonthlyfees(rs.getString("monthlyfees"));
-	details.setExpertise2(rs.getString("expertise2"));
-	details.setSchedule2(rs.getString("schedules2"));
-	details.setClasslevel2(rs.getString("classlevel2"));
-	details.setMonthlyfees2(rs.getString("monthlyfees2"));
-	details.setExpertise3(rs.getString("expertise3"));
-	details.setSchedule3(rs.getString("schedules3"));
-	details.setClasslevel3(rs.getString("classlevel3"));
-	details.setMonthlyfees3(rs.getString("monthlyfees3"));
-*/	details.setAboutyourself(rs.getString("aboutyourself"));
+
+	details.setAboutyourself(rs.getString("aboutyourself"));
 	details.setFilename(rs.getString("photoname"));
+	try {
+		details.setBase64Image(AppUtils.asBlobEncoded(rs.getBlob("photo")));
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 	details.setCertificate1filename(rs.getString("certificate1filename"));
 	details.setCertificate2filename(rs.getString("certificate2filename"));
 	details.setCertificate3filename(rs.getString("certificate3filename"));
+	
+	
 	details.setCreatetime(rs.getTimestamp("creationtime"));
-/*	Blob blob = rs.getBlob("photo");
-	
-	InputStream inputStream = blob.getBinaryStream();
-   ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-   byte[] buffer = new byte[4096];
-   int bytesRead = -1;
-    
-   while ((bytesRead = inputStream.read(buffer)) != -1) {
-       outputStream.write(buffer, 0, bytesRead);                  
-   }
-    
-   byte[] imageBytes = outputStream.toByteArray();
-   String base64Image = Base64.getEncoder().encodeToString(imageBytes);
-   
-  details.setBase64Image(base64Image);
-    
-    
-   inputStream.close();
-   outputStream.close();
-	
-*/
+
 
 //	System.out.println("list::"+details);
 	// Adding the Student Object to List
@@ -297,19 +278,34 @@ while (rs.next()) {
 		details.setFilename2("");
 	}
 	// details.setCreationTime(rs.getLong("creationTime"));
-	Long vv=rs.getLong("creationTime");
-	String convertedExpireTime = Long.toString(vv);
-	//Create a calendar instance
-	Calendar calendar = Calendar.getInstance();
-	calendar.setTimeInMillis(Long.parseLong(convertedExpireTime));
-	int mYear = calendar.get(Calendar.YEAR);
-	int mMonth = calendar.get(Calendar.MONTH);
-	int mDay = calendar.get(Calendar.DAY_OF_MONTH);
-	int mHour = calendar.get(Calendar.HOUR_OF_DAY);
-	int mMin = calendar.get(Calendar.MINUTE);
-	int mSec = calendar.get(Calendar.SECOND);
-	String readableFormat = mYear + "-" + mMonth + "-" + mDay + " " + mHour + ":"+ mMin + ":"+ mSec; // The value is now converted to 2019-6-27 0:59:59
-	details.setTrainerName(readableFormat);
+	// milliseconds
+    long miliSec = rs.getLong("creationTime");
+
+    // Creating date format
+    DateFormat simple = new SimpleDateFormat("MMM-dd, yyyy HH:mm aa");
+
+    // Creating date from milliseconds
+    // using Date() constructor
+    Date result = new Date(miliSec);
+
+    // Formatting Date according to the
+    // given format
+    System.out.println(simple.format(result));
+	
+//	Long vv=rs.getLong("creationTime");
+//	String convertedExpireTime = Long.toString(vv);
+//	//Create a calendar instance
+//	Calendar calendar = Calendar.getInstance();
+//	calendar.setTimeInMillis(Long.parseLong(convertedExpireTime));
+//	int mYear = calendar.get(Calendar.YEAR);
+//	int mMonth = calendar.get(Calendar.MONTH);
+//	int mDay = calendar.get(Calendar.DAY_OF_MONTH);
+//	int mHour = calendar.get(Calendar.HOUR_OF_DAY);
+//	int mMin = calendar.get(Calendar.MINUTE);
+//	int mSec = calendar.get(Calendar.SECOND);
+//	String readableFormat = mYear + "-" + mMonth + "-" + mDay + " " + mHour + ":"+ mMin + ":"+ mSec; // The value is now converted to 2019-6-27 0:59:59
+//	details.setTrainerName(readableFormat);
+	details.setTrainerName(simple.format(result));
 	
 	// Adding the Student Object to List
 	tstoryrequest.add(details);

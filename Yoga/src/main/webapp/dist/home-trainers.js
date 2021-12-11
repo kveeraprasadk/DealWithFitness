@@ -64,7 +64,7 @@ function Trainers() {
 			data: requestPayload,
 			cache: false,
 			success: function(data) {
-				self.renderTrainers(data);
+				self.renderTrainers(data);				
 			},
 			error: function(error, more) {
 				console.error(error, more)
@@ -374,7 +374,7 @@ function Trainers() {
 				// If series id is there means then trainer will have series otherwise empty
 				if (series.id) {
 					series.attendeeSubscribedClass = "hide";
-					series.zeroAttendeesClass = "hide";
+					series.zeroAttendeesClass = "hide";				
 					if (series.attendees) {
 						series.attendeeCount = series.attendees.length;
 						series.zeroAttendeesClass = series.attendees.length > 0 ? "" : "hide";
@@ -389,7 +389,7 @@ function Trainers() {
 						trainer.demoClass = "demo-class"
 					}
 
-					// If series has overriden expretise then take that otherwise trainer expretise
+					// If series has overridden expertise then take that otherwise trainer expertise
 					trainer.expertise = series.expertise ? series.expertise : trainer.expertise;
 					// Convert the series information to a recurrence rule
 					Utils.addRecurrenceRule(series);
