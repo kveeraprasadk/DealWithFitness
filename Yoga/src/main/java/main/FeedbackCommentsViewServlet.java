@@ -8,8 +8,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -51,7 +53,18 @@ public class FeedbackCommentsViewServlet extends HttpServlet {
 						details.setComment(rs.getString("comment"));
 						details.setCreatetime(rs.getTimestamp("commenttime"));
 						
-						System.out.println("list::" + details);
+						Timestamp tsstart=rs.getTimestamp("commenttime");
+						Date date = new Date();
+						long mlend=date.getTime();
+						long mlstart=tsstart.getTime();
+				        long deff=mlend-mlstart;
+				        int defdays=(int)(deff/(1000*60*60*24));
+				        String days=defdays+"days";
+//						System.out.println("deff::" + deff);
+//						System.out.println("days::" + defdays);
+						
+						details.setDefdays(days);
+						
 						// Adding the Student Object to List
 						commentsList.add(details);
 										

@@ -14,17 +14,21 @@ function Utils() {
 		if (seriesDetails.selectedDayNames && seriesDetails.selectedDayNames.length > 0) {
 			const daysCapitalize = [];
 			for (const dayName of seriesDetails.selectedDayNames) {
-				daysCapitalize.push(dayName.charAt(0).toUpperCase() + dayName.substr(1));
+				//daysCapitalize.push(dayName.charAt(0).toUpperCase() + dayName.substr(1));
+				daysCapitalize.push(dayName.charAt(0).toUpperCase() + dayName.charAt(1)+dayName.charAt(2));
 			}
-			const days = daysCapitalize.join(", ");
+			const days = daysCapitalize.join(", ");			
+			
 //			seriesDetails.schedule = start + " - " + end + " <br> " + "Every " + days + " <br> " +
 //				"Timings: <b>" + sTimeOnly + " - " + eTimeOnly + "</b>";
 			seriesDetails.schedule ="<b>"+sTimeOnly +"</b>";
 			seriesDetails.duration ="<b>"+ttt+" min</b>";
+			seriesDetails.selecteddays="<b>"+days +"</b>";
 		} else {
 //			seriesDetails.schedule = start + " " + sTimeOnly + " - " + eTimeOnly;
 			seriesDetails.schedule = "<b>"+sTimeOnly +"</b>";
 			seriesDetails.duration ="<b>"+ttt+" min</b>";
+			seriesDetails.selecteddays="<b>EveryDay</b>";
 		}
 	}
 

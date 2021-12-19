@@ -257,9 +257,9 @@ hr {
 					<h2>Trainer's Zone</h2>
 				</div>
 				<div class="col-12">
-					<a href="javascript: switchView('calendar')" class="btn btn-info">My Training
+					<a href="javascript: switchView('calendar')" class="btn">My Training
 						Calendar</a>
-					<a href="javascript: switchView('profile')" class="btn btn-info">Profile</a>
+					<a href="javascript: switchView('profile')" class="btn">Profile</a>
 				</div>
 			</div>
 		</div>
@@ -390,43 +390,281 @@ hr {
 					</form>
 					<div id="updatesuccess"></div>
 					<h3 class="mth3">Certificates</h3>
-
-					<ul class="exrts">
-						<li><%=trainerdetails.getCertificate1filename()%></li>
-						<li>
-							<%
+					<% if (trainerdetails.getCertificate1filename().length() > 3 || trainerdetails.getCertificate2filename().length() >3 || trainerdetails.getCertificate3filename().length() >3){ %>
+					<%
 							if (trainerdetails.getCertificate1filename().length() > 3) {
 							%>
-							
-							<a class="downloadReport btn btn-info" target="_blank" href="http://localhost:8080/Yoga/AdminCertificate1DownloadServlet?user=<%=trainerdetails.getEmail() %>,<%=trainerdetails.getCertificate1filename() %>"><i class="fa fa-download blue-color " ></i>&nbspDownload</a>
-							<%
-							}
-							%>
-						</li>
-						<li><%=trainerdetails.getCertificate2filename()%></li>
-						<li>
-							<%
+                  <div class="form-group">
+                    <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                    <%=trainerdetails.getCertificate1filename()%>
+                    </div>                  
+                     
+							 <div class="col-lg-6 col-md-6 col-sm-12">
+<!-- 							<button class="btn certificate1view btn-info ">View</button> -->
+							<a class="downloadReport btn btn-warning" target="_blank" href="http://localhost:8080/Yoga/AdminCertificate1DownloadServlet?user=<%=trainerdetails.getEmail() %>,<%=trainerdetails.getCertificate1filename() %>"><i class="fa fa-download blue-color " ></i>&nbspDownload</a>
+							<button class="btn certificate1-update-btn btn-primary"><i class="fa fa-edit blue-color " ></i>&nbsp Update</button>
+                    </div>
+                    </div>
+                    <div class="row certificate1update hide">
+						<div class="col-lg-8 col-md-8 col-sm-12">
+								<div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm"	style="">
+								<input name="formcertificate1" id="formcertificate1" type="file" 
+									class="form-control border-0 photo-trigger-button">
+								<label id="formcertificate1-lbl" for="formcertificate1"
+									class="font-weight-light text-muted photo-trigger-button-label">Choose
+									file</label>
+								<div class="input-group-append">
+									<label for="formcertificate1"
+										class="btn btn-light m-0 rounded-pill px-4">
+										<i class="fas fa-image fa-lg mr-2 text-muted"></i>
+										<small class="text-uppercase font-weight-bold text-muted">Browse</small>
+									</label>
+								</div>
+							</div>
+						</div>
+					    <div class="col-lg-4 col-md-4 col-sm-12">
+							<button class="btn cert1-upload-btn btn-info"><i class="fa fa-upload blue-color " ></i>&nbsp Upload</button>	
+						</div>
+					</div> 
+					         
+                 </div>
+                   <%
+					}
+					%> 
+						
+						 <%
 							if (trainerdetails.getCertificate2filename().length() > 3) {
 							%>
-							<a class="downloadReport btn btn-info" target="_blank" href="http://localhost:8080/Yoga/AdminCertificate2DownloadServlet?user=<%=trainerdetails.getEmail() %>,<%=trainerdetails.getCertificate2filename() %>"><i class="fa fa-download blue-color " ></i>&nbspDownload</a>
-							<%
-							System.out.println("tt::" + trainerdetails.getCertificate2filename().length());
-							}
-							%>
-						</li>
-						<li><%=trainerdetails.getCertificate3filename()%></li>
-						<li>
-							<%
+				<div class="form-group">
+                    <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                    <%=trainerdetails.getCertificate2filename()%>
+                    </div>
+                     <div class="col-lg-6 col-md-6 col-sm-12">
+                    
+<!-- 							<button class="btn certificate1view btn-info ">View</button> -->
+							<a class="downloadReport btn btn-warning" target="_blank" href="http://localhost:8080/Yoga/AdminCertificate2DownloadServlet?user=<%=trainerdetails.getEmail() %>,<%=trainerdetails.getCertificate2filename() %>"><i class="fa fa-download blue-color " ></i>&nbspDownload</a>
+							<button class="btn certificate2-update-btn btn-primary"><i class="fa fa-edit blue-color " ></i>&nbsp Update</button>
+                    </div>
+                    </div>
+                    <div class="row certificate2update hide">
+						<div class="col-lg-8 col-md-8 col-sm-12">
+								<div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm"	style="">
+								<input name="form-certificate2" id="form-certificate2" type="file" 
+									class="form-control border-0 photo-trigger-button">
+								<label id="form-certificate2-lbl" for="form-certificate2"
+									class="font-weight-light text-muted photo-trigger-button-label">Choose
+									file</label>
+								<div class="input-group-append">
+									<label for="form-certificate2"
+										class="btn btn-light m-0 rounded-pill px-4">
+										<i class="fas fa-image fa-lg mr-2 text-muted"></i>
+										<small class="text-uppercase font-weight-bold text-muted">Browse</small>
+									</label>
+								</div>
+							</div>
+						</div>
+					    <div class="col-lg-4 col-md-4 col-sm-12">
+							<button class="btn cert2-upload-btn btn-info"><i class="fa fa-upload blue-color " ></i>&nbsp Upload</button>	
+						</div>
+					</div>           
+              </div>
+                   <%
+					}
+					%> 
+							
+					 <%
 							if (trainerdetails.getCertificate3filename().length() > 3) {
-							%>
-							<a class="downloadReport btn btn-info" target="_blank" href="http://localhost:8080/Yoga/AdminCertificate3DownloadServlet?user=<%=trainerdetails.getEmail() %>,<%=trainerdetails.getCertificate3filename() %>"><i class="fa fa-download blue-color " ></i>&nbspDownload</a>
-							<%
-							}
-							%>
-						</li>
-					</ul>
-
-				</div>
+							%>				
+					<div class="form-group">
+                    <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                    <%=trainerdetails.getCertificate3filename()%>
+                    </div>
+                     <div class="col-lg-6 col-md-6 col-sm-12">
+                    
+						<!-- 	<button class="btn certificate3view btn-info ">View</button> -->
+							<a class="downloadReport btn btn-warning" target="_blank" href="http://localhost:8080/Yoga/AdminCertificate3DownloadServlet?user=<%=trainerdetails.getEmail() %>,<%=trainerdetails.getCertificate3filename() %>"><i class="fa fa-download blue-color " ></i>&nbspDownload</a>
+							<button class="btn certificate3-update-btn btn-primary"><i class="fa fa-edit blue-color " ></i>&nbsp Update</button>
+                    </div>
+                    </div>                   	
+                   
+                    <div class="row certificate3update hide">
+						<div class="col-lg-8 col-md-8 col-sm-12">
+								<div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm"	style="">
+								<input name="form-certificate3" id="form-certificate3" type="file" 
+									class="form-control border-0 photo-trigger-button">
+								<label id="form-certificate3-lbl" for="form-certificate3"
+									class="font-weight-light text-muted photo-trigger-button-label">Choose
+									file</label>
+								<div class="input-group-append">
+									<label for="form-certificate3"
+										class="btn btn-light m-0 rounded-pill px-4">
+										<i class="fas fa-image fa-lg mr-2 text-muted"></i>
+										<small class="text-uppercase font-weight-bold text-muted">Browse</small>
+									</label>
+								</div>
+							</div>
+						</div>
+					    <div class="col-lg-4 col-md-4 col-sm-12">
+							<button class="btn cert3-upload-btn btn-info"><i class="fa fa-upload blue-color " ></i>&nbsp Upload</button>	
+						</div>
+					</div>           
+                 </div>
+                  <%
+					}
+					%> 
+                 <div class="form-group">
+                 <div class="row">
+					<button class="btn add-cert-field-btn "><u>Add/Modify Certificates</u></button>
+					</div> 
+                 </div>
+                 <div class="extra-add-certificates">
+                 <div class="form-group">
+											<strong>Upload Certificates</strong>
+											<div class="row">
+												<div class="col-9">
+								<div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm"	style="">
+								<input name="formcertificate1" id="formcertificate1" type="file" 
+									class="form-control border-0 photo-trigger-button">
+								<label id="formcertificate1-lbl" for="formcertificate1"
+									class="font-weight-light text-muted photo-trigger-button-label">Choose
+									file</label>
+								<div class="input-group-append">
+									<label for="formcertificate1"
+										class="btn btn-light m-0 rounded-pill px-4">
+										<i class="fas fa-image fa-lg mr-2 text-muted"></i>
+										<small class="text-uppercase font-weight-bold text-muted">Browse</small>
+									</label>
+								</div>
+							</div>
+												</div>
+												<div class="col-3">
+													<button type="button" id="addcertificate1" class="unstyled-button"  style="background-color:grey;color:white;width:40px;
+ 														height:40px;border-radius: 50%;"><i class="fa fa-plus" aria-hidden="true"></i></button>												 
+														
+												</div>
+											</div>
+											<div class="row form-certificate2-field ">
+												<div class="col-9">
+								<div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm"	style="">
+								<input name="form-certificate2" id="form-certificate2" type="file" 
+									class="form-control border-0 photo-trigger-button">
+								<label id="form-certificate2-lbl" for="form-certificate2"
+									class="font-weight-light text-muted photo-trigger-button-label">Choose
+									file</label>
+								<div class="input-group-append">
+									<label for="form-certificate2"
+										class="btn btn-light m-0 rounded-pill px-4">
+										<i class="fas fa-image fa-lg mr-2 text-muted"></i>
+										<small class="text-uppercase font-weight-bold text-muted">Browse</small>
+									</label>
+								</div>
+							</div>
+												</div>
+												<div class="col-3">
+													<button type="button" id="addcertificate2" class="unstyled-button" style="background-color:Grey;color:white;width:40px;
+														height:40px;border-radius: 50%;"><i class="fa fa-plus" aria-hidden="true"></i></button> 
+												</div>
+											</div>
+											<div class="row form-certificate3-field">
+												<div class="col-9">
+														<div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm"	style="">
+								<input name="form-certificate3" id="form-certificate3" type="file" 
+									class="form-control border-0 photo-trigger-button">
+								<label id="form-certificate3-lbl" for="form-certificate3"
+									class="font-weight-light text-muted photo-trigger-button-label">Choose
+									file</label>
+								<div class="input-group-append">
+									<label for="form-certificate3"
+										class="btn btn-light m-0 rounded-pill px-4">
+										<i class="fas fa-image fa-lg mr-2 text-muted"></i>
+										<small class="text-uppercase font-weight-bold text-muted">Browse</small>
+									</label>
+								</div>
+							</div>
+												</div>
+											</div>
+											<div class="row">
+											<button class="btn certificatesall-upload-btn btn-info"><i class="fa fa-upload blue-color " ></i>&nbsp Upload</button>
+											</div>
+										</div>					
+                 </div>              			
+                    
+              
+                <%} else{ %>
+                										<div class="form-group">
+											<strong>Upload Certificates</strong>
+											<div class="row">
+												<div class="col-9">
+								<div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm"	style="">
+								<input name="formcertificate1" id="formcertificate1" type="file" 
+									class="form-control border-0 photo-trigger-button">
+								<label id="formcertificate1-lbl" for="formcertificate1"
+									class="font-weight-light text-muted photo-trigger-button-label">Choose
+									file</label>
+								<div class="input-group-append">
+									<label for="formcertificate1"
+										class="btn btn-light m-0 rounded-pill px-4">
+										<i class="fas fa-image fa-lg mr-2 text-muted"></i>
+										<small class="text-uppercase font-weight-bold text-muted">Browse</small>
+									</label>
+								</div>
+							</div>
+												</div>
+												<div class="col-3">
+													<button type="button" id="addcertificate1" class="unstyled-button"  style="background-color:grey;color:white;width:40px;
+ 														height:40px;border-radius: 50%;"><i class="fa fa-plus" aria-hidden="true"></i></button>												 
+														
+												</div>
+											</div>
+											<div class="row form-certificate2-field ">
+												<div class="col-9">
+								<div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm"	style="">
+								<input name="form-certificate2" id="form-certificate2" type="file" 
+									class="form-control border-0 photo-trigger-button">
+								<label id="form-certificate2-lbl" for="form-certificate2"
+									class="font-weight-light text-muted photo-trigger-button-label">Choose
+									file</label>
+								<div class="input-group-append">
+									<label for="form-certificate2"
+										class="btn btn-light m-0 rounded-pill px-4">
+										<i class="fas fa-image fa-lg mr-2 text-muted"></i>
+										<small class="text-uppercase font-weight-bold text-muted">Browse</small>
+									</label>
+								</div>
+							</div>
+												</div>
+												<div class="col-3">
+													<button type="button" id="addcertificate2" class="unstyled-button" style="background-color:Grey;color:white;width:40px;
+														height:40px;border-radius: 50%;"><i class="fa fa-plus" aria-hidden="true"></i></button> 
+												</div>
+											</div>
+											<div class="row form-certificate3-field">
+												<div class="col-9">
+														<div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm"	style="">
+								<input name="form-certificate3" id="form-certificate3" type="file" 
+									class="form-control border-0 photo-trigger-button">
+								<label id="form-certificate3-lbl" for="form-certificate3"
+									class="font-weight-light text-muted photo-trigger-button-label">Choose
+									file</label>
+								<div class="input-group-append">
+									<label for="form-certificate3"
+										class="btn btn-light m-0 rounded-pill px-4">
+										<i class="fas fa-image fa-lg mr-2 text-muted"></i>
+										<small class="text-uppercase font-weight-bold text-muted">Browse</small>
+									</label>
+								</div>
+							</div>
+												</div>
+											</div>
+											<div class="row">
+											<button class="btn certificatesall-upload-btn btn-info"><i class="fa fa-upload blue-color " ></i>&nbsp Upload</button>
+											</div>
+										</div>										
+                <%} %>
+                </div>
 
 				<div class="col-lg-4 col-md-5 leftgh flex-column flex-halign-center flex-valign-center">
 
@@ -490,6 +728,34 @@ hr {
 						</form>
 						
 					</div>
+					<script type="text/javascript">
+	$('.form-certificate2-field').hide();
+	$('.form-certificate3-field').hide();
+	$('.extra-add-certificates').hide();
+	
+	$(".certificate1-update-btn").click(function() {
+		$('.certificate1update').toggle();	
+		$('.cert1-upload-li').toggle();
+	});
+	$(".certificate2-update-btn").click(function() {
+		$('.certificate2update').toggle();	
+		
+	});
+	$(".certificate3-update-btn").click(function() {
+		$('.certificate3update').toggle();	
+	});
+	$("#addcertificate1").click(function() {
+		$('.form-certificate2-field').toggle();
+		
+	});
+	$("#addcertificate2").click(function() {
+		$('.form-certificate3-field').toggle();
+	});
+	$(".add-cert-field-btn").click(function() {
+		$('.extra-add-certificates').toggle();	
+		
+	});
+	</script>
 <script type="text/javascript">
 $(document).ready(function() {
 	console.log("page ready..");
@@ -548,9 +814,7 @@ window.onclick = function(event) {
 					<div class="name-det">
 						<h2><%=trainerdetails.getName()%></h2>
 						<h3>Contact</h3>
-						<p><%=trainerdetails.getName()%>
-							<br>
-						</p>
+						
 						<p><%=trainerdetails.getEmail()%>
 							<br>
 						</p>

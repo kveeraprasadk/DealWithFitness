@@ -49,6 +49,7 @@ public class TrainerDetailsVO {
 	private String starttime;
 	private String endtime;
 	private String selecteddays;
+	private String defdays;
 	
 	public String getSelecteddays() {
 		return selecteddays;
@@ -403,6 +404,14 @@ public class TrainerDetailsVO {
 
 	public void setEndtime(String endtime) {
 		this.endtime = endtime;
+	}
+
+	public String getDefdays() {
+		return defdays;
+	}
+
+	public void setDefdays(String defdays) {
+		this.defdays = defdays;
 	}
 
 	

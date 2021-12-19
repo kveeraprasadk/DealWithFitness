@@ -272,6 +272,8 @@ input[type=time] {
 	width: calc(100% - 95px);
 	margin: 0 10px 0 10px;
 	font-weight: 600;
+	
+	font-size:2.0rem;
 }
 
 .attendee-count {

@@ -56,7 +56,7 @@ public class TrainerDetailsView extends HttpServlet {
 		
 		try (Connection connection = DBConnection.createConnection()) {
 		try (PreparedStatement statement = connection.prepareStatement("select * from trainerregister where traineremail=?")) 
-	//		try (PreparedStatement statement = connection.prepareStatement("select tr.trainername,tr.traineremail,tr.experience,tr.qualification,tr.aboutyourself,tr.photoname,tr.photo,tr.certificate1filename,tr.certificate2filename,tr.certificate3filename,ss.title,ss.starttime,ss.endtime,ss.endByDate,ss.selectedDayNames,ss.trainerpreference,ss.fee,ss.classlevel,ss.expertise,ss.democlass from trainerregister tr,schedulesseries ss where tr.traineremail=ss.traineremail and tr.traineremail=?")) 
+	//i need this query asif sir       try (PreparedStatement statement = connection.prepareStatement("select tr.trainername,tr.traineremail,tr.experience,tr.qualification,tr.aboutyourself,tr.photoname,tr.photo,tr.certificate1filename,tr.certificate2filename,tr.certificate3filename,ss.title,ss.starttime,ss.endtime,ss.endByDate,ss.selectedDayNames,ss.trainerpreference,ss.fee,ss.classlevel,ss.expertise,ss.democlass from trainerregister tr,schedulesseries ss where tr.traineremail=ss.traineremail and tr.traineremail=?")) 
 			{
 				statement.setString(1, traineremail);
 				try (ResultSet rs = statement.executeQuery()) {

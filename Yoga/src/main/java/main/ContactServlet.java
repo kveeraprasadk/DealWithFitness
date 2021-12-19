@@ -51,7 +51,7 @@ public class ContactServlet extends HttpServlet {
 		
 		System.out.println("class running::");
 		String name = (String)request.getParameter("name");
-		
+		String phone = (String)request.getParameter("phone");
 		String email = (String)request.getParameter("email");
 		String subject = (String)request.getParameter("subject");
 		String usermessage = (String)request.getParameter("message");
@@ -62,13 +62,14 @@ public class ContactServlet extends HttpServlet {
         try
         {
             con = DBConnection.createConnection();
-            String query = "insert into fitnesscomments(commentorname,commentoremail,subject,comment,commenttime) values (?,?,?,?,?)"; //Insert user details into the table 'USERS'
+            String query = "insert into fitnesscomments(commentorname,commentoremail,commentorphone,subject,comment,commenttime) values (?,?,?,?,?)"; //Insert user details into the table 'USERS'
             PreparedStatement statement = con.prepareStatement(query); //Making use of prepared statements here to insert bunch of data
             statement.setString(1, name);              
             statement.setString(2, email);
-            statement.setString(3, subject);
-            statement.setString(4, usermessage);
-            statement.setTimestamp(5, ts);              
+            statement.setString(3, phone);
+            statement.setString(4, subject);
+            statement.setString(5, usermessage);
+            statement.setTimestamp(6, ts);              
             
             int i= statement.executeUpdate();
             if (i==1)  {         	   
@@ -102,7 +103,7 @@ public class ContactServlet extends HttpServlet {
 			message.setContent(
 			"Hi<p> DealWithFitness Creative Team,"
 			+ "<br>This is the mail regarding to the Deal With Fitness Creative team to post a comment.<br>Below are the contact details. "
-			+ "Please reply him comment. <br><br><br>Name :"+name+"<br>Email :"+email+"<br>Message :"+usermessage+"</p>",
+			+ "Please reply him comment. <br><br><br>Name :"+name+"<br>Email :"+email+"<br>PhoneNumber :"+phone+"<br>Message :"+usermessage+"</p>",
 			"text/html");
 			//<a href=http://localhost:8083/DealWithBusiness/ChangePassword.jsp>Change Password</a>
 			// send message

@@ -59,6 +59,9 @@
     	<script src="assets/js/owl-carousel.js"></script>
     	<script src="assets/js/lightbox.js"></script>
     	<script src="assets/js/custom.js"></script>
+    	
+    	<script src="./dist/whoami.js"></script>
+
     <script>
       //according to loftblog tut
       $(".main-menu li:first").addClass("active");
@@ -155,14 +158,15 @@ label {
     <body onLoad="LoadingTrainersProfileData()">
     <script type="text/javascript">
      function LoadingTrainersProfileData(){
-    	 
+    	 whoami.detect();
+    	
     	 $.ajax({
 
     		 type: 'GET',
     		 url: "${pageContext.request.contextPath}/TrainerRequestServlet",
     		 
     	 }); 
-    	 
+    	
     	 const image = $("#trainer-profile-base64-encoded-element").val();
 			if (image) {
 				console.log("Profile picture present")
