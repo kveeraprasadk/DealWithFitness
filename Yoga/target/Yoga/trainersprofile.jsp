@@ -74,6 +74,7 @@
 	<script src="profile/js/script.js"></script>
 <script src="./dist/whoami.js"></script>
 
+
 <style>
 .toggle.ios, .toggle-on.ios, .toggle-off.ios {
 	border-radius: 20px;
@@ -105,85 +106,29 @@
 }
 </style>
 <style>
-/* The Modal (background) */
-.modal-new {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 395px;
-  top: 90px;
-  width: 40%; /* Full width */
-  height: 90%; /* Full height */
-
-  padding-top: 50px;
-}
-/* Modal Content/Box */
-.content-new {
- /* background-color: #828282;  */
-    background-color: #d9edf7;
-  margin: 2% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-  border: 1px solid #888; 
-  width: 80%; /* Full width */
-  height: 90%; /* Full height */
-}
-/* Float cancel and delete buttons and add an equal width */
-.cancelbtn, .deletebtn {
-	float: left;
-	width: 50%;
-}
-
-/* Add a color to the cancel button */
-.cancelbtn {
-	background-color: #ccc;
-	color: black;
-}
-
-/* Add a color to the delete button */
-.deletebtn {
-/*	background-color: #f44336; */
-	background-color: 	#4169E1;
-}
-
-
-
 /* Style the horizontal ruler */
 hr {
 	border: 1px solid #f1f1f1;
 	margin-bottom: 25px;
 }
 
-/* The Modal Close Button (x) */
-.close {
-	position: absolute;
-	right: 35px;
-	top: 15px;
-	font-size: 40px;
-	font-weight: bold;
-	color: red;
-}
 
-.close:hover, .close:focus {
-	color: red;
-	cursor: pointer;
-}
+
 
 /* Clear floats */
 .clearfix::after {
 	content: "";
 	clear: both;
 	display: table;
+
+.input-group-append {
+    margin-left: 550px;
+}
+@media screen and (min-width: 200px) and (max-width: 970px) {
+.input-group-append {
+    margin-left: 280px;
 }
 
-.unstyled-button {
-	border: none;
-	padding: 0;
-	background: none;
-}
-/* Change styles for cancel button and delete button on extra small screens */
-@media screen and (max-width: 300px) {
-	.cancelbtn, .deletebtn {
-		width: 100%;
-	}
 }
 </style>
 
@@ -247,6 +192,7 @@ hr {
 	<!-- Nav Bar Start -->
 	<%@include file="./html/navbar.html"%>
 	<%@include file="./html/dialogs.html"%>
+	<%@include file="./html/trainer-profile-pic-update-modal.html"%>
 	<!-- Nav Bar End -->
 
 	<!-- Page Header Start -->
@@ -406,16 +352,21 @@ hr {
 							<button class="btn certificate1-update-btn btn-primary"><i class="fa fa-edit blue-color " ></i>&nbsp Update</button>
                     </div>
                     </div>
+                    <form class="trainerprofilecertificate1update" role="form"
+							enctype="multipart/form-data"
+							action="TrainerProfileCertificates1UpdateServlet"
+							id="trainerprofilecertificate1update"							
+							name="trainerprofilecertificate1update" method="post">
                     <div class="row certificate1update hide">
 						<div class="col-lg-8 col-md-8 col-sm-12">
 								<div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm"	style="">
-								<input name="formcertificate1" id="formcertificate1" type="file" 
+								<input name="form-certificate1-update" id="form-certificate1-update" type="file" 
 									class="form-control border-0 photo-trigger-button">
-								<label id="formcertificate1-lbl" for="formcertificate1"
+								<label id="form-certificate1-update-lbl" for="form-certificate1-update"
 									class="font-weight-light text-muted photo-trigger-button-label">Choose
 									file</label>
 								<div class="input-group-append">
-									<label for="formcertificate1"
+									<label for="form-certificate1-update"
 										class="btn btn-light m-0 rounded-pill px-4">
 										<i class="fas fa-image fa-lg mr-2 text-muted"></i>
 										<small class="text-uppercase font-weight-bold text-muted">Browse</small>
@@ -424,10 +375,10 @@ hr {
 							</div>
 						</div>
 					    <div class="col-lg-4 col-md-4 col-sm-12">
-							<button class="btn cert1-upload-btn btn-info"><i class="fa fa-upload blue-color " ></i>&nbsp Upload</button>	
+							<button type="submit" class="btn cert1-upload-btn btn-info"><i class="fa fa-upload blue-color " ></i>&nbsp Upload</button>	
 						</div>
 					</div> 
-					         
+					    </form>     
                  </div>
                    <%
 					}
@@ -448,16 +399,21 @@ hr {
 							<button class="btn certificate2-update-btn btn-primary"><i class="fa fa-edit blue-color " ></i>&nbsp Update</button>
                     </div>
                     </div>
+                    <form class="trainerprofilecertificate2update" role="form"
+							enctype="multipart/form-data"
+							action="TrainerProfileCertificates2UpdateServlet"
+							id="trainerprofilecertificate2update"							
+							name="trainerprofilecertificate2update" method="post">
                     <div class="row certificate2update hide">
 						<div class="col-lg-8 col-md-8 col-sm-12">
 								<div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm"	style="">
-								<input name="form-certificate2" id="form-certificate2" type="file" 
+								<input name="form-certificate2-update" id="form-certificate2-update" type="file" 
 									class="form-control border-0 photo-trigger-button">
-								<label id="form-certificate2-lbl" for="form-certificate2"
+								<label id="form-certificate2-update-lbl" for="form-certificate2-update"
 									class="font-weight-light text-muted photo-trigger-button-label">Choose
 									file</label>
 								<div class="input-group-append">
-									<label for="form-certificate2"
+									<label for="form-certificate2-update"
 										class="btn btn-light m-0 rounded-pill px-4">
 										<i class="fas fa-image fa-lg mr-2 text-muted"></i>
 										<small class="text-uppercase font-weight-bold text-muted">Browse</small>
@@ -468,7 +424,8 @@ hr {
 					    <div class="col-lg-4 col-md-4 col-sm-12">
 							<button class="btn cert2-upload-btn btn-info"><i class="fa fa-upload blue-color " ></i>&nbsp Upload</button>	
 						</div>
-					</div>           
+					</div> 
+					   </form>       
               </div>
                    <%
 					}
@@ -486,20 +443,24 @@ hr {
                     
 						<!-- 	<button class="btn certificate3view btn-info ">View</button> -->
 							<a class="downloadReport btn btn-warning" target="_blank" href="http://localhost:8080/Yoga/AdminCertificate3DownloadServlet?user=<%=trainerdetails.getEmail() %>,<%=trainerdetails.getCertificate3filename() %>"><i class="fa fa-download blue-color " ></i>&nbspDownload</a>
-							<button class="btn certificate3-update-btn btn-primary"><i class="fa fa-edit blue-color " ></i>&nbsp Update</button>
+							<button type="submit" class="btn certificate3-update-btn btn-primary"><i class="fa fa-edit blue-color " ></i>&nbsp Update</button>
                     </div>
                     </div>                   	
-                   
+                   <form class="trainerprofilecertificate3update" role="form"
+							enctype="multipart/form-data"
+							action="TrainerProfileCertificates3UpdateServlet"
+							id="trainerprofilecertificate3update"							
+							name="trainerprofilecertificate3update" method="post">
                     <div class="row certificate3update hide">
 						<div class="col-lg-8 col-md-8 col-sm-12">
 								<div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm"	style="">
-								<input name="form-certificate3" id="form-certificate3" type="file" 
+								<input name="form-certificate3-update" id="form-certificate3-update" type="file" 
 									class="form-control border-0 photo-trigger-button">
-								<label id="form-certificate3-lbl" for="form-certificate3"
+								<label id="form-certificate3-update-lbl" for="form-certificate3-update"
 									class="font-weight-light text-muted photo-trigger-button-label">Choose
 									file</label>
 								<div class="input-group-append">
-									<label for="form-certificate3"
+									<label for="form-certificate3-update"
 										class="btn btn-light m-0 rounded-pill px-4">
 										<i class="fas fa-image fa-lg mr-2 text-muted"></i>
 										<small class="text-uppercase font-weight-bold text-muted">Browse</small>
@@ -508,9 +469,10 @@ hr {
 							</div>
 						</div>
 					    <div class="col-lg-4 col-md-4 col-sm-12">
-							<button class="btn cert3-upload-btn btn-info"><i class="fa fa-upload blue-color " ></i>&nbsp Upload</button>	
+							<button type="submit" class="btn cert3-upload-btn btn-info"><i class="fa fa-upload blue-color " ></i>&nbsp Upload</button>	
 						</div>
-					</div>           
+					</div> 
+					</form>          
                  </div>
                   <%
 					}
@@ -521,18 +483,23 @@ hr {
 					</div> 
                  </div>
                  <div class="extra-add-certificates">
+                <form class="trainerprofileextracertificates" role="form"
+							enctype="multipart/form-data"
+							action="TrainerProfileExtraCertificatesaddServlet"
+							id="trainerprofileextracertificates"							
+							name="trainerprofileextracertificates" method="post">
                  <div class="form-group">
 											<strong>Upload Certificates</strong>
 											<div class="row">
 												<div class="col-9">
 								<div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm"	style="">
-								<input name="formcertificate1" id="formcertificate1" type="file" 
+								<input name="form-certificate1-extra" id="form-certificate1-extra" type="file" 
 									class="form-control border-0 photo-trigger-button">
-								<label id="formcertificate1-lbl" for="formcertificate1"
+								<label id="form-certificate1-extra-lbl" for="form-certificate1-extra"
 									class="font-weight-light text-muted photo-trigger-button-label">Choose
 									file</label>
 								<div class="input-group-append">
-									<label for="formcertificate1"
+									<label for="form-certificate1-extra"
 										class="btn btn-light m-0 rounded-pill px-4">
 										<i class="fas fa-image fa-lg mr-2 text-muted"></i>
 										<small class="text-uppercase font-weight-bold text-muted">Browse</small>
@@ -549,13 +516,13 @@ hr {
 											<div class="row form-certificate2-field ">
 												<div class="col-9">
 								<div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm"	style="">
-								<input name="form-certificate2" id="form-certificate2" type="file" 
+								<input name="form-certificate2-extra" id="form-certificate2-extra" type="file" 
 									class="form-control border-0 photo-trigger-button">
-								<label id="form-certificate2-lbl" for="form-certificate2"
+								<label id="form-certificate2-extra-lbl" for="form-certificate2-extra"
 									class="font-weight-light text-muted photo-trigger-button-label">Choose
 									file</label>
 								<div class="input-group-append">
-									<label for="form-certificate2"
+									<label for="form-certificate2-extra"
 										class="btn btn-light m-0 rounded-pill px-4">
 										<i class="fas fa-image fa-lg mr-2 text-muted"></i>
 										<small class="text-uppercase font-weight-bold text-muted">Browse</small>
@@ -571,13 +538,13 @@ hr {
 											<div class="row form-certificate3-field">
 												<div class="col-9">
 														<div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm"	style="">
-								<input name="form-certificate3" id="form-certificate3" type="file" 
+								<input name="form-certificate3-extra" id="form-certificate3-extra" type="file" 
 									class="form-control border-0 photo-trigger-button">
-								<label id="form-certificate3-lbl" for="form-certificate3"
+								<label id="form-certificate3-extra-lbl" for="form-certificate3-extra"
 									class="font-weight-light text-muted photo-trigger-button-label">Choose
 									file</label>
 								<div class="input-group-append">
-									<label for="form-certificate3"
+									<label for="form-certificate3-extra"
 										class="btn btn-light m-0 rounded-pill px-4">
 										<i class="fas fa-image fa-lg mr-2 text-muted"></i>
 										<small class="text-uppercase font-weight-bold text-muted">Browse</small>
@@ -587,25 +554,32 @@ hr {
 												</div>
 											</div>
 											<div class="row">
-											<button class="btn certificatesall-upload-btn btn-info"><i class="fa fa-upload blue-color " ></i>&nbsp Upload</button>
+											<button type="submit" class="btn certificatesall-upload-btn btn-info"><i class="fa fa-upload blue-color " ></i>&nbsp Upload</button>
 											</div>
-										</div>					
-                 </div>              			
+										</div>
+						</form>									
+                 </div>               			
                     
               
-                <%} else{ %>
+ <%} else{ %>
+                <form class="trainerprofileaddcertificates" role="form"
+							enctype="multipart/form-data"
+							action="TrainerProfileCertificatesUpdateServlet"
+							id="trainerprofileaddcertificates"							
+							name="trainerprofileaddcertificates" method="post">
                 										<div class="form-group">
 											<strong>Upload Certificates</strong>
+											
 											<div class="row">
 												<div class="col-9">
 								<div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm"	style="">
-								<input name="formcertificate1" id="formcertificate1" type="file" 
+								<input name="form-certificate1-add" id="form-certificate1-add" type="file" 
 									class="form-control border-0 photo-trigger-button">
-								<label id="formcertificate1-lbl" for="formcertificate1"
+								<label id="form-certificate1-add-lbl" for="form-certificate1-add"
 									class="font-weight-light text-muted photo-trigger-button-label">Choose
 									file</label>
 								<div class="input-group-append">
-									<label for="formcertificate1"
+									<label for="form-certificate1-add"
 										class="btn btn-light m-0 rounded-pill px-4">
 										<i class="fas fa-image fa-lg mr-2 text-muted"></i>
 										<small class="text-uppercase font-weight-bold text-muted">Browse</small>
@@ -622,13 +596,13 @@ hr {
 											<div class="row form-certificate2-field ">
 												<div class="col-9">
 								<div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm"	style="">
-								<input name="form-certificate2" id="form-certificate2" type="file" 
+								<input name="form-certificate2-add" id="form-certificate2-add" type="file" 
 									class="form-control border-0 photo-trigger-button">
-								<label id="form-certificate2-lbl" for="form-certificate2"
+								<label id="form-certificate2-add-lbl" for="form-certificate2-add"
 									class="font-weight-light text-muted photo-trigger-button-label">Choose
 									file</label>
 								<div class="input-group-append">
-									<label for="form-certificate2"
+									<label for="form-certificate2-add"
 										class="btn btn-light m-0 rounded-pill px-4">
 										<i class="fas fa-image fa-lg mr-2 text-muted"></i>
 										<small class="text-uppercase font-weight-bold text-muted">Browse</small>
@@ -644,13 +618,13 @@ hr {
 											<div class="row form-certificate3-field">
 												<div class="col-9">
 														<div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm"	style="">
-								<input name="form-certificate3" id="form-certificate3" type="file" 
+								<input name="form-certificate3-add" id="form-certificate3-add" type="file" 
 									class="form-control border-0 photo-trigger-button">
-								<label id="form-certificate3-lbl" for="form-certificate3"
+								<label id="form-certificate3-add-lbl" for="form-certificate3-add"
 									class="font-weight-light text-muted photo-trigger-button-label">Choose
 									file</label>
 								<div class="input-group-append">
-									<label for="form-certificate3"
+									<label for="form-certificate3-add"
 										class="btn btn-light m-0 rounded-pill px-4">
 										<i class="fas fa-image fa-lg mr-2 text-muted"></i>
 										<small class="text-uppercase font-weight-bold text-muted">Browse</small>
@@ -660,9 +634,10 @@ hr {
 												</div>
 											</div>
 											<div class="row">
-											<button class="btn certificatesall-upload-btn btn-info"><i class="fa fa-upload blue-color " ></i>&nbsp Upload</button>
+											<button type="submit" class="btn certificatesall-upload-btn btn-info"><i class="fa fa-upload blue-color " ></i>&nbsp Upload</button>
 											</div>
-										</div>										
+										</div>
+										</form>												
                 <%} %>
                 </div>
 
@@ -680,55 +655,49 @@ hr {
 
 
 
-					<div id="id01" class="modal modal-new">
-<!-- 						<span onclick="document.getElementById('id01').style.display='none'" -->
-<!-- 							class="close" title="Close Modal">×</span> -->
+<!-- 					<div id="id02" class="modal modal-new" > -->
+<!-- 						<form class="modal-content content-new" role="form" -->
+<!-- 							enctype="multipart/form-data" -->
+<!-- 							action="TrainerProfilePicUpdateServlet" -->
+<!-- 							id="trainerprofilepictureupdate" -->
+<!-- 							name="trainerprofilepictureupdate" method="post"> -->
+<!-- 							<div class="container"> -->
+<!-- 								<h3 class="text-center">Update Profile Picture</h3> -->
+<!-- 								<h6>Please Select Update Picture !</h6>	 -->
 
-						<form class="modal-content content-new" role="form"
-							enctype="multipart/form-data"
-							action="TrainerProfilePicUpdateServlet"
-							id="trainerprofilepictureupdate"
-							name="trainerprofilepictureupdate" method="post">
-							<div class="container">
-								<h3 class="text-center">Update Profile Picture</h3>
-								<h6>Please Select Update Picture !</h6>
+<!-- 										<div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm"	style=""> -->
+<!-- 								<input name="formimage" id="formimage" type="file"  -->
+<!-- 									class="form-control border-0 photo-trigger-button" -->
+<!-- 									accept=".jpg, .png, .jpeg, .gif, .tif, .tiff" onchange="preview_image(event)"> -->
+<!-- 								<label id="formimage-lbl" for="formimage" -->
+<!-- 									class="font-weight-light text-muted photo-trigger-button-label">Choose -->
+<!-- 									file</label> -->
+<!-- 								<div class="input-group-append"> -->
+<!-- 									<label for="formimage" -->
+<!-- 										class="btn btn-light m-0 rounded-pill px-4 "> -->
+<!-- 										<i class="fas fa-image fa-lg mr-2 text-muted"></i> -->
+<!-- 										<small class="text-uppercase font-weight-bold text-muted">Browse</small> -->
+<!-- 									</label> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 								<div class="bh-img " > -->
+<!-- 									<img id="output_image" class="text-center"/> -->
+<!-- 								</div> -->
 								
-<!-- 									<input type="file" name="formimage" -->
-<!-- 										class="form-image form-control" id="form-image" -->
-<!-- 										accept="image/*" onchange="preview_image(event)"> -->
-										<div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm"	style="">
-								<input name="formimage" id="formimage" type="file" 
-									class="form-control border-0 photo-trigger-button"
-									accept=".jpg, .png, .jpeg, .gif, .tif, .tiff" onchange="preview_image(event)">
-								<label id="formimage-lbl" for="formimage"
-									class="font-weight-light text-muted photo-trigger-button-label">Choose
-									file</label>
-								<div class="input-group-append">
-									<label for="formimage"
-										class="btn btn-light m-0 rounded-pill px-4 ">
-										<i class="fas fa-image fa-lg mr-2 text-muted"></i>
-										<small class="text-uppercase font-weight-bold text-muted">Browse</small>
-									</label>
-								</div>
-							</div>
-								<div class="bh-img " >
-									<img id="output_image" class="text-center"/>
-								</div>
-								
-								<br>
-								<div class="clearfix">
-									<button type="button"
-										onclick="document.getElementById('id01').style.display='none'"
-										class="cancelbtn">Cancel</button>
-									<button type="submit"
-										onclick="document.getElementById('id01').style.display='none'"
-										class="deletebtn">Save</button>
-								</div>
-							</div>
-						</form>
+<!-- 								<br> -->
+<!-- 								<div class="clearfix"> -->
+<!-- 									<button type="button" -->
+<!-- 										onclick="document.getElementById('id01').style.display='none'" -->
+<!-- 										class="cancelbtn">Cancel</button> -->
+<!-- 									<button type="submit" -->
+<!-- 										onclick="document.getElementById('id01').style.display='none'" -->
+<!-- 										class="deletebtn">Save</button> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</form> -->
 						
-					</div>
-					<script type="text/javascript">
+<!-- 					</div> -->
+<script type="text/javascript">
 	$('.form-certificate2-field').hide();
 	$('.form-certificate3-field').hide();
 	$('.extra-add-certificates').hide();
@@ -789,6 +758,172 @@ $(document).ready(function() {
 	});
 });
 </script>
+<script type="text/javascript">
+$(document).ready(function() {	
+	$("#trainerprofileaddcertificates").on('submit',function(event){
+		event.preventDefault();
+	//	var f=$(this).serialize();
+	let f=new FormData(this);
+		console.log(f);
+		alert("certificate add");
+		$.ajax({
+			url: "TrainerProfileCertificatesUpdateServlet",
+			data : f,
+			type : "POST",
+			success: function(data,textStatus,jqXHR){
+				console.log(data);
+				console.log("success");
+				if(data.trim() === 'Updated Successfully'){
+					document.location.href = './TrainerProfile';
+					
+				}else{
+					console.log(data); 
+					document.location.href = './TrainerProfile';
+				}
+			},
+			error: function(data,textStatus,errorThrown){
+				console.log(data);
+				console.log("error");				
+			},
+			processData : false,
+			contentType : false
+		}); 
+	});
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function() {	
+	$("#trainerprofileextracertificates").on('submit',function(event){
+		event.preventDefault();
+	//	var f=$(this).serialize();
+	let f=new FormData(this);
+		console.log(f);
+		alert("certificate extra");
+		$.ajax({
+			url: "TrainerProfileExtraCertificatesaddServlet",
+			data : f,
+			type : "POST",
+			success: function(data,textStatus,jqXHR){
+				console.log(data);
+				console.log("success");
+				if(data.trim() === 'Updated Successfully'){
+					document.location.href = './TrainerProfile';
+					
+				}else{
+					console.log(data); 
+					document.location.href = './TrainerProfile';
+				}
+			},
+			error: function(data,textStatus,errorThrown){
+				console.log(data);
+				console.log("error");				
+			},
+			processData : false,
+			contentType : false
+		}); 
+	});
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function() {	
+	$("#trainerprofilecertificate1update").on('submit',function(event){
+		event.preventDefault();
+	//	var f=$(this).serialize();
+	let f=new FormData(this);
+		console.log(f);
+		alert("certificate1 update");
+		$.ajax({
+			url: "TrainerProfileCertificates1UpdateServlet",
+			data : f,
+			type : "POST",
+			success: function(data,textStatus,jqXHR){
+				console.log(data);
+				console.log("success");
+				if(data.trim() === 'Updated Successfully'){
+					document.location.href = './TrainerProfile';
+					
+				}else{
+					console.log(data); 
+					document.location.href = './TrainerProfile';
+				}
+			},
+			error: function(data,textStatus,errorThrown){
+				console.log(data);
+				console.log("error");				
+			},
+			processData : false,
+			contentType : false
+		}); 
+	});
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function() {	
+	$("#trainerprofilecertificate2update").on('submit',function(event){
+		event.preventDefault();
+	//	var f=$(this).serialize();
+	let f=new FormData(this);
+		console.log(f);
+		alert("certificate2 update");
+		$.ajax({
+			url: "TrainerProfileCertificates2UpdateServlet",
+			data : f,
+			type : "POST",
+			success: function(data,textStatus,jqXHR){
+				console.log(data);
+				console.log("success");
+				if(data.trim() === 'Updated Successfully'){
+					document.location.href = './TrainerProfile';
+					
+				}else{
+					console.log(data); 
+					document.location.href = './TrainerProfile';
+				}
+			},
+			error: function(data,textStatus,errorThrown){
+				console.log(data);
+				console.log("error");				
+			},
+			processData : false,
+			contentType : false
+		}); 
+	});
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function() {	
+	$("#trainerprofilecertificate3update").on('submit',function(event){
+		event.preventDefault();
+	//	var f=$(this).serialize();
+	let f=new FormData(this);
+		console.log(f);
+		alert("certificate 3 update");
+		$.ajax({
+			url: "TrainerProfileCertificates3UpdateServlet",
+			data : f,
+			type : "POST",
+			success: function(data,textStatus,jqXHR){
+				console.log(data);
+				console.log("success");
+				if(data.trim() === 'Updated Successfully'){
+					document.location.href = './TrainerProfile';
+					
+				}else{
+					console.log(data); 
+					document.location.href = './TrainerProfile';
+				}
+			},
+			error: function(data,textStatus,errorThrown){
+				console.log(data);
+				console.log("error");				
+			},
+			processData : false,
+			contentType : false
+		}); 
+	});
+});
+</script>
+
 					<script type='text/javascript'>
 		function preview_image(event) {
 			var reader = new FileReader();

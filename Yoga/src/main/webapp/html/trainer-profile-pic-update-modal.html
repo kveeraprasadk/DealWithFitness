@@ -1,0 +1,57 @@
+<div class="modal" id="id01" >
+		<div class="modal-dialog modal-dialog-scrollable" role="document"
+			style="max-width: 750px">
+			<div class="modal-content">
+			<form role="form"
+							enctype="multipart/form-data"
+							action="TrainerProfilePicUpdateServlet"
+							id="trainerprofilepictureupdate"
+							name="trainerprofilepictureupdate" method="post">
+				<div class="modal-header">
+					<h4 class="modal-title">Trainer Profile Picture Update</h4>
+					
+				</div>
+				<div class="modal-body" class="flex-column">
+					
+						<div class="flex-column">					
+								
+								<div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm"	style="">
+								<input name="formimage" id="formimage" type="file" 
+									class="form-control border-0 photo-trigger-button"
+									accept=".jpg, .png, .jpeg, .gif, .tif, .tiff" onchange="preview_image(event)">
+								<label id="formimage-lbl" for="formimage"
+									class="font-weight-light text-muted photo-trigger-button-label">Choose your Profile Picture</label>
+								<div class="input-group-append">
+									<label for="formimage"
+										class="btn btn-light m-0 rounded-pill px-4 ">
+										<i class="fas fa-image fa-lg mr-2 text-muted"></i>
+										<small class="text-uppercase font-weight-bold text-muted">Browse</small>
+									</label>
+								</div>
+							</div>
+							
+						</div>
+						<div class="flex-column mt">
+							<div class="bh-img " style="margin-left:100Px;">
+									<img id="output_image" class="text-center"/>
+								</div>
+						</div>		
+						
+					
+				</div>
+				<div class="alert-message-container mt"
+					id="recurrence-validation-alert">
+					<div class="flex flex-valign-center">
+						<p class="fa  fa-info-circle mr"
+							style="font-size: 20px; height: 24px; width: 24px; margin: 0px 7px"></p>
+						<span id="recurrence-validation-message"></span>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal" onclick="document.getElementById('id01').style.display='none'">Close</button>
+					<button type="submit" class="btn btn-primary">Save</button>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>

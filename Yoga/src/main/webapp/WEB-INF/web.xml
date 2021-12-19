@@ -286,6 +286,36 @@
 		<description></description>
 		<servlet-class>main.service.trainee.TraineePhoneNumberSendServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>TrainerProfileCertificatesUpdateServlet</servlet-name>
+		<display-name>TrainerProfileCertificatesUpdateServlet</display-name>
+		<description></description>
+		<servlet-class>main.service.trainer.TrainerProfileCertificatesUpdateServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>TrainerProfileExtraCertificatesaddServlet</servlet-name>
+		<display-name>TrainerProfileExtraCertificatesaddServlet</display-name>
+		<description></description>
+		<servlet-class>main.service.trainer.TrainerProfileExtraCertificatesaddServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>TrainerProfileCertificates1UpdateServlet</servlet-name>
+		<display-name>TrainerProfileCertificates1UpdateServlet</display-name>
+		<description></description>
+		<servlet-class>main.service.trainer.TrainerProfileCertificates1UpdateServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>TrainerProfileCertificates2UpdateServlet</servlet-name>
+		<display-name>TrainerProfileCertificates2UpdateServlet</display-name>
+		<description></description>
+		<servlet-class>main.service.trainer.TrainerProfileCertificates2UpdateServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>TrainerProfileCertificates3UpdateServlet</servlet-name>
+		<display-name>TrainerProfileCertificates3UpdateServlet</display-name>
+		<description></description>
+		<servlet-class>main.service.trainer.TrainerProfileCertificates3UpdateServlet</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>TrainerRegisterServlet</servlet-name>
@@ -474,6 +504,26 @@
 	<servlet-mapping>
 		<servlet-name>TraineePhoneNumberSendServlet</servlet-name>
 		<url-pattern>/TraineePhoneNumberSendServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>TrainerProfileCertificatesUpdateServlet</servlet-name>
+		<url-pattern>/TrainerProfileCertificatesUpdateServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>TrainerProfileExtraCertificatesaddServlet</servlet-name>
+		<url-pattern>/TrainerProfileExtraCertificatesaddServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>TrainerProfileCertificates1UpdateServlet</servlet-name>
+		<url-pattern>/TrainerProfileCertificates1UpdateServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>TrainerProfileCertificates2UpdateServlet</servlet-name>
+		<url-pattern>/TrainerProfileCertificates2UpdateServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>TrainerProfileCertificates3UpdateServlet</servlet-name>
+		<url-pattern>/TrainerProfileCertificates3UpdateServlet</url-pattern>
 	</servlet-mapping>
 	<listener>
 		<listener-class>main.common.MysqlDatasource</listener-class>
