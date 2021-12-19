@@ -313,7 +313,7 @@ label {
 										</div>
 										<div class="form-group">
 											<label class="sr-only" for="form-expertise1">Expertise-1</label>
-											<span style="font-size: 14px">Choose any Expert to
+											<span style="font-size: 14px">Choose any Expertise to
 												know your suitable fitness guru</span> <select
 												name="formexpertise1" id="form-expertise1"
 												class="form-control required">
@@ -326,7 +326,7 @@ label {
 													<option value="Meditation">Meditation</option>
 												</optgroup>
 												<optgroup label="Dance Group">
-													<option value="Tomcat v7.0 Server at localhost">Dance</option>
+													<option value="Dance">Dance</option>
 													<option value="Zumba">Zumba</option>
 												</optgroup>
 												<option value="Weight / Body weight Workout">Weight
@@ -373,112 +373,91 @@ label {
 										</div>
 
 <!-- 										<div class="form-group"> -->
-<!-- 											<strong>Profile Picture</strong> <br><input type="file" -->
-<!-- 												name="formimage" class="form-image " -->
-<!-- 												id="form-image" accept="image/*" -->
-<!-- 												onchange="preview_image(event)" required>  -->
-<!-- 												<div class="input-group shadow"> -->
-<!-- 												<img -->
-<!-- 												id="output_image" /> -->
-<!-- 												</div> -->
-<!-- 										</div> -->
-										
-										<div class="form-group">
-										<strong>Profile Picture</strong>
-							<div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm"	style="">
-								<input name="formimage" id="formimage" type="file" 
-									class="form-control border-0 photo-trigger-button"
-									accept=".jpg, .png, .jpeg, .gif, .tif, .tiff" onchange="preview_image(event)">
-								<label id="formimage-lbl" for="formimage"
-									class="font-weight-light text-muted photo-trigger-button-label">Choose
-									file</label>
-								<div class="input-group-append">
-									<label for="formimage"
-										class="btn btn-light m-0 rounded-pill px-4">
-<!-- 										<i class="fa fa-cloud-upload mr-2 text-muted"></i> -->
-										<i class="fas fa-image fa-lg mr-2 text-muted"></i>
-										<small class="text-uppercase font-weight-bold text-muted">Browse</small>
-									</label>
-								</div>
-							</div>
-							<img id="output_image" />
-										</div>										
+<!-- 										<strong>Profile Picture</strong> -->
+<!-- 							<div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm"	style=""> -->
+<!-- 								<input name="formimage" id="formimage" type="file"  -->
+<!-- 									class="form-control border-0 photo-trigger-button" -->
+<!-- 									accept=".jpg, .png, .jpeg, .gif, .tif, .tiff" onchange="preview_image(event)"> -->
+<!-- 								<label id="formimage-lbl" for="formimage" -->
+<!-- 									class="font-weight-light text-muted photo-trigger-button-label">Choose -->
+<!-- 									file</label> -->
+<!-- 								<div class="input-group-append"> -->
+<!-- 									<label for="formimage" -->
+<!-- 										class="btn btn-light m-0 rounded-pill px-4"> -->
+<!-- 										<i class="fas fa-image fa-lg mr-2 text-muted"></i> -->
+<!-- 										<small class="text-uppercase font-weight-bold text-muted">Browse</small> -->
+<!-- 									</label> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 							<img id="output_image" /> -->
+<!-- 										</div>										 -->
 																				
-										<div class="form-group">
-											<strong>Upload Certificates</strong>
-											<div class="row">
-												<div class="col-9">
-<!-- 													<input type="file" name="formcertificate1" -->
-<!-- 														class="form-certificate1" id="form-certificate1"> -->
-								<div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm"	style="">
-								<input name="formcertificate1" id="formcertificate1" type="file" 
-									class="form-control border-0 photo-trigger-button">
-								<label id="formcertificate1-lbl" for="formcertificate1"
-									class="font-weight-light text-muted photo-trigger-button-label">Choose
-									file</label>
-								<div class="input-group-append">
-									<label for="formcertificate1"
-										class="btn btn-light m-0 rounded-pill px-4">
-<!-- 										<i class="fa fa-cloud-upload mr-2 text-muted"></i> -->
-										<i class="fas fa-image fa-lg mr-2 text-muted"></i>
-										<small class="text-uppercase font-weight-bold text-muted">Browse</small>
-									</label>
-								</div>
-							</div>
-												</div>
-												<div class="col-3">
-													<button type="button" id="addcertificate1" class="unstyled-button"  style="background-color:grey;color:white;width:40px;
-														height:40px;border-radius: 50%;"><i class="fa fa-plus" aria-hidden="true"></i></button>												
+<!-- 										<div class="form-group"> -->
+<!-- 											<strong>Upload Certificates</strong> -->
+<!-- 											<div class="row"> -->
+<!-- 												<div class="col-9"> -->
+<!-- 								<div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm"	style=""> -->
+<!-- 								<input name="formcertificate1" id="formcertificate1" type="file"  -->
+<!-- 									class="form-control border-0 photo-trigger-button"> -->
+<!-- 								<label id="formcertificate1-lbl" for="formcertificate1" -->
+<!-- 									class="font-weight-light text-muted photo-trigger-button-label">Choose -->
+<!-- 									file</label> -->
+<!-- 								<div class="input-group-append"> -->
+<!-- 									<label for="formcertificate1" -->
+<!-- 										class="btn btn-light m-0 rounded-pill px-4"> -->
+<!-- 										<i class="fas fa-image fa-lg mr-2 text-muted"></i> -->
+<!-- 										<small class="text-uppercase font-weight-bold text-muted">Browse</small> -->
+<!-- 									</label> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 												</div> -->
+<!-- 												<div class="col-3"> -->
+<!-- 													<button type="button" id="addcertificate1" class="unstyled-button"  style="background-color:grey;color:white;width:40px; -->
+<!-- 														height:40px;border-radius: 50%;"><i class="fa fa-plus" aria-hidden="true"></i></button>												 -->
 														
-												</div>
-											</div>
-											<div class="row form-certificate2-field">
-												<div class="col-9">
-<!-- 													<input type="file" name="form-certificate2" -->
-<!-- 														class="form-certificate2" id="form-certificate2"> -->
-								<div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm"	style="">
-								<input name="form-certificate2" id="form-certificate2" type="file" 
-									class="form-control border-0 photo-trigger-button">
-								<label id="form-certificate2-lbl" for="form-certificate2"
-									class="font-weight-light text-muted photo-trigger-button-label">Choose
-									file</label>
-								<div class="input-group-append">
-									<label for="form-certificate2"
-										class="btn btn-light m-0 rounded-pill px-4">
-<!-- 										<i class="fa fa-cloud-upload mr-2 text-muted"></i> -->
-										<i class="fas fa-image fa-lg mr-2 text-muted"></i>
-										<small class="text-uppercase font-weight-bold text-muted">Browse</small>
-									</label>
-								</div>
-							</div>
-												</div>
-												<div class="col-3">
-													<button type="button" id="addcertificate2" class="unstyled-button" style="background-color:Grey;color:white;width:40px;
-														height:40px;border-radius: 50%;"><i class="fa fa-plus" aria-hidden="true"></i></button>
-												</div>
-											</div>
-											<div class="row form-certificate3-field">
-												<div class="col-9">
-<!-- 													<input type="file" name="form-certificate3" -->
-<!-- 														class="form-certificate3" id="form-certificate3"> -->
-														<div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm"	style="">
-								<input name="form-certificate3" id="form-certificate3" type="file" 
-									class="form-control border-0 photo-trigger-button">
-								<label id="form-certificate3-lbl" for="form-certificate3"
-									class="font-weight-light text-muted photo-trigger-button-label">Choose
-									file</label>
-								<div class="input-group-append">
-									<label for="form-certificate3"
-										class="btn btn-light m-0 rounded-pill px-4">
-<!-- 										<i class="fa fa-cloud-upload mr-2 text-muted"></i> -->
-										<i class="fas fa-image fa-lg mr-2 text-muted"></i>
-										<small class="text-uppercase font-weight-bold text-muted">Browse</small>
-									</label>
-								</div>
-							</div>
-												</div>
-											</div>
-										</div>										
+<!-- 												</div> -->
+<!-- 											</div> -->
+<!-- 											<div class="row form-certificate2-field"> -->
+<!-- 												<div class="col-9"> -->
+<!-- 								<div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm"	style=""> -->
+<!-- 								<input name="form-certificate2" id="form-certificate2" type="file"  -->
+<!-- 									class="form-control border-0 photo-trigger-button"> -->
+<!-- 								<label id="form-certificate2-lbl" for="form-certificate2" -->
+<!-- 									class="font-weight-light text-muted photo-trigger-button-label">Choose -->
+<!-- 									file</label> -->
+<!-- 								<div class="input-group-append"> -->
+<!-- 									<label for="form-certificate2" -->
+<!-- 										class="btn btn-light m-0 rounded-pill px-4"> -->
+<!-- 										<i class="fas fa-image fa-lg mr-2 text-muted"></i> -->
+<!-- 										<small class="text-uppercase font-weight-bold text-muted">Browse</small> -->
+<!-- 									</label> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 												</div> -->
+<!-- 												<div class="col-3"> -->
+<!-- 													<button type="button" id="addcertificate2" class="unstyled-button" style="background-color:Grey;color:white;width:40px; -->
+<!-- 														height:40px;border-radius: 50%;"><i class="fa fa-plus" aria-hidden="true"></i></button> -->
+<!-- 												</div> -->
+<!-- 											</div> -->
+<!-- 											<div class="row form-certificate3-field"> -->
+<!-- 												<div class="col-9"> -->
+<!-- 														<div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm"	style=""> -->
+<!-- 								<input name="form-certificate3" id="form-certificate3" type="file"  -->
+<!-- 									class="form-control border-0 photo-trigger-button"> -->
+<!-- 								<label id="form-certificate3-lbl" for="form-certificate3" -->
+<!-- 									class="font-weight-light text-muted photo-trigger-button-label">Choose -->
+<!-- 									file</label> -->
+<!-- 								<div class="input-group-append"> -->
+<!-- 									<label for="form-certificate3" -->
+<!-- 										class="btn btn-light m-0 rounded-pill px-4"> -->
+<!-- 										<i class="fas fa-image fa-lg mr-2 text-muted"></i> -->
+<!-- 										<small class="text-uppercase font-weight-bold text-muted">Browse</small> -->
+<!-- 									</label> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 												</div> -->
+<!-- 											</div> -->
+<!-- 										</div>										 -->
 										<button type="submit"
 											class="btn trainerregisterbutton btn-primary"
 											id="trainerregisterbutton">
@@ -674,16 +653,13 @@ $(document).ready(function() {
 													formaboutself : {
 														required : true,
 														minlength : 50
-													},
-													//			formcertificate1 : {
-													//				required : true
-													//			},
-													formimage : {
-														required : true,
-														extension : "png|jpeg|jpg",
-														//	filesize : 1048576
-														filesize : 204576
 													}
+													
+// 													formimage : {
+// 														required : true,
+// 														extension : "png|jpeg|jpg",														
+// 														filesize : 204576
+// 													}
 
 												},
 												messages : {
@@ -738,15 +714,13 @@ $(document).ready(function() {
 													formaboutself : {
 														required : "please enter about yourself",
 														minlength : "Please enter atleast 50 chars"
-													},
-													formimage : {
-														required : "Please select JPEG or PNG file",
-														filesize: " file size must be less than 200 KB.",
-														extension: "Please upload .jpg or .png files"
-													},
-												//			formcertificate1 : {
-												//				required : "Please Upload your certificate"
-												//			}
+													}
+// 													formimage : {
+// 														required : "Please select JPEG or PNG file",
+// 														filesize: " file size must be less than 200 KB.",
+// 														extension: "Please upload .jpg or .png files"
+// 													},
+												
 
 												}
 																							
@@ -786,7 +760,7 @@ $(document).ready(function() {
     frm.submit(function (e) {
 
     	e.preventDefault();
-		alert("enter");
+		
         $.ajax({
             type: frm.attr('method'),
             url: frm.attr('action'),
@@ -795,7 +769,7 @@ $(document).ready(function() {
             	
                 console.log('Submission was successful.');
                 console.log(data);
-                alert(data);
+                
                 if(data == "Temporary Profile Created Successfully")
             	{
                 	document.location.href = './TrainerTempProfile.jsp';
@@ -819,7 +793,7 @@ $(document).ready(function() {
             error: function (data) {
                 console.log('An error occurred.');
                 console.log(data);
-                alert(data);
+               
             },
         });
         return false;

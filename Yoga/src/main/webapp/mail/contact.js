@@ -10,8 +10,9 @@ $(function() {
 							event.preventDefault();
 							var name = $("input#name").val();
 							var email = $("input#email").val();
+							var phone = $("input#phonenumber").val();
 							var subject = $("input#subject").val();
-
+									
 							var message = $("textarea#message").val();
 							$('.forgot-progressbar').show();
 							$this = $("#sendMessageButton");
@@ -24,6 +25,7 @@ $(function() {
 										data : {
 											name : name,
 											email : email,
+											phone : phone,
 											subject : subject,
 											message : message
 										},
@@ -87,42 +89,3 @@ $('#name').focus(function() {
 
 
 
-$(document).on("click", "#sendMessage99999999", function() { // When HTML DOM "click"
-														// event is invoked on
-														// element with ID
-														// "somebutton", execute
-														// the following
-														// function...
-
-	var name = $('#name').val();
-	var email = $('#email').val();
-	var sub = $('#subject').val();
-	var msg = $('#message').val();
-alert("second");
-	$.post("ContactServlet", {
-		name : name,
-		email : email,
-		subject : sub,
-		message : msg
-
-	}, function(responseText) { // Execute Ajax GET request on URL of
-								// "someservlet" and execute the following
-								// function with Ajax response text...
-		if (responseText == "Register Success") {
-
-			$('#reqsentsuccmsg').text(responseText);
-			$("#success-alert").fadeTo(2000, 500).slideUp(500, function() {
-				$("#success-alert").slideUp(500);
-			});
-
-		} else {
-
-			$('#reqsentfailmsg').text("Request Sent Failed");
-			$("#danger-alert").fadeTo(2000, 500).slideUp(500, function() {
-				$("#danger-alert").slideUp(500);
-			});
-
-		}
-
-	});
-});

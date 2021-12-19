@@ -3,6 +3,7 @@
 const REG_ERROR_MSG_ID = "reg-validation-error";
 const LOGIN_ERROR_MSG_ID = "login-validation-error";
 const FORGOT_ERROR_MSG_ID="forgot-validation-error";
+const PHONE_ERROR_MSG_ID="phonenumber-validation-error";
 
 function Trainers() {
 	self = this;
@@ -46,6 +47,7 @@ function Trainers() {
 
 		if (queryRequest) {
 			if (queryRequest.expertise) {
+				
 				requestPayload.filterByExpertise = queryRequest.expertise;
 			}
 			if (queryRequest.startTime) {
@@ -73,6 +75,7 @@ function Trainers() {
 			complete: () => progressBar.end()
 		});
 	}
+	
 
 	self.attachLoginActions = function() {
 		$("#register-trainee-dialog-parent").keydown((e) => {
@@ -91,6 +94,12 @@ function Trainers() {
 			if (e.keyCode == 13) {
 				e.preventDefault();
 				self.forgotpasswordEvent()
+			}
+		});
+		$("#trainee-phonenumber-dialog-parent").keydown((e) => {
+			if (e.keyCode == 13) {
+				e.preventDefault();
+				self.traineephonenumberEvent()
 			}
 		});
 		$('#login-trainee-action').click(self.loginEvent);
@@ -131,6 +140,22 @@ function Trainers() {
 		$("#forgot-validation-error").hide();
 		return true;
 	}
+	
+	
+	self.validateTrainerPhoneNumber = function(phone) {
+		if (phone == null || phone.trim().length == 0) {
+			self.validationError(PHONE_ERROR_MSG_ID, "Mobile number is mandatory");
+			$("#trainee-phonenumber").focus();
+			return false;
+		}else if (phone && phone.trim().length < 10 || phone.trim().length > 10) {
+			self.validationError(PHONE_ERROR_MSG_ID, "Mobile number should be atleast 10 digits");
+			$("#trainee-phonenumber").focus();
+			return false;
+		}
+		$("#phonenumber-validation-error").hide();
+		return true;
+	}
+	
 
 	self.loginEvent = function() {
 		var emailId = $('#login-traineeemailid').val();
@@ -196,6 +221,55 @@ function Trainers() {
 							.append("</button>");
 					$('#forgotsuccess > .alert-danger').append($("<strong>").text(data));
 					$('#forgotsuccess > .alert-danger').append('</div>');
+				},
+				complete: () => progressBar.end()
+			});
+		}
+	}
+	
+	
+	self.traineephonenumberEvent = function() {
+		var tpnumber = $('#trainee-phonenumber').val();
+		
+		if (self.validateTrainerPhoneNumber(tpnumber)) {			
+			progressBar.start();
+			// Validations are done 
+			$.ajax({
+				url: "TraineePhoneNumberSendServlet",
+				type: "POST",
+				data: {
+					pnumber: tpnumber					
+				},
+				cache: false,
+				success: function(data) {
+				
+					if (data == "Submitted successfully") {						
+						$('#phonenumbersuccess').html("<div class='alert alert-success'>");
+//						$('#phonenumbersuccess > .alert-success').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+//								.append("</button>");
+						$('#phonenumbersuccess > .alert-success').append($("<strong>").text("Congratulations for your step towards better health. Our team will get back to you shortly."));
+						$('#phonenumbersuccess > .alert-success').append('</div>');
+						 $('html,body').animate({
+						        scrollTop: $(".viru").offset().top},
+						        'slow');
+						 $('#trainee-phonenumber').hide();
+						 $('#trainee-phone-button').hide();
+						 $('#trainee-image-class').hide();
+					}else {
+						$('#phonenumbersuccess').html("<div class='alert alert-danger'>");
+						$('#phonenumbersuccess > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+								.append("</button>");
+						$('#phonenumbersuccess > .alert-danger').append($("<strong>").text(data));
+						$('#phonenumbersuccess > .alert-danger').append('</div>');
+						$("#trainee-phonenumber").focus();
+					}
+				},
+				error: function(data) {
+					$('#phonenumbersuccess').html("<div class='alert alert-danger'>");
+					$('#phonenumbersuccess > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+							.append("</button>");
+					$('#phonenumbersuccess > .alert-danger').append($("<strong>").text(data));
+					$('#phonenumbersuccess > .alert-danger').append('</div>');
 				},
 				complete: () => progressBar.end()
 			});
@@ -289,8 +363,8 @@ function Trainers() {
 	self.sortTrainersList = function(event) {
 		progressBar.start();
 		let request = {};
-
-		const timingsSelection = $("#form-filter-misc").val();
+		
+		const timingsSelection = $("#form-filter-misc").val();		
 		const expertise = $("#form-expertise").val();
 
 		if (timingsSelection != "all") {
@@ -309,14 +383,17 @@ function Trainers() {
 	self.filterTrainers = function(event) {
 		progressBar.start();
 		let request = {};
-
+		
+		if (event.target.value == "all") {			
+			self.showTraineePhoneNumberDialogEvent();
+		}
 		const timingsSelection = $("#form-filter-misc").val();
 		if (timingsSelection != "all") {
 			request = self.getTimings(timingsSelection);
 		}
 
 		if (event.target.value && event.target.value != "all") {
-			request.expertise = event.target.value
+			request.expertise = event.target.value;
 		}
 		request.sort = $("#form-sortby").val()
 
@@ -562,6 +639,18 @@ function Trainers() {
 		$("#trainee-forgot-password-dialog").modal("show");
 		setTimeout(() => {
 			$("#forgot-traineeemailid").focus()
+		}, 500);
+	}
+	
+	
+	self.showTraineePhoneNumberDialogEvent = function() {	
+
+		$("#trainee-phonenumber").val("");		
+		// Hide the error message
+		$("#phonenumber-validation-error").hide();
+		$("#trainee-phone-number-dialog").modal("show");
+		setTimeout(() => {
+			$("#trainee-phonenumber").focus()
 		}, 500);
 	}
 	

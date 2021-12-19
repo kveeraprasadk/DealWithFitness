@@ -31,14 +31,21 @@
 	rel="stylesheet">
 <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
 
+<script src="./dist/external/moment.min.js"></script>
+<script src="./dist/utils.js"></script>
+<script src="./dist/dialogs.js"></script>
+<script src="./dist/whoami.js"></script>
+<script src="./dist/home-trainers.js"></script>
+
 <!-- Template Stylesheet -->
 <link href="css/style.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="./css/common.css">
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
+<link rel="icon" href="img/yogapose.png">
+
 <!-- JavaScript Libraries -->
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 <script src="lib/easing/easing.min.js"></script>
 <script src="lib/owlcarousel/owl.carousel.min.js"></script>
 <script src="lib/isotope/isotope.pkgd.min.js"></script>

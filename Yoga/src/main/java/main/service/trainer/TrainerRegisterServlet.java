@@ -76,97 +76,17 @@ public class TrainerRegisterServlet extends HttpServlet {
 		System.out.println("password::" + password);
 		System.out.println("timestamp::" + ts);
 
-		InputStream inputStream = null; // input stream of the upload file
+		String Countrow = null;
+		boolean isapprove=false;
+		
 		InputStream is=null; 
 		InputStream certificate1inputStream = null;
 		InputStream certificate2inputStream = null;
 		InputStream certificate3inputStream = null;
-		BufferedImage resizeImageJpg;
-
-		// obtains the upload file part in this multipart request
-		Part filePart = request.getPart("formimage");
-		// String fileName1 = filePart.getSubmittedFileName();
-		/*
-		 * System.out.println("path:"+request.getContextPath()+"/target/Yoga/img/" +
-		 * fileName1); for (Part part : request.getParts()) {
-		 * part.write("/target/Yoga/img/" + fileName1);
-		 * System.out.println("path:"+request.getContextPath()); }
-		 */
-
-		String fileName = AppUtils.getFileNameFromFormPart(filePart);
-		if (filePart != null) {
-			// prints out some information for debugging
-			System.out.println("original name:"+filePart.getName());
-			System.out.println("original size:"+filePart.getSize());
-			System.out.println("original type:"+filePart.getContentType());
-			
-			// obtains input stream of the upload file
-			inputStream = filePart.getInputStream();
-			try {
-                BufferedImage originalImage = ImageIO.read(inputStream);
-                int type = originalImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
-                System.out.println("type::"+type);
-                resizeImageJpg = resizeImage(originalImage, type);//call to resize the image
- 
-               // BufferedImage to ByteArrayInputStream
-                ByteArrayOutputStream os = new ByteArrayOutputStream();
-                ImageIO.write(resizeImageJpg, "jpg", os);
-                is = new ByteArrayInputStream(os.toByteArray());
-                
-                System.out.println("resize name:"+is);
-//    			System.out.println("original size:"+filePart.getSize());
-//    			System.out.println("original type:"+filePart.getContentType());
- 
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-            }
-						
-		}
-		Part certificate1 = request.getPart("formcertificate1");
-		String certificatefileName1 = AppUtils.getFileNameFromFormPart(certificate1);
-		if (certificate1 != null) {
-			// prints out some information for debugging
-			System.out.println("certificate1::::" + certificate1.getName());
-			System.out.println(certificate1.getSize());
-			System.out.println(certificate1.getContentType());
-
-			// obtains input stream of the upload file
-			certificate1inputStream = certificate1.getInputStream();
-		} else {
-			certificate1inputStream = null;
-			certificatefileName1 = "";
-		}
-		Part certificate2 = request.getPart("form-certificate2");
-		String certificatefileName2 = AppUtils.getFileNameFromFormPart(certificate2);
-		if (certificate2 != null) {
-			// prints out some information for debugging
-			System.out.println("certificate2::::" + certificate2.getName());
-			System.out.println(certificate2.getSize());
-			System.out.println(certificate2.getContentType());
-
-			// obtains input stream of the upload file
-			certificate2inputStream = certificate2.getInputStream();
-		} else {
-			certificate2inputStream = null;
-			certificatefileName2 = "";
-		}
-		Part certificate3 = request.getPart("form-certificate3");
-		String certificatefileName3 = AppUtils.getFileNameFromFormPart(certificate3);
-		if (certificate3 != null) {
-			// prints out some information for debugging
-			System.out.println("certificate3::::" + certificate3.getName());
-			System.out.println(certificate3.getSize());
-			System.out.println(certificate3.getContentType());
-
-			// obtains input stream of the upload file
-			certificate3inputStream = certificate3.getInputStream();
-		} else {
-			certificate3inputStream = null;
-			certificatefileName3 = "";
-		}
-
-		String Countrow = null;
-		boolean isapprove=false;
+		String fileName = "";
+		String certificatefileName1 = "";
+		String certificatefileName2 = "";
+		String certificatefileName3 = "";
 		try (Connection con = DBConnection.createConnection()){
 			String cnt = "select count(*) from trainerregister tr,traineeregister te where tr.traineremail=? or te.username=?";
 	//		String cnt = "select count(*) from trainerregister where traineremail=?";
@@ -184,27 +104,27 @@ public class TrainerRegisterServlet extends HttpServlet {
 				// values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"; //Insert user
 				// details into the table 'USERS'
 				String query = "insert into trainerregister(trainername,traineremail,experience,qualification,phoneno,expertise,aboutyourself,photoname,photo,creationtime,certificate1,certificate1filename,certificate2,certificate2filename,certificate3,certificate3filename,password,adminapprove) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"; // Insert
-																																																																													// 'USERS'
-				PreparedStatement statement = con.prepareStatement(query); // Making use of prepared statements here to
-																			// insert bunch of data
-				statement.setString(1, name);
-				statement.setString(2, email);
-				statement.setString(3, experience);
-				statement.setString(4, qualification);
-				statement.setString(5, phoneno);
-				statement.setString(6, expertise);
-				statement.setString(7, abuotme);
-				statement.setString(8, fileName);
-				statement.setBlob(9, is);
-				statement.setTimestamp(10, ts);
-				statement.setBlob(11, certificate1inputStream);
-				statement.setString(12, certificatefileName1);
-				statement.setBlob(13, certificate2inputStream);
-				statement.setString(14, certificatefileName2);
-				statement.setBlob(15, certificate3inputStream);
-				statement.setString(16, certificatefileName3);
-				statement.setString(17, password);
-				statement.setBoolean(18, isapprove);
+				// 'USERS'
+PreparedStatement statement = con.prepareStatement(query); // Making use of prepared statements here to
+// insert bunch of data
+statement.setString(1, name);
+statement.setString(2, email);
+statement.setString(3, experience);
+statement.setString(4, qualification);
+statement.setString(5, phoneno);
+statement.setString(6, expertise);
+statement.setString(7, abuotme);
+statement.setString(8, fileName);
+statement.setBlob(9, is);
+statement.setTimestamp(10, ts);
+statement.setBlob(11, certificate1inputStream);
+statement.setString(12, certificatefileName1);
+statement.setBlob(13, certificate2inputStream);
+statement.setString(14, certificatefileName2);
+statement.setBlob(15, certificate3inputStream);
+statement.setString(16, certificatefileName3);
+statement.setString(17, password);
+statement.setBoolean(18, isapprove);
 
 				int i = statement.executeUpdate();
 
@@ -225,11 +145,7 @@ public class TrainerRegisterServlet extends HttpServlet {
 					session.setAttribute("trainerexpertise", expertise);
 					session.setAttribute("trainerphone", phoneno);
 					session.setAttribute("trainerpassword", password);					
-					session.setAttribute("traineraboutme", abuotme);
-					session.setAttribute("trainercertificatefileName1", certificatefileName1);
-					session.setAttribute("trainercertificatefileName2", certificatefileName2);
-					session.setAttribute("trainercertificatefileName3", certificatefileName3);
-					session.setAttribute("trainerprofilephoto",is);
+					session.setAttribute("traineraboutme", abuotme);					
 
 					out.write("Temporary Profile Created Successfully");
 					System.out.println("Temporary Profile Created Successfully");					
@@ -255,12 +171,5 @@ public class TrainerRegisterServlet extends HttpServlet {
 
 	}
 
-	private static BufferedImage resizeImage(BufferedImage originalImage, int type) {
-        BufferedImage resizedImage = new BufferedImage(314, 210, type);//set width and height of image
-        Graphics2D g = resizedImage.createGraphics();
-        g.drawImage(originalImage, 0, 0, 314, 210, null);
-        g.dispose();
- 
-        return resizedImage;
-    }
+	
 }

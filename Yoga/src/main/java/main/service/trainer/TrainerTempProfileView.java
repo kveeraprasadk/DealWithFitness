@@ -83,9 +83,7 @@ public class TrainerTempProfileView extends HttpServlet {
 						session.setAttribute("trainerprofilepic", AppUtils.asBlobEncoded(rs.getBlob("photo")));
 					
 					}
-				//	request.setAttribute("TrainerProfileData", TrainersList);
-					
-					
+					request.setAttribute("TrainerProfileData", TrainersList);					
 					
 					
 					request.getRequestDispatcher("/TrainerTempProfile.jsp").forward(request, response);

@@ -1,0 +1,38 @@
+<div class="modal fade" id="trainee-phone-number-dialog" role="dialog">
+	<div class="modal-dialog modal-sm" style="max-width: 400px">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title text-center">Trainee Phone Number</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body text-center"
+				id="trainee-phonenumber-dialog-parent">
+				<p class="trainee-image-class hide">
+					<i class="fa fa-user user-container"></i>
+				</p>
+				<p>
+					<input type="number" id="trainee-phonenumber"
+						class="form-control" placeholder="Mobile number" maxlength="16">
+				</p>				
+				<div id="phonenumber-validation-error" class="error-message-container hide">
+				</div>
+				<div id="phonenumbersuccess" >
+				</div>
+				<div class="pt">
+					<button class="btn btn-primary hide"
+						onclick="trainers.redirectToSignInFromRegistration(event)"
+						id="redirect-signin-button">Send</button>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<p>
+					<button class="btn bookbutton btn-primary"
+						onclick="trainers.traineephonenumberEvent()"
+						id="trainee-phone-button">Send</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				</p>
+				
+			</div>
+		</div>
+	</div>
+</div>

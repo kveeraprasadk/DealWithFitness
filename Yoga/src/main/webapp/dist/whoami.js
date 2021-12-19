@@ -59,7 +59,7 @@ function Whoami() {
 			const trainers = document.getElementsByName("trainer-hyperlink-element");
 			$(trainers).removeClass("hide");
 		}
-
+87
 		if (callback) {
 			callback();
 		}

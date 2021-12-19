@@ -90,7 +90,9 @@ public class TrainerProfilePicUpdateServlet extends HttpServlet {
 	            
 	            if (i!=0) { //Just to ensure data has been inserted into the database
 	            //	HttpSession session = request.getSession(true);
-	            //	session.setAttribute("traineremail", email);
+	            //	session.setAttribute("traineremail", email); 	
+	            	
+	            	
 	           out.println("Updated Successfully");
 	           System.out.println("success");
 	        //   request.setAttribute("success", "register success");
@@ -105,7 +107,7 @@ public class TrainerProfilePicUpdateServlet extends HttpServlet {
 	            //	 request.setAttribute("fail", "register fail");
 	                 
 	                 // forwards to the message page
-	                 getServletContext().getRequestDispatcher("/trainersprofile.jsp").forward(request, response);
+	            //     getServletContext().getRequestDispatcher("/trainersprofile.jsp").forward(request, response);
 	            }
 	        }
 	        catch(SQLException e)

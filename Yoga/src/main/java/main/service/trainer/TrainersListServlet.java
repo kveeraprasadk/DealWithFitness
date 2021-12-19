@@ -51,7 +51,8 @@ public class TrainersListServlet extends HttpServlet {
 		String endTime = request.getParameter("endTime");
 		String tzOffset = request.getParameter("tzOffset");
 		String sortOrder = request.getParameter("sort");
-
+		String exp1,exp2,exp3,exp4,exp5;
+		System.out.println("exp"+filterByExpertise);
 		if (sortOrder == null) {
 			response.setStatus(400);
 			response.getWriter().write("sort is mandantory to pass.");
@@ -66,7 +67,33 @@ public class TrainersListServlet extends HttpServlet {
 		if (filterByExpertise != null || startTime != null) {
 			whereClause.append(" where ");
 			if (filterByExpertise != null) {
-				whereClause.append(String.format(" ss.expertise = '%s' ", filterByExpertise));
+				if(filterByExpertise.equals("Yoga")){
+					exp1="Yoga for health";
+					exp2="Weight Loss";
+					exp3="Kids Yoga";
+					exp4="Pregnancy Yoga";
+					exp5="Meditation";
+					whereClause.append(String.format(" ss.expertise = '%s' ", exp1));
+					whereClause.append(" or ");
+					whereClause.append(String.format(" ss.expertise = '%s' ", exp2));
+					whereClause.append(" or ");
+					whereClause.append(String.format(" ss.expertise = '%s' ", exp3));
+					whereClause.append(" or ");
+					whereClause.append(String.format(" ss.expertise = '%s' ", exp4));
+					whereClause.append(" or ");
+					whereClause.append(String.format(" ss.expertise = '%s' ", exp5));
+				}else if(filterByExpertise.equals("Dance")){
+					exp1="Dance";
+					exp2="Zumba";
+					System.out.println("dance::"+filterByExpertise);
+					whereClause.append(String.format(" ss.expertise = '%s' ", exp1));
+					whereClause.append(" or ");
+					whereClause.append(String.format(" ss.expertise = '%s' ", exp2));
+					
+				}else{
+					System.out.println("one::"+filterByExpertise);
+					whereClause.append(String.format(" ss.expertise = '%s' ", filterByExpertise));
+				}
 			}
 			if (startTime != null) {
 				if (filterByExpertise != null) {
@@ -76,7 +103,7 @@ public class TrainersListServlet extends HttpServlet {
 				whereClause.append(getTimingsSqlWhereClass(startTime, endTime, tzOffset));
 			}
 		}
-
+		System.out.println("where:"+whereClause);
 		// If filter is passed then change the sql to add where clause
 		String sql = new String(String.format(SQL, whereClause.toString(), sortOrder));
 		try (Connection connection = DBConnection.createConnection()) {

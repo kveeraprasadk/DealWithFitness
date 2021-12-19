@@ -38,7 +38,11 @@
 <link href="css/style.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="./css/common.css">
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="./dist/utils.js"></script>
+<script src="./dist/dialogs.js"></script>
 <script src="./dist/whoami.js"></script>
+<script src="./dist/trainee-journey.js"></script>
 
 <!-- JavaScript Libraries -->
 <script
@@ -53,13 +57,14 @@
 <script src="mail/jqBootstrapValidation.min.js"></script>
 <script src="mail/contact.js"></script>
 
-<!-- Template Javascript -->
+<!-- Added this for fixating the header otherwise not needed -->
 <script src="js/main.js"></script>
+<script src="assets/js/scripts.js"></script>
 
 <!-- Comments -->
-<link rel="stylesheet" href="comment/fonts/icomoon/style.css">
+<!-- <link rel="stylesheet" href="comment/fonts/icomoon/style.css"> -->
     <link rel="stylesheet" href="comment/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="comment/css/bootstrap.min.css">    
+<!--     <link rel="stylesheet" href="comment/css/bootstrap.min.css">     -->
     <link rel="stylesheet" href="comment/css/style.css">
     <script src="comment/js/jquery-3.3.1.min.js"></script>
     <script src="comment/js/popper.min.js"></script>
@@ -68,7 +73,7 @@
     <script src="comment/js/main.js"></script>
 <script>
 	function init() {
-		whoami.detect();
+	
 		$
 		.ajax({
 			type : 'GET',
@@ -107,13 +112,13 @@ $('.forgot-progressbar').hide();
   width: 25vw;
   height: 50vh;
   min-height: 320px;
-  background: #f2f2f2;
+  background: white;
   overflow: hidden;
   transition: all 0.5s ease-in;
   z-index: 2;
   box-sizing: border-box;
   padding: 30px;
-  box-shadow: -10px 25px 50px rgba(0, 0, 0, 0.3);
+/*   box-shadow: -10px 25px 50px rgba(0, 0, 0, 0.3); */
 }
 
 .quotes .box::before {
@@ -125,7 +130,7 @@ $('.forgot-progressbar').hide();
   height: 100%;
   font-size: 120px;
   opacity: 0.2;
-  background: transparent;
+/*   background: transparent; */
   pointer-events: none;
 }
 
@@ -136,7 +141,7 @@ $('.forgot-progressbar').hide();
   right: 5%;
   font-size: 120px;
   opacity: 0.2;
-  background: transparent;
+/*   background: transparent; */
   filter: invert(1);
   pointer-events: none;
 }
@@ -156,10 +161,10 @@ $('.forgot-progressbar').hide();
   font-size: 1.5rem;
 }
 
-.quotes .box:hover {
-  color: #f2f2f2;
-  box-shadow: 20px 50px 100px rgba(0, 0, 0, 0.5);
-}
+/* .quotes .box:hover { */
+/*   color: #f2f2f2; */
+/*   box-shadow: 20px 50px 100px rgba(0, 0, 0, 0.5); */
+/* } */
 
 .quotes .bg {
   position: absolute;
@@ -173,37 +178,21 @@ $('.forgot-progressbar').hide();
   height: 100%;
   overflow: hidden;
 }
-
-.quotes .box.box1:hover,
-.quotes .box.box1:hover~.bg {
-  opacity: 1;
-  background: #e2a9e5;
-background: -moz-linear-gradient(-45deg, #e2a9e5 15%, #2b94e5 100%);
-background: -webkit-linear-gradient(-45deg, #e2a9e5 15%,#2b94e5 100%);
-background: linear-gradient(135deg, #e2a9e5 15%,#2b94e5 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2a9e5', endColorstr='#2b94e5',GradientType=1 );
+@media screen and (min-width: 200px) and (max-width: 970px) {
+ .quotes .box {
+  position: relative;
+  width: 100%; 
+  background: white;
+  overflow: hidden;
+  transition: all 0.5s ease-in;
+  z-index: 2;
+  box-sizing: border-box;
+  padding: 30px;
+/*   box-shadow: -10px 25px 50px rgba(0, 0, 0, 0.3); */
 }
-
-.quotes .box.box2:hover,
-.quotes .box.box2:hover~.bg {
-  opacity: 1;
-  background: #632c65;
-background: -moz-linear-gradient(-45deg, #632c65 15%, #56a5e2 100%);
-background: -webkit-linear-gradient(-45deg, #632c65 15%,#56a5e2 100%);
-background: linear-gradient(135deg, #632c65 15%,#56a5e2 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#632c65', endColorstr='#56a5e2',GradientType=1 );
-}
-
-.quotes .box.box3:hover,
-.quotes .box.box3:hover~.bg {
-  opacity: 1;
-  background: #4b384c;
-background: -moz-linear-gradient(-45deg, #4b384c 15%, #da5de2 100%);
-background: -webkit-linear-gradient(-45deg, #4b384c 15%,#da5de2 100%);
-background: linear-gradient(135deg, #4b384c 15%,#da5de2 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4b384c', endColorstr='#da5de2',GradientType=1 );
 }
 </style>
+
 </head>
 
 <body onload="init()">
@@ -212,6 +201,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4b384c', end
 
 	<!-- Nav Bar Start -->
 	<%@include file="./html/navbar.html"%>
+	<%@include file="./html/dialogs.html"%>
 	<!-- Nav Bar End -->
 
 
@@ -286,27 +276,33 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4b384c', end
 				<div class="col-12 wow fadeInUp" data-wow-delay="0.1s">
 					<div class="contact-form">
 						<div id="success"></div>
-						<form name="sentMessage" id="contactForm" novalidate="novalidate">
+						<form  name="sentMessage" id="contactForm" >
 							<div class="control-group">
-								<input type="text" class="form-control" id="name"
+								<input type="text" class="form-control" id="name" 
 									placeholder="Your Name" required="required"
 									data-validation-required-message="Please enter your name" />
 								<p class="help-block text-danger"></p>
 							</div>
 							<div class="control-group">
-								<input type="email" class="form-control" id="email"
+								<input type="email" class="form-control" id="email" 
 									placeholder="Your Email" required="required"
 									data-validation-required-message="Please enter your email" />
 								<p class="help-block text-danger"></p>
 							</div>
 							<div class="control-group">
-								<input type="text" class="form-control" id="subject"
+								<input type="number" class="form-control" id="phonenumber" 
+									placeholder="Your Phone Number" required="required"
+									data-validation-required-message="Please enter your phone number" />
+								<p class="help-block text-danger"></p>
+							</div>
+							<div class="control-group">
+								<input type="text" class="form-control" id="subject" 
 									placeholder="Subject" required="required"
 									data-validation-required-message="Please enter a subject" />
 								<p class="help-block text-danger"></p>
 							</div>
 							<div class="control-group">
-								<textarea class="form-control" id="message"
+								<textarea class="form-control" id="message" 
 									placeholder="Message" required="required"
 									data-validation-required-message="Please enter your message"></textarea>
 								<p class="help-block text-danger"></p>
@@ -318,7 +314,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4b384c', end
   									</div>
 							</div><br>
 							<div class="control-group">
-								<button class="btn" type="submit" id="sendMessage">Send
+								<button class="btn btn-primary" type="submit" id="sendMessage">Send
 									Message</button>
 							</div>
 						</form>
@@ -328,6 +324,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4b384c', end
 		</div>
 	</div>
 	<!-- Contact End -->
+	
 	
 	<!-- Comments Start -->
 	<div class="content commentbody">
@@ -345,75 +342,40 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4b384c', end
       <div class="container owl-2-style">      
 
         <div class="owl-carousel owl-2 quotes">
+<%
+				ArrayList<TrainerDetailsVO> comments1 = (ArrayList<TrainerDetailsVO>) request
+						.getAttribute("CommentListData");
+			%>
+
+
+			<%
+				// Iterating through subjectList
+				if (comments1 != null && comments1.size() > 0) // Null check for the object
+				{
+					Iterator<TrainerDetailsVO> iterator1 = comments1.iterator(); // Iterator interface
+					int inv1 = 0;
+					for (TrainerDetailsVO commentdetails1 : comments1) // iterate through all the data until the last record
+					{
+						//InvestorExpertNamemodel myinvestordetails = iterator.next(); //assign individual employee record to the employee class object
+						inv1++;
+						//	System.out.println("My Investor: "+ traineedetails.getName());
+			%>
 
           <div class="card">
           <div class="box box1">
 <!--             <img src="images/person_1_sm.jpg" alt="Image" class="img-fluid"> -->
-            <h3>Sandeep</h3>
-            <p>Health is supposed to be the only companion staying with
-							you till you die. Staying fit keeps you really alive while you
-							are alive.</p>
+            <h3><%=commentdetails1.getName()%></h3>
+            <p><%=commentdetails1.getComment()%></p>
+            <p class="text-right"><%=commentdetails1.getDefdays()%></p>
           </div>
           <div class="bg"></div>
-    	  </div>
-
-          <div class="media-29101 card">
-          <div class="box box2">
-<!--             <img src="images/person_1_sm.jpg" alt="Image" class="img-fluid"> -->
-            <h3>Prasad</h3>
-            <p>Health is supposed to be the only companion staying with
-							you till you die. Staying fit keeps you really alive while you
-							are alive.</p>
-          </div>
-          <div class="bg"></div>
-    	  </div>
-
-         <div class="media-29101 card">
-          <div class="box box3">
-<!--             <img src="images/person_1_sm.jpg" alt="Image" class="img-fluid"> -->
-            <h3>Hari</h3>
-            <p>Health is supposed to be the only companion staying with
-							you till you die. Staying fit keeps you really alive while you
-							are alive.</p>
-          </div>
-          <div class="bg"></div>
-    	  </div>
-
-         <div class="media-29101 card">
-          <div class="box box1">
-<!--             <img src="images/person_1_sm.jpg" alt="Image" class="img-fluid"> -->
-            <h3>Viru</h3>
-            <p>Health is supposed to be the only companion staying with
-							you till you die. Staying fit keeps you really alive while you
-							are alive.</p>
-          </div>
-          <div class="bg"></div>
-    	  </div>
-
-          <div class="media-29101 card">
-          <div class="box box2">
-<!--             <img src="images/person_1_sm.jpg" alt="Image" class="img-fluid"> -->
-            <h3>Krish</h3>
-            <p>Health is supposed to be the only companion staying with
-							you till you die. Staying fit keeps you really alive while you
-							are alive.</p>
-          </div>
-          <div class="bg"></div>
-    	  </div>
-
-          <div class="media-29101 card">
-          <div class="box box3">
-<!--             <img src="images/person_1_sm.jpg" alt="Image" class="img-fluid"> -->
-            <h3>Harsha</h3>
-            <p>Health is supposed to be the only companion staying with
-							you till you die. Staying fit keeps you really alive while you
-							are alive.</p>
-          </div>
-          <div class="bg"></div>
-    	  </div>
-
+    	  </div>     
+		<%
+							}
+							}
+						%>
         </div>
-
+		
       </div>
     </div>
 

@@ -37,6 +37,7 @@ alert("trainer");
 
 	self.filterTrainers = function(event) {
 		progressBar.start();
+		alert("trainer::"+event);
 		if (event.target.value && event.target.value != "all") {
 			self.dispatch(event.target.value);
 		} else {

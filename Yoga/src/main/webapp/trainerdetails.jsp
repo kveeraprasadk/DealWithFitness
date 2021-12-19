@@ -252,7 +252,7 @@
 						<h3>Contact</h3>
 
 						<p>
-						<div class="tname"></div>
+						
 						<br>
 						</p>
 					</div>
