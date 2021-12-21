@@ -61,10 +61,6 @@
 	<script src="lib/isotope/isotope.pkgd.min.js"></script>
 	<script src="lib/lightbox/js/lightbox.min.js"></script>
 
-	<!-- Contact Javascript File -->
-	<script src="mail/jqBootstrapValidation.min.js"></script>
-	<script src="mail/contact.js"></script>
-
 	<!-- Template Javascript -->
 	<script src="js/main.js"></script>
 
@@ -85,6 +81,27 @@
 
 .error {
 	color: #FF0000 !important;
+}
+@media screen and (min-width: 200px) and (max-width: 970px) {
+
+.card-deck {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    margin-right: 5px;
+    margin-left: 5px;
+    flex-direction: row;
+}
+.card-deck .card {   
+    margin: 5px;
+    border-radius: 15px;
+}
+.card-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 0.5rem;    
+}
 }
 </style>
 </head>
@@ -113,9 +130,26 @@
 				<div class="col-12">
 					<h2>Trainee's Zone</h2>
 				</div>
-				<div class="col-12">
-					<a href="traineelandingpage.jsp">My Trainings</a> <a
-						href="javascript:">My Profile</a>
+				<div class="col-12">					
+					<div class="card-deck">
+					<div class="card ">
+						<div class="card-body text-center">
+							<p class="card-text">
+								<a href="traineelandingpage.jsp">
+								<i class="fa fa-clock pr" style="font-size: 23px"></i>My Trainings</a>
+							</p>
+						</div>
+					</div>
+					<div class="card ">
+						<div class="card-body text-center">
+							<p class="card-text">
+								<a href="javascript:">
+								<i class="fa fa-file pr" style="font-size: 23px"></i>My Profile</a>
+							</p>
+
+						</div>
+					</div>
+					</div> 
 				</div>
 			</div>
 		</div>
@@ -149,10 +183,17 @@
 			%>
 			<div class="row">
 				<div class="col-lg-8 col-md-7 detail-px no-padding">
-					<form role="form" name=traineeupdateform " id="traineeupdateform">
+					
 						<h3 class="mth3">Profile</h3>
 							<p><span style="background-color: #FFFF00"><strong>! Important :</strong> Please Update your profile with following
 							fields for better services.</span></p>
+							<div class="right">
+								<button class="btn btn-info editprofileicon">
+									<i class="fa fa-edit blue-color "></i> <span
+										style="font-size: 14px">Edit Profile</span>
+								</button>
+							</div>
+			<form role="form" name=traineeupdateform " id="traineeupdateform">
 						<div class="fx-ro">
 							<div class="dat col-lg-4">Trainee Email</div>
 							<div class="dat col-lg-8">
@@ -274,7 +315,8 @@
 							<div class="dat col-lg-4"></div>
 							<div class="dat col-lg-8">
 								<button type="submit" class="btn btn-primary"
-									id="traineeprofileupdate" name="traineeprofileupdate">Update</button>
+									id="traineeprofileupdate" name="traineeprofileupdate"><i class="fa fa-edit blue-color "></i>&nbspUpdate</button>
+														
 							</div>
 						</div>
 						<div id="updatesuccess"></div>
@@ -298,11 +340,7 @@
 
 						<h2><%=traineedetails.getName()%></h2>
 
-						<h3>Contact</h3>
-
-						<p><%=traineedetails.getName()%>
-							<br>
-						</p>
+						<h3>Contact</h3>						
 
 						<p><%=traineedetails.getEmail()%>
 							<br>
@@ -635,6 +673,7 @@
 			$('#changepasswordhide').hide();
 			$('.classlevelhide').hide();
 			$('.schedulehide').hide();
+			$('#traineeprofileupdate').hide();
 
 			$(".trainerchangepassword").click(function() {
 				$('#changepasswordhide').toggle();
@@ -642,6 +681,9 @@
 			$(".classhide").click(function() {
 				$('.classlevelhide').show();
 				$('.schedulehide').show();
+			});
+			$(".editprofileicon").click(function() {
+				$('#traineeprofileupdate').toggle();
 			});
 
 		});

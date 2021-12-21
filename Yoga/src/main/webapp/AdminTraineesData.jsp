@@ -46,10 +46,7 @@
         <script src="lib/isotope/isotope.pkgd.min.js"></script>
         <script src="lib/lightbox/js/lightbox.min.js"></script>
         <script src="./dist/dialogs.js"></script> 
-        
-        <!-- Contact Javascript File -->
-        <script src="mail/jqBootstrapValidation.min.js"></script>
-        <script src="mail/contact.js"></script>
+   
 
         <!-- Template Javascript -->
         <script src="js/main.js"></script>

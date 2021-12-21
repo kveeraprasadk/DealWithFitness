@@ -62,7 +62,7 @@ public class ContactServlet extends HttpServlet {
         try
         {
             con = DBConnection.createConnection();
-            String query = "insert into fitnesscomments(commentorname,commentoremail,commentorphone,subject,comment,commenttime) values (?,?,?,?,?)"; //Insert user details into the table 'USERS'
+            String query = "insert into fitnesscomments(commentorname,commentoremail,commentorphone,subject,comment,commenttime) values (?,?,?,?,?,?)"; //Insert user details into the table 'USERS'
             PreparedStatement statement = con.prepareStatement(query); //Making use of prepared statements here to insert bunch of data
             statement.setString(1, name);              
             statement.setString(2, email);

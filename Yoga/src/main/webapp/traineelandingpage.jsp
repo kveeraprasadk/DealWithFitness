@@ -66,10 +66,6 @@
 	<script src="lib/isotope/isotope.pkgd.min.js"></script>
 	<script src="lib/lightbox/js/lightbox.min.js"></script>
 
-	<!-- Contact Javascript File -->
-	<script src="mail/jqBootstrapValidation.min.js"></script>
-	<script src="mail/contact.js"></script>
-
 	<!-- Template Javascript -->
 	<script src="js/main.js"></script>
 
@@ -84,6 +80,41 @@
 <style type="text/css">
 label {
 	color: #FF0000 !important;
+}
+.card-deck {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    margin-right: 250px;
+    margin-left: 250px;
+}
+.card-deck .card {    
+    border-radius: 15px;
+}
+@media screen and (min-width: 200px) and (max-width: 970px) {
+
+.card-deck {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    margin-right: 10px;
+    margin-left: 10px;
+    flex-direction: row;
+}
+.card-deck .card {   
+    margin: 5px;
+    border-radius: 15px;
+    padding: 0.3px;
+}
+
+.card-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 0.5rem;
+}
+
 }
 
 @media ( max-width : 575.98px) {
@@ -187,8 +218,25 @@ label {
 					<h2>Trainee's Zone</h2>
 				</div>
 				<div class="col-12">
-					<a href="javascript:">My Trainings</a> <a
-						href="javascript: trainee.switchView('profile')">My Profile</a>
+					<div class="card-deck">
+					<div class="card ">
+						<div class="card-body text-center">
+							<p class="card-text">
+								<a href="traineelandingpage.jsp">
+								<i class="fa fa-clock pr" style="font-size: 23px"></i>My Trainings</a>
+							</p>
+						</div>
+					</div>
+					<div class="card ">
+						<div class="card-body text-center">
+							<p class="card-text">
+								<a href="./TraineeProfile">
+								<i class="fa fa-file pr" style="font-size: 23px"></i>My Profile</a>
+							</p>
+
+						</div>
+					</div>					
+					</div> 
 				</div>
 			</div>
 		</div>
