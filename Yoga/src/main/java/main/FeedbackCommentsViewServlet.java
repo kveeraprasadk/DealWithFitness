@@ -69,8 +69,10 @@ public class FeedbackCommentsViewServlet extends HttpServlet {
 						commentsList.add(details);
 										
 					}
-					request.setAttribute("CommentListData", commentsList);					
+					request.setAttribute("CommentListData", commentsList);		
+				
 					request.getRequestDispatcher("/About.jsp").forward(request, response);
+					
 				}
 			}
 

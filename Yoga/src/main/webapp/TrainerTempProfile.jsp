@@ -48,10 +48,6 @@
         <script src="lib/owlcarousel/owl.carousel.min.js"></script>
         <script src="lib/isotope/isotope.pkgd.min.js"></script>
         <script src="lib/lightbox/js/lightbox.min.js"></script>
-        
-        <!-- Contact Javascript File -->
-        <script src="mail/jqBootstrapValidation.min.js"></script>
-        <script src="mail/contact.js"></script>
 
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
@@ -142,25 +138,66 @@
 
     <body onLoad="renderTrainerProfile()">
    <%@include file="./html/trainer-profile-pic-update-modal.html"%>
-        <!-- Nav Bar Start -->
-        <div class="navbar navbar-expand-lg bg-dark navbar-dark">
-            <div class="container-fluid">
-                <a href="index.jsp" class="navbar-brand">Dealwithfitness<span></span></a>
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+        
+        <!-- Nav bar Start-->
+        <div class="navbar navbar-expand-lg bg-dark navbar-dark"
+	style="padding: 0px">
+	<div class="container-fluid"
+		style="padding: 0px; flex-direction: column">
+		<div class="container-fluid"
+			style="padding: 0px; justify-content: flex-start; min-height: 40px">
+			<a tabindex="0" id="sm-more-options-trigger" role="button"
+				class="btn btn-default small-screen" data-trigger="focus"
+				data-container="body" data-placement="bottom" data-toggle="popover"
+				data-html="true" style="padding-left: 8px">
+				<span class="fa fa-bars"></span>
+			</a>
+			<span class="logo-text flex-grow pl " style="text-align: left; font-size: 28px;"><strong>DEALWITHFITNESS</strong></span>
+			<!-- This is for bigger screens  -->
+						
+			<a tabindex="0" id="logged-in-user-options-trigger" role="button"
+				class="btn btn-default user-logged-in-button hide"
+				data-trigger="focus" data-container="body" data-placement="bottom"
+				data-toggle="popover" data-html="true" style="padding-left: 8px">
+				<span class="fa fa-user"></span>
+			</a>
+			<div class="flex flex-valign-center">				
+				<span id="logged-in-user-name" class="user-name" style="font-size: 20px"></span>
+			</div>
+		</div>
+		<!-- This is for smaller screens  -->
+		<div class="small-screen hide flex-column hide"
+			id="sm-navbar-more-options">
+			<div class="navbar-nav ml-auto flex-column pl pr pb pt">			
+				<a id="user-logout-element" href="./logoutservice"
+				class="nav-item nav-link anchor-button">Logout</a>
+			</div>
+		</div>
+	</div>
+	<!-- User popup -->
+	<div id="logged-in-user-popover-options" class="hide">
+		<div class="flex-column logged-in-user-popover-options pl pr pb pt">
+			<div class="flex flex-valign-center">
+				<i class="fa fa-user-circle icon-color icon-color-gray"
+					style="font-size: 20px"></i>
+				<span id="logged-in-trainee-name" class="user-name"></span>
+			</div>
+			<div class="flex flex-valign-center">
+				<i class="fa fa-envelope icon-color icon-color-gray"
+					style="font-size: 20px"></i>
+				<span id="logged-in-user-email" class="user-name"></span>
+			</div>
 
-                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                    <div class="navbar-nav ml-auto">
-                 
-                         <a href="./TrainerLogoutServlet" class="nav-item nav-link">Logout</a>
-                        
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Nav Bar End -->
+			<span class="divider"></span>
+			<a id="user-logout-element" href="./logoutservice"
+				class="nav-item nav-link anchor-button">Logout</a>
+		</div>
+	</div>
+</div>
+        <!-- Nav bar End-->
+        
+        
+        
 
 
         <!-- Page Header Start -->

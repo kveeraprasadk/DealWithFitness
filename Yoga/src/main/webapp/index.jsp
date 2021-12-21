@@ -63,10 +63,6 @@
 	<script src="lib/isotope/isotope.pkgd.min.js"></script>
 	<script src="lib/lightbox/js/lightbox.min.js"></script>
 
-	<!-- Contact Javascript File -->
-	<script src="mail/jqBootstrapValidation.min.js"></script>
-	<script src="mail/contact.js"></script>
-
 	<!-- Template Javascript -->
 	<script src="js/main.js"></script>
 <link rel="icon" href="img/yoga-icon1.jpg">
@@ -194,7 +190,7 @@ display: none;
 }
 .mobilealign{
 margin-top: -20px;
-margin-left: 270px;
+margin-left: 240px;
 }
 .card-deck {
     display: -ms-flexbox;
@@ -213,10 +209,10 @@ border-radius: 10px;
     padding: 0.5rem;
     }
     .mobilecard{
-    margin-top: 20px;
-   
+    margin-top: 20px;   
     }
-    .quotes .box {
+    
+ .quotes .box {
   position: relative;
   width: 100%; 
   background: white;
@@ -254,7 +250,7 @@ border-radius: 10px;
 
 .quotes .box {
   position: relative;
-  width: 25vw;
+  width: 100%;
   height: 50vh;
   min-height: 320px;
   background: white;
@@ -393,7 +389,7 @@ border-radius: 10px;
 						<div class="class-teacher">
 						<span class="far fa-check-circle flex flex-valign-center {attendeeSubscribedClass} trainee-selected" style="margin-left:10px"></span>
 		            	<button class="btn profiledata"  value="{email}" title="View Trainer Profile">
-						<span class="flex-grow trainer-name" ><strong>{name}</strong></span>						
+						<span class="flex-grow trainer-name" >{name}</span>						
 						</button>
 		        	</div>
 					<button class="btn profiledata" style="background-color: #dae2e642;"  value="{email}" title="View Trainer Profile">
@@ -401,10 +397,10 @@ border-radius: 10px;
 						<div class="flex-column flex-grow">	
 			            	<div class="class-meta flex" style="color: #050df6;">
 								<span class="pl" style="text-align:left; font-size: 1rem;color:gray; padding-right:30px;">									
-									<Strong>{expertise} </Strong>                                                   
+									{expertise}                                                    
 								</span>
 								<span  style="font-size: 1rem;color:gray;flex: 1; text-align: right; white-space: nowrap;">
-								<Strong><span class="pr-sm">&#x20B9;</span>{fee}/Month</Strong>
+								<span class="pr-sm">&#x20B9;</span>{fee}/Month
 								</span>
 			            	</div>
 						</div>							
@@ -414,23 +410,15 @@ border-radius: 10px;
 						<div class="flex-column flex-grow">	
 							<div class="class-meta flex" style="color: #050df6;">
 								<span class="pl" style="text-align:left; font-size: 1rem;color:gray; padding-right:30px;">
-									<i class="far fa-clock pr-sm" style="font-size: 16px;color:gray;"></i>
+									
 									{schedule}&nbsp({duration})                                                    
 								</span>
-								
-			            	</div>										             	
-		            	</div>
-					</div>
-					<div style=" width:100%;" class="flex-column  flex-grow trainer-details-card-inner-container {demoClass}" >
-						<div class="flex-column flex-grow">	
-							<div class="class-meta flex" style="color: #050df6;">
-								<span class="pl" style="text-align:left; font-size: 1rem;color:gray; padding-right:30px;">
-									<Strong>{selecteddays}</Strong>                                                   
+								<span class="pr" style="text-align:right; font-size: 1rem;color:gray; ">
+									{classdays}                                                  
 								</span>
-								
 			            	</div>										             	
 		            	</div>
-					</div>
+					</div>					
 					</button>
 					<div style=" width:100%;" class="flex-column flex-valign-center flex-grow trainer-details-card-inner-container" >
 			             <div class="class-meta">
@@ -646,7 +634,7 @@ border-radius: 10px;
 	<!-- Schedules image End -->	
 	
 	<!-- Comments Start -->
-	<div class="content commentbody " >
+	<div class="content commentbody">
     
     <div class="container ">
       <div class="section-header text-center" style="max-width: none">
@@ -660,78 +648,48 @@ border-radius: 10px;
       <div class="container owl-2-style">      
 
         <div class="owl-carousel owl-2 quotes">
+<%
+				ArrayList<TrainerDetailsVO> comments1 = (ArrayList<TrainerDetailsVO>) request
+						.getAttribute("CommentListData");
+			%>
+
+
+			<%
+				// Iterating through subjectList
+				if (comments1 != null && comments1.size() > 0) // Null check for the object
+				{
+					Iterator<TrainerDetailsVO> iterator1 = comments1.iterator(); // Iterator interface
+					int inv1 = 0;
+					for (TrainerDetailsVO commentdetails1 : comments1) // iterate through all the data until the last record
+					{
+						//InvestorExpertNamemodel myinvestordetails = iterator.next(); //assign individual employee record to the employee class object
+						inv1++;
+						//	System.out.println("My Investor: "+ traineedetails.getName());
+			%>
 
           <div class="card">
           <div class="box box1">
 <!--             <img src="images/person_1_sm.jpg" alt="Image" class="img-fluid"> -->
-            <h3>Sandeep</h3>
-            <p>Health is supposed to be the only companion staying with
-							you till you die. Staying fit keeps you really alive while you
-							are alive.</p>
+            <h3><%=commentdetails1.getName()%></h3>
+            <p><%=commentdetails1.getComment()%></p>
+            <p class="text-right"><%=commentdetails1.getDefdays()%></p>
           </div>
           <div class="bg"></div>
-    	  </div>
-
-          <div class="media-29101 card">
-          <div class="box box2">
-<!--             <img src="images/person_1_sm.jpg" alt="Image" class="img-fluid"> -->
-            <h3>Prasad</h3>
-            <p>Health is supposed to be the only companion staying with
-							you till you die. Staying fit keeps you really alive while you
-							are alive.</p>
-          </div>
-          <div class="bg"></div>
-    	  </div>
-
-         <div class="media-29101 card">
-          <div class="box box3">
-<!--             <img src="images/person_1_sm.jpg" alt="Image" class="img-fluid"> -->
-            <h3>Hari</h3>
-            <p>Health is supposed to be the only companion staying with
-							you till you die. Staying fit keeps you really alive while you
-							are alive.</p>
-          </div>
-          <div class="bg"></div>
-    	  </div>
-
-         <div class="media-29101 card">
-          <div class="box box1">
-<!--             <img src="images/person_1_sm.jpg" alt="Image" class="img-fluid"> -->
-            <h3>Viru</h3>
-            <p>Health is supposed to be the only companion staying with
-							you till you die. Staying fit keeps you really alive while you
-							are alive.</p>
-          </div>
-          <div class="bg"></div>
-    	  </div>
-
-          <div class="media-29101 card">
-          <div class="box box2">
-<!--             <img src="images/person_1_sm.jpg" alt="Image" class="img-fluid"> -->
-            <h3>Krish</h3>
-            <p>Health is supposed to be the only companion staying with
-							you till you die. Staying fit keeps you really alive while you
-							are alive.</p>
-          </div>
-          <div class="bg"></div>
-    	  </div>
-
-          <div class="media-29101 card">
-          <div class="box box3">
-<!--             <img src="images/person_1_sm.jpg" alt="Image" class="img-fluid"> -->
-            <h3>Harsha</h3>
-            <p>Health is supposed to be the only companion staying with
-							you till you die. Staying fit keeps you really alive while you
-							are alive.</p>
-          </div>
-          <div class="bg"></div>
-    	  </div>
+    	  </div>     
+		<%
+							}
+							}
+						%>
         </div>
+		
       </div>
     </div>
+
   </div>
     
 	<!-- Comments End -->
+	
+	
 	
 
 	<!-- Footer Start -->

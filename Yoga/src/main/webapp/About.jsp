@@ -46,16 +46,20 @@
 
 <!-- JavaScript Libraries -->
 <script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.js"></script>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"
+	defer></script>
+
+<script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 <script src="lib/easing/easing.min.js"></script>
 <script src="lib/wow/wow.min.js"></script>
 <script src="lib/owlcarousel/owl.carousel.min.js"></script>
 <script src="lib/isotope/isotope.pkgd.min.js"></script>
 <script src="lib/lightbox/js/lightbox.min.js"></script>
-
-<!-- Contact Javascript File -->
-<script src="mail/jqBootstrapValidation.min.js"></script>
-<script src="mail/contact.js"></script>
 
 <!-- Added this for fixating the header otherwise not needed -->
 <script src="js/main.js"></script>
@@ -71,19 +75,7 @@
     <script src="comment/js/bootstrap.min.js"></script>
     <script src="comment/js/owl.carousel.min.js"></script>
     <script src="comment/js/main.js"></script>
-<script>
-	function init() {
-	
-		$
-		.ajax({
-			type : 'GET',
-			url : "${pageContext.request.contextPath}/FeedbackCommentsViewServlet",
-		});
-	}
-$(document).ready(function(){	
-$('.forgot-progressbar').hide();
-		});
-</script>
+
 <style type="text/css">
 <!--Comments css -->
 .commentbody {
@@ -109,7 +101,7 @@ $('.forgot-progressbar').hide();
 
 .quotes .box {
   position: relative;
-  width: 25vw;
+  width: 100%;
   height: 50vh;
   min-height: 320px;
   background: white;
@@ -178,6 +170,9 @@ $('.forgot-progressbar').hide();
   height: 100%;
   overflow: hidden;
 }
+.error {
+	color: #FF0000 !important;
+}
 @media screen and (min-width: 200px) and (max-width: 970px) {
  .quotes .box {
   position: relative;
@@ -190,11 +185,26 @@ $('.forgot-progressbar').hide();
   padding: 30px;
 /*   box-shadow: -10px 25px 50px rgba(0, 0, 0, 0.3); */
 }
+.error {
+	color: #FF0000 !important;
+}
 }
 </style>
 
 </head>
-
+<script>
+	function init() {
+	
+		$.ajax({
+			type : 'GET',
+			url : "${pageContext.request.contextPath}/FeedbackCommentsViewServlet",
+		});
+		whoami.detect();
+	}
+$(document).ready(function(){	
+$('.forgot-progressbar').hide();
+		});
+</script>
 <body onload="init()">
 	<!-- Top Bar Start -->
 	<!-- Top Bar End -->
@@ -247,8 +257,7 @@ $('.forgot-progressbar').hide();
 	</div>
 	<!-- About End -->
 
-
-	<!-- Contact Start -->
+<!-- Contact Start -->
 	<div class="contact">
 		<div class="container">
 			<div class="section-header text-center wow zoomIn"
@@ -275,46 +284,42 @@ $('.forgot-progressbar').hide();
 				</div>
 				<div class="col-12 wow fadeInUp" data-wow-delay="0.1s">
 					<div class="contact-form">
-						<div id="success"></div>
-						<form  name="sentMessage" id="contactForm" >
+						
+						<form role="form" name="CommentsSendForm" id="CommentsSendForm" class="comments-form">
 							<div class="control-group">
-								<input type="text" class="form-control" id="name" 
-									placeholder="Your Name" required="required"
-									data-validation-required-message="Please enter your name" />
-								<p class="help-block text-danger"></p>
+								<input type="text" class="form-control" id="cname" name="cname"
+									placeholder="Your Name" required />
+								
 							</div>
 							<div class="control-group">
-								<input type="email" class="form-control" id="email" 
-									placeholder="Your Email" required="required"
-									data-validation-required-message="Please enter your email" />
-								<p class="help-block text-danger"></p>
+								<input type="email" class="form-control" id="cemail" name="cemail"
+									placeholder="Your Email" required />
+								
 							</div>
 							<div class="control-group">
-								<input type="number" class="form-control" id="phonenumber" 
-									placeholder="Your Phone Number" required="required"
-									data-validation-required-message="Please enter your phone number" />
-								<p class="help-block text-danger"></p>
+								<input type="number" class="form-control" id="cphonenumber" name="cphonenumber"
+									placeholder="Your Phone Number" required />
+								
 							</div>
 							<div class="control-group">
-								<input type="text" class="form-control" id="subject" 
-									placeholder="Subject" required="required"
-									data-validation-required-message="Please enter a subject" />
-								<p class="help-block text-danger"></p>
+								<input type="text" class="form-control" id="csubject" name="csubject"
+									placeholder="Subject" required />
+								
 							</div>
 							<div class="control-group">
-								<textarea class="form-control" id="message" 
-									placeholder="Message" required="required"
-									data-validation-required-message="Please enter your message"></textarea>
-								<p class="help-block text-danger"></p>
+								<textarea class="form-control" id="cmessage" name="cmessage"
+									placeholder="Message" required></textarea>
+								
 							</div>
 							<div class="control-group">
+							<div id="success"></div>
 									<div class="progress forgot-progressbar">
     											<div class="progress-bar  progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:100%">
     											Sending</div>
   									</div>
 							</div><br>
 							<div class="control-group">
-								<button class="btn btn-primary" type="submit" id="sendMessage">Send
+								<button type="submit" class="btn btn-primary" id="send-message-button">Send
 									Message</button>
 							</div>
 						</form>
@@ -324,8 +329,137 @@ $('.forgot-progressbar').hide();
 		</div>
 	</div>
 	<!-- Contact End -->
-	
-	
+<script type="text/javascript">
+	$(document)	.ready(	function() {
+				$('#CommentsSendForm').validate(
+								{
+									rules : {
+										cname : {
+											required : true,
+											minlength : 3,
+											alphaNum : true
+											},
+										cemail : {
+											required : true,
+											email : true
+											},
+										cphonenumber : {
+												required : true,
+												minlength : 10,
+												maxlength : 10,
+												onlyNum : true
+											},
+										csubject :	{
+												required : true,
+												minlength : 3
+												},
+										cmessage :	{
+													required : true,
+													minlength : 50
+													}
+									},
+									messages : {
+										
+										cname : {
+											required : "Please Enter name",
+											minlength : "Name should be at least 3 characters"
+										},
+										cemail : {
+											required : "Please Enter Email",
+											email : "The email should be in the format: abc@domain.tld"
+										},
+										cphonenumber : {
+											required : "Please enter Phone Number",
+											minlength : "Phone Number must be 10 numbers",
+											maxlength : "Phone Number must be 10 numbers"
+										},
+										csubject : {
+											required : "Please Enter Subject",
+											minlength : "subject should be at least 3 characters"
+										},
+										cmessage : {
+											required : "Please Enter your comment",
+											minlength : "comment should be at least 50 characters"
+										}
+									},
+
+									submitHandler : function(form) {
+
+										var name = $("#cname").val();
+										var email = $("#cemail").val();
+										var phone = $("#cphonenumber").val();
+										var subject = $("#csubject").val();												
+										var message = $("#cmessage").val();
+										alert(email);
+										$('.forgot-progressbar').show();
+
+										$
+												.ajax({
+													url : "ContactServlet",
+													type : "POST",
+													data : {
+														name : name,
+														email : email,
+														phone : phone,
+														subject : subject,
+														message : message
+													},
+													cache : false,
+													success : function() {
+														$('.forgot-progressbar').hide();
+														$('#success')
+																.html(
+																		"<div class='alert alert-success'>");
+														$('#success > .alert-success')
+																.html(
+																		"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+																.append("</button>");
+														$('#success > .alert-success')
+																.append(
+																		"<strong>Feedback Sent</strong>");
+														$('#success > .alert-success')
+																.append('</div>');
+														$('#contactForm').trigger("reset");
+													},
+													error : function() {
+														$('#success')
+																.html(
+															"<div class='alert alert-danger'>");
+														$('#success > .alert-danger')
+																.html(
+																		"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+																.append("</button>");
+														$('#success > .alert-danger')
+																.append(
+																		$("<strong>")
+																				.text(
+																					"Sorry "
+																								+ name
+																								+ ", Feedback Sent failed. Please try again later!"));
+														$('#success > .alert-danger')
+																.append('</div>');
+														$('#contactForm').trigger("reset");
+													}
+												});
+
+										return false;
+									}
+								});
+				$.validator.addMethod("alphaNum", function(value,element) {
+					return this.optional(element)
+							|| value == value
+									.match(/^[a-zA-Z\s]*$/);
+				}, "please enter a valid name");
+				$.validator.addMethod("onlyNum", function(value,
+						element) {
+					return this.optional(element)
+							|| value == value
+									.match(/^[1-9]{1}[0-9]{9}$/);
+				}, "Phone number must be 10 numbers");
+			});
+	</script>
+
+		
 	<!-- Comments Start -->
 	<div class="content commentbody">
     
@@ -383,54 +517,7 @@ $('.forgot-progressbar').hide();
     
 	<!-- Comments End -->
 	
-	<!-- Feedback view Start -->
-	<div class="about wow fadeInUp" data-wow-delay="0.1s"
-		style="background: white">
-		<div class="container">
-			<div class="row align-items-center">
-				<h4>Feedbacks</h4>
-				<table class="table table-bordered">
-				<tr>
-				<th>Name</th>
-				<th>Subject</th>
-				<th>Comment</th>
-				<th>Time</th>
-				</tr>
-				<%
-				ArrayList<TrainerDetailsVO> comments = (ArrayList<TrainerDetailsVO>) request
-						.getAttribute("CommentListData");
-			%>
-
-
-			<%
-				// Iterating through subjectList
-				if (comments != null && comments.size() > 0) // Null check for the object
-				{
-					Iterator<TrainerDetailsVO> iterator = comments.iterator(); // Iterator interface
-					int inv = 0;
-					for (TrainerDetailsVO commentdetails : comments) // iterate through all the data until the last record
-					{
-						//InvestorExpertNamemodel myinvestordetails = iterator.next(); //assign individual employee record to the employee class object
-						inv++;
-						//	System.out.println("My Investor: "+ traineedetails.getName());
-			%>
-						<tr>
-						<td><%=commentdetails.getName()%></td>
-						<td><%=commentdetails.getSubject()%></td>
-						<td><%=commentdetails.getComment()%></td>
-						<td><%=commentdetails.getCreatetime()%></td>
-						</tr>
-			
-			<%
-							}
-							}
-						%>
-				
-				</table>				
-			</div>
-		</div>
-	</div>
-	<!-- About End -->
+	
 
 
 	<!-- Footer Start -->

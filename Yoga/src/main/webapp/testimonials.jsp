@@ -69,6 +69,38 @@
 	left: 1rem;
 	transform: translateY(-50%);
 }
+.card-deck {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    margin-right: 250px;
+    margin-left: 250px;
+}
+.card-deck .card {    
+    border-radius: 15px;
+}
+@media screen and (min-width: 200px) and (max-width: 970px) {
+
+.card-deck {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    margin-right: 5px;
+    margin-left: 5px;
+    flex-direction: row;
+}
+.card-deck .card {   
+    margin: 5px;
+    border-radius: 15px;
+}
+.card-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 0.5rem;    
+}
+}
 </style>
 </head>
 
@@ -86,9 +118,24 @@
 				<div class="col-12">
 					<h2>My Fitness Journey</h2>
 				</div>
-				<div class="flex flex-halign-center col-12">
-					<a href="testimonials.jsp">Add New Story</a>
-					<a href="viewtestimonials.jsp">View Stories</a>
+				<div class="col-12">		
+					
+					<div class="card-deck">
+					<div class="card ">
+						<div class="card-body text-center">
+							<p class="card-text">
+								<a href="testimonials.jsp"><i class="fa fa-heart pr" style="font-size: 23px"></i>Add Story</a>
+							</p>
+						</div>
+					</div>
+					<div class="card ">
+						<div class="card-body text-center">
+							<p class="card-text">
+								<a href="viewtestimonials.jsp"><i class="fa fa-eye pr" style="font-size: 23px"></i>View Stories</a>
+							</p>
+						</div>
+					</div>					
+					</div> 
 				</div>
 			</div>
 		</div>

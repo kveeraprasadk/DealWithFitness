@@ -14,7 +14,7 @@
 			<!-- This is for bigger screens  -->
 			<div class="navbar-collapse justify-content-between big-screen">
 				<div class="navbar-nav ml-auto flex flex-valign-center">
-					<a href="index.jsp" class="nav-item nav-link ">Home</a>
+					<a href="./IndexCommentsView" class="nav-item nav-link ">Home</a>
 					<a href="./CommentsView" class="nav-item nav-link">About</a>
 					<a href="viewstories.jsp" class="nav-item nav-link">Stories</a>
 					<a name="trainer-hyperlink-element" href="Trainer.jsp"
@@ -22,12 +22,16 @@
 						<a href="indexnew.jsp" class="nav-item nav-link ">NewHome</a>
 				</div>
 			</div>
+			<div class="flex flex-valign-center">				
+				<span id="logged-in-user-name" class="user-name" style="font-size: 20px"></span>
+			</div>
 			<a tabindex="0" id="logged-in-user-options-trigger" role="button"
 				class="btn btn-default user-logged-in-button hide"
 				data-trigger="focus" data-container="body" data-placement="bottom"
 				data-toggle="popover" data-html="true" style="padding-left: 8px">
 				<span class="fa fa-user"></span>
 			</a>
+			
 		</div>
 		<!-- This is for smaller screens  -->
 		<div class="small-screen hide flex-column hide"
@@ -35,7 +39,7 @@
 			<div class="navbar-nav ml-auto flex-column pl pr pb pt">
 				<div class="flex flex-valign-center pb-sm">
 					<i class="fa fa-home icon-color pr" style="font-size: 20px"></i>
-					<a href="index.jsp" class="nav-item nav-link user-name"> Home </a>
+					<a href="./IndexCommentsView" class="nav-item nav-link user-name"> Home </a>
 				</div>
 				<div class="flex flex-valign-center pb-sm">
 					<i class="fa fa-file icon-color pr" style="font-size: 20px"></i>
@@ -65,7 +69,7 @@
 			<div class="flex flex-valign-center">
 				<i class="fa fa-user-circle icon-color icon-color-gray"
 					style="font-size: 20px"></i>
-				<span id="logged-in-user-name" class="user-name"></span>
+				<span id="logged-in-trainee-name" class="user-name"></span>
 			</div>
 			<div class="flex flex-valign-center">
 				<i class="fa fa-envelope icon-color icon-color-gray"

@@ -34,6 +34,7 @@ function Journey() {
 	}
 	
 	self.trainerinit = function() {
+		whoami.detect(() => {
 		var inputs = document.getElementsByClassName('photo-trigger-button');
 		for (const inp of inputs) {
 			self.clearFileSelection(inp);
@@ -57,6 +58,7 @@ function Journey() {
 //				}
 			}
 		});
+		})
 	}
 
 	self.isSupportedFiles = function(fileName) {

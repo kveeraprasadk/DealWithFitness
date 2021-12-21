@@ -316,6 +316,12 @@
 		<description></description>
 		<servlet-class>main.service.trainer.TrainerProfileCertificates3UpdateServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>CommentsViewInIndexServlet</servlet-name>
+		<display-name>CommentsViewInIndexServlet</display-name>
+		<description></description>
+		<servlet-class>main.CommentsViewInIndexServlet</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>TrainerRegisterServlet</servlet-name>
@@ -524,6 +530,10 @@
 	<servlet-mapping>
 		<servlet-name>TrainerProfileCertificates3UpdateServlet</servlet-name>
 		<url-pattern>/TrainerProfileCertificates3UpdateServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>CommentsViewInIndexServlet</servlet-name>
+		<url-pattern>/CommentsViewInIndexServlet</url-pattern>
 	</servlet-mapping>
 	<listener>
 		<listener-class>main.common.MysqlDatasource</listener-class>

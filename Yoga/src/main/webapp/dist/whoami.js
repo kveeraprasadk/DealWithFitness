@@ -59,7 +59,7 @@ function Whoami() {
 			const trainers = document.getElementsByName("trainer-hyperlink-element");
 			$(trainers).removeClass("hide");
 		}
-87
+
 		if (callback) {
 			callback();
 		}
@@ -83,6 +83,7 @@ function Whoami() {
 		if (self.isUserLoggedIn()) {
 			$("#logged-in-user-email").text(self.userDetails.email);
 			$("#logged-in-user-name").text(self.userDetails.name);
+			$("#logged-in-trainee-name").text(self.userDetails.name);
 			$("#logged-in-user-options-trigger").show();
 
 			// If logged in user is trainee then hide trainer hyperlink
