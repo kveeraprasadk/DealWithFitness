@@ -22,9 +22,11 @@
 	rel="stylesheet">
 
 <!-- CSS Libraries -->
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-	rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<!-- <link href="css/all.min.css" rel="stylesheet"> -->
+<link href="css/style.css" rel="stylesheet">
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
 	rel="stylesheet">
 
 <link href="lib/animate/animate.min.css" rel="stylesheet">
@@ -33,18 +35,14 @@
 <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
 
 <!-- Template Stylesheet -->
-<link href="css/style.css" rel="stylesheet">
-<script src="./dist/external/moment.min.js"></script>
-<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.js"></script>
-<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script type="text/javascript"	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"
-	defer></script>
 
-<!-- jQuery library --> 
-<!-- Popper JS -->
-<script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://apis.google.com/js/platform.js" async defer></script>
+<script src="./dist/external/moment.min.js"></script>
+<script src="./js/jquery.min.js"></script>
+<script src="./js/jquery.validate.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script src="./js/jquery.validate.min.js"></script>
+<script src="./js/popper.min.js"></script>
+<script src="./js/platform.js" async defer></script>
 
 <meta name="google-signin-client_id" content="GOOGLEID">
 <!-- Add Google ID -->
@@ -55,8 +53,8 @@
 <script src="./dist/whoami.js"></script>
 <script src="./dist/home-trainers.js"></script>
 <!-- JavaScript Libraries -->
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<!-- 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
+	<script src="./js/bootstrap.bundle.min.js" ></script>
 	<script src="lib/easing/easing.min.js"></script>
 	<script src="lib/wow/wow.min.js"></script>
 	<script src="lib/owlcarousel/owl.carousel.min.js"></script>
@@ -141,6 +139,12 @@ label {
 }
 .btntext{
 text-align: left !important;
+}
+.cardcomment{
+margin:3px;
+}
+.commentbox {
+margin:10px;
 }
 
 .card-deck{
@@ -354,18 +358,20 @@ border-radius: 10px;
 	
 	function renderTrainerProfile() {
 		trainers.init();
-		
-			const image = $("#trainer-profile-base64-encoded-element").val();
+	
+			
+			const image = $("#trainer-profile-base64-encoded-element").val();			
 			if (image) {
 				console.log("Profile picture present")
 				$("#profile-image-element").attr("src",
 						"data:image/*;base64," + image);
 			} else {
 				console.log("No profile picture");
-			}		
+			}				
 		
 	}
 </script>
+
 
 </head>
 
@@ -380,10 +386,9 @@ border-radius: 10px;
 	    <div class="col-lg-4 col-md-6 col-sm-12 class-item filter-1 wow fadeInUp " data-wow-delay="0.0s">
 		    <div class="class-wrap">				 
 		        	<div class="class-text flex-column flex-valign-center trainer-schedules" >
-						<input type="hidden" id="trainer-profile-base64-encoded-element"
-						value="{base64image }" />
+						
 						<div class="class-img">
-							<img src="img/yoga-class.jpg" alt="Image">										
+							<img src="data:image;base64,{base64Image}" alt="">										
                  		</div>
 						<p class="classexpertise">{expertise}</p>
 						<div class="class-teacher">
@@ -392,6 +397,7 @@ border-radius: 10px;
 						<span class="flex-grow trainer-name" >{name}</span>						
 						</button>
 		        	</div>
+					
 					<button class="btn profiledata" style="background-color: #dae2e642;"  value="{email}" title="View Trainer Profile">
 					<div style=" width:100%;" class="flex-column  flex-grow trainer-details-card-inner-container {demoClass}" >
 						<div class="flex-column flex-grow">	
@@ -431,29 +437,86 @@ border-radius: 10px;
 					</div>
 		        </div>
 		    </div>
+		
 		</div>
 	</script>
-	
-	<!--If trainer is not providing any trainings then this template will be rendered -->
 	<script type="text/html" id="Trainer-details-template-empty"
 		targetId="trainers-list-container">
-	    <div class="col-lg-4 col-md-6 col-sm-12 class-item filter-1 wow fadeInUp box" data-wow-delay="0.0s">
-		    <div class="class-wrap class-text flex-column">
-	            <div class="class-teacher">
-		            <span class="flex-grow trainer-name" style="font-size:1.2rem;"><strong>{name}</strong></span>
-					<a style="height: 32px;width: 32px" title="View Trainer Profile">
-						<button class="btn profiledata home-trainer-list-a fas fa-external-link-alt" value="{email}" style="font-size:18px">
+	    <div class="col-lg-4 col-md-6 col-sm-12 class-item filter-1 wow fadeInUp " data-wow-delay="0.0s">
+		    <div class="class-wrap">				 
+		        	<div class="class-text flex-column flex-valign-center trainer-schedules" >
+						
+						<div class="class-img">
+							<img src="data:image;base64,{base64Image}" alt="">										
+                 		</div>
+						<p class="classexpertise">{expertise}</p>
+						<div class="class-teacher">
+						
+		            	<button class="btn profiledata"  value="{email}" title="View Trainer Profile">
+						<span class="flex-grow trainer-name" >{name}</span>						
 						</button>
-					</a>
-	        	</div>
-		    	<div class="flex-column flex-valign-center trainer-details-card-inner-container flex-grow">
-					<h4>{expertise}</h4>
-					<span style="color:red; padding: 10px" class="flex flex-valign-center">
-						<span class="fa fa-info-circle pr-sm" style="font-size:20px"></span>Trainings are not scheduled yet.
-					</span>
+		        	</div>
+					
+					<button class="btn profiledata" style="background-color: #dae2e642;"  value="{email}" title="View Trainer Profile">
+					<div style=" width:100%;" class="flex-column  flex-grow trainer-details-card-inner-container {demoClass}" >
+						<div class="flex-column flex-grow">	
+			            	<div class="class-meta flex" style="color: #050df6;">
+								<span class="pl" style="text-align:left; font-size: 1rem;color:gray; padding-right:30px;">									
+									{expertise}                                                    
+								</span>								
+			            	</div>
+						</div>							
+					</div>									
+					</button>
+					<div class="flex-column flex-valign-center trainer-details-card-inner-container flex-grow"> 
+					
+ 					<span style="color:red; padding: 10px" class="flex flex-valign-center"> 
+ 						<span class="fa fa-info-circle pr-sm" style="font-size:20px"></span>Trainings are not scheduled yet. 
+ 					</span> 
+		        </div> 
 		        </div>
 		    </div>
+		
 		</div>
+	</script>
+	<!--If trainer is not providing any trainings then this template will be rendered -->
+<!-- 	<script type="text/html" id="Trainer-details-template-empty" -->
+<!-- 		targetId="trainers-list-container"> -->
+<!-- 	    <div class="col-lg-4 col-md-6 col-sm-12 class-item filter-1 wow fadeInUp box" data-wow-delay="0.0s"> -->
+<!-- 		    <div class="class-wrap class-text flex-column"> -->
+<!-- 	            <div class="class-teacher"> -->
+<!-- 		            <span class="flex-grow trainer-name" style="font-size:1.2rem;"><strong>{name}</strong></span> -->
+<!-- 					<a style="height: 32px;width: 32px" title="View Trainer Profile"> -->
+<!-- 						<button class="btn profiledata home-trainer-list-a fas fa-external-link-alt" value="{email}" style="font-size:18px"> -->
+<!-- 						</button> -->
+<!-- 					</a> -->
+<!-- 	        	</div> -->
+<!-- 		    	<div class="flex-column flex-valign-center trainer-details-card-inner-container flex-grow"> -->
+<!-- 					<h4>{expertise}</h4> -->
+<!-- 					<span style="color:red; padding: 10px" class="flex flex-valign-center"> -->
+<!-- 						<span class="fa fa-info-circle pr-sm" style="font-size:20px"></span>Trainings are not scheduled yet. -->
+<!-- 					</span> -->
+<!-- 		        </div> -->
+<!-- 		    </div> -->
+<!-- 		</div> -->
+<!-- 	</script> -->
+	<!--This template will be providing all comments data -->
+	<script type="text/html" id="Comments-details-template"
+		targetId="comments-list-index">
+		
+ <div class="col-lg-12 col-md-12 col-sm-12 class-item filter-1 wow fadeInUp box" >
+<div class="container-fluid">
+          	<div class="card cardcomment">
+          		<div class="box commentbox">
+<!--             	<img src="images/person_1_sm.jpg" alt="Image" class="img-fluid"> -->
+            		<h3>{name}</h3>
+            		<p>" {comment} "</p>
+            		<p class="text-right">{defdays}</p>
+          		</div>
+          	<div class="bg"></div>
+    	  	</div>  
+</div>   
+	</div>
 	</script>
 	<!-- Nav Bar Start -->
 	<%@include file="./html/navbar.html"%>
@@ -632,62 +695,30 @@ border-radius: 10px;
 		</div>
 	</div>
 	<!-- Schedules image End -->	
-	
-	<!-- Comments Start -->
+	<!-- comments script Start -->	
 	<div class="content commentbody">
-    
-    <div class="container ">
+		<div class="container ">
       <div class="section-header text-center" style="max-width: none">
 				<h2	style="color:#0000a8; letter-spacing: 1px; text-transform: uppercase;"><strong>
 				Feedback</strong></h2>
       </div>
     </div>
+    <div id="comments-list-index" class="flex flex-wrap"></div>
+<!--     <div class="site-section bg-left-half mb-5"> -->
+<!--       <div class="container owl-2-style">       -->
 
+<!--         <div class="owl-carousel owl-2 quotes"> -->
+			
+<!-- 			</div> -->
+<!--     </div> -->
 
-    <div class="site-section bg-left-half mb-5">
-      <div class="container owl-2-style">      
-
-        <div class="owl-carousel owl-2 quotes">
-<%
-				ArrayList<TrainerDetailsVO> comments1 = (ArrayList<TrainerDetailsVO>) request
-						.getAttribute("CommentListData");
-			%>
-
-
-			<%
-				// Iterating through subjectList
-				if (comments1 != null && comments1.size() > 0) // Null check for the object
-				{
-					Iterator<TrainerDetailsVO> iterator1 = comments1.iterator(); // Iterator interface
-					int inv1 = 0;
-					for (TrainerDetailsVO commentdetails1 : comments1) // iterate through all the data until the last record
-					{
-						//InvestorExpertNamemodel myinvestordetails = iterator.next(); //assign individual employee record to the employee class object
-						inv1++;
-						//	System.out.println("My Investor: "+ traineedetails.getName());
-			%>
-
-          <div class="card">
-          <div class="box box1">
-<!--             <img src="images/person_1_sm.jpg" alt="Image" class="img-fluid"> -->
-            <h3><%=commentdetails1.getName()%></h3>
-            <p><%=commentdetails1.getComment()%></p>
-            <p class="text-right"><%=commentdetails1.getDefdays()%></p>
-          </div>
-          <div class="bg"></div>
-    	  </div>     
-		<%
-							}
-							}
-						%>
-        </div>
-		
-      </div>
-    </div>
-
-  </div>
-    
-	<!-- Comments End -->
+<!--   </div> -->
+	</div>
+	<!-- comments script End -->	
+	
+	
+	
+	
 	
 	
 	

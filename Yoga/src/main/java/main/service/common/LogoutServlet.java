@@ -30,7 +30,7 @@ public class LogoutServlet extends HttpServlet {
 			session.removeAttribute(AppConstants.SESSION_IDENTIFICATION_KEY);
 			session.removeAttribute(AppConstants.SESSION_USER_INFO);
 			session.invalidate();
-			response.sendRedirect("index.jsp");
+			response.sendRedirect("./index.jsp");
 		}
 	}
 

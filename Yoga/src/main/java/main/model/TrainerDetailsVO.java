@@ -3,7 +3,9 @@ package main.model;
 import java.sql.Blob;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class TrainerDetailsVO {
 	private String name;
@@ -50,6 +52,9 @@ public class TrainerDetailsVO {
 	private String endtime;
 	private String selecteddays;
 	private String defdays;
+	private String scheduleExpertise;
+	private String id;
+	private Set<String> attendees = new HashSet<>();
 	
 	public String getSelecteddays() {
 		return selecteddays;
@@ -412,6 +417,30 @@ public class TrainerDetailsVO {
 
 	public void setDefdays(String defdays) {
 		this.defdays = defdays;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public Set<String> getAttendees() {
+		return attendees;
+	}
+
+	public void setAttendees(Set<String> attendees) {
+		this.attendees = attendees;
+	}
+
+	public String getScheduleExpertise() {
+		return scheduleExpertise;
+	}
+
+	public void setScheduleExpertise(String scheduleExpertise) {
+		this.scheduleExpertise = scheduleExpertise;
 	}
 
 	

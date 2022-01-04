@@ -162,6 +162,7 @@ public class TrainersListServlet extends HttpServlet {
 							});
 							if (rs.getString("traineeId") != null) {
 								scheduleSeries.getAttendees().add(rs.getString("traineeId"));
+								System.out.println("attendee::"+(rs.getString("traineeId")));
 							}
 						} else {
 							SeriesSchedulesVO seriesVo = new SeriesSchedulesVO();

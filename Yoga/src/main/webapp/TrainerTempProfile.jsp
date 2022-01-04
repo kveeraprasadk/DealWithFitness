@@ -20,7 +20,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
         <!-- CSS Libraries -->
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
         <link href="lib/animate/animate.min.css" rel="stylesheet">
         <link href="lib/flaticon/font/flaticon.css" rel="stylesheet"> 
@@ -31,18 +31,14 @@
     <link rel="stylesheet" href="profile/css/bootstrap.min.css">
     <link rel="stylesheet" href="profile/css/fontawsom-all.min.css">
     <link rel="stylesheet" type="text/css" href="profile/css/style.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
-    <!-- jQuery library -->
-    <!-- Popper JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"
-	defer></script>   
+    <script src="./js/jquery.min.js"></script>
+ <script src="./js/bootstrap.min.js"></script>
+  <script src="./js/jquery.validate.js"></script>
+    <script src="./js/popper.min.js"></script>
+  <script src="./js/jquery.validate.min.js"></script> 
 	<!-- JavaScript Libraries -->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<!--         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
+       <script src="./js/bootstrap.bundle.min.js" ></script>
         <script src="lib/easing/easing.min.js"></script>
         <script src="lib/wow/wow.min.js"></script>
         <script src="lib/owlcarousel/owl.carousel.min.js"></script>
@@ -101,8 +97,11 @@
 	left: 1rem;
 	transform: translateY(-50%);
 }
+.modal-back {
+   background-color: lightgrey;
+}
 .input-group-append {
-    margin-left: 550px;
+    margin-left: 50px;
 }
 @media screen and (min-width: 200px) and (max-width: 970px) {
 .input-group-append {

@@ -53,15 +53,15 @@ public class TrainerRegisterServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 
-		String name = request.getParameter("formfirstname");
-		String email = request.getParameter("formemail");
+		String name =(String) request.getParameter("name");
+		String email =(String) request.getParameter("email");
 
-		String abuotme = request.getParameter("formaboutself");
-		String experience = request.getParameter("formexperience");
-		String qualification = request.getParameter("formqualification");
-		String phoneno = request.getParameter("formphone");
-		String expertise = request.getParameter("formexpertise1");
-		String pass = request.getParameter("formpassword");	
+		String abuotme =(String) request.getParameter("about");
+		String experience =(String) request.getParameter("experience");
+		String qualification =(String) request.getParameter("qualification");
+		String phoneno =(String) request.getParameter("phone");
+		String expertise =(String) request.getParameter("expertise");
+		String pass =(String) request.getParameter("password");	
 		System.out.println("pass:"+pass);
 		String password=null;
 		try {

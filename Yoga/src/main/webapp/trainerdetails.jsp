@@ -22,9 +22,7 @@
 	rel="stylesheet">
 
 <!-- CSS Libraries -->
-<link
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-	rel="stylesheet">
+<link href="css/bootstrap.min.css" rel="stylesheet">
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
 	rel="stylesheet">
@@ -38,20 +36,13 @@
 <link rel="stylesheet" href="profile/css/bootstrap.min.css">
 <link rel="stylesheet" href="profile/css/fontawsom-all.min.css">
 <link rel="stylesheet" type="text/css" href="profile/css/style.css" />
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
-<!-- jQuery library -->
-<!-- Popper JS -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<!-- JavaScript Libraries -->
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="./js/jquery.min.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script src="./js/jquery.validate.js"></script>
+<script src="./js/popper.min.js"></script>
+
+<!-- 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
+<script src="./js/bootstrap.bundle.min.js" ></script>
 	<script src="lib/easing/easing.min.js"></script>
 	<script src="lib/wow/wow.min.js"></script>
 	<script src="lib/owlcarousel/owl.carousel.min.js"></script>
@@ -68,18 +59,40 @@
 <!-- Template Stylesheet -->
 <link href="css/style.css" rel="stylesheet">
 <link href="css/common.css" rel="stylesheet">
+<script src="./dist/external/moment.min.js"></script>
+<script src="./dist/utils.js"></script>
+<script src="./dist/dialogs.js"></script>
 <script src="./dist/whoami.js"></script>
+<script src="./dist/home-trainers.js"></script>
+<script src="./dist/traineee-bookings.js"></script>
+<script src="./dist/TrainerSchedules.js"></script>
 <script>
 	function init() {
 		whoami.detect();
 	}
 </script>
+<style type="text/css">
+.card-deck {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
 
+
+</style>
 </head>
 
 <body onload="init()">
 	<!-- Nav Bar Start -->
 	<%@include file="./html/navbar.html"%>
+	<%@include file="./html/dialogs.html"%>
+	<%@include file="./html/trainee-login-dialog.html"%>
+	<%@include file="./html/register-trainee-dialog.html"%>
+	<%@include file="./html/trainee-forgot-password-dialog.html"%>
+	<%@include file="./html/Trainee-Phone-Number-Dialog.html"%>
 	<!-- Nav Bar End -->
 
 
@@ -97,45 +110,40 @@
 	<script type="text/javascript">
 		$(document).ready(
 				function() {
-// 					$("#book1").hide();
-// 					$("#book2").hide();
-// 					$("#book3").hide();
+
 					var globalarray = [];
 					var arrLinks = [];
-					arrLinks = JSON.parse(window.localStorage
-							.getItem("globalarray"));
+					arrLinks = JSON.parse(window.localStorage.getItem("globalarray"));
 					/* console.log(arrLinks); */
 					var i = 1;
 					console.log("Start");
 					console.log(arrLinks.length);
-					console.log("0:"+arrLinks[0]);
+				//	console.log("0:"+arrLinks[0]);
+				//	let schedule1 = JSON.parse(arrLinks[1]);
+					
 					let details = JSON.parse(arrLinks[0]);
+				//	console.log(details[].size);
+					console.log("length:"+details.length);
 // 					console.log("1:"+details[1]);
 // 					console.log("2:"+details[2]);
 					$(".tname").html(details[0].name);
+					$(".temail").html(details[0].email);
 					$(".texperience").html(details[0].experience);
 					$(".tqualification").html(details[0].qualification);
 					$(".texpertise").html(details[0].expertise);
 					$(".tmonthlyfees").html(details[0].monthlyfees);
 // 					$(".tschedules").html(details[0].schedule);
 					$(".tclasslevel").html(details[0].classlevel);
-// 					$(".texpertise2").html(details[0].expertise2);
-// 					$(".tmonthlyfees2").html(details[0].monthlyfees2);
-// 					$(".tschedules2").html(details[0].schedule2);
-// 					$(".tclasslevel2").html(details[0].classlevel2);
-// 					$(".texpertise3").html(details[0].expertise3);
-// 					$(".tmonthlyfees3").html(details[0].monthlyfees3);
-// 					$(".tschedules3").html(details[0].schedule3);
-// 					$(".tclasslevel3").html(details[0].classlevel3);
+
 					$(".taboutyourself").html(details[0].aboutyourself);
 					$(".tcertificate1filename").html(
 							details[0].certificate1filename);
 					$(".tcertificate2filename").html(
 							details[0].certificate2filename);
 					$(".tcertificate3filename").html(
-							details[0].certificate3filename);
-
-					const image = details[0].base64Image
+							details[0].certificate3filename);	
+					
+					const image = details[0].base64Image;
 					if (image) {
 						$("#profile-image-element").attr("src",
 								"data:image/*;base64," + image);
@@ -151,6 +159,51 @@
 						console.log("No profile picture");
 						$("#profile-image-element").show();
 					}
+					
+					for(let i=1;i<=details.length;i++){						
+						
+						$(".tscheduleslist").append("<div class='row'>");					
+						$(".tscheduleslist").append("<div class='card box'>");						
+						$(".tscheduleslist").append("<div>");
+						$(".tscheduleslist").append("Title:<b>"+details[i].title+"</b>");						
+						$(".tscheduleslist").append("</div>");
+						$(".tscheduleslist").append("<div>");
+						$(".tscheduleslist").append("Expertise:<b>"+details[i].scheduleExpertise+"</b>");	
+						$(".tscheduleslist").append("</div>");
+						$(".tscheduleslist").append("<div>");
+						$(".tscheduleslist").append("StartTime:<b>"+details[i].starttime+"</b>");	
+						$(".tscheduleslist").append("</div>");
+						$(".tscheduleslist").append("<div>");
+						$(".tscheduleslist").append("EndTime:<b>"+details[i].endtime+"</b>");	
+						$(".tscheduleslist").append("</div>");
+						$(".tscheduleslist").append("<div>");
+						$(".tscheduleslist").append("ScheduleDays:<b>"+details[i].selecteddays+"</b>");	
+						$(".tscheduleslist").append("</div>");
+						$(".tscheduleslist").append("<div>");
+						$(".tscheduleslist").append("MonthlyFees:<b>"+details[i].monthlyfees+"</b>");						
+						$(".tscheduleslist").append("</div>");
+						$(".tscheduleslist").append("<div>");
+						$(".tscheduleslist").append("<button class='btn btn-primary bookbutton' trainerId="+details[0].email+" seriesId="+details[i].id+" title="+details[i].title+" data-toggle='modal' onclick='schedules.bookScheduleEvent(event)'>Book</button>");
+						$(".tscheduleslist").append("</div>");
+						
+						$(".tscheduleslist").append("</div>");
+						$(".tscheduleslist").append("</div>");
+					
+						}	
+				
+// 					for(let i=1;i<=details.length;i++)	+					
+				
+// 					$(".texpertise"+i).append(details[i].expertise);	
+// 					$(".tfee"+i).html(details[i].monthlyfees  );
+// 					$(".tstarttime"+i).html(details[i].starttime  );
+// 					$(".tendtime"+i).html(details[i].endtime  );
+// 					$(".tselecteddays"+i).html(details[i].selecteddays  );
+// 					$(".tclasslevel"+i).html(details[i].classlevel  );
+// 					$(".ttitle"+i).html(details[i].title  );
+// 					}				
+
+					
+					
 // 					if (details[0].expertise.length > 5) {
 // 						$("#book1").show();
 // 					}
@@ -184,6 +237,7 @@
 						</a>
 					</div>
 					<h3 class="mth3">Profile</h3>
+					<div class="texpertise1"></div>
 					<div class="fx-ro">
 						Name : <b><div class="tname"></div></b>
 					</div>
@@ -195,6 +249,7 @@
 					</div>
 					<div class="fx-ro">
 						Expertise : <b><div class="texpertise"></div></b>
+						
 					</div>
 					<h3>About Trainer</h3>
 					<p>
@@ -202,33 +257,57 @@
 					</p>
 
 					<h3 class="mth3">Schedules</h3>
+					
+					
+<!-- schedules start -->
+	
+	<div class="top-content">
 
-					<table class="table table-bordered">
-				<tr>
-				<th>Title</th>
-				<th>Expertise</th>
-				<th>classlevel</th>				
-				<th>StartTime</th>
-				<th>EndTime</th>
-				<th>Fees</th>
-				<th></th>
-				</tr>
-				<tr>
-				<td>title1</td>
-				<td>title1</td>
-				<td>title1</td>
-				<td>title1</td>
-				<td>title1</td>
-				<td>title1</td>
-				<td>
-				<button class="btn btn-primary bookbutton" trainerId="{email}" seriesId="{id}" 
-								data-toggle="modal" title="{title}" attendee="{attendeeClass}" 
-								onclick="trainers.bookScheduleEvent(event)">
-								Book
-							</button>
-				</td>
-				</tr>
-				</table>
+		<div class="inner-bg">
+			<div class="container">
+				<div class="row pl pr">
+					<div class="col-sm-12 form-box card bg-white" style="padding: 0px;">
+						
+
+						
+							
+<!-- 								<div class="form-top"> -->
+								
+<!-- 								<div class="row"> -->
+<!-- 								<div class="col-lg-2 col-md-2 col-sm-6"> -->
+<!-- 								<p><b>Expertise</b></p> -->
+<!-- 								</div> -->
+<!-- 								<div class="col-lg-2 col-md-2 col-sm-6"> -->
+<!-- 								<p><b>StartTime</b></p> -->
+<!-- 								</div> -->
+<!-- 								<div class="col-lg-2 col-md-2 col-sm-6"> -->
+<!-- 								<p><b>EndTime</b></p> -->
+<!-- 								</div> -->
+<!-- 								<div class="col-lg-2 col-md-2 col-sm-6"> -->
+<!-- 								<p><b>Days</b></p> -->
+<!-- 								</div> -->
+<!-- 								<div class="col-lg-2 col-md-2 col-sm-6"> -->
+<!-- 								<p><b>Fees</b></p> -->
+<!-- 								</div> -->
+<!-- 								<div class="col-lg-2 col-md-2 col-sm-6">								 -->
+<!-- 								</div> -->
+<!-- 								</div>																 -->
+<!-- 									<div class="form-top-divider"></div> -->
+<!-- 								</div>	 -->
+								
+									<div class="tscheduleslist"></div>
+										
+										
+										</div>		
+						
+						</div>
+					</div>		
+					
+				</div>
+			</div>
+	
+	<!-- schedules END -->
+					
 
 				</div>
 				<div

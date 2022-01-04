@@ -12,7 +12,10 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,6 +24,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import main.common.DBConnection;
+import main.common.Json;
+import main.model.SeriesSchedulesVO;
 import main.model.TrainerDetailsVO;
 
 /**
@@ -36,7 +41,8 @@ public class CommentsViewInIndexServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
 
-		List<TrainerDetailsVO> commentsList = new ArrayList<TrainerDetailsVO>();		
+		List<TrainerDetailsVO> commentsList = new ArrayList<TrainerDetailsVO>();
+		Map<String, SeriesSchedulesVO> commentSeriesbyviewers = new LinkedHashMap<>();
 
 		try (Connection connection = DBConnection.createConnection()) {
 			String sql = "select * from fitnesscomments order by commenttime desc;";
@@ -45,7 +51,7 @@ public class CommentsViewInIndexServlet extends HttpServlet {
 					while (rs.next()) {
 						// Defining Student Object
 						TrainerDetailsVO details = new TrainerDetailsVO();
-
+						SeriesSchedulesVO seriesVo = new SeriesSchedulesVO();
 						details.setName(rs.getString("commentorname"));
 						details.setEmail(rs.getString("commentoremail"));
 						details.setSubject(rs.getString("subject"));
@@ -58,18 +64,41 @@ public class CommentsViewInIndexServlet extends HttpServlet {
 						long mlstart=tsstart.getTime();
 				        long deff=mlend-mlstart;
 				        int defdays=(int)(deff/(1000*60*60*24));
-				        String days=defdays+"days";
-//						System.out.println("deff::" + deff);
-//						System.out.println("days::" + defdays);
-						
-						details.setDefdays(days);
+				        int defhrs=(int)(deff/(1000*60*60));
+				        int defmin=(int)(deff/(1000*60));
+				        
+						System.out.println("deff::" + deff);
+						System.out.println("days::" + defdays);
+				        
+				        if(defdays<1){
+				        	if(defhrs<1){
+				        		if(defmin<1){
+				        			String days="Justnow";
+									details.setDefdays(days);
+				        		}else{
+				        		String days=defmin+"mins";
+								details.setDefdays(days);
+				        		}
+				        	}else{
+				        		String days=defhrs+"hrs";
+								details.setDefdays(days);
+				        	}
+				        }else{
+				        	String days=defdays+"days";
+							details.setDefdays(days);
+				        }
 						
 						// Adding the Student Object to List
-						commentsList.add(details);
-										
+	//			commentsList.add(details);
+				       seriesVo.setTrainer(details);
+						// Just create dummy id so that we can add to map, this id has no significant.
+				       commentSeriesbyviewers.put(UUID.randomUUID().toString(), seriesVo);
 					}
-					request.setAttribute("CommentListData", commentsList);		
-					request.getRequestDispatcher("/index.jsp").forward(request, response);				
+//					request.setAttribute("CommentListData", commentsList);		
+//					request.getRequestDispatcher("/index.jsp").forward(request, response);
+					
+					response.setContentType("application/json");
+					response.getWriter().write(Json.stringify(commentSeriesbyviewers.values()));
 					
 				}
 			}

@@ -58,12 +58,31 @@ public class FeedbackCommentsViewServlet extends HttpServlet {
 						long mlend=date.getTime();
 						long mlstart=tsstart.getTime();
 				        long deff=mlend-mlstart;
-				        int defdays=(int)(deff/(1000*60*60*24));
-				        String days=defdays+"days";
+				        
+				        int defdays=(int)(deff/(1000*60*60*24));				        
+				        int defhrs=(int)(deff/(1000*60*60));
+				        int defmin=(int)(deff/(1000*60));
+				        
 //						System.out.println("deff::" + deff);
 //						System.out.println("days::" + defdays);
-						
-						details.setDefdays(days);
+				        
+				        if(defdays<1){
+				        	if(defhrs<1){
+				        		if(defmin<1){
+				        			String days="Justnow";
+									details.setDefdays(days);
+				        		}else{
+				        		String days=defmin+"mins";
+								details.setDefdays(days);
+				        		}
+				        	}else{
+				        		String days=defhrs+"hrs";
+								details.setDefdays(days);
+				        	}
+				        }else{
+				        	String days=defdays+"days";
+							details.setDefdays(days);
+				        }
 						
 						// Adding the Student Object to List
 						commentsList.add(details);
