@@ -322,6 +322,12 @@
 		<description></description>
 		<servlet-class>main.CommentsViewInIndexServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>TrainerSchedulesViewServlet</servlet-name>
+		<display-name>TrainerSchedulesViewServlet</display-name>
+		<description></description>
+		<servlet-class>main.service.trainer.TrainerSchedulesViewServlet</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>TrainerRegisterServlet</servlet-name>
@@ -534,6 +540,10 @@
 	<servlet-mapping>
 		<servlet-name>CommentsViewInIndexServlet</servlet-name>
 		<url-pattern>/CommentsViewInIndexServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>TrainerSchedulesViewServlet</servlet-name>
+		<url-pattern>/TrainerSchedulesViewServlet</url-pattern>
 	</servlet-mapping>
 	<listener>
 		<listener-class>main.common.MysqlDatasource</listener-class>

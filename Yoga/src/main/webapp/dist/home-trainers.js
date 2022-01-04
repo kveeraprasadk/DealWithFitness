@@ -16,6 +16,7 @@ function Trainers() {
 			self.positionUserOptions();
 			self.dispatch();
 			self.attachLoginActions();
+			self.attachComments();
 		});
 		// When this dialog close do cleaup
 		$("#register-trainee-dialog").on("hide.bs.modal", () => {
@@ -340,7 +341,7 @@ function Trainers() {
 		const title = button.getAttribute("title");
 
 		if (button.getAttribute("attendee") === "show") {
-			alertDialog.show("Information", "You are already attending this trianing.")
+			alertDialog.show("Information", "You are already attending this training.")
 		} else {
 			confirmDialog.show("Would you like to book training class \"" + title + "\"", () => {
 				self.selectedTrainerSeriesId = {
@@ -437,6 +438,7 @@ function Trainers() {
 	}
 
 	self.renderTrainers = function(seriesSchedules) {
+	
 		const templeteForEmptySeries = document.getElementById("Trainer-details-template-empty");
 		const templeteForSeries = document.getElementById("Trainer-details-template");
 		const htmlSeriesTemplate = templeteForSeries.innerHTML;
@@ -449,6 +451,7 @@ function Trainers() {
 				let childHtmlNode;
 				const trainer = series.trainer;
 				// If series id is there means then trainer will have series otherwise empty
+					
 				if (series.id) {
 					series.attendeeSubscribedClass = "hide";
 					series.zeroAttendeesClass = "hide";				
@@ -463,7 +466,7 @@ function Trainers() {
 
 					if (series.demoClass == true) {
 						trainer.name = "Demo by " + trainer.name;
-						trainer.demoClass = "demo-class"
+						trainer.demoClass = "demo-class";
 					}
 
 					// If series has overridden expertise then take that otherwise trainer expertise
@@ -479,9 +482,7 @@ function Trainers() {
 			}
 
 			// This is to add listener to view profile button
-			$(document).on(
-				"click",
-				".profiledata", //".home-trainer-list-a",
+			$(document).on("click",".profiledata", //".home-trainer-list-a",
 				function(event) {
 					var useremail = $(this).val();
 					$.get("TrainerDetailsView", {
@@ -493,13 +494,63 @@ function Trainers() {
 						window.localStorage.setItem("globalarray", JSON
 							.stringify(globalarray));
 						document.location.href = './trainerdetails.jsp';
-					});
+					});				
+					
+					
 				});
+			
 		} else {
 			parentHtmlNode.append("<span class='no-results'>No results found with the matching filters. Choose different filter to see results</span>");
 		}
-
 	}
+	
+	
+	
+	self.attachComments = function() {
+		progressBar.start();
+		$.ajax({
+			url: "CommentsViewInIndexServlet",
+			type: "GET",	
+	//		data: requestPayload,
+			cache: false,
+			
+			success: function(data) {
+			//	alert("suc"+data);
+				self.renderComments(data);				
+			},
+			error: function(error, more) {
+			//	alert("error"+data);
+				console.error(error, more)
+				alertDialog.show("Service Failure", "Failed to get comments data ");
+			},
+			complete: () => progressBar.end()
+		});
+	}	
+	
+	self.renderComments = function(commentsList) {
+		const templeteForComments = document.getElementById("Comments-details-template");
+		const htmlCommentsTemplate = templeteForComments.innerHTML;
+		const parentCommentsId = templeteForComments.getAttribute("targetId");
+		const parentCommentsHtmlNode = $("#" + parentCommentsId);
+		parentCommentsHtmlNode.html("");
+		
+		if (commentsList && commentsList.length > 0) {
+			for (const series of commentsList) {
+				let childccHtmlNode;
+				const trainer = series.trainer;
+				
+				// If series id is there means then trainer will have series otherwise empty
+				childccHtmlNode = Utils.fillTemplate(htmlCommentsTemplate, [trainer, series]);
+				parentCommentsHtmlNode.append(childccHtmlNode);
+				
+			}		
+		} else {
+			parentCommentsHtmlNode.append("<span class='no-results'>No results found with the matching filters. Choose different filter to see results</span>");
+		}
+	}
+	
+	
+	
 
 	self.submitTraineeBooking = function() {
 		// if user is not logged in due to some reason call comes here then we show

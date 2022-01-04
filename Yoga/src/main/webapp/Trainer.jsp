@@ -19,9 +19,7 @@
 	rel="stylesheet">
 
 <!-- CSS Libraries -->
-<link
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-	rel="stylesheet">
+<link href="css/bootstrap.min.css" rel="stylesheet">
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
 	rel="stylesheet">
@@ -41,16 +39,11 @@
 <link rel="stylesheet" href="assets/css/form-elements.css">
 <link rel="stylesheet" href="assets/css/style.css">
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.js"></script>
-<script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"
-	defer></script>
+<script src="./js/jquery.min.js"></script>
+<script src="./js/jquery.validate.js"></script>
+<script src="./js/jquery.validate.min.js"></script>
 
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="./js/bootstrap.bundle.min.js" ></script>
 	<script
 	src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js"></script>
 	
@@ -272,7 +265,7 @@ label {
 								</div>
 								<div class="form-bottom">
 									<form role="form" enctype="multipart/form-data"
-										action="TrainerRegisterServlet" method="post"
+										action="" method="post"
 										id="trainerregform" name="trainerregform"
 										class="registration-form">
 										<div class="form-group">
@@ -460,7 +453,7 @@ label {
 <!-- 										</div>										 -->
 										<button type="submit"
 											class="btn trainerregisterbutton btn-primary"
-											id="trainerregisterbutton">
+											id="trainerregisterbutton"  >
 											<i class="fas fa-sign-in-alt ml-1"></i> &nbsp Register
 										</button>
 									</form>
@@ -475,6 +468,7 @@ label {
 							</div>
 						</div>
 					</div>
+					
 					<div class="col-sm-7 text"
 						style="margin-top: 0px; padding-top: 0px">
 						<h1>
@@ -550,258 +544,6 @@ label {
 
 		});
 	</script>
-	<script type="text/javascript">
-$(document).ready(function() {
-	console.log("page ready..");
-	$("#trainerregform").on('submit',function(event){
-		event.preventDefault();
-	//	var f=$(this).serialize();
-	let f=new FormData(this);
-		console.log(f);
-		$.ajax({
-			url: "TrainerRegisterServlet",
-			data : f,
-			type : "POST",
-			success: function(data,textStatus,jqXHR){
-				console.log(data);
-				console.log("success");
-				if(data.trim() === 'Temporary Profile Created Successfully'){
-					document.location.href = './TrainerTempProfile.jsp';					
-				}else{
-					$('#regerror').html("<div class='alert alert-danger'>");
-					$('#regerror > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-													   .append("</button>");
-					$('#regerror > .alert-danger').append($("<strong>").text(data));
-					$('#regerror > .alert-danger').append('</div>');
-					
-
-				}
-			},
-			error: function(data,textStatus,errorThrown){
-				console.log(data);
-				console.log("error");				
-			},
-			processData : false,
-			contentType : false
-		});
-	});
-});
-</script>
-	<script type="text/javascript">
-		$(document)
-				.ready(
-						function() {
-							$('#trainerregform')
-									.validate(
-											{
-												rules : {
-													formfirstname : {
-														required : true,
-														minlength : 3,
-														alphaNum : true
-
-													},
-													formemail : {
-														required : true,
-														email : true
-													},
-													formexpertise1 : {
-														required : true
-													},
-													formexperience : {
-														required : true
-													},
-													formqualification : {
-														required : true,
-														minlength : 2,
-														alphaNum : true
-													},
-													formphone : {
-														required : true,
-														minlength : 10,
-														maxlength : 10,
-														onlyNum : true
-													},
-													formclasslevel1 : {
-														required : true
-													},
-													formfrom1 : {
-														timey : true,
-														required : true,
-														rangelength : [ 2, 6 ]
-													},
-													formto1 : {
-														timey : true,
-														required : true,
-														rangelength : [ 2, 6 ]
-													},
-													'roles' : {
-														required : true
-													},
-													formmonthlyfees1 : {
-														required : true
-
-													},
-													formpassword : {
-														required : true,
-														minlength : 6
-													},
-													formcpassword : {
-														required : true,
-														equalTo : "#form-password"
-													},
-													formaboutself : {
-														required : true,
-														minlength : 50
-													}
-													
-// 													formimage : {
-// 														required : true,
-// 														extension : "png|jpeg|jpg",														
-// 														filesize : 204576
-// 													}
-
-												},
-												messages : {
-													formfirstname : {
-														required : "Please Enter name",
-														minlength : "Name should be at least 3 characters"
-													},
-													formemail : {
-														required : "Please Enter Email",
-														email : "The email should be in the format: abc@domain.tld"
-													},
-													formexpertise1 : {
-														required : "Please select Expertise"
-													},
-													formexperience : {
-														required : "Please select Experience"
-													},
-													formclasslevel1 : {
-														required : "Please enter Classlevel"
-													},
-													formqualification : {
-														required : "Please enter Qualification",
-														minlength : "Qualification should be at least 2 characters"
-													},
-													formphone : {
-														required : "Please enter phone number",
-														minlength : "Phone Number must be 10 numbers",
-														maxlength : "Phone Number must be 10 numbers"
-													},
-													formfrom1 : {
-														required : "please enter class start time",
-
-													},
-													formto1 : {
-														required : "please enter class end time"
-													},
-													'roles' : {
-														required : "Plz Select Atleast One Option"
-													},
-													formmonthlyfees1 : {
-														required : "please enter monthly fees"
-
-													},
-													formpassword : {
-														required : "please enter password",
-														minlength : "Password min 6 characters"
-													},
-													formcpassword : {
-														required : "please enter confirm password",
-														equalTo : "password doesn match"
-													},
-													formaboutself : {
-														required : "please enter about yourself",
-														minlength : "Please enter atleast 50 chars"
-													}
-// 													formimage : {
-// 														required : "Please select JPEG or PNG file",
-// 														filesize: " file size must be less than 200 KB.",
-// 														extension: "Please upload .jpg or .png files"
-// 													},
-												
-
-												}
-																							
-												
-											});
-							$.validator.addMethod('filesize11', function(value,element, param) {
-								// param = size (en bytes) 
-							    // element = element to validate (<input>)
-							    // value = value of the element (file name)
-								return this.optional(element) || (element.files[0].size <= param)
-							},"file must be below 200kb");
-							$.validator.addMethod('filesize', function (value, element, arg) {
-						        if(element.files[0].size<=arg){
-						            return true;
-						        }else{
-						            return false;
-						        }
-						    });
-							$.validator.addMethod("alphaNum", function(value,element) {
-								return this.optional(element)
-										|| value == value
-												.match(/^[a-zA-Z\s]*$/);
-							}, "please enter a valid name");
-							$.validator.addMethod("onlyNum", function(value,
-									element) {
-								return this.optional(element)
-										|| value == value
-												.match(/^[1-9]{1}[0-9]{9}$/);
-							}, "Phone number must be 10 numbers");
-
-						});
-	</script>
- <script type="text/javascript">
-   $(document).ready(function() {	  
-    var frm = $('#trainerregform');
-
-    frm.submit(function (e) {
-
-    	e.preventDefault();
-		
-        $.ajax({
-            type: frm.attr('method'),
-            url: frm.attr('action'),
-            data: frm.serialize(),
-            success: function (data) {
-            	
-                console.log('Submission was successful.');
-                console.log(data);
-                
-                if(data == "Temporary Profile Created Successfully")
-            	{
-                	document.location.href = './TrainerTempProfile.jsp';
-            	}else if(data == "Email ID is Already Registered")
-                	{
-                	$('#regerror').html("<div class='alert alert-danger'>");
-					$('#regerror > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-									.append("</button>");
-					$('#regerror > .alert-danger').append($("<strong>").text(data));
-					$('#regerror > .alert-danger').append('</div>');
-                	}else{
-                		$('#regerror').html("<div class='alert alert-danger'>");
-    					$('#regerror > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-    									.append("</button>");
-    					$('#regerror > .alert-danger').append($("<strong>").text(data));
-    					$('#regerror > .alert-danger').append('</div>');
-                	}
-                		
-                
-            },
-            error: function (data) {
-                console.log('An error occurred.');
-                console.log(data);
-               
-            },
-        });
-        return false;
-	
-        });
-   });
-</script> 
-	
 	<!-- REGISTER PAGE END -->
 
 

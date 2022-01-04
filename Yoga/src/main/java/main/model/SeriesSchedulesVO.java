@@ -26,6 +26,10 @@ public class SeriesSchedulesVO {
 	private String ssexpertise;
 	private String ssclassLevel;
 	private boolean demoClass;
+	private String selecteddays;
+	private String monthlyfees;
+	private String starttime;
+	private String endtime;
 	
 	public String getExpertise() {
 		return expertise;
@@ -235,5 +239,37 @@ public class SeriesSchedulesVO {
 
 	public void setSsclassLevel(String ssclassLevel) {
 		this.ssclassLevel = ssclassLevel;
+	}
+
+	public String getSelecteddays() {
+		return selecteddays;
+	}
+
+	public void setSelecteddays(String selecteddays) {
+		this.selecteddays = selecteddays;
+	}
+
+	public String getMonthlyfees() {
+		return monthlyfees;
+	}
+
+	public void setMonthlyfees(String monthlyfees) {
+		this.monthlyfees = monthlyfees;
+	}
+
+	public String getStarttime() {
+		return starttime;
+	}
+
+	public void setStarttime(String starttime) {
+		this.starttime = starttime;
+	}
+
+	public String getEndtime() {
+		return endtime;
+	}
+
+	public void setEndtime(String endtime) {
+		this.endtime = endtime;
 	}
 }

@@ -19,9 +19,7 @@
 	rel="stylesheet">
 
 <!-- CSS Libraries -->
-<link
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-	rel="stylesheet">
+<link href="css/bootstrap.min.css" rel="stylesheet">
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
 	rel="stylesheet">
@@ -34,16 +32,15 @@
 <!-- Template Stylesheet -->
 <link href="css/style.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="./css/common.css">
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
+<!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
+<script src="./js/jquery.min.js"></script>
 <script src="./dist/utils.js"></script>
 <script src="./dist/dialogs.js"></script>
 <script src="./dist/whoami.js"></script>
 <script src="./dist/trainee-journey.js"></script>
 
 <!-- JavaScript Libraries -->
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="./js/bootstrap.bundle.min.js" ></script>
 <script src="lib/easing/easing.min.js"></script>
 <script src="lib/wow/wow.min.js"></script>
 <script src="lib/owlcarousel/owl.carousel.min.js"></script>

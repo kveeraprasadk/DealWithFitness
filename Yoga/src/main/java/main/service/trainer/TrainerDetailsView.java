@@ -9,10 +9,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Collection;
+import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -25,6 +31,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import main.common.DBConnection;
+import main.common.Json;
 import main.model.SeriesSchedulesVO;
 import main.model.TrainerDetailsVO;
 
@@ -36,7 +43,7 @@ import main.model.TrainerDetailsVO;
 public class TrainerDetailsView extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Gson gson = new Gson();
-
+	public String traineremail;
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -50,13 +57,13 @@ public class TrainerDetailsView extends HttpServlet {
 		List<TrainerDetailsVO> TrainersList = new ArrayList<TrainerDetailsVO>();
 		
 	
-		String traineremail = (String) request.getParameter("trainersemail");
+		traineremail = (String) request.getParameter("trainersemail");
 		String userJsonString=null;
 		System.out.println("traineremail2::" + traineremail);
 		
 		try (Connection connection = DBConnection.createConnection()) {
 		try (PreparedStatement statement = connection.prepareStatement("select * from trainerregister where traineremail=?")) 
-	//i need this query asif sir       try (PreparedStatement statement = connection.prepareStatement("select tr.trainername,tr.traineremail,tr.experience,tr.qualification,tr.aboutyourself,tr.photoname,tr.photo,tr.certificate1filename,tr.certificate2filename,tr.certificate3filename,ss.title,ss.starttime,ss.endtime,ss.endByDate,ss.selectedDayNames,ss.trainerpreference,ss.fee,ss.classlevel,ss.expertise,ss.democlass from trainerregister tr,schedulesseries ss where tr.traineremail=ss.traineremail and tr.traineremail=?")) 
+	//       try (PreparedStatement statement = connection.prepareStatement("select tr.trainername,tr.traineremail,tr.experience,tr.qualification,tr.aboutyourself,tr.photoname,tr.photo,tr.certificate1filename,tr.certificate2filename,tr.certificate3filename,ss.title,ss.starttime,ss.endtime,ss.endByDate,ss.selectedDayNames,ss.trainerpreference,ss.fee,ss.classlevel,ss.expertise,ss.democlass from trainerregister tr,schedulesseries ss where tr.traineremail=ss.traineremail and tr.traineremail=?")) 
 			{
 				statement.setString(1, traineremail);
 				try (ResultSet rs = statement.executeQuery()) {
@@ -74,13 +81,6 @@ public class TrainerDetailsView extends HttpServlet {
 						details.setCertificate1filename(rs.getString("certificate1filename"));
 						details.setCertificate2filename(rs.getString("certificate2filename"));
 						details.setCertificate3filename(rs.getString("certificate3filename"));
-						
-//						details.setTitle(rs.getString("title"));
-//						details.setStarttime(rs.getString("starttime"));
-//						details.setEndtime(rs.getString("endtime"));
-//						details.setSelecteddays(rs.getString("selectedDayNames"));
-//						details.setMonthlyfees(rs.getString("fee"));
-//						details.setClasslevel(rs.getString("classlevel"));
 	
 						Blob blob = rs.getBlob("photo");
 
@@ -102,8 +102,9 @@ public class TrainerDetailsView extends HttpServlet {
 						outputStream.close();
 
 						TrainersList.add(details);
-					
+					List<TrainerDetailsVO> sschedules=schedulesView(traineremail);
 //						System.out.println(rs.getString("title"));
+					TrainersList.addAll(sschedules);
 						userJsonString = this.gson.toJson(TrainersList);
 						out.write(userJsonString);
 					}
@@ -116,7 +117,69 @@ public class TrainerDetailsView extends HttpServlet {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 			throw new IllegalArgumentException(e);
-		}
+		}		
+		
 	}
+	public List<TrainerDetailsVO> schedulesView(String email){
+		
+		List<TrainerDetailsVO> TrainersList = new ArrayList<TrainerDetailsVO>();		
+		
+		System.out.println("trainerscheduleemail::" +email);
+		
+		try (Connection connection = DBConnection.createConnection()) {
+		try (PreparedStatement statement = connection.prepareStatement("select ss.traineremail,ss.id,ss.title,ss.selectedDayNames,ss.fee,ss.classlevel,ss.expertise,ss.starttime,ss.endtime from schedulesSeries ss where ss.traineremail=?")) 
+	//    try (PreparedStatement statement = connection.prepareStatement("select tr.trainername,tr.traineremail,tr.experience,tr.qualification,tr.aboutyourself,tr.photoname,tr.photo,tr.certificate1filename,tr.certificate2filename,tr.certificate3filename,ss.title,ss.starttime,ss.endtime,ss.endByDate,ss.selectedDayNames,ss.trainerpreference,ss.fee,ss.classlevel,ss.expertise,ss.democlass from trainerregister tr,schedulesseries ss where tr.traineremail=ss.traineremail and tr.traineremail=?")) 
+			{
+				statement.setString(1, email);
+				try (ResultSet rs = statement.executeQuery()) {
+
+					while (rs.next()) {
+						// Defining Student Object
+						TrainerDetailsVO details = new TrainerDetailsVO();						
+						
+						details.setEmail(rs.getString("traineremail"));						
+						details.setId(rs.getString("id"));
+						details.setTitle(rs.getString("title"));
+						
+						details.setSelecteddays(rs.getString("selectedDayNames"));
+						details.setMonthlyfees(rs.getString("fee"));
+						details.setClasslevel(rs.getString("classlevel"));
+						details.setScheduleExpertise(rs.getString("expertise"));
+						
+						// milliseconds
+					    long startmSec = rs.getLong("starttime");
+					    long endmSec = rs.getLong("endtime");
+					    // Creating date format
+					    DateFormat simple = new SimpleDateFormat("MMM-dd, yyyy HH:mm aa");
+
+					    // using Date() constructor
+					    Date startresult = new Date(startmSec);
+					    Date endresult = new Date(endmSec);
+				//	    System.out.println(simple.format(result));					   
+					    details.setStarttime(simple.format(startresult));
+					    details.setEndtime(simple.format(endresult));
+					    
+//					    if (rs.getString("traineeId") != null) {
+//					    	details.getAttendees().add(rs.getString("traineeId"));
+//						}
+					    
+						TrainersList.add(details);		
+						
+						
+					}
+				}
+				
+			 }	
+		  }
+		
+		catch(SQLException e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+			throw new IllegalArgumentException(e);
+		}
+		return TrainersList;
+		
+	}
+
 }
 
